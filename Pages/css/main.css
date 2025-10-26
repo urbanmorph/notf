@@ -1438,7 +1438,7 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Team Section
+# Team Section now Supporters section
 --------------------------------------------------------------*/
 .team .member {
   --default-color: #ffffff;
@@ -1518,10 +1518,11 @@ section,
   transition: left ease-in-out 0.3s;
 }
 
-/*--------------------------------------------------------------
-# Pricing Section
---------------------------------------------------------------*/
-.pricing .pricing-item {
+
+/*-------------------------------------------------------------------------
+# Pricing Section (section not required hence removing this through comment
+---------------------------------------------------------------------------*/
+/* .pricing .pricing-item {
   background-color: var(--surface-color);
   box-shadow: 0 3px 20px -2px rgba(0, 0, 0, 0.1);
   border-top: 4px solid var(--background-color);
@@ -1630,7 +1631,7 @@ section,
     max-width: 100%;
     margin: 0 auto 30px auto;
   }
-}
+} */
 
 /*--------------------------------------------------------------
 # Faq Section
@@ -1955,6 +1956,5 @@ section,
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
-.starter-section {
+/*.starter-section { */
   /* Add your styles here */
-}
