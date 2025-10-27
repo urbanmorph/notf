@@ -1445,6 +1445,13 @@ section,
   text-align: center;
   position: relative;
   overflow: hidden;
+  display: flex;
+  justify-content: cneter;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  position: relative;
 }
 
 .team .member .member-info {
@@ -1517,6 +1524,15 @@ section,
   left: 0;
   transition: left ease-in-out 0.3s;
 }
+
+.team .member img {
+  max-width: 80%;
+  max-height: 130px;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+}
+
 
 
 /*-------------------------------------------------------------------------
