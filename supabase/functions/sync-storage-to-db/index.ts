@@ -30,9 +30,43 @@ serve(async (req) => {
       }
     )
 
+    // SECURITY: this endpoint bulk-overwrites DB metadata from Storage across the
+    // entire catalogue. Require an authenticated admin (it previously had no role
+    // check at all). Mirrors update-file / delete-file.
+    const supabaseAnon = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+      {
+        auth: { autoRefreshToken: false, persistSession: false },
+        global: { headers: { Authorization: req.headers.get('Authorization') ?? '' } }
+      }
+    )
+
+    const authHeader = req.headers.get('Authorization')
+    if (!authHeader) {
+      return new Response(
+        JSON.stringify({ error: 'Authentication required' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+    const { data: { user }, error: authError } = await supabaseAnon.auth.getUser()
+    if (authError || !user) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid or expired authentication token' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+    if (user.user_metadata?.role !== 'admin') {
+      return new Response(
+        JSON.stringify({ error: 'Forbidden', message: 'Admin privileges required' }),
+        { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
     // Parse request body for options
     const body = req.method === 'POST' ? await req.json() : {}
-    const dryRun = body.dry_run || false
+    // Default to dry-run for safety (must explicitly pass dry_run:false to write).
+    const dryRun = body.dry_run !== false
     const fileType = body.file_type || null // 'community' or 'solution-provider' or null for both
 
     console.log(`Starting sync (dry_run=${dryRun}, file_type=${fileType})...`)
