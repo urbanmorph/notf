@@ -51,7 +51,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({
         status: 'ok',
-        version: '4.1-db-seed-fallback',
+        version: '4.2-empty-array-guard',
         timestamp: new Date().toISOString()
       }),
       {
@@ -393,6 +393,16 @@ function mergeUpdates(current: Record<string, any>, updates: Record<string, any>
   for (const [key, value] of Object.entries(updates)) {
     if (value === null || value === undefined) {
       // Don't overwrite with null/undefined
+      continue
+    }
+
+    // Don't let an empty array clobber an existing populated array. The admin
+    // edit form always submits every array field (offers/asks/themes/
+    // neighborhoods/wards); a field that was left blank, or that the form never
+    // loaded, arrives as [] and would otherwise erase real data via the
+    // assignment below. Treat [] as "no change". To intentionally clear an array
+    // a caller should send an explicit delete signal in future, not [].
+    if (Array.isArray(value) && value.length === 0) {
       continue
     }
 

@@ -529,38 +529,36 @@ async function getAuthToken() {
 async function updateCommunity(row) {
     const { semicolonToArray, parseCoordinate, parseFilePath } = window.ExcelCommon;
 
-    // Extract slug from file path
-    const { slug } = parseFilePath(row['File Path']);
-    if (!slug) {
+    // Use the authoritative stored File Path verbatim — do NOT recompute it
+    // (recomputing from the name would orphan the existing Storage file).
+    const filePath = row['File Path'];
+    if (!filePath) {
         throw new Error('Invalid file path');
     }
 
-    // Unflatten data
+    // Unflatten data. cleanObject() drops empty fields, and the Edge Function
+    // merges into existing metadata, so absent columns are preserved (not wiped).
     const updatedData = unflattenCommunity(row);
 
-    // Get auth token
-    const token = await getAuthToken();
-
-    // Call update-file Edge Function
-    const response = await fetch('https://kfiwceytvbwibsjdshuz.supabase.co/functions/v1/update-file', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({
-            type: 'community',
-            slug: slug,
-            data: updatedData
-        })
+    // Route through the update-file Edge Function on the SAME project as the rest
+    // of the app (invoke() handles auth + correct project automatically).
+    const supabase = getSupabaseClient();
+    const { data, error } = await supabase.functions.invoke('update-file', {
+        body: {
+            file_path: filePath,
+            file_type: 'community',
+            updates: updatedData
+        }
     });
 
-    if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || 'Update failed');
+    if (error) {
+        throw new Error(error.message || 'Update failed');
+    }
+    if (data?.error) {
+        throw new Error(data.error);
     }
 
-    return await response.json();
+    return data;
 }
 
 /**
@@ -570,38 +568,35 @@ async function updateCommunity(row) {
 async function updateProvider(row) {
     const { parseFilePath } = window.ExcelCommon;
 
-    // Extract slug from file path
-    const { slug } = parseFilePath(row['File Path']);
-    if (!slug) {
+    // Use the authoritative stored File Path verbatim — do NOT recompute it.
+    const filePath = row['File Path'];
+    if (!filePath) {
         throw new Error('Invalid file path');
     }
 
-    // Unflatten data
+    // Unflatten data. cleanObject() drops empty fields, and the Edge Function
+    // merges into existing metadata, so absent columns are preserved (not wiped).
     const updatedData = unflattenProvider(row);
 
-    // Get auth token
-    const token = await getAuthToken();
-
-    // Call update-file Edge Function
-    const response = await fetch('https://kfiwceytvbwibsjdshuz.supabase.co/functions/v1/update-file', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({
-            type: 'provider',
-            slug: slug,
-            data: updatedData
-        })
+    // Route through the update-file Edge Function on the SAME project as the rest
+    // of the app (invoke() handles auth + correct project automatically).
+    const supabase = getSupabaseClient();
+    const { data, error } = await supabase.functions.invoke('update-file', {
+        body: {
+            file_path: filePath,
+            file_type: 'solution-provider',
+            updates: updatedData
+        }
     });
 
-    if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || 'Update failed');
+    if (error) {
+        throw new Error(error.message || 'Update failed');
+    }
+    if (data?.error) {
+        throw new Error(data.error);
     }
 
-    return await response.json();
+    return data;
 }
 
 // ==================== UNFLATTEN FUNCTIONS ====================
@@ -661,7 +656,7 @@ function unflattenCommunity(row) {
         neighborhood_size: row['Neighborhood Size'] || null,
         population_served: row['Population Served'] || null,
 
-        status: (row['Status'] || 'active').toLowerCase(),
+        status: row['Status'] ? row['Status'].toLowerCase() : undefined,  // omit when blank so existing status is preserved (no silent auto-approve)
         submitted_via: 'excel_import',
         submitted_at: new Date().toISOString()
     };
@@ -700,7 +695,7 @@ function unflattenProvider(row) {
         organization_type: row['Organization Type'] || null,
         city: row['City'] || null,
 
-        status: (row['Status'] || 'active').toLowerCase(),
+        status: row['Status'] ? row['Status'].toLowerCase() : undefined,  // omit when blank so existing status is preserved (no silent auto-approve)
         submitted_via: 'excel_import',
         submitted_at: new Date().toISOString()
     };
