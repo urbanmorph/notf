@@ -51,7 +51,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({
         status: 'ok',
-        version: '4.0-auth-required',
+        version: '4.1-db-seed-fallback',
         timestamp: new Date().toISOString()
       }),
       {
@@ -177,9 +177,33 @@ serve(async (req) => {
         currentData = parseYAML(currentContent) as Record<string, any> || {}
       }
     } else {
-      // File doesn't exist yet - this is a create operation
-      console.log(`File doesn't exist yet, will create: ${file_path}`)
-      currentData = {}
+      // File doesn't exist in Storage. This is NOT necessarily a fresh create:
+      // public submissions (join form, chatbot onboarding) insert directly into
+      // the file_metadata table and never write a Storage file. For those
+      // records the rich metadata lives only in the DB row. If we merged into an
+      // empty object here, a status-only update (e.g. admin approval sending
+      // { status: 'active' }) would overwrite metadata with just the status and
+      // wipe name/themes/description/contact/etc. So seed currentData from the
+      // existing DB row's metadata, which both prevents the wipe and backfills
+      // the missing Storage file with full content.
+      console.log(`File missing in Storage: ${file_path}. Checking DB for existing metadata...`)
+      const { data: existingRow } = await supabaseAdmin
+        .from('file_metadata')
+        .select('metadata')
+        .eq('file_path', file_path)
+        .maybeSingle()
+
+      if (
+        existingRow?.metadata &&
+        typeof existingRow.metadata === 'object' &&
+        !Array.isArray(existingRow.metadata)
+      ) {
+        currentData = existingRow.metadata as Record<string, any>
+        console.log(`Seeded currentData from existing DB row (${Object.keys(currentData).length} keys)`)
+      } else {
+        console.log(`No existing DB metadata; treating as fresh create: ${file_path}`)
+        currentData = {}
+      }
     }
 
     // Optimistic locking: Check version if provided
