@@ -1,39 +1,9 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import { parse as parseYAML, stringify as stringifyYAML } from 'https://deno.land/std@0.168.0/encoding/yaml.ts'
-
-// CORS: Whitelist specific origins for security.
-// Production is served at notf.in (notf.in -> www.notf.in redirect), so the
-// browser Origin on admin calls is https://www.notf.in. Keep the legacy
-// vercel/org entries for any older bookmarks/aliases.
-const ALLOWED_ORIGINS = [
-  'https://www.notf.in',   // production (canonical, post-redirect)
-  'https://notf.in',       // production (apex, pre-redirect)
-  'https://notf.vercel.app',
-  'https://www.notf.org',
-  'http://localhost:3000', // Development only
-  'http://localhost:5173'  // Vite dev server
-]
-
-function getCorsHeaders(req: Request): Record<string, string> {
-  const origin = req.headers.get('Origin')
-  if (origin && ALLOWED_ORIGINS.includes(origin)) {
-    return {
-      'Access-Control-Allow-Origin': origin,
-      'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-      'Access-Control-Allow-Credentials': 'true'
-    }
-  }
-  // Fallback for non-CORS requests (direct API calls)
-  return {
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-  }
-}
-
-const defaultCorsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-}
+import { getCorsHeaders } from '../_shared/cors.ts'
+import { isAuthorizedAdmin } from '../_shared/auth.ts'
+import { generateMarkdownFile, mergeUpdates, parseMarkdownFile } from '../_shared/file-ops.ts'
 
 interface UpdateFileRequest {
   file_path: string
@@ -56,7 +26,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({
         status: 'ok',
-        version: '4.3-cors-notf-in',
+        version: '4.4-admin-users-auth',
         timestamp: new Date().toISOString()
       }),
       {
@@ -124,11 +94,13 @@ serve(async (req) => {
       )
     }
 
-    // SECURITY: Check for admin role
-    const userRole = user.user_metadata?.role
+    // SECURITY: authorize via the admin_users registry (active membership),
+    // honouring the legacy user_metadata.role === 'admin' flag too. Uses the
+    // service-role client so the lookup is not subject to RLS.
+    const authorized = await isAuthorizedAdmin(supabaseAdmin, user)
 
-    if (userRole !== 'admin') {
-      console.log(`Access denied for user ${user.email}: role=${userRole}`)
+    if (!authorized) {
+      console.log(`Access denied for user ${user.email}: not an active admin`)
       return new Response(
         JSON.stringify({
           error: 'Forbidden',
@@ -346,7 +318,7 @@ serve(async (req) => {
 
     return new Response(
       JSON.stringify({
-        error: error.message || 'Unknown error occurred'
+        error: error instanceof Error ? error.message : 'Unknown error occurred'
       }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -355,74 +327,3 @@ serve(async (req) => {
     )
   }
 })
-
-/**
- * Parse markdown file with YAML frontmatter
- */
-function parseMarkdownFile(content: string): { frontmatter: Record<string, any>, body: string } {
-  if (!content.startsWith('---')) {
-    return { frontmatter: {}, body: content }
-  }
-
-  const parts = content.split('---', 3)
-  if (parts.length < 3) {
-    return { frontmatter: {}, body: content }
-  }
-
-  const yamlContent = parts[1]
-  const body = parts[2]
-
-  try {
-    const frontmatter = parseYAML(yamlContent) as Record<string, any> || {}
-    return { frontmatter, body }
-  } catch (e) {
-    console.error('YAML parse error:', e)
-    return { frontmatter: {}, body: content }
-  }
-}
-
-/**
- * Generate markdown file with YAML frontmatter
- */
-function generateMarkdownFile(frontmatter: Record<string, any>, body: string): string {
-  const yamlStr = stringifyYAML(frontmatter)
-  return `---\n${yamlStr}---${body}`
-}
-
-/**
- * Merge updates with existing data (preserves unedited fields)
- */
-function mergeUpdates(current: Record<string, any>, updates: Record<string, any>): Record<string, any> {
-  const merged = { ...current }
-
-  for (const [key, value] of Object.entries(updates)) {
-    if (value === null || value === undefined) {
-      // Don't overwrite with null/undefined
-      continue
-    }
-
-    // Don't let an empty array clobber an existing populated array. The admin
-    // edit form always submits every array field (offers/asks/themes/
-    // neighborhoods/wards); a field that was left blank, or that the form never
-    // loaded, arrives as [] and would otherwise erase real data via the
-    // assignment below. Treat [] as "no change". To intentionally clear an array
-    // a caller should send an explicit delete signal in future, not [].
-    if (Array.isArray(value) && value.length === 0) {
-      continue
-    }
-
-    if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
-      // Deep merge objects (e.g., elected_representatives, contact)
-      if (typeof merged[key] === 'object' && !Array.isArray(merged[key]) && merged[key] !== null) {
-        merged[key] = { ...merged[key], ...value }
-      } else {
-        merged[key] = value
-      }
-    } else {
-      // Simple assignment for primitives and arrays
-      merged[key] = value
-    }
-  }
-
-  return merged
-}

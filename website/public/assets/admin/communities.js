@@ -193,7 +193,7 @@ function renderCommunities(comms) {
                         `<button class="mini-icon-btn activate" title="Activate" onclick="updateStatus('${comm.id}', 'active')">
                             <i class="fa-solid fa-check"></i>
                         </button>` :
-                        `<button class="mini-icon-btn deactivate" title="Deactivate" onclick="updateStatus('${comm.id}', 'inactive')">
+                        `<button class="mini-icon-btn deactivate" title="Deactivate" onclick="updateStatus('${comm.id}', 'archived')">
                             <i class="fa-solid fa-ban"></i>
                         </button>`
                     }

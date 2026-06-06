@@ -743,6 +743,48 @@ header {
     border-color: #2F4A2C;
 }
 
+/* Checkboxes & radios must NOT inherit the full-width text-input sizing above.
+   Without this, theme/sector checkboxes (inputs inside a .form-group) rendered
+   as giant full-width bordered boxes, breaking the edit-modal layout. */
+.form-group input[type="checkbox"],
+.form-group input[type="radio"] {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+/* Theme / sector checkbox pills used in the community & organization edit
+   modals. Defined once here so the layout can't drift between pages. */
+.theme-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+.theme-checkboxes label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: auto;
+    margin: 0;
+    padding: 6px 12px;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 1rem;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: #333;
+    cursor: pointer;
+}
+.theme-checkboxes label:has(input:checked) {
+    background: rgba(47, 74, 44, 0.15);
+    color: #2F4A2C;
+    font-weight: 600;
+}
+.theme-checkboxes input[type="checkbox"] {
+    accent-color: #2F4A2C;
+}
+
 .form-actions {
     display: flex;
     justify-content: flex-end;

@@ -938,6 +938,61 @@ for lang, text in translations.items():
 - **Admin Edits:** Must use Edge Functions (not direct DB updates)
 - **See:** `ARCHITECTURE.md` for complete data flow
 
+### ⚠️ Data Safety & Deletion Safeguards — DO NOT REGRESS
+
+On 2026-06-02 an approval action silently wiped a community's metadata, and it was
+nearly unrecoverable (no audit trail, no PITR). The safeguards below were added in
+response. **Any future code change MUST preserve every one of them.** If a change
+appears to require weakening one, STOP and confirm with the maintainer first.
+
+**Architectural invariant — data flow:**
+- Public submissions (join form, chatbot) INSERT directly into the `file_metadata`
+  DB table and do **not** write a Storage file (`buildJoinRecord` in
+  `utils.js`). Their metadata lives only in the DB row until approval.
+- All admin create/update/delete must go through the Edge Functions
+  (`update-file`, `delete-file`) using `supabase.functions.invoke` on the project's
+  own client — **never** direct client DB writes, and **never** a hardcoded foreign
+  project URL.
+
+**Admin authorization (shared by the write/delete functions):**
+- `_shared/auth.ts` `isAuthorizedAdmin()` is the single gate: a caller is an admin
+  if they have an **active row in `admin_users`** (the real registry, also used by
+  the file_metadata RLS policy + audit policy + the admin UI's `requireAuth`) **OR**
+  the legacy `user_metadata.role === 'admin'` flag. This unified the two mismatched
+  checks that previously 403'd every admin write (no account had the metadata flag).
+  This is a *membership* gate; per-role / corp-zone scoping is the planned next step
+  (see `RBAC-PLAN.md`). **Do not** narrow it back to `user_metadata.role` only.
+- CORS lives in `_shared/cors.ts` (`getCorsHeaders`); `ALLOWED_ORIGINS` MUST include
+  `https://www.notf.in` (production, post-redirect) or the admin site's calls are
+  silently blocked by the browser. Don't drift per-function copies.
+
+**Edge Function safeguards (must stay true):**
+1. `update-file`: when the Storage file is missing, it seeds `currentData` from the
+   existing DB row's `metadata` before merging (prevents wiping DB-first records on
+   a status-only update). `mergeUpdates` (`_shared/file-ops.ts`) skips
+   `null`/`undefined`, **empty strings**, **and empty arrays**, recursively
+   (including nested objects like `contact`), so blank form fields never erase
+   populated data. Health: `4.4+`.
+2. `delete-file`: REQUIRES an active admin via `isAuthorizedAdmin` (admin_users
+   membership, or legacy `user_metadata.role === 'admin'`); looks the row up by
+   `file_path` first (404 if absent, 409 on `file_type` mismatch); deletes the DB
+   row by immutable `id`; returns the before-image. Never make auth optional. Health: `2.1+`.
+3. `sync-storage-to-db`: requires admin role; `dry_run` defaults to **true**.
+4. `cleanup-root-community-files`: requires admin role; only deletes Storage files
+   with **no** matching `file_metadata` row (root paths like `communities/<slug>.md`
+   are legitimate, backfilled by `update-file`). Keep `dry_run` default true.
+
+**Database safeguards (migrations in `supabase/migrations/`):**
+5. `file_metadata_audit` table + `file_metadata_audit_trg` trigger capture a full
+   before-image of every UPDATE/DELETE on `file_metadata`. **Do not drop them.**
+   To recover lost data: `SELECT old_row FROM file_metadata_audit WHERE file_path = ...`
+6. `DELETE` on `file_metadata` is REVOKED from `anon`/`authenticated`. Deletion only
+   via the service-role Edge Function. **Do not re-grant.**
+
+**When changing any admin write/delete path, re-verify 1–6 still hold.** Prefer
+fixing data-integrity issues in the Edge Function merge layer (one place, protects
+all callers) over client-side patches.
+
 ### File Structure
 
 ```

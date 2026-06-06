@@ -20,11 +20,38 @@ async function checkAuth() {
     return session;
 }
 
-// Redirect to login if not authenticated
+// Check whether a signed-in user is an active admin (the admin_users registry).
+// This is the same membership gate the Edge Functions enforce server-side, so
+// the UI and the write path agree on who is an admin.
+async function isActiveAdmin(userId) {
+    if (!userId) return false;
+    const client = getSupabaseAuthClient();
+    const { data, error } = await client
+        .from('admin_users')
+        .select('id')
+        .eq('user_id', userId)
+        .eq('is_active', true)
+        .maybeSingle();
+    if (error) {
+        console.error('admin_users membership check failed:', error.message);
+        return false;
+    }
+    return !!data;
+}
+
+// Redirect to login if not authenticated OR not an active admin.
 async function requireAuth() {
     const session = await checkAuth();
     if (!session) {
         window.location.href = '/admin/login.html';
+        return null;
+    }
+    // A valid session is not enough — require active admin_users membership.
+    const admin = await isActiveAdmin(session.user?.id);
+    if (!admin) {
+        const client = getSupabaseAuthClient();
+        await client.auth.signOut();
+        window.location.href = '/admin/login.html?denied=1';
         return null;
     }
     return session;
@@ -67,6 +94,7 @@ async function getCurrentUser() {
 window.authUtils = {
     checkAuth,
     requireAuth,
+    isActiveAdmin,
     login,
     logout,
     getCurrentUser,

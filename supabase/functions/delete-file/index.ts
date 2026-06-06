@@ -1,10 +1,7 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
-
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-}
+import { getCorsHeaders } from '../_shared/cors.ts'
+import { isAuthorizedAdmin } from '../_shared/auth.ts'
 
 interface DeleteFileRequest {
   file_path: string
@@ -12,6 +9,8 @@ interface DeleteFileRequest {
 }
 
 serve(async (req) => {
+  const corsHeaders = getCorsHeaders(req)
+
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
@@ -22,7 +21,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({
         status: 'ok',
-        version: '2.0-admin-required',
+        version: '2.1-admin-users-auth',
         timestamp: new Date().toISOString()
       }),
       {
@@ -69,8 +68,11 @@ serve(async (req) => {
       )
     }
 
-    if (user.user_metadata?.role !== 'admin') {
-      console.log(`Delete denied for ${user.email}: role=${user.user_metadata?.role}`)
+    // Authorize via the admin_users registry (active membership), honouring the
+    // legacy user_metadata.role === 'admin' flag too. Uses the service-role
+    // client so the lookup is not subject to RLS.
+    if (!(await isAuthorizedAdmin(supabaseAdmin, user))) {
+      console.log(`Delete denied for ${user.email}: not an active admin`)
       return new Response(
         JSON.stringify({ error: 'Forbidden', message: 'Admin privileges required to delete data' }),
         { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
@@ -164,7 +166,7 @@ serve(async (req) => {
 
     return new Response(
       JSON.stringify({
-        error: error.message || 'Unknown error occurred'
+        error: error instanceof Error ? error.message : 'Unknown error occurred'
       }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },

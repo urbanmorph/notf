@@ -146,7 +146,7 @@ function renderOrganizations(orgs) {
                         `<button class="mini-icon-btn activate" title="Activate" onclick="updateStatus('${org.id}', 'active')">
                             <i class="fa-solid fa-check"></i>
                         </button>` :
-                        `<button class="mini-icon-btn deactivate" title="Deactivate" onclick="updateStatus('${org.id}', 'inactive')">
+                        `<button class="mini-icon-btn deactivate" title="Deactivate" onclick="updateStatus('${org.id}', 'archived')">
                             <i class="fa-solid fa-ban"></i>
                         </button>`
                     }

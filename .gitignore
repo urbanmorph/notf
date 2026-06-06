@@ -44,3 +44,4 @@ website/test-results/
 # Playwright HTML report at repo root (when run from notf root)
 playwright-report/
 RECOVERED-metadata-2026-06-02.json
+deno.lock
