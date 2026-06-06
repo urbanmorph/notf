@@ -337,30 +337,6 @@ async function handleFormSubmit(e) {
         metadata.submitted_at = new Date().toISOString();
     }
 
-    // Warn if renaming a provider that has catalogue entries: the catalogue
-    // references providers by name and won't auto-update on rename.
-    if (isEditing && editingId) {
-        const existing = organizations.find(o => o.id === editingId);
-        if (existing && name !== (existing.metadata?.name || '')) {
-            const deps = catalogueEntriesForOrg(existing);
-            if (deps.length) {
-                const noun = deps.length === 1 ? 'entry' : 'entries';
-                const titles = deps.map(d => '  • ' + d.title).join('\n');
-                const ok = confirm(
-                    `⚠️ "${existing.metadata?.name}" is the provider for ${deps.length} catalogue ${noun}:\n\n${titles}\n\n` +
-                    `Renaming it to "${name}" won't update the catalogue, which will keep showing the old name.\n\n` +
-                    `Rename anyway?`
-                );
-                if (!ok) {
-                    submitBtn.disabled = false;
-                    submitBtnText.style.display = 'inline';
-                    submitBtnLoader.style.display = 'none';
-                    return;
-                }
-            }
-        }
-    }
-
     const supabase = authUtils.supabase;
 
     try {
@@ -422,41 +398,16 @@ async function handleFormSubmit(e) {
     }
 }
 
-// Catalogue entries attached to a provider (matched by slug). Returns [] if the
-// dependency module/data isn't loaded. See catalogue-deps.js + RBAC-PLAN.md.
-function catalogueEntriesForOrg(org) {
-    if (!org || !window.catalogueDeps || !Array.isArray(window.CATALOG_PROJECTS)) return [];
-    return window.catalogueDeps.catalogueEntriesForProvider(window.CATALOG_PROJECTS, org.slug);
-}
-
-// Build a "this provider has catalogue entries" warning for a CRUD action, or
-// '' when there is no catalogue dependency. `action` is e.g. 'Archiving',
-// 'Deleting'.
-function catalogueDependencyWarning(org, action) {
-    const deps = catalogueEntriesForOrg(org);
-    if (!deps.length) return '';
-    const name = org.metadata?.name || org.slug;
-    const noun = deps.length === 1 ? 'entry' : 'entries';
-    const titles = deps.map(d => '  • ' + d.title).join('\n');
-    return `⚠️ "${name}" is the provider for ${deps.length} catalogue ${noun}:\n\n${titles}\n\n`
-        + `${action} it removes it from the Solution Providers count and the home-page `
-        + `listing. The catalogue ${noun} will still appear but reference a provider that is `
-        + `no longer listed.\n\n`;
-}
-
 async function deleteOrganization(id, name) {
-    const organization = organizations.find(o => o.id === id);
-    const depWarning = organization ? catalogueDependencyWarning(organization, 'Deleting') : '';
-    const confirmMsg = depWarning
-        ? `${depWarning}Delete anyway? This cannot be undone.`
-        : `Are you sure you want to delete "${name}"? This cannot be undone.`;
-    if (!confirm(confirmMsg)) {
+    if (!confirm(`Are you sure you want to delete "${name}"? This cannot be undone.`)) {
         return;
     }
 
     const supabase = authUtils.supabase;
 
     try {
+        // Find the organization to get file_path
+        const organization = organizations.find(o => o.id === id);
         if (!organization) {
             throw new Error('Organization not found');
         }
@@ -488,19 +439,9 @@ async function deleteOrganization(id, name) {
 async function updateStatus(id, newStatus) {
     const supabase = authUtils.supabase;
 
-    // Find the organization to get file_path
-    const organization = organizations.find(o => o.id === id);
-
-    // Warn before taking a provider off the home-page listing if it has
-    // catalogue entries attached (archive/deactivate only).
-    if (organization && (newStatus === 'archived' || newStatus === 'inactive')) {
-        const depWarning = catalogueDependencyWarning(organization, 'Archiving');
-        if (depWarning && !confirm(`${depWarning}Archive anyway?`)) {
-            return;
-        }
-    }
-
     try {
+        // Find the organization to get file_path
+        const organization = organizations.find(o => o.id === id);
         if (!organization) {
             throw new Error('Organization not found');
         }
