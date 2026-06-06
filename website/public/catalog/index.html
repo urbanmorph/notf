@@ -366,6 +366,27 @@
             font-weight: 500;
         }
         .detail-links a:hover { text-decoration: underline; }
+        .detail-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 0 0 1.5rem 0;
+        }
+        .detail-gallery-item { margin: 0; }
+        .detail-gallery-item img {
+            width: 100%;
+            aspect-ratio: 3 / 2;
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+            background: #f1efe4;
+        }
+        .detail-gallery-item figcaption {
+            font-size: 0.72rem;
+            color: #777;
+            line-height: 1.35;
+            margin-top: 5px;
+        }
         .modal-effort-indicators {
             display: flex;
             gap: 1.25rem;
@@ -1438,6 +1459,29 @@
                 whatsNeeded: "From communities: participation in co-creating and reviewing City Action Plans, engagement in local consultations, and feedback on priorities. From partner organisations: sectoral expertise to assess gaps and co-design interventions, and willingness to work within a shared city-level framework aligned to the CAP. From government: coordination mechanism at the city level such as a Municipal Planning Committee.",
                 links: ["https://www.janaagraha.org/"],
                 provider: "Janaagraha"
+            },
+            {
+                id: 50,
+                title: "Pollinator-Linked Urban Ecosystems (PLUME)",
+                description: "Nature-based solutions that turn urban green spaces — from balconies and home gardens to schools and lakesides — into multifunctional ecosystems that support pollinators, food growing, wellbeing, and climate resilience.",
+                themes: ["Placemaking & Urban Ecology"],
+                time: 4, workload: 3, budget: 3,
+                whatIsIt: "The Pollinator-Linked Urban Multifunctional Ecosystems (PLUME) programme offers nature-based solutions that transform urban green spaces into multifunctional ecosystems that benefit both people and biodiversity. Designed to work across spaces of different sizes, types, and forms of governance — from home gardens and campuses to community and institutional spaces — PLUME helps urban green areas support pollinators that are vital for plant health and food security, improve human wellbeing, strengthen climate resilience, and provide other ecosystem benefits. By rethinking how urban green spaces are designed and used, PLUME demonstrates how cities can make limited space more sustainable, resilient, and ecologically vibrant.",
+                whyExists: "Cities are expanding rapidly, often at the cost of green spaces and biodiversity. As urban areas become hotter, more polluted, and disconnected from nature, they also become less liveable. Conserving biodiversity cannot remain limited to protected areas alone — it must become part of everyday urban spaces, from backyards and balconies to campuses and community gardens. PLUME reimagines urban green spaces as multifunctional ecosystems that support both people and biodiversity, demonstrating how even small spaces can provide habitat for pollinators while contributing to food production, climate resilience, and wellbeing.",
+                involves: ["Working with stakeholders such as homeowners, schools, institutions, and communities to understand the needs and possibilities of each space", "Co-designing multifunctional green spaces that support biodiversity while meeting urban needs such as food growing, recreation, and wellbeing", "Implementing nature-based interventions including pollinator-friendly gardens, bee hotels, composting systems, and other habitat features", "Monitoring biodiversity and ecosystem outcomes through ecological surveys and long-term observation"],
+                whereDone: "Implemented across six pilot sites in Jakkur ward, Bengaluru, including home gardens, a public school, and a public lakeside space.",
+                impact: "Created multifunctional pollinator-friendly spaces in diverse settings with edible gardens, bee hotels, stingless bee colonies, composting systems, and upcycled garden structures. Engaged local communities, homeowners, and school children through hands-on gardening, pollinator observation, and awareness activities. Developed educational and outreach resources including the PLUME website, learning material on beneficial insects and garden pests, and a public video on pollinator-linked urban agriculture. Contributed to wider policy and academic discussions through policy briefs.",
+                whatsNeeded: "Space to set up a garden — grounded space is not necessary; terraces and balconies work too. Regular maintenance of the green space after interventions are in place. Willingness to work with the team of researchers, and venues or seating arrangements for community activities.",
+                links: ["https://www.atree.org/plume/", "https://www.youtube.com/watch?v=K7yyjT8wyEA"],
+                images: [
+                    { src: "/assets/images/catalogue/plume-insect-hotel.jpg", caption: "Insect hotel at Venkateshpura Lake" },
+                    { src: "/assets/images/catalogue/plume-bee-hotel.jpg", caption: "A bee visiting a cavity in the bee hotel" },
+                    { src: "/assets/images/catalogue/plume-edible-walkway.jpg", caption: "Edible creepers walkway in a public space" },
+                    { src: "/assets/images/catalogue/plume-plant-support.jpg", caption: "Plant support with pollinator habitat" },
+                    { src: "/assets/images/catalogue/plume-aquatic-habitat.jpg", caption: "Biodiversity-supportive water feature at a school" },
+                    { src: "/assets/images/catalogue/plume-stingless-bees.jpg", caption: "A stingless bee colony at its nest entrance" }
+                ],
+                provider: "ATREE"
             }
         ];
 
@@ -1466,6 +1510,7 @@
             31: ['Community'],
             34: ['Livelihoods'],
             41: ['Governance'],
+            50: ['Biodiversity'],
         };
 
         let activeTheme = '';
@@ -1572,9 +1617,24 @@
                 `;
             }
 
+            let galleryHtml = '';
+            if (project.images && project.images.length > 0) {
+                galleryHtml = `
+                    <div class="detail-gallery">
+                        ${project.images.map(img => `
+                            <figure class="detail-gallery-item">
+                                <img src="${img.src}" alt="${img.caption}" loading="lazy">
+                                <figcaption>${img.caption}</figcaption>
+                            </figure>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
             const body = document.getElementById('modalProjectBody');
             body.innerHTML = `
                 <p style="color:#666; font-size:0.9rem; line-height:1.6; margin:0 0 1.25rem 0;">${project.description}</p>
+                ${galleryHtml}
                 <div class="modal-effort-indicators">
                     <div class="modal-effort-item time">
                         <span class="modal-effort-label" data-i18n="catalogPage.effort.time">Time</span>
