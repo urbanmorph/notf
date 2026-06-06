@@ -2,8 +2,13 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 import { parse as parseYAML, stringify as stringifyYAML } from 'https://deno.land/std@0.168.0/encoding/yaml.ts'
 
-// CORS: Whitelist specific origins for security
+// CORS: Whitelist specific origins for security.
+// Production is served at notf.in (notf.in -> www.notf.in redirect), so the
+// browser Origin on admin calls is https://www.notf.in. Keep the legacy
+// vercel/org entries for any older bookmarks/aliases.
 const ALLOWED_ORIGINS = [
+  'https://www.notf.in',   // production (canonical, post-redirect)
+  'https://notf.in',       // production (apex, pre-redirect)
   'https://notf.vercel.app',
   'https://www.notf.org',
   'http://localhost:3000', // Development only
@@ -51,7 +56,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({
         status: 'ok',
-        version: '4.2-empty-array-guard',
+        version: '4.3-cors-notf-in',
         timestamp: new Date().toISOString()
       }),
       {
