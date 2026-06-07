@@ -760,5 +760,27 @@ window.CATALOG_PROJECTS = [
                     { src: "/assets/images/catalogue/plume-stingless-bees.jpg", caption: "A stingless bee colony at its nest entrance" }
                 ],
                 provider: "ATREE"
+            },
+            {
+                id: 51,
+                title: "Venkateshpura Lake Restoration",
+                description: "A community-led urban lake restoration reviving a degraded freshwater ecosystem through invasive-species management, native habitat and pollinator restoration, floating-island water treatment, ecological monitoring, and long-term community stewardship.",
+                themes: ["Water & Ecology"],
+                time: 5, workload: 4, budget: 4,
+                whatIsIt: "The Venkateshpura Lake Project is a community-led urban lake restoration initiative focused on reviving a degraded freshwater ecosystem. It combines invasive-species management, native habitat restoration, pollinator conservation, nature-based water treatment, ecological monitoring, and community engagement to improve water quality, enhance biodiversity, and promote long-term stewardship of the lake. Delivered by ATREE in collaboration with NatWest Group India and neighbourhood residents and volunteers.",
+                whyExists: "Venkateshpura Lake was affected by pollution, sewage inflow, algal blooms, habitat loss, and the proliferation of terrestrial and aquatic invasive species — including Lantana camara, Parthenium hysterophorus, and water hyacinth (Eichhornia crassipes). These pressures reduced water quality, biodiversity, and the lake's ecological functioning. The project restores native habitats, improves ecosystem resilience, and enables stakeholders to actively participate in the long-term conservation and management of the lake.",
+                involves: ["Removal and management of terrestrial and aquatic invasive species to improve habitat quality and ecological functioning", "Restoration of native vegetation, butterfly trails, and pollinator habitats to enhance biodiversity and ecosystem resilience", "Installation and maintenance of floating islands as nature-based water-treatment systems that improve water quality and support aquatic biodiversity", "Regular monitoring of water quality, biodiversity, and ecological indicators to guide management actions", "Community engagement through nature walks, volunteer activities, awareness programmes, and stakeholder participation in lake stewardship", "Creation of nature-based community spaces using recycled, locally available materials — rock seating, upcycled tyre seating, and nature-themed mural art", "Capacity building and knowledge-sharing to support long-term conservation and sustainable management"],
+                whereDone: "Venkateshpura Lake, Bengaluru, Karnataka. Restoration interventions have been implemented across approximately 6 acres (2.43 hectares) of lake and surrounding habitat, engaging local residents, community groups, schools, and volunteers — reaching over 3,000 people through restoration, monitoring, and stewardship activities.",
+                impact: "Multiple rounds of invasive-species removal improved habitat quality and reduced ecological pressures on the lake. Five butterfly mounds were established and enriched with over 34 native host and nectar plant species, strengthening pollinator habitats. Floating islands improved water clarity from roughly 10–12 cm to nearly 50 cm. Biodiversity monitoring recorded increased sightings of birds, bees, butterflies, dragonflies, reptiles, and amphibians. Nature-based community spaces — mural art, rock seating, and upcycled tyre seating — fostered greater public engagement and stewardship.",
+                whatsNeeded: "Active participation from local residents, volunteers, schools, and community groups. Support for regular maintenance — invasive-species management, floating-island upkeep, and habitat restoration. Collaboration with local institutions, government agencies, and stakeholder groups. Access to restoration sites, and a long-term commitment to monitoring, conservation, and sustainable management.",
+                links: ["https://www.atree.org/venkateshpura/", "https://lakerestoration.atree.org/", "https://www.instagram.com/reel/C8GbozXIS_i/"],
+                images: [
+                    { src: "/assets/images/catalogue/venkateshpura-floating-islands.jpg", caption: "Floating islands installed to improve water quality and support aquatic habitats" },
+                    { src: "/assets/images/catalogue/venkateshpura-lantana-sculpture.jpg", caption: "Lakeside sculptures of a farmer's family, woven from removed invasive lantana" },
+                    { src: "/assets/images/catalogue/venkateshpura-lantana-seater.jpg", caption: "A woven lantana seater — a nature-based community space" },
+                    { src: "/assets/images/catalogue/venkateshpura-butterfly-murals.jpg", caption: "Butterfly murals on the trail, painted on repurposed cement debris" },
+                    { src: "/assets/images/catalogue/venkateshpura-birds.jpg", caption: "Murals celebrating bird species spotted at the restored lake" }
+                ],
+                provider: "ATREE"
             }
-        ];;
+        ];
