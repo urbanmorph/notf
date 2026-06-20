@@ -258,9 +258,8 @@ async function submitForm() {
 
         if (!supabase) throw new Error('Supabase client not available. Please refresh and try again.');
 
-        const { data, error } = await supabase
-            .from('file_metadata')
-            .insert(record);
+        // Insert with collision-safe slug retry (file_path is UNIQUE).
+        const { error } = await insertJoinRecord(supabase, record);
 
         if (error) throw error;
 

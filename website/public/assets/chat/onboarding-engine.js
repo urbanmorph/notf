@@ -201,10 +201,19 @@ class OnboardingEngine {
         });
 
         try {
-            if (this.supabase) {
-                const { error } = await this.supabase.from('file_metadata').insert([record]);
-                if (error) throw error;
+            // Recover the client if it wasn't ready when onboarding started.
+            if (!this.supabase && typeof dataLoader !== 'undefined' && dataLoader.getSupabaseClient) {
+                this.supabase = dataLoader.getSupabaseClient();
             }
+            // Never report success without an actual insert (previously a missing
+            // client silently skipped the insert but still confirmed "submitted").
+            if (!this.supabase) {
+                throw new Error('No connection to the server.');
+            }
+
+            // Insert with collision-safe slug retry (file_path is UNIQUE).
+            const { error } = await insertJoinRecord(this.supabase, record);
+            if (error) throw error;
 
             return {
                 text: `Your application for "${this.data.name}" has been submitted!\n\nReference: ${refNum}\nWe'll review it within 3 working days.`,
