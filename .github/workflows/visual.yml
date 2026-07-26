@@ -16,6 +16,12 @@ jobs:
   visual:
     name: Playwright visual + a11y
     runs-on: ubuntu-latest
+    # Pin the rendering environment. This image ships the exact Playwright
+    # version + chromium + fonts, so screenshots are identical here and on any
+    # developer machine that runs the same image. Keep this tag in lockstep with
+    # `@playwright/test` in website/package.json.
+    container:
+      image: mcr.microsoft.com/playwright:v1.59.1-noble
     timeout-minutes: 20
     defaults:
       run:
@@ -23,17 +29,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: website/package-lock.json
-
+      # Browsers + system deps are already in the image; just install node deps.
       - name: Install dependencies
         run: npm ci
-
-      - name: Install Playwright browsers
-        run: npx playwright install chromium --with-deps
 
       - name: Run visual + a11y suite
         run: |
@@ -51,7 +49,7 @@ jobs:
         if: inputs.update_snapshots == true
         uses: actions/upload-artifact@v4
         with:
-          name: linux-snapshots
+          name: snapshots
           path: website/tests/visual/**/*-snapshots/**
           retention-days: 7
 

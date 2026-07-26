@@ -45,3 +45,6 @@ website/test-results/
 playwright-report/
 RECOVERED-metadata-2026-06-02.json
 deno.lock
+
+# Stray Playwright snapshots created by running from repo root instead of website/
+/*.spec.ts-snapshots/
