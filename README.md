@@ -32,7 +32,7 @@ insights.
 | `supabase/functions/` | Edge Functions (admin write/delete, sync, deploy trigger). |
 | `supabase/migrations/` | Database migrations (audit trigger, delete lockdown, …). |
 | `scripts/` | Operational one-off scripts (sitemap, catalogue check, …). `scripts/archive/` is dead legacy tooling. |
-| `supporting documents/` | Climate-data research, source docs, data-processing scripts. |
+| `data-docs/` | Public climate-dataset documentation (sources, credits, research) + the data-processing scripts. |
 
 ## Local development
 
@@ -86,8 +86,8 @@ NOTF provides open ward-level climate baseline data for Indian cities, starting 
   - ⏳ Disaster Resilience (pending)
 
 **Data Quality:**
-- Bengaluru: ★★★☆☆ (63%) - See [`DATA_SOURCES_AND_CREDITS.md`](supporting%20documents/DATA_SOURCES_AND_CREDITS.md)
-- Mumbai: ★★★☆☆ (60%) - See [`MUMBAI_DATA_SOURCES_AND_CREDITS.md`](supporting%20documents/MUMBAI_DATA_SOURCES_AND_CREDITS.md)
+- Bengaluru: ★★★☆☆ (63%) - See [`DATA_SOURCES_AND_CREDITS.md`](data-docs/DATA_SOURCES_AND_CREDITS.md)
+- Mumbai: ★★★☆☆ (60%) - See [`MUMBAI_DATA_SOURCES_AND_CREDITS.md`](data-docs/MUMBAI_DATA_SOURCES_AND_CREDITS.md)
 
 ---
 
@@ -206,8 +206,8 @@ for ward in south_wards['wards']:
 ```
 
 **Documentation:**
-- [`MUMBAI_DATA_SOURCES_AND_CREDITS.md`](supporting%20documents/MUMBAI_DATA_SOURCES_AND_CREDITS.md) - Comprehensive data source documentation
-- [`MUMBAI_227_WARDS_DATA_RESEARCH.md`](supporting%20documents/MUMBAI_227_WARDS_DATA_RESEARCH.md) - Ward data research findings
+- [`MUMBAI_DATA_SOURCES_AND_CREDITS.md`](data-docs/MUMBAI_DATA_SOURCES_AND_CREDITS.md) - Comprehensive data source documentation
+- [`MUMBAI_227_WARDS_DATA_RESEARCH.md`](data-docs/MUMBAI_227_WARDS_DATA_RESEARCH.md) - Ward data research findings
 
 ---
 
@@ -265,7 +265,7 @@ Original Sources: Census of India 2011, OpenCity.in, BBMP, KSPCB
 
 ### 📚 Data Sources & Credits
 
-All data compiled from authoritative government and research sources. Full documentation available in [`DATA_SOURCES_AND_CREDITS.md`](supporting%20documents/DATA_SOURCES_AND_CREDITS.md).
+All data compiled from authoritative government and research sources. Full documentation available in [`DATA_SOURCES_AND_CREDITS.md`](data-docs/DATA_SOURCES_AND_CREDITS.md).
 
 #### Primary Data Providers
 
@@ -306,7 +306,7 @@ All data compiled from authoritative government and research sources. Full docum
 
 ### 🔧 Data Processing Scripts
 
-Python scripts for generating ward-level climate data are available in [`supporting documents/scripts/processing/`](supporting%20documents/scripts/processing/):
+Python scripts for generating ward-level climate data are available in [`data-docs/processing/`](data-docs/processing/):
 
 1. **`split_corporation_data.py`** - Split 3.5 MB baseline JSON into 5 corporation files
 2. **`generate_ward_index.py`** - Extract ward metadata for routing
@@ -316,7 +316,7 @@ Python scripts for generating ward-level climate data are available in [`support
 
 ```bash
 # Run data pipeline
-cd "supporting documents/scripts/processing"
+cd data-docs/processing
 python3 split_corporation_data.py
 python3 generate_ward_index.py
 python3 generate_city_summary.py
@@ -447,9 +447,8 @@ wget https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/asset
 
 ### 📖 Additional Documentation
 
-- **Full Methodology:** [`DATA_SOURCES_AND_CREDITS.md`](supporting%20documents/DATA_SOURCES_AND_CREDITS.md)
-- **Mumbai Data Sources:** [`MUMBAI_DATA_SOURCES_AND_CREDITS.md`](supporting%20documents/MUMBAI_DATA_SOURCES_AND_CREDITS.md)
-- **Implementation Progress:** [`WARD_DASHBOARD_FINAL_SUMMARY.md`](supporting%20documents/WARD_DASHBOARD_FINAL_SUMMARY.md)
+- **Full Methodology:** [`DATA_SOURCES_AND_CREDITS.md`](data-docs/DATA_SOURCES_AND_CREDITS.md)
+- **Mumbai Data Sources:** [`MUMBAI_DATA_SOURCES_AND_CREDITS.md`](data-docs/MUMBAI_DATA_SOURCES_AND_CREDITS.md)
 - **Architecture:** [`ARCHITECTURE.md`](ARCHITECTURE.md)
 
 ---

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ ward_name }} — {{ sector_title }} | Bengaluru Climate | NOTF</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="description" content="{{ ward_name }} ward — {{ sector_title }} climate data in Bengaluru: per-metric rankings, city averages, and 2030 targets with source confidence.">
+    <link rel="canonical" href="https://notf.in/cities/bengaluru/climate/{{ sector_slug }}/wards/{{ ward_slug }}/">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Neighbourhoods of the Future">
+    <meta property="og:title" content="{{ ward_name }} — {{ sector_title }} | Bengaluru Climate">
+    <meta property="og:description" content="{{ ward_name }} ward climate data for {{ sector_title }} in Bengaluru — rankings, metrics, and sources.">
+    <meta property="og:url" content="https://notf.in/cities/bengaluru/climate/{{ sector_slug }}/wards/{{ ward_slug }}/">
+    <meta property="og:image" content="https://notf.in/assets/images/notf-terracotta.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ ward_name }} — {{ sector_title }} | Bengaluru Climate">
+    <meta name="twitter:description" content="{{ ward_name }} ward climate data for {{ sector_title }} in Bengaluru.">
+    <meta name="twitter:image" content="https://notf.in/assets/images/notf-terracotta.png">
+
+    <!-- Structured data: Dataset + BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Dataset",
+          "@id": "https://notf.in/cities/bengaluru/climate/{{ sector_slug }}/wards/{{ ward_slug }}/#dataset",
+          "name": "{{ ward_name }} — {{ sector_title }} indicators",
+          "description": "Ward-level {{ sector_title|lower }} climate indicators for {{ ward_name }} ({{ corporation }} Corporation, Bengaluru): per-metric values, city rankings, and city averages against 2030 targets.",
+          "url": "https://notf.in/cities/bengaluru/climate/{{ sector_slug }}/wards/{{ ward_slug }}/",
+          "keywords": ["Bengaluru", "{{ ward_name }}", "{{ sector_title }}", "climate", "urban indicators", "ward data"],
+          "spatialCoverage": {
+            "@type": "Place",
+            "name": "{{ ward_name }}, {{ corporation }} Corporation, Bengaluru, India"
+          },
+          "isAccessibleForFree": true,
+          "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+          "creator": {
+            "@type": "Organization",
+            "name": "Neighbourhoods of the Future",
+            "url": "https://notf.in/"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://notf.in/" },
+            { "@type": "ListItem", "position": 2, "name": "Bengaluru", "item": "https://notf.in/cities/bengaluru/" },
+            { "@type": "ListItem", "position": 3, "name": "Climate", "item": "https://notf.in/cities/bengaluru/climate/" },
+            { "@type": "ListItem", "position": 4, "name": "{{ sector_title }}", "item": "https://notf.in/cities/bengaluru/climate/{{ sector_slug }}/" },
+            { "@type": "ListItem", "position": 5, "name": "{{ ward_name }}", "item": "https://notf.in/cities/bengaluru/climate/{{ sector_slug }}/wards/{{ ward_slug }}/" }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/climate/ward-detail.css">
+    <link rel="stylesheet" href="/assets/i18n/language-selector.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-brand">
+                <a href="/" class="logo-link">
+                    <img src="/assets/images/notf-terracotta.png" alt="NOTF Logo" class="nav-logo">
+                </a>
+            </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="nav-menu" id="navMenu">
+                <a href="/cities/bengaluru/" class="back-button">
+                    <i class="fa-solid fa-arrow-left"></i> Bengaluru Hub
+                </a>
+                <a href="/cities/bengaluru/communities/">Communities</a>
+                <a href="/cities/bengaluru/solution-providers/">Providers</a>
+                <a href="/cities/bengaluru/map/">Map</a>
+                <a href="/join/" class="join-link">Join</a>
+                <a href="/admin/login.html" class="admin-link" title="Admin Login">
+                    <i class="fa-solid fa-user-lock"></i>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Ward Hero -->
+        <section class="ward-hero" style="background-color: {{ sector_color }}">
+            <div class="ward-hero-content">
+                <div class="breadcrumb">
+                    <a href="/">Home</a> /
+                    <a href="/cities/bengaluru/">Bengaluru</a> /
+                    <a href="/cities/bengaluru/climate/">Climate</a> /
+                    <a href="/cities/bengaluru/climate/{{ sector_slug }}/">{{ sector_title }}</a> /
+                    {{ ward_name }}
+                </div>
+                <h1>{{ ward_name }}</h1>
+                <p class="ward-subtitle">
+                    <span class="ward-local-name">{{ ward_name_local }}</span>
+                </p>
+                <div class="ward-meta">
+                    <span><i class="fa-solid fa-building"></i> {{ corporation }} Corporation</span>
+                    <span><i class="fa-solid fa-users"></i> Population: {{ population }}</span>
+                    <span><i class="fa-solid fa-home"></i> Households: {{ households }}</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Metrics Dashboard -->
+        <section class="metrics-section">
+            <div class="metrics-container">
+                <h2>{{ sector_title }} Performance</h2>
+
+                <div class="metrics-grid">
+                    {% for metric in metrics %}
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <h3>
+                                <i class="{{ metric.icon }}"></i>
+                                {{ metric.name }}
+                            </h3>
+                            <span class="metric-rank">#{{ metric.rank }} of 369</span>
+                        </div>
+
+                        <div class="metric-value">
+                            {{ metric.value }}{{ metric.unit }}
+                        </div>
+
+                        <div class="progress-bar-container">
+                            <div class="progress-bar progress-{{ metric.status }}"
+                                 style="width: {{ metric.percentage }}%">
+                            </div>
+                        </div>
+
+                        <div class="metric-comparison">
+                            <span class="city-avg">
+                                City Average: {{ metric.city_avg }}{{ metric.unit }}
+                            </span>
+                            {% if metric.difference > 0 %}
+                            <span class="diff-above">
+                                <i class="fa-solid fa-arrow-up"></i>
+                                {{ metric.difference }}% above average
+                            </span>
+                            {% elif metric.difference < 0 %}
+                            <span class="diff-below">
+                                <i class="fa-solid fa-arrow-down"></i>
+                                {{ metric.difference|abs }}% below average
+                            </span>
+                            {% else %}
+                            <span class="diff-equal">At city average</span>
+                            {% endif %}
+                        </div>
+
+                        <div class="metric-confidence">
+                            <small>
+                                <i class="fa-solid fa-circle-info"></i>
+                                {{ metric.confidence }} - {{ metric.source }}
+                            </small>
+                        </div>
+
+                        {% if metric.data_source %}
+                        <div class="metric-source-toggle">
+                            <button class="source-toggle-btn" onclick="toggleSource('{{ metric.key }}')" aria-label="Show data source details">
+                                <i class="fa-solid fa-database"></i>
+                                Data Source
+                            </button>
+                        </div>
+
+                        <div class="metric-source-details" id="source-{{ metric.key }}" style="display: none;">
+                            <div class="source-header">
+                                <h4>
+                                    <i class="fa-solid fa-chart-line"></i>
+                                    Data Source Information
+                                </h4>
+                                <span class="confidence-badge">{{ metric.data_source.confidence_stars }}</span>
+                            </div>
+
+                            <div class="source-item">
+                                <strong>Provider:</strong>
+                                <span>{{ metric.data_source.provider }}</span>
+                            </div>
+
+                            <div class="source-item">
+                                <strong>Dataset:</strong>
+                                <a href="{{ metric.data_source.url }}" target="_blank" rel="noopener noreferrer">
+                                    OpenCity.in Dataset <i class="fa-solid fa-external-link"></i>
+                                </a>
+                            </div>
+
+                            <div class="source-item">
+                                <strong>Methodology:</strong>
+                                <p>{{ metric.data_source.methodology }}</p>
+                            </div>
+
+                            {% if metric.data_source.limitations %}
+                            <div class="source-item">
+                                <strong>Limitations:</strong>
+                                <ul>
+                                    {% for limitation in metric.data_source.limitations %}
+                                    <li>{{ limitation }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endif %}
+
+                            <div class="source-footer">
+                                <small>
+                                    <i class="fa-solid fa-calendar"></i>
+                                    Data Year: {{ metric.data_source.data_year }}
+                                    {% if metric.data_source.notes %}
+                                    | <i class="fa-solid fa-lightbulb"></i> {{ metric.data_source.notes }}
+                                    {% endif %}
+                                </small>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <section class="ward-navigation">
+            <div class="nav-container">
+                <h3>Explore More</h3>
+                <div class="nav-buttons">
+                    <a href="/cities/bengaluru/climate/{{ sector_slug }}/leaderboard/" class="btn btn-primary">
+                        <i class="fa-solid fa-trophy"></i>
+                        View Leaderboard
+                    </a>
+                    <a href="/cities/bengaluru/climate/{{ sector_slug }}/" class="btn btn-secondary">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Back to {{ sector_title }}
+                    </a>
+                    <a href="/cities/bengaluru/map/?ward={{ ward_slug }}" class="btn btn-secondary">
+                        <i class="fa-solid fa-map"></i>
+                        View on Map
+                    </a>
+                </div>
+
+                <div class="other-sectors">
+                    <h4>View This Ward in Other Sectors</h4>
+                    <div class="sector-links">
+                        {% for other_sector in all_sectors %}
+                        {% if other_sector.slug != sector_slug %}
+                        <a href="/cities/bengaluru/climate/{{ other_sector.slug }}/wards/{{ ward_slug }}/"
+                           class="sector-chip"
+                           style="background-color: {{ other_sector.color }}"
+                           title="{{ other_sector.title }}"
+                           aria-label="{{ other_sector.title }}">
+                            {% if other_sector.icon_brand %}<img src="/assets/images/icons/{{ other_sector.icon_brand }}" alt="" aria-hidden="true" class="sector-brand-icon">{% else %}<i class="{{ other_sector.icon }}" aria-hidden="true"></i>{% endif %}
+                            {{ other_sector.name }}
+                        </a>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license noopener noreferrer" class="cc-license">
+                <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="CC" class="cc-icon">
+                <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt="BY" class="cc-icon">
+                <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt="NC" class="cc-icon">
+                <img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg" alt="SA" class="cc-icon">
+            </a>
+            <span class="cc-text">2025 Neighbourhoods of the Future. Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a></span>
+        </p>
+    </footer>
+
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!hamburger.contains(event.target) && !navMenu.contains(event.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Toggle source details
+        function toggleSource(metricKey) {
+            const sourceDetails = document.getElementById('source-' + metricKey);
+            const toggleBtn = event.currentTarget;
+
+            if (sourceDetails.style.display === 'none') {
+                sourceDetails.style.display = 'block';
+                toggleBtn.innerHTML = '<i class="fa-solid fa-database"></i> Hide Source';
+                toggleBtn.classList.add('active');
+            } else {
+                sourceDetails.style.display = 'none';
+                toggleBtn.innerHTML = '<i class="fa-solid fa-database"></i> Data Source';
+                toggleBtn.classList.remove('active');
+            }
+        }
+    </script>
+
+    <!-- i18n Translation System -->
+    <script src="/assets/i18n/translator.js"></script>
+    <script src="/assets/i18n/language-selector.js"></script>
+
+    <!-- Chatbot Integration -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+    <link rel="stylesheet" href="/assets/chat/chatbot.css">
+    <script src="/assets/chat/discovery-engine.js"></script>
+    <script src="/assets/chat/chatbot.js"></script>
+    <script src="/assets/js/nav-highlight.js"></script>
+</body>
+</html>
