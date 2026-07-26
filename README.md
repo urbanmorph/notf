@@ -1,57 +1,62 @@
 # NOTF - Neighbourhoods of the Future
 
-**Live site:** https://urbanmorph.github.io/notf/
+**Live site:** https://www.notf.in
 
-A collaborative platform for building inclusive, resilient, and people-first neighbourhoods through systems thinking, community engagement, and data-driven insights.
+A collaborative platform for building inclusive, resilient, and people-first
+neighbourhoods through systems thinking, community engagement, and data-driven
+insights.
 
-## Structure
+## Stack at a glance
 
-- `docs/` - GitHub Pages website (built from website/)
-- `data/` - Network data (members, communities, asks/offers)
-- `scripts/` - Automation scripts
-- `website/` - Website source files
-- `website/public/assets/data/climate/` - Ward-level climate data (Bengaluru)
-- `supporting documents/` - Project documentation and data processing scripts
+- **Frontend:** hand-written static HTML/CSS/JS in `website/public/`. **No build
+  step, no framework, no Eleventy.** Files are deployed as-is.
+- **Hosting:** **Vercel** — auto-deploys on every push to `main`
+  (`vercel.json` serves `website/public`).
+- **Backend:** **Supabase** project `abblyaukkoxmgzwretvm` — Postgres
+  (`file_metadata`), Storage (`notf` bucket), and Deno **Edge Functions**
+  (`supabase/functions/`). The site reads data at runtime via the public anon key.
+- **i18n:** 11 languages, JSON locale files under
+  `website/public/assets/i18n/locales/`. Updating all 11 is mandatory for any
+  user-facing text change.
 
-## Local Development
+> ⚠️ An older version of this README described a GitHub Pages + Eleventy + YAML
+> (`data/`, `docs/`, `_site/`, `npm run build`) setup. **That architecture is
+> gone.** If you find references to it anywhere, they are stale.
+
+## Repository layout
+
+| Path | What it is |
+|------|------------|
+| `website/public/` | The deployed site (static HTML + `assets/`). |
+| `website/tests/` | Playwright visual tests + Deno unit tests. |
+| `supabase/functions/` | Edge Functions (admin write/delete, sync, deploy trigger). |
+| `supabase/migrations/` | Database migrations (audit trigger, delete lockdown, …). |
+| `scripts/` | Operational one-off scripts (sitemap, catalogue check, …). `scripts/archive/` is dead legacy tooling. |
+| `supporting documents/` | Climate-data research, source docs, data-processing scripts. |
+
+## Local development
 
 ```bash
-# Install dependencies
 cd website
 npm install
-
-# Run development server
-npm start
-
-# Build for production
-npm run build
-
-# Copy to docs for GitHub Pages
-cp -r _site/* ../docs/
+npm run dev        # Vite dev server → http://localhost:5173 (serves public/)
 ```
 
-## Data Management
+The site fetches live data from Supabase via the **public anon key** (hardcoded in
+`assets/js/data-loader.js`), so `npm run dev` shows real production content with **no
+`.env` or secrets required** for read-only work. See `CONTRIBUTING.md` for the test
+and deploy workflows, and `ACCESS.md` for what write access requires.
 
-```bash
-# Add new member
-cp data/members/organizations/_TEMPLATE.yaml data/members/organizations/new-org.yaml
+## Documentation map — start here
 
-# Validate data
-python3 scripts/validate_data.py data/
+New to the project? Read these in order:
 
-# Find matches
-python3 scripts/match_asks_offers.py
-
-# Generate weekly digest
-python3 scripts/weekly_digest.py
-```
-
-## GitHub Pages Setup
-
-1. Go to repository Settings > Pages
-2. Set Source to "Deploy from a branch"
-3. Select branch: `main` and folder: `/docs`
-4. Save
+1. **[`ONBOARDING.md`](ONBOARDING.md)** — day-one setup and how the whole system fits together.
+2. **[`ARCHITECTURE.md`](ARCHITECTURE.md)** — data flow, the two write paths, and the **Data Safety Invariants** (read before touching any admin write/delete path).
+3. **[`CONTRIBUTING.md`](CONTRIBUTING.md)** — how to make changes: static pages, catalogue, edge functions, migrations, tests, i18n, and the PR/CI/deploy flow.
+4. **[`CLAUDE.md`](CLAUDE.md)** — full project conventions (brand, i18n, icons, data-safety). Written for AI agents but the canonical rulebook for humans too.
+5. **[`ACCESS.md`](ACCESS.md)** — the credentials/access matrix for maintainers (GitHub, Supabase, Vercel, secrets).
+6. **[`RBAC-PLAN.md`](RBAC-PLAN.md)** — the planned admin roles / authorization work.
 
 ---
 

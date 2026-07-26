@@ -1289,10 +1289,14 @@ Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
 
 ### Key Files
 
-- `ARCHITECTURE.md` - Data flow and storage patterns
-- `CHATBOT_DEPLOYMENT_SUMMARY.md` - Chatbot implementation details
-- `API_SPECIFICATION.md` - API documentation
-- `COMPLAINT_API_DOCUMENTATION.md` - Complaint API docs
+- `README.md` - Project overview + documentation map
+- `ONBOARDING.md` - Developer day-one guide
+- `ARCHITECTURE.md` - Data flow, the two write paths, and Data Safety Invariants
+- `CONTRIBUTING.md` - How to make changes (pages, catalogue, edge functions, migrations, i18n, tests)
+- `ACCESS.md` - Credentials / access handover for maintainers
+- `RBAC-PLAN.md` - Planned admin roles / authorization work
+- Chatbot & complaint code: `website/public/assets/chat/` (`onboarding-engine.js`,
+  `complaint-engine.js`, `notf-cms-api.js`, `discovery-engine.js`)
 
 ---
 

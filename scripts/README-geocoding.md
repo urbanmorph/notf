@@ -1,5 +1,12 @@
 # Community Geocoding Scripts
 
+> ⚠️ **Status: legacy reference.** Day-to-day geocoding is now done through the admin
+> UI at `website/public/admin/geocode-tool.html`. The batch Python scripts described
+> below (`geocode-communities.py`, `check-community-locations.py`) now live in
+> [`archive/`](archive/) and assume the removed `/data/` tree — they will not work
+> against the current Supabase-backed system. This doc is kept for reference on the
+> geocoding approach (Nominatim, neighbourhood+city lookup).
+
 These scripts help geocode community organizations to fix incorrect map locations.
 
 ## Overview
