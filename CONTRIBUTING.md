@@ -164,8 +164,9 @@ fixing the type is a minor follow-up).
 Screenshots are **pinned to the official Playwright Docker image**, so they render
 identically in CI and on any machine — no more "green on my Mac, red in CI". Data is
 served from a **fixed fixture** (`tests/visual/fixtures.ts`), so live Supabase content
-can't drift the layout. Baselines are a single **platform-independent** set
-(`tests/visual/*-snapshots/page-<viewport>.png`).
+can't drift the layout. Baselines live in `tests/visual/*-snapshots/` and are **only
+ever the container's Linux renders** (`…-linux.png`), because that image is the only
+place they're generated.
 
 Run the suite through the same pinned image:
 ```bash

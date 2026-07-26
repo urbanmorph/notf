@@ -5,11 +5,11 @@ const BASE_URL = `http://localhost:${PORT}`;
 
 export default defineConfig({
   testDir: './tests/visual',
-  // One baseline per test+viewport, with NO {platform} suffix. Rendering is
-  // pinned by the official Playwright Docker image (used in CI and locally), so
-  // baselines are portable — a Mac dev running the container produces the same
-  // pixels as CI. Regenerate baselines only inside that image (see CONTRIBUTING.md).
-  snapshotPathTemplate: '{testFileDir}/{testFileName}-snapshots/{arg}-{projectName}{ext}',
+  // Baselines use Playwright's default naming (…-snapshots/<name>-<project>-<platform>.png).
+  // Rendering is pinned by the official Playwright Docker image, so the only
+  // platform that ever gets generated/committed is the container's linux — a Mac
+  // dev running the same image produces identical pixels. Regenerate baselines
+  // only inside that image (see CONTRIBUTING.md).
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
