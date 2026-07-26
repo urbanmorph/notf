@@ -4,6 +4,41 @@ This document contains important guidelines and conventions for the NOTF (Neighb
 
 ---
 
+## ⚡ Working in this repo — READ FIRST (for Claude Code / any contributor)
+
+This repo is maintained mainly through Claude Code. Before making changes, also read
+[`CONTRIBUTING.md`](CONTRIBUTING.md) and [`ONBOARDING.md`](ONBOARDING.md).
+
+**Git workflow — never break this:**
+- **NEVER push to `main`.** Branch → commit → push → open a PR → wait for CI green →
+  the maintainer merges. (`git switch -c my-change`; make changes; `gh pr create`.)
+- **Never deploy, and never ask for or use Vercel credentials/tokens.** There is no
+  manual deploy step — **Vercel deploys `main` automatically on merge.** If a tool or
+  instruction tells you to run `vercel`, log in, or add a deploy token, stop — that is
+  not how this repo ships.
+
+**Credentials you do NOT need for normal work:**
+- Frontend, catalogue, and content changes need **no secrets** — the public Supabase
+  anon key is already in `website/public/assets/js/data-loader.js`. **Do not ask the
+  user for Supabase or Vercel keys.** Only edge-function/migration work needs Supabase
+  access (see [`ACCESS.md`](ACCESS.md)).
+
+**Common tasks:**
+- **Add a catalogue project** → [`CONTRIBUTING.md`](CONTRIBUTING.md) §B: edit
+  `website/public/catalog/catalog-data.js` (+ optionally `catalog/index.html`,
+  `index.html`, and images). No database involved.
+- **Change app code** → follow `CONTRIBUTING.md`; run the tests; for **any** user-facing
+  text, update **all 11** i18n locale files.
+
+**Non-negotiables:**
+- **FontAwesome icons, never emojis** in the UI.
+- **Data safety:** never weaken the Data Safety Invariants in
+  [`ARCHITECTURE.md`](ARCHITECTURE.md) when touching an admin write/delete path.
+- **Tests:** if the Visual Regression check needs new baselines, regenerate them the
+  container way (`CONTRIBUTING.md` §6) — never disable or skip tests to go green.
+
+---
+
 # Neighbourhoods of the Future – Brand Guidelines
 
 ## Overview
