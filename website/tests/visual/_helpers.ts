@@ -1,5 +1,6 @@
 import { expect, type Page, type TestInfo } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { stubSupabase } from './fixtures';
 
 /**
  * Standard page audit run on every spec across every viewport.
@@ -30,6 +31,10 @@ export async function auditPage(
   page.on('console', (msg) => {
     if (msg.type() === 'error') consoleErrors.push(`console.error: ${msg.text()}`);
   });
+
+  // Serve the DB from a fixed fixture so live prod data can't drift the layout.
+  // Must be set up before navigation.
+  await stubSupabase(page);
 
   await page.goto(path, { waitUntil: 'networkidle' });
   if (opts.waitFor) await page.waitForSelector(opts.waitFor, { timeout: 10000 });

@@ -160,21 +160,33 @@ sidesteps a known type-inference quirk in `catalogue-deps.test.ts` (runtime is g
 fixing the type is a minor follow-up).
 
 ### Playwright visual + a11y
-```bash
-cd website
-npx playwright install chromium --with-deps   # first time
-npm run test:visual                           # 13 specs × 5 viewports (320–1440)
-npm run test:visual:report                    # open the HTML report
-```
-Uses Node 20 and serves `public/` via `python3 -m http.server`.
 
-**Baselines:** any layout/height change shifts screenshots and reddens the `visual`
-check — that's expected, not a bug. Regenerate baselines the authoritative way (Linux,
-via CI) rather than locally (macOS baselines differ):
-1. Push your branch.
-2. Actions → **Visual Regression** → **Run workflow** with `update_snapshots = true`.
-3. Download the `linux-snapshots` artifact, unzip it over `website/tests/visual/`,
-   commit the updated `*-snapshots/` PNGs.
+Screenshots are **pinned to the official Playwright Docker image**, so they render
+identically in CI and on any machine — no more "green on my Mac, red in CI". Data is
+served from a **fixed fixture** (`tests/visual/fixtures.ts`), so live Supabase content
+can't drift the layout. Baselines are a single **platform-independent** set
+(`tests/visual/*-snapshots/page-<viewport>.png`).
+
+Run the suite through the same pinned image:
+```bash
+docker run --rm -v "$PWD":/work -w /work/website \
+  mcr.microsoft.com/playwright:v1.59.1-noble \
+  sh -c "npm ci && npx playwright test"
+```
+`cd website && npm run test:visual` also works for quick iteration, but pixel-exact
+comparison is only valid **inside the image** — a bare local run must not be used to
+update baselines.
+
+**Regenerate baselines only inside the pinned image** (a bare local
+`--update-snapshots` bakes in your machine's rendering and will break CI):
+- **Locally:** add `--update-snapshots` to the `docker run` command above, then commit
+  the changed `*-snapshots/*.png`.
+- **Via CI:** Actions → **Visual Regression** → **Run workflow** with
+  `update_snapshots = true` → download the `snapshots` artifact → unzip over
+  `website/tests/visual/` → commit.
+
+Only regenerate when you *intend* the visuals to change. Keep the image tag and
+`@playwright/test` in `package.json` in lockstep.
 
 ---
 
