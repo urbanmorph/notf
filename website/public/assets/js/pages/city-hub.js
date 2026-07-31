@@ -65,40 +65,14 @@
                         '<span class="hub-preview-meta">' + esc(s.community || s.location || '') + '</span></a>'
                       ).join('')
                     : '<div class="hub-empty">No stories here yet.</div>';
-            }
 
-            // Community Stories card -> Live when the city has stories.
-            const storiesCard = document.querySelector('[data-feature="stories"]');
-            if (storiesCard && cityStories.length > 0) {
-                storiesCard.classList.remove('coming-soon');
-
-                const badge = storiesCard.querySelector('.feature-status-badge');
-                if (badge) {
-                    badge.className = 'feature-status-badge live';
-                    badge.innerHTML =
-                        '<i class="fa-solid fa-check-circle"></i> ' +
-                        '<span data-i18n="cityHub.features.map.statusLive">Live</span>';
-                }
-
-                const desc = storiesCard.querySelector('.feature-description');
-                if (desc) {
-                    desc.setAttribute('data-i18n', 'cityHub.features.stories.description');
-                    desc.textContent =
-                        'Discover real stories of neighbourhood transformation, ' +
-                        'told by the people who made it happen.';
-                }
-
-                const action = storiesCard.querySelector('.feature-action');
-                if (action) {
-                    action.innerHTML =
-                        '<a href="/cities/' + slug + '/stories/" class="btn btn-primary">' +
-                        '<span data-i18n="cityHub.features.stories.button">Read Stories</span> ' +
-                        '<i class="fa-solid fa-arrow-right"></i></a>';
-                }
-
-                // Translate the newly injected data-i18n nodes.
-                if (window.translator && typeof window.translator.translatePage === 'function') {
-                    window.translator.translatePage();
+                // Hide the "Read all" link for cities without a stories page yet
+                // (they have no stories) so it can't 404. It reappears once a
+                // city has stories (and thus a /stories/ page).
+                if (cityStories.length === 0) {
+                    const seeAll = hubStories.closest('.hub-section');
+                    const link = seeAll && seeAll.querySelector('.hub-see-all');
+                    if (link) link.style.display = 'none';
                 }
             }
 
