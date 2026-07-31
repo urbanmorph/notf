@@ -36,6 +36,37 @@
                 if (cityCommunities.length > 0) commStat.classList.remove('zero');
             }
 
+            const esc = (s) => String(s == null ? '' : s)
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+
+            // Communities preview list (Bengaluru-style hub layout).
+            const hubCommCount = document.getElementById('hubCommCount');
+            if (hubCommCount) hubCommCount.textContent = cityCommunities.length;
+            const hubCommunities = document.getElementById('hubCommunities');
+            if (hubCommunities) {
+                hubCommunities.innerHTML = cityCommunities.length > 0
+                    ? cityCommunities.slice(0, 4).map((c) =>
+                        '<a href="/communities/" class="hub-preview-item">' +
+                        '<strong>' + esc(c.name) + '</strong>' +
+                        '<span class="hub-preview-meta">' + esc((c.themes || []).slice(0, 2).join(', ')) + '</span></a>'
+                      ).join('')
+                    : '<div class="hub-empty">No communities here yet.' +
+                      '<a href="/join/"><i class="fa-solid fa-user-plus"></i> Join as a community</a></div>';
+            }
+
+            // Stories preview list.
+            const hubStories = document.getElementById('hubStories');
+            if (hubStories) {
+                hubStories.innerHTML = cityStories.length > 0
+                    ? cityStories.slice(0, 3).map((s) =>
+                        '<a href="/cities/' + slug + '/stories/?story=' + encodeURIComponent(s.slug) + '" class="hub-preview-item">' +
+                        '<strong>' + esc(s.title) + '</strong>' +
+                        '<span class="hub-preview-meta">' + esc(s.community || s.location || '') + '</span></a>'
+                      ).join('')
+                    : '<div class="hub-empty">No stories here yet.</div>';
+            }
+
             // Community Stories card -> Live when the city has stories.
             const storiesCard = document.querySelector('[data-feature="stories"]');
             if (storiesCard && cityStories.length > 0) {

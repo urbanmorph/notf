@@ -1,0 +1,120 @@
+/* City hub data-preview layout — extracted from the Bengaluru hub so every
+   city hub can share it. Communities/Stories/Map preview sections. */
+
+.hub-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.hub-section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    padding: 1.25rem;
+    overflow: hidden;
+}
+.hub-section-wide { grid-column: 1 / -1; }
+.hub-section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.hub-section-header h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #2F4A2C;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+.hub-count {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #B9C98A;
+}
+.hub-see-all {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #2F4A2C;
+    text-decoration: none;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+.hub-see-all:hover { opacity: 1; }
+
+.hub-preview-list { display: flex; flex-direction: column; gap: 4px; }
+.hub-preview-item {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s;
+}
+.hub-preview-item:hover { background: rgba(185,201,138,0.1); }
+.hub-preview-item strong { font-size: 0.9rem; color: #2B2B2B; }
+.hub-preview-meta { font-size: 0.75rem; color: #999; }
+
+.hub-sector-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+.hub-sector-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s;
+    border: 1px solid rgba(0,0,0,0.04);
+}
+.hub-sector-card:hover { background: rgba(185,201,138,0.1); }
+.hub-sector-card i { font-size: 1.2rem; color: #2F4A2C; min-width: 24px; text-align: center; }
+.hub-sector-card strong { font-size: 0.85rem; color: #2B2B2B; display: block; }
+.hub-sector-card span { font-size: 0.72rem; color: #999; line-height: 1.3; }
+
+.hub-map-preview {
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #FAF6E8;
+    text-align: center;
+}
+.hub-loading { text-align: center; color: #999; padding: 1rem; font-size: 0.85rem; }
+
+/* Empty state with a call-to-action (used when a city has no data yet). */
+.hub-empty {
+    text-align: center;
+    color: #666;
+    padding: 1.25rem 1rem;
+    font-size: 0.9rem;
+}
+.hub-empty a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 0.6rem;
+    font-weight: 600;
+    color: #2F4A2C;
+    text-decoration: none;
+}
+.hub-empty a:hover { text-decoration: underline; }
+
+@media (max-width: 768px) {
+    .hub-grid { grid-template-columns: 1fr; }
+    .hub-sector-grid { grid-template-columns: 1fr; }
+}
