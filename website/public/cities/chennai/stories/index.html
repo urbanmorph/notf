@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Stories | Chennai | NOTF</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/i18n/language-selector.css">
+    <style>
+        /* Breadcrumb styles */
+        .breadcrumb {
+            padding: 1rem 0;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .breadcrumb a {
+            color: #2F4A2C;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #253B23;
+            text-decoration: underline;
+        }
+
+        .breadcrumb .separator {
+            margin: 0 0.5rem;
+            color: #999;
+        }
+
+        .breadcrumb .current {
+            color: #666;
+        }
+
+        /* Hero section */
+        .city-hero {
+            background: linear-gradient(135deg, #2F4A2C 0%, #3F5F7A 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1.25rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .city-hero h1 {
+            margin: 0 0 0.5rem 0;
+            color: white;
+            font-size: 2.5rem;
+        }
+
+        .city-hero p {
+            margin: 0;
+            opacity: 0.95;
+            font-size: 1.1rem;
+        }
+
+        /* City navigation bar */
+        .city-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .city-nav a {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            color: #2F4A2C;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .city-nav a:hover {
+            background: rgba(47, 74, 44, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .city-nav a.active {
+            background: #2F4A2C;
+            color: white;
+        }
+
+        /* Stories grid */
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Story card */
+        .story-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .story-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+
+        .story-card-header {
+            padding: 1.5rem 1.5rem 0;
+        }
+
+        .story-themes {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.75rem;
+        }
+
+        .theme-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #FAF6E8;
+        }
+
+        .theme-tag.waste { background: #C45A2A; }
+        .theme-tag.community { background: #3F5F7A; }
+        .theme-tag.green { background: #2F4A2C; }
+        .theme-tag.water { background: #3F5F7A; }
+        .theme-tag.energy { background: #F5B82E; color: #2B2B2B; }
+        .theme-tag.default { background: #B9C98A; color: #2B2B2B; }
+
+        .story-card h3 {
+            font-size: 1.35rem;
+            margin: 0 0 0.5rem;
+            color: #2B2B2B;
+            line-height: 1.3;
+        }
+
+        .story-meta {
+            font-size: 0.9rem;
+            color: #3F5F7A;
+            margin-bottom: 0.75rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .story-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .story-card-body {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .story-excerpt {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .story-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .video-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(196, 90, 42, 0.08);
+            border: 1px solid rgba(196, 90, 42, 0.2);
+            border-radius: 0.5rem;
+            color: #C45A2A;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .video-link:hover {
+            background: rgba(196, 90, 42, 0.15);
+        }
+
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: none;
+            border: none;
+            color: #2F4A2C;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .read-more-btn:hover {
+            color: #C45A2A;
+        }
+
+        /* Expanded story content */
+        .story-expanded {
+            display: none;
+            padding: 0 1.5rem 1.5rem;
+            border-top: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .story-expanded.open {
+            display: block;
+        }
+
+        .story-expanded .story-content {
+            line-height: 1.8;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .story-expanded .story-content h1,
+        .story-expanded .story-content h2,
+        .story-expanded .story-content h3 {
+            color: #2F4A2C;
+            margin-top: 1.5rem;
+        }
+
+        .story-expanded .story-content p {
+            margin-bottom: 1rem;
+        }
+
+        /* YouTube thumbnail inside card body */
+        .story-thumbnail {
+            position: relative;
+            display: block;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            margin-bottom: 0.75rem;
+        }
+
+        .story-thumbnail img {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .story-thumbnail:hover img {
+            transform: scale(1.03);
+        }
+
+        .story-thumbnail .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.65);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .story-thumbnail:hover .play-overlay {
+            background: rgba(196, 90, 42, 0.9);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .story-thumbnail .play-overlay i {
+            color: white;
+            font-size: 18px;
+            margin-left: 3px;
+        }
+
+        /* YouTube embed in expanded section */
+        .youtube-embed {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        .youtube-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .collapse-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(47, 74, 44, 0.08);
+            border: 1px solid rgba(47, 74, 44, 0.2);
+            border-radius: 0.5rem;
+            color: #2F4A2C;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .collapse-btn:hover {
+            background: rgba(47, 74, 44, 0.15);
+        }
+
+        /* Empty state */
+        .stories-empty {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .stories-empty i {
+            font-size: 3rem;
+            color: #B9C98A;
+            margin-bottom: 1rem;
+        }
+
+        .stories-empty h3 {
+            color: #2B2B2B;
+            margin-bottom: 0.5rem;
+        }
+
+        .stories-empty p {
+            color: #666;
+        }
+
+        /* Loading state */
+        .stories-loading {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .city-hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .city-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .city-nav a {
+                justify-content: center;
+            }
+
+            .stories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .story-actions {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="/assets/chat/chat.css">
+</head>
+<body>
+    <div id="notf-header" data-city="chennai" data-city-subpage="stories"></div>
+    <script src="/assets/js/components/header.js"></script>
+<main>
+        <div class="page-container">
+            <section class="content">
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb">
+                    <a href="/" data-i18n="nav.home">Home</a>
+                    <span class="separator">&rsaquo;</span>
+                    <a href="/cities/chennai/">Chennai</a>
+                    <span class="separator">&rsaquo;</span>
+                    <span class="current" data-i18n="cityHub.features.stories.title">Community Stories</span>
+                </nav>
+
+                <!-- City Hero Section -->
+                <div class="city-hero">
+                    <h1><img src="/assets/images/icons/story.svg" alt="" style="width:20px;height:20px;"> <span data-i18n="cityHub.features.stories.title">Community Stories</span></h1>
+                    <p data-i18n="cityHub.features.stories.description">Discover real stories of neighbourhood transformation, told by the people who made it happen.</p>
+                </div>
+
+                <!-- Stories Grid -->
+                <div id="storiesContainer">
+                    <div class="stories-loading">
+                        <i class="fa-solid fa-spinner fa-spin"></i> Loading stories...
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <div id="notf-footer"></div>
+    <script src="/assets/js/components/footer.js"></script>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/assets/js/data-loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+    <script>
+        // Theme tag color mapping
+        function getThemeClass(theme) {
+            const t = (theme || '').toLowerCase();
+            if (t.includes('waste')) return 'waste';
+            if (t.includes('community') || t.includes('space')) return 'community';
+            if (t.includes('green') || t.includes('biodiversity') || t.includes('tree')) return 'green';
+            if (t.includes('water')) return 'water';
+            if (t.includes('energy')) return 'energy';
+            return 'default';
+        }
+
+        // Extract YouTube video ID
+        function getYoutubeId(url) {
+            if (!url) return null;
+            const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+            return match ? match[1] : null;
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        // Render stories
+        function renderStories(stories) {
+            const container = document.getElementById('storiesContainer');
+
+            if (!stories || stories.length === 0) {
+                container.innerHTML = `
+                    <div class="stories-empty">
+                        <img src="/assets/images/icons/story.svg" alt="" style="width:20px;height:20px;">
+                        <h3>No stories yet</h3>
+                        <p>Community stories for Chennai will appear here soon.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="stories-grid">
+                    ${stories.map((story, index) => {
+                        const themes = story.themes || [];
+                        const youtubeId = getYoutubeId(story.youtube_url);
+                        const hasContent = story.content && story.content.trim();
+
+                        return `
+                            <div class="story-card" id="story-${index}">
+                                <div class="story-card-header">
+                                    ${themes.length > 0 ? `
+                                        <div class="story-themes">
+                                            ${themes.map(t => `<span class="theme-tag ${getThemeClass(t)}">${escapeHtml(t)}</span>`).join('')}
+                                        </div>
+                                    ` : ''}
+                                    <h3>${escapeHtml(story.title)}</h3>
+                                    <div class="story-meta">
+                                        ${story.location ? `<span><img src="/assets/images/icons/location.svg" alt="" style="width:16px;height:16px;vertical-align:middle;"> ${escapeHtml(story.location)}</span>` : ''}
+                                        ${story.community ? `<span><img src="/assets/images/icons/community.svg" alt="" style="width:20px;height:20px;"> ${escapeHtml(story.community)}</span>` : ''}
+                                    </div>
+                                </div>
+                                <div class="story-card-body">
+                                    ${youtubeId ? `
+                                        <div class="story-thumbnail" onclick="playVideo(this, '${escapeHtml(youtubeId)}')">
+                                            <img src="https://img.youtube.com/vi/${escapeHtml(youtubeId)}/hqdefault.jpg" alt="${escapeHtml(story.title)}" loading="lazy">
+                                            <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+                                        </div>
+                                    ` : ''}
+                                    <div class="story-actions">
+                                        ${hasContent ? `
+                                            <button class="read-more-btn" onclick="toggleStory(${index})">
+                                                Read Full Story <i class="fa-solid fa-chevron-down"></i>
+                                            </button>
+                                        ` : ''}
+                                    </div>
+                                </div>
+                                ${hasContent ? `
+                                    <div class="story-expanded" id="story-expanded-${index}">
+                                        ${story.excerpt ? `<p class="story-excerpt">${escapeHtml(story.excerpt)}</p>` : ''}
+                                        <div class="story-content">${marked.parse(story.content)}</div>
+                                        <button class="collapse-btn" onclick="toggleStory(${index})">
+                                            <i class="fa-solid fa-chevron-up"></i> Collapse
+                                        </button>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        // Play video inline, replacing the thumbnail
+        function playVideo(el, videoId) {
+            el.outerHTML = `<div class="youtube-embed"><iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>`;
+        }
+
+        // Toggle story expansion
+        function toggleStory(index) {
+            const expanded = document.getElementById(`story-expanded-${index}`);
+            const btn = document.querySelector(`#story-${index} .read-more-btn`);
+
+            if (expanded.classList.contains('open')) {
+                expanded.classList.remove('open');
+                if (btn) {
+                    btn.innerHTML = 'Read Full Story <i class="fa-solid fa-chevron-down"></i>';
+                }
+            } else {
+                expanded.classList.add('open');
+                if (btn) {
+                    btn.innerHTML = 'Collapse <i class="fa-solid fa-chevron-up"></i>';
+                }
+                expanded.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // Load stories on page load
+        async function init() {
+            await dataLoader.waitForSupabase();
+            const stories = await dataLoader.loadStories('Chennai');
+            renderStories(stories);
+        }
+
+        init();
+    </script>
+
+    <script src="/assets/js/components/common-scripts.js"></script>
+</body>
+</html>
