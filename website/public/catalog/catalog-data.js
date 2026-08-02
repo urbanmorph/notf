@@ -759,7 +759,7 @@ window.CATALOG_PROJECTS = [
                     { src: "/assets/images/catalogue/plume-aquatic-habitat.jpg", caption: "Biodiversity-supportive water feature at a school" },
                     { src: "/assets/images/catalogue/plume-stingless-bees.jpg", caption: "A stingless bee colony at its nest entrance" }
                 ],
-                provider: "ATREE"
+                provider: "Ashoka Trust for Research in Ecology and the Environment (ATREE)"
             },
             {
                 id: 51,
@@ -781,7 +781,7 @@ window.CATALOG_PROJECTS = [
                     { src: "/assets/images/catalogue/venkateshpura-butterfly-murals.jpg", caption: "Butterfly murals on the trail, painted on repurposed cement debris" },
                     { src: "/assets/images/catalogue/venkateshpura-birds.jpg", caption: "Murals celebrating bird species spotted at the restored lake" }
                 ],
-                provider: "ATREE"
+                provider: "Ashoka Trust for Research in Ecology and the Environment (ATREE)"
             },
             {
                 id: 52,
@@ -796,7 +796,7 @@ window.CATALOG_PROJECTS = [
                 impact: "100+ community camps, 15 Green PLVs trained, 10 participatory workshops, and 14+ policy recommendations. Under the Right to Education work, 1,000+ households received end-to-end support and 10,000+ received indirect support.",
                 whatsNeeded: "Resource persons and subject-matter experts to help train Green PLVs. Community and institutional spaces — Ward Parshad offices, community centres, and other local spaces — for workshops and engagement. Technology and digital support for tools, platforms, and data systems. Legal expertise — lawyers and practitioners for research, training, and policy analysis. In return, APNA offers its field-tested Green PLV model and adaptable learning modules, templates, and resources.",
                 links: ["https://www.parivartan.org"],
-                provider: "Association for Parivartan of Nation (APNA)"
+                provider: "Association for Parivartan of Nation"
             },
             {
                 id: 53,
