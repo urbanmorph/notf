@@ -168,7 +168,7 @@
                     <div class="preview-card" style="border-color: rgba(196, 90, 42, 0.15);">
                         <div class="preview-card-header">
                             <span class="preview-card-label" style="color: var(--terracotta-dark);" data-i18n="stats.catalogItems">Catalogue</span>
-                            <span class="preview-card-count"><span id="catalogCount">48</span> <span data-i18n="statsNav.catalogTitle">Projects</span></span>
+                            <span class="preview-card-count"><span id="catalogCount">-</span> <span data-i18n="statsNav.catalogTitle">Projects</span></span>
                             <a href="/catalog/" class="preview-card-cta" style="color: var(--terracotta-dark);">Browse all <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                         <div class="preview-card-carousel-wrapper">
@@ -303,61 +303,89 @@
     <!-- Load Data for Stats -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="/assets/js/data-loader.js"></script>
+    <!-- Single source of truth for the catalogue list + counts (shared with /catalog/). -->
+    <script src="/catalog/catalog-data.js"></script>
     <script>
-        // Static catalogue data with SVG images and deep links
-        const catalogProjects = [
-            { id: 1, title: 'Learning Experience Centre', themes: ['Education', 'Awareness'], image: '/assets/images/catalogue/learning-experience-centre.jpg' },
-            { id: 2, title: 'RRR Maadi', themes: ['Waste Management', 'Repair'], image: '/assets/images/catalogue/rrr-maadi.jpg' },
-            { id: 3, title: 'Cutlery Bank', themes: ['Waste Reduction', 'Community'], image: '/assets/images/catalogue/cutlery-bank.jpg' },
-            { id: 4, title: 'Zero Waste School', themes: ['Education', 'Waste Management'], image: '/assets/images/catalogue/zero-waste-school.svg' },
-            { id: 5, title: 'Cloth Pad Bank', themes: ['Health', 'Sustainability'], image: '/assets/images/catalogue/cloth-pad-bank.jpg' },
-            { id: 6, title: 'Kasa Kiosk', themes: ['Waste Management', 'Infrastructure'], image: '/assets/images/catalogue/kasa-kiosk.jpg' },
-            { id: 7, title: 'Waste-Free Worship Hubs', themes: ['Waste Reduction', 'Culture'], image: '/assets/images/catalogue/waste-free-worship.jpg' },
-            { id: 8, title: 'Model DWCC', themes: ['Waste Management', 'Infrastructure'], image: '/assets/images/catalogue/model-dwcc.jpg' },
-            { id: 9, title: 'First Job Fellowship', themes: ['Employment', 'Youth'], image: '/assets/images/catalogue/first-job-fellowship.jpg' },
-            { id: 10, title: 'Neighbourhood Green Score', themes: ['Environment', 'Assessment'], image: '/assets/images/catalogue/neighbourhood-green-score.jpg' },
-            { id: 11, title: 'Smart Refill', themes: ['Waste Reduction', 'Retail'], image: '/assets/images/catalogue/smart-refill.svg' },
-            { id: 12, title: 'Noisewatchers', themes: ['Awareness', 'Community'], image: '/assets/images/catalogue/noisewatchers.svg' },
-            { id: 13, title: 'The Blue Bag Project', themes: ['Waste Management', 'Recycling'], image: '/assets/images/catalogue/blue-bag-project.svg' },
-            { id: 14, title: 'Namma Banna', themes: ['Community', 'Art'], image: '/assets/images/catalogue/namma-banna.svg' },
-            { id: 15, title: 'Ek Saath - The Earth Foundation', themes: ['Waste Management', 'Environment'], image: '/assets/images/catalogue/ek-saath.svg' },
-            { id: 16, title: 'Wheels of Change', themes: ['Livelihoods', 'Mobility'], image: '/assets/images/catalogue/wheels-of-change.svg' },
-            { id: 17, title: 'Public Leadership Training', themes: ['Governance', 'Education'], image: '/assets/images/catalogue/public-leadership.svg' },
-            { id: 18, title: 'Do Your Own Cleanup (DYOC)', themes: ['Waste Management', 'Community'], image: '/assets/images/catalogue/dyoc.svg' },
-            { id: 19, title: 'Literacy for Green Workers', themes: ['Education', 'Livelihoods'], image: '/assets/images/catalogue/green-workers-literacy.svg' },
-            { id: 20, title: 'Weaving Lives: Textile Circularity', themes: ['Waste Management', 'Circular Economy'], image: '/assets/images/catalogue/textile-circularity.svg' },
-            { id: 21, title: 'School Recycling Gullaks', themes: ['Education', 'Waste Management'], image: '/assets/images/catalogue/recycling-gullaks.svg' },
-            { id: 22, title: 'Zero Waste Community Events', themes: ['Waste Management', 'Awareness'], image: '/assets/images/catalogue/zero-waste-events.svg' },
-            { id: 23, title: 'Community Public Space Transformations', themes: ['Community', 'Art'], image: '/assets/images/catalogue/public-space-art.svg' },
-            { id: 24, title: 'YUWA Climate Chaupal', themes: ['Awareness', 'Community'], image: '/assets/images/catalogue/climate-chaupal.svg' },
-            { id: 25, title: 'Urban Reforms', themes: ['Governance', 'Community'], image: '/assets/images/catalogue/urban-reforms.svg' },
-            { id: 26, title: 'Capacity Building: Elected Reps', themes: ['Governance', 'Education'], image: '/assets/images/catalogue/capacity-elected-reps.svg' },
-            { id: 27, title: 'Capacity Building of Youth', themes: ['Governance', 'Education'], image: '/assets/images/catalogue/capacity-youth.svg' },
-            { id: 28, title: 'E-QLT', themes: ['Assessment', 'Governance'], image: '/assets/images/catalogue/eqlt.svg' },
-            { id: 29, title: 'Rubbish! Board Game', themes: ['Education', 'Waste Management'], image: '/assets/images/catalogue/rubbish-game.svg' },
-            { id: 30, title: '74th Amendment Workshop', themes: ['Governance', 'Education'], image: '/assets/images/catalogue/74th-amendment.svg' },
-            { id: 31, title: 'Ondu Kathe Keli', themes: ['Community', 'Governance'], image: '/assets/images/catalogue/ondu-kathe-keli.svg' },
-            { id: 32, title: 'Framework for Lake Rejuvenation', themes: ['Water', 'Community'], image: '/assets/images/catalogue/lake-rejuvenation.svg' },
-            { id: 33, title: 'Strategy Tool for RWAs', themes: ['Water', 'Community'], image: '/assets/images/catalogue/stp-strategy-tool.svg' },
-            { id: 34, title: 'Urban Resource Centre', themes: ['Livelihoods', 'Community'], image: '/assets/images/catalogue/urban-resource-centre.svg' },
-            { id: 35, title: 'Small Cities Handbook', themes: ['Governance', 'Water'], image: '/assets/images/catalogue/small-cities-guide.svg' },
-            { id: 36, title: 'Climate Vulnerability Assessment', themes: ['Assessment', 'Community'], image: '/assets/images/catalogue/chva.svg' },
-            { id: 37, title: 'Data Lab', themes: ['Assessment', 'Awareness'], image: '/assets/images/catalogue/data-lab.svg' },
-            { id: 38, title: 'Greening Mumbai Manual', themes: ['Urban Ecology', 'Community'], image: '/assets/images/catalogue/greening-mumbai.svg' },
-            { id: 39, title: 'Mapathon', themes: ['Urban Ecology', 'Community'], image: '/assets/images/catalogue/mapathon.svg' },
-            { id: 40, title: 'Shift Transport', themes: ['Mobility', 'Awareness'], image: '/assets/images/catalogue/shift-transport.svg' },
-            { id: 41, title: 'A Park for All', themes: ['Urban Ecology', 'Governance'], image: '/assets/images/catalogue/park-for-all.svg' },
-            { id: 42, title: 'Institutional Neighbourhood Enhancement', themes: ['Mobility', 'Infrastructure'], image: '/assets/images/catalogue/institutional-neighbourhood.svg' },
-            { id: 43, title: 'The Greens & Browns Story', themes: ['Waste & Circular Economy'], image: '/assets/images/catalogue/greens-browns.svg' },
-            { id: 44, title: 'Community Connect Fellowship', themes: ['Governance & Policy'], image: '/assets/images/catalogue/cc-fellowship.svg' },
-            { id: 45, title: 'Community Connect Actathon', themes: ['Governance & Policy'], image: '/assets/images/catalogue/cc-actathon.svg' },
-            { id: 46, title: 'Community Connect Challenge', themes: ['Governance & Policy'], image: '/assets/images/catalogue/cc-challenge.svg' },
-            { id: 47, title: 'WISE Quotient', themes: ['Energy & Climate'], image: '/assets/images/catalogue/wise-quotient.svg' },
-            { id: 48, title: 'Walkable Cities', themes: ['Mobility'], image: '/assets/images/catalogue/walkable-cities.svg' },
-            { id: 49, title: 'City Action Plans', themes: ['Governance & Policy'], image: '/assets/images/catalogue/city-action-plans.svg' },
-            { id: 50, title: 'PLUME', themes: ['Placemaking & Urban Ecology', 'Biodiversity'], image: '/assets/images/catalogue/plume-insect-hotel.jpg' },
-            { id: 51, title: 'Venkateshpura Lake Restoration', themes: ['Water & Ecology', 'Biodiversity'], image: '/assets/images/catalogue/venkateshpura-lantana-seater.jpg' }
-        ];
+        // Curated showcase images per project id. The catalogue list itself (titles,
+        // themes, count) comes from window.CATALOG_PROJECTS — the single source of
+        // truth in /catalog/catalog-data.js — so counts stay in sync automatically.
+        // Any project without a curated image here falls back to its theme icon.
+        const catalogueImages = {
+            1: '/assets/images/catalogue/learning-experience-centre.jpg',
+            2: '/assets/images/catalogue/rrr-maadi.jpg',
+            3: '/assets/images/catalogue/cutlery-bank.jpg',
+            4: '/assets/images/catalogue/zero-waste-school.svg',
+            5: '/assets/images/catalogue/cloth-pad-bank.jpg',
+            6: '/assets/images/catalogue/kasa-kiosk.jpg',
+            7: '/assets/images/catalogue/waste-free-worship.jpg',
+            8: '/assets/images/catalogue/model-dwcc.jpg',
+            9: '/assets/images/catalogue/first-job-fellowship.jpg',
+            10: '/assets/images/catalogue/neighbourhood-green-score.jpg',
+            11: '/assets/images/catalogue/smart-refill.svg',
+            12: '/assets/images/catalogue/noisewatchers.svg',
+            13: '/assets/images/catalogue/blue-bag-project.svg',
+            14: '/assets/images/catalogue/namma-banna.svg',
+            15: '/assets/images/catalogue/ek-saath.svg',
+            16: '/assets/images/catalogue/wheels-of-change.svg',
+            17: '/assets/images/catalogue/public-leadership.svg',
+            18: '/assets/images/catalogue/dyoc.svg',
+            19: '/assets/images/catalogue/green-workers-literacy.svg',
+            20: '/assets/images/catalogue/textile-circularity.svg',
+            21: '/assets/images/catalogue/recycling-gullaks.svg',
+            22: '/assets/images/catalogue/zero-waste-events.svg',
+            23: '/assets/images/catalogue/public-space-art.svg',
+            24: '/assets/images/catalogue/climate-chaupal.svg',
+            25: '/assets/images/catalogue/urban-reforms.svg',
+            26: '/assets/images/catalogue/capacity-elected-reps.svg',
+            27: '/assets/images/catalogue/capacity-youth.svg',
+            28: '/assets/images/catalogue/eqlt.svg',
+            29: '/assets/images/catalogue/rubbish-game.svg',
+            30: '/assets/images/catalogue/74th-amendment.svg',
+            31: '/assets/images/catalogue/ondu-kathe-keli.svg',
+            32: '/assets/images/catalogue/lake-rejuvenation.svg',
+            33: '/assets/images/catalogue/stp-strategy-tool.svg',
+            34: '/assets/images/catalogue/urban-resource-centre.svg',
+            35: '/assets/images/catalogue/small-cities-guide.svg',
+            36: '/assets/images/catalogue/chva.svg',
+            37: '/assets/images/catalogue/data-lab.svg',
+            38: '/assets/images/catalogue/greening-mumbai.svg',
+            39: '/assets/images/catalogue/mapathon.svg',
+            40: '/assets/images/catalogue/shift-transport.svg',
+            41: '/assets/images/catalogue/park-for-all.svg',
+            42: '/assets/images/catalogue/institutional-neighbourhood.svg',
+            43: '/assets/images/catalogue/greens-browns.svg',
+            44: '/assets/images/catalogue/cc-fellowship.svg',
+            45: '/assets/images/catalogue/cc-actathon.svg',
+            46: '/assets/images/catalogue/cc-challenge.svg',
+            47: '/assets/images/catalogue/wise-quotient.svg',
+            48: '/assets/images/catalogue/walkable-cities.svg',
+            49: '/assets/images/catalogue/city-action-plans.svg',
+            50: '/assets/images/catalogue/plume-insect-hotel.jpg',
+            51: '/assets/images/catalogue/venkateshpura-lantana-seater.jpg',
+        };
+
+        // Theme -> fallback showcase icon, for catalogue entries without a curated image above.
+        const themeShowcaseIcons = {
+            'Waste & Circular Economy': '/assets/images/icons/waste-circular.svg',
+            'Governance & Policy': '/assets/images/icons/governance-policy.svg',
+            'Placemaking & Urban Ecology': '/assets/images/icons/placemaking-ecology.svg',
+            'Energy & Climate': '/assets/images/icons/energy-climate.svg',
+            'Livelihoods & Inclusion': '/assets/images/icons/livelihoods-inclusion.svg',
+            'Water & Ecology': '/assets/images/icons/water-ecology.svg',
+            'Mobility': '/assets/images/icons/mobility.svg',
+            'Place-Based Centres': '/assets/images/icons/place-based-centres.svg'
+        };
+        const themeFallbackImage = themes =>
+            (themes || []).map(t => themeShowcaseIcons[t]).find(Boolean)
+            || '/assets/images/icons/place-based-centres.svg';
+
+        // Derive the homepage catalogue list from the single source of truth.
+        const catalogProjects = (window.CATALOG_PROJECTS || []).map(p => ({
+            id: p.id,
+            title: p.title,
+            themes: p.themes || [],
+            image: catalogueImages[p.id] || themeFallbackImage(p.themes)
+        }));
 
         // Story default images (fallback when no YouTube video)
         const storyFallbackImages = [
@@ -610,6 +638,13 @@
             // Show skeletons while loading
             showCarouselSkeletons('storyItems');
             showCarouselSkeletons('cityItems');
+
+            // Catalogue count comes straight from the source-of-truth list, so it
+            // never drifts from /catalog/. Set it up front (no network dependency).
+            const catalogCountEl = document.getElementById('catalogCount');
+            if (catalogCountEl) catalogCountEl.textContent = catalogProjects.length;
+            const statProjectsEl = document.getElementById('statProjects');
+            if (statProjectsEl) statProjectsEl.textContent = catalogProjects.length;
 
             // Render catalogue immediately (static data, each links to its own card)
             renderCarouselSlides('catalogItems', 'catalogNav',
