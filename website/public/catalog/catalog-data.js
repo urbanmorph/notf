@@ -812,5 +812,20 @@ window.CATALOG_PROJECTS = [
                 whatsNeeded: "Venues and seating arrangements from the community and partner organisations. Partnerships with local advocacy groups working in heritage or historic areas with similar challenges. Funding or partnership to programme public events and to implement short-term public-space improvements in identified areas. Research support for curating the neighbourhood portal.",
                 links: ["https://storymaps.arcgis.com/stories/60f6af2d17614bb5b3f655f2538030a6", "https://app.notion.com/p/Project-Thiruvanmiyur-Mada-Street-23ebab82ddd980d699f7ef36f2e03758", "https://youtube.com/shorts/gwmFwNync-o", "https://www.newindianexpress.com/good-news/2025/Dec/14/residents-walk-the-talk-to-restore-mada-streets-in-chennais-thiruvanmiyur"],
                 provider: "Design Co:Lab"
+            },
+            {
+                id: 54,
+                title: "NammaKasa",
+                description: "A live citizen reporting platform that maps garbage blackspots to the ward, corporator, and elected representative responsible for clearing them. A report takes under 30 seconds, with no login.",
+                themes: ["Waste & Circular Economy"],
+                time: 1, workload: 2, budget: 1,
+                whatIsIt: "NammaKasa is a live citizen reporting platform that maps garbage blackspots directly to the government official responsible for clearing them: the ward, the corporator, and the elected representative. A report takes under 30 seconds, with no login required.",
+                whyExists: "Citizen garbage complaints today disappear into a black box (helplines, WhatsApp groups, generic government apps) with no visible owner and no way to track what happens next. That not-knowing is what makes people stop reporting altogether. NammaKasa exists to fix that, not by cleaning up garbage directly, but by making sure every complaint has a named, public, accountable owner.",
+                involves: ["A citizen reports a blackspot with a photo and live GPS location, no login required", "The report is automatically mapped to the ward, corporator, and elected representative responsible", "The report stays publicly visible and trackable on a public map until it is resolved", "Aggregate data is available at nammakasa.in/analytics for officials, researchers, and journalists"],
+                whereDone: "Live across Bengaluru (351 of 369 wards have at least one report). Expansion to Mumbai (Aamcha Kachra) is currently in progress.",
+                impact: "Nearly 8,900 citizen reports tracked across 351 of Bengaluru's 369 wards, built and run solo with zero marketing spend. Winner of the Cheistha Kochhar Nudge Award (ISPP, 2026). Independent impact studies are underway with an NCAER/World Bank team and a Columbia University (ex-J-PAL South Asia) researcher, and the platform is in early integration discussions with BSWML/GBA, Bengaluru's solid waste management body.",
+                whatsNeeded: "Introductions to RWAs, apartment communities, and ward-level civic groups to drive local reporting adoption. Visibility and outreach support to grow usage in wards with low report density. Continued dialogue with civic bodies (BSWML/GBA) on formal integration.",
+                links: ["https://www.nammakasa.in", "https://www.nammakasa.in/analytics"],
+                provider: "NammaKasa"
             }
         ];
