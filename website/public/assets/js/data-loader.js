@@ -1,7 +1,23 @@
 // Supabase Data Loader for Public Pages
 // Loads data client-side from Supabase
 
-const SUPABASE_URL = 'https://abblyaukkoxmgzwretvm.supabase.co';
+// The direct project host. Kept as the fallback for non-browser contexts.
+const SUPABASE_PROJECT_URL = 'https://abblyaukkoxmgzwretvm.supabase.co';
+
+// Route every Supabase call through a same-origin path (/api/supabase/*) that
+// our own origin proxies to the project: Vercel via a rewrite (vercel.json) in
+// production, and Vite via server.proxy in dev. Some ISPs (observed on ACT
+// Fibernet) DNS-block *.supabase.co to a sinkhole, so the browser's direct
+// calls failed with ERR_CONNECTION_CLOSED and the homepage counts rendered
+// empty. Talking only to our own domain sidesteps any third-party host block.
+// The anon key is public (RLS-gated), so nothing secret is exposed by proxying.
+// Falls back to the direct host when there is no usable origin (non-browser
+// contexts, or file:// pages whose opaque origin is the string "null").
+function resolveSupabaseUrl(win) {
+    const origin = win && win.location && win.location.origin;
+    return origin && origin !== 'null' ? `${origin}/api/supabase` : SUPABASE_PROJECT_URL;
+}
+const SUPABASE_URL = resolveSupabaseUrl(typeof window !== 'undefined' ? window : undefined);
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFiYmx5YXVra294bWd6d3JldHZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgyMzE4NTQsImV4cCI6MjA4MzgwNzg1NH0.neJmkUmGFPfXMC5PZNRhaXIGEefj_b79L_YceXl5jxU';
 
 // Initialize Supabase client (lazy initialization)
