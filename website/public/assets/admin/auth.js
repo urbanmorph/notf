@@ -1,14 +1,31 @@
 // Admin Authentication Utilities
 // Uses Supabase Auth for login/logout
 
-const SUPABASE_URL = 'https://abblyaukkoxmgzwretvm.supabase.co';
+// The direct project host. Kept as the fallback for non-browser contexts.
+const SUPABASE_PROJECT_URL = 'https://abblyaukkoxmgzwretvm.supabase.co';
+
+// Route admin auth, queries and Edge Function calls through the same-origin
+// /api/supabase/* proxy, so an ISP block on *.supabase.co can't lock admins
+// out. Same logic as resolveSupabaseUrl in /assets/js/data-loader.js.
+function resolveSupabaseUrl(win) {
+    const origin = win && win.location && win.location.origin;
+    return origin && origin !== 'null' ? `${origin}/api/supabase` : SUPABASE_PROJECT_URL;
+}
+const SUPABASE_URL = resolveSupabaseUrl(typeof window !== 'undefined' ? window : undefined);
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFiYmx5YXVra294bWd6d3JldHZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgyMzE4NTQsImV4cCI6MjA4MzgwNzg1NH0.neJmkUmGFPfXMC5PZNRhaXIGEefj_b79L_YceXl5jxU';
+
+// supabase-js names its session key after the URL hostname. Pin it to the key
+// derived from the project host so existing admin sessions survive the switch
+// to the proxy URL (which would otherwise derive "sb-www-auth-token").
+const AUTH_STORAGE_KEY = `sb-${new URL(SUPABASE_PROJECT_URL).hostname.split('.')[0]}-auth-token`;
 
 // Lazy initialization of Supabase client
 let supabaseClient = null;
 function getSupabaseAuthClient() {
     if (!supabaseClient && window.supabase) {
-        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+            auth: { storageKey: AUTH_STORAGE_KEY }
+        });
     }
     return supabaseClient;
 }
