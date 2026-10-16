@@ -1,6 +1,12 @@
 {
   "outputDirectory": "website/public",
   "framework": null,
-  "buildCommand": null
+  "buildCommand": null,
+  "rewrites": [
+    {
+      "source": "/api/supabase/:path*",
+      "destination": "https://abblyaukkoxmgzwretvm.supabase.co/:path*"
+    }
+  ]
 }
 
