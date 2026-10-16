@@ -827,5 +827,20 @@ window.CATALOG_PROJECTS = [
                 whatsNeeded: "Introductions to RWAs, apartment communities, and ward-level civic groups to drive local reporting adoption. Visibility and outreach support to grow usage in wards with low report density. Continued dialogue with civic bodies (BSWML/GBA) on formal integration.",
                 links: ["https://www.nammakasa.in", "https://www.nammakasa.in/analytics"],
                 provider: "NammaKasa"
+            },
+            {
+                id: 55,
+                title: "Project Intersect",
+                description: "A data-driven road safety initiative that maps crash blackspots across Bengaluru and links each one to an evidence-based fix, so citizens, city agencies, and funders can prioritise safer junctions.",
+                themes: ["Mobility"],
+                time: 5, workload: 4, budget: 4,
+                whatIsIt: "Project Intersect is a data-driven road safety initiative led by Compartment S4, with support from the Sustainable Mobility Network (SMN), that identifies high-risk locations across Bengaluru and translates crash data into actionable solutions. Through scientific crash analysis, spatial mapping, and on-ground assessments, it diagnoses the causes of blackspots and develops a scalable countermeasure framework to guide junction improvements. Its open-source interactive portal supports government agencies in prioritising interventions and planning budgets, while enabling road safety fixes to be funded through public investment, CSR, and philanthropic support. The initiative also raises awareness through data stories and builds the capacity of municipal engineers and consultants to deliver safer streets.",
+                whyExists: "Road safety improvements are often fragmented, with limited access to scientific data to prioritise locations and guide investment. Project Intersect addresses this gap by mapping crash patterns across Bengaluru to identify high-risk junctions and help city corporations decide where to allocate funds. It creates a common platform where citizens can flag and vote for problematic locations, government agencies can prioritise interventions, and CSR and philanthropic partners can identify locations to fund. By linking each identified problem to an evidence-based countermeasure, it bridges the gap between crash data, investment decisions, and on-ground implementation.",
+                involves: ["Scientific crash-data analysis, spatial mapping, and on-ground assessments to identify high-risk junctions", "An evidence-based countermeasure framework that links each problem location to a specific fix", "An open-source interactive portal where citizens can flag and vote for problematic locations", "Budget prioritisation support for government agencies, plus targeted CSR and philanthropic funding", "Data stories on city crashes and capacity building for municipal engineers and consultants"],
+                whereDone: "Bengaluru junctions including Race Course Road, Anand Rao Circle, Deepanjali Nagar metro station, Byatarayanapura, and Kodigehalli. Delivered with the Bengaluru Traffic Police (BTP), the Greater Bengaluru Authority (GBA), and the Sustainable Mobility Network.",
+                impact: "175 locations budgeted in the Karnataka state budget for Bengaluru city. Rs 80 crore sanctioned by NHAI for road safety improvements on NH44. Data stories published on crashes across the city.",
+                whatsNeeded: "Citizens to engage with the dashboard and vote for the problematic, high-risk locations in their neighbourhoods. CSR funders to use the dashboard to plan funding for road safety improvement projects.",
+                links: ["https://projectintersect.framer.website/"],
+                provider: "Compartment S4"
             }
         ];
