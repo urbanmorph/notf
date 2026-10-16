@@ -11,9 +11,13 @@ const SUPABASE_PROJECT_URL = 'https://abblyaukkoxmgzwretvm.supabase.co';
 // calls failed with ERR_CONNECTION_CLOSED and the homepage counts rendered
 // empty. Talking only to our own domain sidesteps any third-party host block.
 // The anon key is public (RLS-gated), so nothing secret is exposed by proxying.
-const SUPABASE_URL = (typeof window !== 'undefined' && window.location && window.location.origin)
-    ? `${window.location.origin}/api/supabase`
-    : SUPABASE_PROJECT_URL;
+// Falls back to the direct host when there is no usable origin (non-browser
+// contexts, or file:// pages whose opaque origin is the string "null").
+function resolveSupabaseUrl(win) {
+    const origin = win && win.location && win.location.origin;
+    return origin && origin !== 'null' ? `${origin}/api/supabase` : SUPABASE_PROJECT_URL;
+}
+const SUPABASE_URL = resolveSupabaseUrl(typeof window !== 'undefined' ? window : undefined);
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFiYmx5YXVra294bWd6d3JldHZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgyMzE4NTQsImV4cCI6MjA4MzgwNzg1NH0.neJmkUmGFPfXMC5PZNRhaXIGEefj_b79L_YceXl5jxU';
 
 // Initialize Supabase client (lazy initialization)
