@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { stubSupabase } from './fixtures';
 
 // Interactive smoke test for the unified chatbot after the PR 5 split
 // (complaint mode extracted into modes/complaint.js mixin).
@@ -13,6 +14,12 @@ test.describe('chatbot', () => {
     page.on('console', (msg) => {
       if (msg.type() === 'error') consoleErrors.push(`console.error: ${msg.text()}`);
     });
+
+    // Serve the DB from the fixed fixture, like every other spec. Without it the
+    // homepage's data-loader calls go to the network: that is flaky, and now that
+    // those calls are same-origin (/api/supabase/*) they 404 against the static
+    // test server instead of silently resolving. Intercept them here too.
+    await stubSupabase(page);
 
     await page.goto('/', { waitUntil: 'networkidle' });
 
