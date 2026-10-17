@@ -827,7 +827,7 @@ window.CATALOG_PROJECTS = [
                 whatsNeeded: "Introductions to RWAs, apartment communities, and ward-level civic groups to drive local reporting adoption. Visibility and outreach support to grow usage in wards with low report density. Continued dialogue with civic bodies (BSWML/GBA) on formal integration.",
                 links: ["https://www.nammakasa.in", "https://www.nammakasa.in/analytics"],
                 images: [
-                    { src: "/assets/images/catalogue/nammakasa-live-map.jpg", caption: "Live public map of garbage blackspot reports across Bengaluru wards" },
+                    { src: "/assets/images/catalogue/nammakasa-live-map.jpg", caption: "Live public map of open garbage blackspot reports, with ward boundaries" },
                     { src: "/assets/images/catalogue/nammakasa-resolved-report.jpg", caption: "A resolved report: before and after photos, cleaned up after 78 days and verified by a citizen" },
                     { src: "/assets/images/catalogue/nammakasa-ward-leaderboard.jpg", caption: "Ward leaderboard ranking wards by unresolved reports" },
                     { src: "/assets/images/catalogue/nammakasa-analytics.jpg", caption: "Public analytics: daily reports filed versus resolved" }
