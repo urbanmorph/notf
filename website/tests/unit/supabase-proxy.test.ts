@@ -112,3 +112,115 @@ Deno.test("vite.config.js: dev proxy mirrors the production rewrite", async () =
   );
   assertEquals(mod.default.server.port, 5173);
 });
+
+// ---------------------------------------------------------------------------
+// Admin client (assets/admin/auth.js)
+// ---------------------------------------------------------------------------
+
+const authSrc = await Deno.readTextFile(
+  new URL("../../public/assets/admin/auth.js", import.meta.url),
+);
+
+function loadAuth(win: any) {
+  return new Function(
+    "window",
+    authSrc +
+      "\nreturn { resolveSupabaseUrl, SUPABASE_URL, SUPABASE_PROJECT_URL, AUTH_STORAGE_KEY, getSupabaseAuthClient };",
+  )(win);
+}
+
+// The key supabase-js derived from the direct project URL before the proxy
+// switch (`sb-<first hostname label>-auth-token`). Admin sessions live here.
+const LEGACY_AUTH_KEY = `sb-${new URL(PROJECT_URL).hostname.split(".")[0]}-auth-token`;
+
+Deno.test("auth.js: resolves the same proxy URL as data-loader.js for every input", () => {
+  const auth = loadAuth({});
+  const loader = loadDataLoader({});
+  const inputs = [
+    undefined,
+    {},
+    { location: {} },
+    { location: { origin: "null" } },
+    { location: { origin: "https://www.notf.in" } },
+    { location: { origin: "http://localhost:5173" } },
+  ];
+  for (const w of inputs) {
+    assertEquals(auth.resolveSupabaseUrl(w), loader.resolveSupabaseUrl(w));
+  }
+  assertEquals(auth.SUPABASE_PROJECT_URL, PROJECT_URL);
+});
+
+Deno.test("auth.js: admin client uses the proxy and keeps the legacy session storage key", () => {
+  const calls: Array<{ url: string; opts: any }> = [];
+  const win = {
+    location: { origin: "https://www.notf.in" },
+    supabase: {
+      createClient(url: string, _key: string, opts: any) {
+        calls.push({ url, opts });
+        return {};
+      },
+    },
+  };
+  const { SUPABASE_URL, AUTH_STORAGE_KEY, getSupabaseAuthClient } = loadAuth(win);
+  assertEquals(SUPABASE_URL, "https://www.notf.in/api/supabase");
+  // Without a pinned key the SDK would derive `sb-www-auth-token` from the new
+  // URL and silently log every admin out.
+  assertEquals(AUTH_STORAGE_KEY, LEGACY_AUTH_KEY);
+  getSupabaseAuthClient();
+  getSupabaseAuthClient(); // lazy: one client only
+  assertEquals(calls.length, 1);
+  assertEquals(calls[0].url, "https://www.notf.in/api/supabase");
+  assertEquals(calls[0].opts?.auth?.storageKey, LEGACY_AUTH_KEY);
+});
+
+Deno.test("auth.js: anon key stays readable by scripts/check-catalogue-consistency.mjs", () => {
+  // That script extracts the key with this exact regex.
+  const anon = authSrc.match(/SUPABASE_ANON_KEY\s*=\s*'([^']+)'/)?.[1];
+  assertEquals(typeof anon, "string");
+  assertEquals(anon!.split(".").length, 3);
+});
+
+// ---------------------------------------------------------------------------
+// Chatbot CMS client (assets/chat/notf-cms-api.js)
+// ---------------------------------------------------------------------------
+
+Deno.test("notf-cms-api.js: Supabase URL defaults to the same-origin proxy", async () => {
+  const src = await Deno.readTextFile(
+    new URL("../../public/assets/chat/notf-cms-api.js", import.meta.url),
+  );
+  const NotfCmsApi = new Function("window", src + "\nreturn NotfCmsApi;")({
+    location: { origin: "https://www.notf.in" },
+  });
+  const api = new NotfCmsApi();
+  assertEquals(api.supabaseUrl, "https://www.notf.in/api/supabase");
+  // Complaints still go to the separate notf-cms app, untouched.
+  assertEquals(api.apiBaseUrl, "https://notf-cms.vercel.app/api");
+});
+
+// ---------------------------------------------------------------------------
+// Regression guard: no shipped browser code targets *.supabase.co directly
+// ---------------------------------------------------------------------------
+
+Deno.test("shipped JS/HTML only references supabase.co as the SUPABASE_PROJECT_URL fallback", async () => {
+  const root = new URL("../../public/", import.meta.url);
+  const offenders: string[] = [];
+  async function walk(dir: URL) {
+    for await (const e of Deno.readDir(dir)) {
+      if (e.name === "node_modules") continue;
+      const u = new URL(e.name + (e.isDirectory ? "/" : ""), dir);
+      if (e.isDirectory) await walk(u);
+      else if (/\.(js|html)$/.test(e.name)) {
+        const lines = (await Deno.readTextFile(u)).split("\n");
+        lines.forEach((line, i) => {
+          if (!/[a-z0-9]\.supabase\.co\b/i.test(line)) return;
+          const t = line.trim();
+          if (t.startsWith("//") || t.startsWith("*")) return; // comments
+          if (/const SUPABASE_PROJECT_URL\s*=/.test(t)) return; // the one fallback
+          offenders.push(`${u.pathname.split("/public/")[1]}:${i + 1}: ${t.slice(0, 100)}`);
+        });
+      }
+    }
+  }
+  await walk(root);
+  assertEquals(offenders, [], `direct *.supabase.co references:\n${offenders.join("\n")}`);
+});

@@ -8,7 +8,9 @@ class NotfCmsApi {
     constructor() {
         // API Configuration
         this.apiBaseUrl = 'https://notf-cms.vercel.app/api';
-        this.supabaseUrl = 'https://abblyaukkoxmgzwretvm.supabase.co';
+        // Same-origin Supabase proxy (see /assets/js/data-loader.js). Only the
+        // optional 'supabase' submission mode would use it; 'api' is the default.
+        this.supabaseUrl = `${window.location.origin}/api/supabase`;
         this.supabaseAnonKey = null; // Will be loaded from environment or injected
 
         // Submission mode: 'api' or 'supabase'
