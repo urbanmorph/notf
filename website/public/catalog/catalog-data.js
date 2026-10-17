@@ -826,6 +826,12 @@ window.CATALOG_PROJECTS = [
                 impact: "Nearly 8,900 citizen reports tracked across 351 of Bengaluru's 369 wards, built and run solo with zero marketing spend. Winner of the Cheistha Kochhar Nudge Award (ISPP, 2026). Independent impact studies are underway with an NCAER/World Bank team and a Columbia University (ex-J-PAL South Asia) researcher, and the platform is in early integration discussions with BSWML/GBA, Bengaluru's solid waste management body.",
                 whatsNeeded: "Introductions to RWAs, apartment communities, and ward-level civic groups to drive local reporting adoption. Visibility and outreach support to grow usage in wards with low report density. Continued dialogue with civic bodies (BSWML/GBA) on formal integration.",
                 links: ["https://www.nammakasa.in", "https://www.nammakasa.in/analytics"],
+                images: [
+                    { src: "/assets/images/catalogue/nammakasa-live-map.jpg", caption: "Live public map of open garbage blackspot reports, with ward boundaries" },
+                    { src: "/assets/images/catalogue/nammakasa-resolved-report.jpg", caption: "A resolved report: before and after photos, cleaned up after 78 days and verified by a citizen" },
+                    { src: "/assets/images/catalogue/nammakasa-ward-leaderboard.jpg", caption: "Ward leaderboard ranking wards by unresolved reports" },
+                    { src: "/assets/images/catalogue/nammakasa-analytics.jpg", caption: "Public analytics: daily reports filed versus resolved" }
+                ],
                 provider: "NammaKasa"
             },
             {
