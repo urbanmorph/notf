@@ -10,12 +10,12 @@
   ],
   "redirects": [
     {
-      "source": "/cities/:city/climate/air-quality/:path*",
+      "source": "/cities/:city/climate/air-quality(/.*)?",
       "destination": "https://oaq.notf.in",
       "permanent": true
     },
     {
-      "source": "/cities/:city/climate/:path*",
+      "source": "/cities/:city/climate(/.*)?",
       "destination": "/cities/:city/",
       "permanent": true
     }

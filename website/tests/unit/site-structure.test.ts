@@ -91,29 +91,57 @@ Deno.test("the hidden /map/ and /search/ pages ask search engines not to index t
   }
 });
 
-Deno.test("old climate URLs redirect permanently: air quality to OAQ, the rest to the city page", async () => {
+// Approximates Vercel's matcher: `:name` is one path segment, `(...)` is a raw
+// regex group, and the whole path must match. Enough to pin the behaviour we rely on.
+function resolveRedirect(
+  redirects: Array<{ source: string; destination: string }>,
+  path: string,
+): string | null {
+  for (const r of redirects) {
+    const pattern = r.source
+      .replace(/:(\w+)/g, "(?<$1>[^/]+)");
+    const m = path.match(new RegExp(`^${pattern}$`));
+    if (m) {
+      return r.destination.replace(
+        /:(\w+)/g,
+        (_, k) => m.groups?.[k] ?? `:${k}`,
+      );
+    }
+  }
+  return null;
+}
+
+Deno.test("old climate URLs redirect permanently, with or without a trailing slash", async () => {
   const cfg = JSON.parse(await Deno.readTextFile(new URL("vercel.json", ROOT)));
   const redirects: Array<
     { source: string; destination: string; permanent: boolean }
   > = cfg.redirects ?? [];
-  const find = (source: string) => redirects.find((r) => r.source === source);
-  assertEquals(
-    find("/cities/:city/climate/air-quality/:path*")?.destination,
-    "https://oaq.notf.in",
-  );
-  assertEquals(
-    find("/cities/:city/climate/:path*")?.destination,
-    "/cities/:city/",
-  );
   for (const r of redirects) {
     assert(r.permanent, `${r.source} should be permanent`);
   }
-  // Vercel uses the first match, so the air-quality rule must come first.
-  const idx = (s: string) => redirects.findIndex((r) => r.source === s);
-  assert(
-    idx("/cities/:city/climate/air-quality/:path*") <
-      idx("/cities/:city/climate/:path*"),
-  );
+  // Every old link ended in "/", which `:path*` alone does not match on Vercel.
+  const cases: Array<[string, string]> = [
+    ["/cities/bengaluru/climate/air-quality/", "https://oaq.notf.in"],
+    ["/cities/bengaluru/climate/air-quality", "https://oaq.notf.in"],
+    ["/cities/bengaluru/climate/", "/cities/bengaluru/"],
+    ["/cities/bengaluru/climate", "/cities/bengaluru/"],
+    ["/cities/bengaluru/climate/energy/", "/cities/bengaluru/"],
+    ["/cities/bengaluru/climate/energy/wards/a-adugodi/", "/cities/bengaluru/"],
+    ["/cities/mumbai/climate/waste/leaderboard/", "/cities/mumbai/"],
+  ];
+  for (const [from, to] of cases) {
+    assertEquals(resolveRedirect(redirects, from), to, from);
+  }
+  // Pages that still exist must not be caught by the climate rules.
+  for (
+    const path of [
+      "/cities/bengaluru/",
+      "/cities/bengaluru/map/",
+      "/cities/climate-x/",
+    ]
+  ) {
+    assertEquals(resolveRedirect(redirects, path), null, path);
+  }
 });
 
 Deno.test("every i18n key used on the home page and header exists in all 11 locales", async () => {
