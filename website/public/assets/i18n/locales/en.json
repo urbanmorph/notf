@@ -9,9 +9,9 @@
     "admin": "Admin Login",
     "adminLogin": "Admin Login",
     "bengaluru": "Bengaluru",
-    "climate": "Climate",
     "catalogue": "Catalogue",
-    "cities": "Cities"
+    "cities": "Cities",
+    "airQuality": "Air Quality"
   },
   "hero": {
     "title": "Bringing Our Neighbourhoods to Life",
@@ -229,20 +229,36 @@
         "desc": "Solution providers offer ready-to-implement projects, training, and expertise to help communities act"
       },
       "point3": {
-        "title": "Climate Resilient",
-        "desc": "Track climate action across wards and sectors, from waste management to green cover to clean energy"
+        "title": "Open Data",
+        "desc": "Neighbourhoods measure what matters to them, like the air they breathe, and share it openly"
       },
       "cta": "Learn more about NOTF"
     },
-    "climateStats": {
-      "title": "Climate Action on the Ground",
-      "waste": "Waste diverted from landfill",
-      "co2": "CO₂ emissions prevented",
-      "bottles": "Plastic bottles avoided",
-      "trees": "Trees & saplings planted",
-      "plans": "City climate action plans",
-      "attribution": "Delivered by 15 climate projects in our catalogue.",
-      "cta": "Browse climate projects"
+    "oaq": {
+      "eyebrow": "OAQ · Open Air Quality",
+      "title": "India’s air, measured by its people",
+      "lead": "OAQ is NOTF’s open platform for hyperlocal air quality. Researchers, community groups and residents run sensors in their own neighbourhoods, and everyone can see the readings live, for free.",
+      "stats": {
+        "stations": "stations live",
+        "cities": "cities covered",
+        "networks": "sensor networks"
+      },
+      "nowTitle": "Air right now",
+      "updated": "updated",
+      "source": "Typical (median) CPCB AQI across each city’s stations. Data: OAQ, via the mugilu open mirror.",
+      "mapButton": "See the live map",
+      "hostButton": "Host a sensor",
+      "mapLink": "Open the OAQ live map",
+      "mapTitle": "Live air quality sensors across Bengaluru",
+      "mapPlace": "Bengaluru",
+      "bands": {
+        "good": "Good",
+        "satisfactory": "Satisfactory",
+        "moderate": "Moderate",
+        "poor": "Poor",
+        "very-poor": "Very poor",
+        "severe": "Severe"
+      }
     }
   },
   "stats": {
@@ -264,8 +280,6 @@
     "mapComingSoon": "Map (Coming Soon)",
     "communitiesComingSoon": "Communities (Coming Soon)",
     "providersComingSoon": "Providers (Coming Soon)",
-    "climateDashboard": "Climate Dashboard",
-    "climateComingSoon": "Climate (Coming Soon)",
     "storiesComingSoon": "Stories (Coming Soon)"
   },
   "features": {
@@ -508,7 +522,7 @@
       "wards": "Wards",
       "population": "Population",
       "exploreTitle": "Explore Mumbai",
-      "exploreSubtitle": "Ward-level map and climate data now available. Community and provider directories coming soon."
+      "exploreSubtitle": "Ward-level map available now. Community and provider directories coming soon."
     },
     "pune": {
       "subtitle": "Maharashtra, India",
@@ -534,8 +548,7 @@
     "stats": {
       "communities": "Communities",
       "providers": "Solution Providers",
-      "wardsTracked": "Wards Tracked",
-      "climateSectors": "Climate Sectors"
+      "wardsTracked": "Wards Tracked"
     },
     "features": {
       "map": {
@@ -554,26 +567,6 @@
         "description": "Find {{count}} organizations supporting community work. CBOs, solution providers, and more.",
         "button": "View Providers"
       },
-      "climate": {
-        "title": "Climate Data",
-        "description": "Ward-level climate baseline data across {{wardCount}} wards. Explore Energy & Buildings and Waste Management sectors with interactive dashboards.",
-        "button": "View Dashboard",
-        "statusLive": "Live",
-        "dashboard": {
-          "title": "Climate Action Dashboard",
-          "description": "Track climate action progress across {{sectorCount}} sectors and {{wardCount}} wards. Ward-level baselining and target tracking based on the Bengaluru Climate Action Plan (BCAP).",
-          "button": "View Climate Dashboard"
-        },
-        "sectors": {
-          "energy": "Energy & Buildings",
-          "transportation": "Transportation",
-          "waste": "Solid Waste",
-          "air": "Air Quality",
-          "water": "Water",
-          "greening": "Greening",
-          "disaster": "Disaster Management"
-        }
-      },
       "statusComingSoon": "Coming Soon",
       "stories": {
         "title": "Community Stories",
@@ -587,7 +580,6 @@
       "communities": "Communities",
       "providers": "Providers",
       "map": "Map",
-      "climate": "Climate",
       "stories": "Stories",
       "backTo": "Back to Bengaluru",
       "allCities": "All Cities"
@@ -597,58 +589,9 @@
       "description": "We're currently building the city directory. Help us grow the network by registering your community or organization.",
       "communityDirectory": "Community Directory",
       "providerNetwork": "Solution Provider Network",
-      "climateAction": "Climate Action Dashboard",
-      "additionalSectors": "Additional Climate Sectors (5 more)",
       "joinCommunity": "Join as Community",
       "joinProvider": "Join as Provider",
       "comingSoonButton": "Coming Soon"
-    }
-  },
-  "mumbai_climate": {
-    "title": "Mumbai Climate Action Dashboard",
-    "subtitle": "Tracking progress across 2 sectors and 227 wards with baseline climate data",
-    "intro_title": "Climate Action by Sector",
-    "intro_description": "Explore baseline data and ward-level metrics across 2 key climate sectors in Mumbai.",
-    "sectors": {
-      "energy_title": "Energy & Buildings",
-      "energy_count": "227 Wards",
-      "energy_description": "Clean cooking fuel adoption, renewable energy capacity, energy-efficient appliances, and green building standards across Mumbai's wards.",
-      "waste_title": "Waste Management",
-      "waste_count": "227 Wards",
-      "waste_description": "Waste segregation, landfill diversion rates, recycling infrastructure, and waste-to-resource initiatives across Mumbai's neighborhoods."
-    },
-    "stats": {
-      "clean_cooking": "Clean Cooking (Baseline)",
-      "segregation": "Segregation (Baseline)",
-      "wards_tracked": "Wards Tracked"
-    },
-    "data_sources_title": "Data Sources & Methodology",
-    "sources": {
-      "census": "Census 2011",
-      "census_desc": "Government of India (projected to 2026)",
-      "opencity": "OpenCity.in",
-      "opencity_desc": "Ward-level municipal data",
-      "boundaries": "Ward Boundaries",
-      "boundaries_desc": "Brihanmumbai Municipal Corporation (227 Prabhags)",
-      "ires": "India Residential Energy Survey (IRES) 2020",
-      "ires_desc": "CEEW baseline estimates",
-      "confidence": "Data Confidence:",
-      "confidence_desc": "~60% (Census 2011 + modeled estimates)",
-      "updated": "Last Updated:"
-    },
-    "zones": {
-      "all": "All Zones",
-      "northern": "Northern Suburbs",
-      "eastern": "Eastern Suburbs",
-      "western": "Western Suburbs",
-      "central": "Central",
-      "south": "South Mumbai"
-    }
-  },
-  "climate": {
-    "sectors": {
-      "energy": "Energy & Buildings",
-      "waste": "Waste Management"
     }
   },
   "mumbai": {
@@ -657,652 +600,11 @@
       "hub": "Mumbai Hub",
       "communities": "Communities",
       "providers": "Providers",
-      "map": "Map",
-      "climate": "Climate"
-    },
-    "climate": {
-      "title": "Mumbai Climate Action Dashboard",
-      "energy": {
-        "title": "Energy & Buildings | Mumbai Climate Action | NOTF",
-        "heading": "Energy & Buildings",
-        "breadcrumb": "Energy & Buildings",
-        "subtitle": "Transitioning to clean energy sources and improving energy efficiency in residential and commercial buildings across Mumbai.",
-        "targets": {
-          "heading": "Climate Targets",
-          "description": "Key goals for reducing carbon emissions and improving energy sustainability in buildings across all 227 wards.",
-          "cleanCooking": {
-            "name": "Clean Cooking",
-            "year": "By 2030"
-          },
-          "renewableEnergy": {
-            "name": "Renewable Energy",
-            "year": "By 2030"
-          },
-          "energyEfficiency": {
-            "name": "Energy Efficiency",
-            "year": "Improvement by 2030"
-          },
-          "greenBuildings": {
-            "name": "Zero Carbon Buildings",
-            "year": "New Buildings by 2030"
-          }
-        },
-        "wardTracking": {
-          "heading": "Ward-Level Tracking",
-          "description": "Energy and building targets are tracked at the ward level across all 227 wards in Mumbai to ensure equitable climate action.",
-          "leaderboardButton": "View Full Ward Leaderboard"
-        },
-        "actions": {
-          "heading": "Key Actions Being Taken",
-          "description": "Initiatives and programs driving progress toward energy and building sector targets.",
-          "cleanCooking": {
-            "name": "Clean Cooking Transition",
-            "description": "Subsidized LPG connections and induction cookstoves for low-income households across all wards."
-          },
-          "rooftopSolar": {
-            "name": "Rooftop Solar Program",
-            "description": "Net metering policies and financing options for residential and commercial solar installations."
-          },
-          "appliances": {
-            "name": "Energy-Efficient Appliances",
-            "description": "Awareness campaigns and rebate programs for 5-star rated appliances and LED lighting."
-          },
-          "greenBuilding": {
-            "name": "Green Building Standards",
-            "description": "Mandatory GRIHA/IGBC certification for new commercial buildings and incentives for retrofits."
-          },
-          "audits": {
-            "name": "Energy Audits",
-            "description": "Free energy audits for residential complexes and commercial buildings to identify efficiency improvements."
-          }
-        },
-        "cta": {
-          "heading": "Explore Other Climate Sectors",
-          "viewAll": "View All Climate Sectors",
-          "viewMap": "View Ward Map"
-        },
-        "leaderboard": {
-          "title": "Energy & Buildings Ward Leaderboard | Mumbai Climate | NOTF",
-          "heading": "Energy & Buildings Ward Leaderboard",
-          "description": "Compare performance across all 227 wards on energy and building climate metrics",
-          "breadcrumb": "Leaderboard",
-          "metric": "Metric:",
-          "filter": "Filter:",
-          "wards": "wards",
-          "backButton": "Back to Energy & Buildings",
-          "metrics": {
-            "cleanCooking": "Clean Cooking (% using solid fuels)",
-            "renewableEnergy": "Renewable Energy (% share)",
-            "electricityUse": "Electricity Use (kWh/capita)",
-            "greenBuildings": "Green Buildings (certified)"
-          },
-          "zones": {
-            "all": "All Zones (227 wards)",
-            "northern": "Northern Suburbs (78 wards)",
-            "eastern": "Eastern Suburbs (49 wards)",
-            "western": "Western Suburbs (44 wards)",
-            "central": "Central (35 wards)",
-            "south": "South Mumbai (21 wards)"
-          }
-        }
-      },
-      "waste": {
-        "title": "Waste Management | Mumbai Climate Action | NOTF",
-        "heading": "Waste Management",
-        "breadcrumb": "Waste Management",
-        "subtitle": "Managing solid waste effectively and transitioning to a circular economy across Mumbai's wards.",
-        "targets": {
-          "heading": "Climate Targets",
-          "description": "Key goals for reducing waste generation and transitioning to a circular economy across all 227 wards.",
-          "segregation": {
-            "name": "Waste Segregation",
-            "year": "By 2025"
-          },
-          "recycling": {
-            "name": "Recycling Rate",
-            "year": "By 2030"
-          },
-          "reduction": {
-            "name": "Waste Reduction",
-            "year": "Reduction by 2030"
-          },
-          "landfill": {
-            "name": "Landfill Diversion",
-            "year": "By 2050"
-          }
-        },
-        "wardTracking": {
-          "heading": "Ward-Level Tracking",
-          "description": "Waste management targets are tracked at the ward level across all 227 wards in Mumbai to ensure equitable climate action.",
-          "leaderboardButton": "View Full Ward Leaderboard"
-        },
-        "actions": {
-          "heading": "Key Actions Being Taken",
-          "description": "Initiatives and programs driving progress toward waste management sector targets.",
-          "segregation": {
-            "name": "Source Segregation Programs",
-            "description": "Community-level training and infrastructure for wet, dry, and hazardous waste separation at source."
-          },
-          "infrastructure": {
-            "name": "Recycling Infrastructure",
-            "description": "Material recovery facilities and recycling centers in every zone for efficient waste processing."
-          },
-          "composting": {
-            "name": "Composting Initiatives",
-            "description": "Ward-level composting units and community composting programs to convert organic waste to nutrient-rich compost."
-          },
-          "wasteToEnergy": {
-            "name": "Waste-to-Energy Systems",
-            "description": "Converting non-recyclable waste into electricity and heat through modern waste-to-energy plants."
-          },
-          "zeroWaste": {
-            "name": "Zero Waste Neighborhoods",
-            "description": "Pilot programs creating model zero-waste neighborhoods through community engagement and circular economy practices."
-          }
-        },
-        "cta": {
-          "heading": "Explore Other Climate Sectors",
-          "viewAll": "View All Climate Sectors",
-          "viewMap": "View Ward Map"
-        },
-        "leaderboard": {
-          "title": "Waste Management Ward Leaderboard | Mumbai Climate | NOTF",
-          "heading": "Waste Management Ward Leaderboard",
-          "description": "Compare performance across all 227 wards on waste management climate metrics",
-          "breadcrumb": "Leaderboard",
-          "metric": "Metric:",
-          "filter": "Filter:",
-          "wards": "wards",
-          "backButton": "Back to Waste Management",
-          "metrics": {
-            "segregation": "Waste Segregation (% at source)",
-            "recycling": "Recycling Rate (% diverted)",
-            "wasteGeneration": "Waste Generation (kg/capita/day)",
-            "landfillDiversion": "Landfill Diversion (%)",
-            "generation": "Waste Generation (kg/capita/day)",
-            "diversion": "Landfill Diversion (% diverted)"
-          },
-          "zones": {
-            "all": "All Zones (227 wards)",
-            "northern": "Northern Suburbs (78 wards)",
-            "eastern": "Eastern Suburbs (49 wards)",
-            "western": "Western Suburbs (44 wards)",
-            "central": "Central (35 wards)",
-            "south": "South Mumbai (21 wards)"
-          }
-        }
-      },
-      "wardPerformance": {
-        "cleanCooking": {
-          "title": "Clean Cooking Performance Distribution",
-          "description": "Tracking adoption of clean cooking methods (LPG, induction, etc.) across all wards. Lower percentages are better (less solid fuel use).",
-          "highPerformers": "High Performers",
-          "highPerformersRange": "(0-30% solid fuel)",
-          "mediumPerformers": "Medium Performers",
-          "mediumPerformersRange": "(31-70% solid fuel)",
-          "needImprovement": "Need Improvement",
-          "needImprovementRange": "(>70% solid fuel)",
-          "top5Title": "Top 5 Wards (Cleanest Cooking)",
-          "bottom5Title": "Bottom 5 Wards (Most Solid Fuel)"
-        },
-        "segregation": {
-          "title": "Waste Segregation Performance Distribution",
-          "description": "Tracking waste segregation at source across all wards. Higher percentages are better (more segregation).",
-          "highPerformers": "High Performers",
-          "highPerformersRange": "(70-100% segregation)",
-          "mediumPerformers": "Medium Performers",
-          "mediumPerformersRange": "(30-70% segregation)",
-          "needImprovement": "Need Improvement",
-          "needImprovementRange": "(<30% segregation)",
-          "top5Title": "Top 5 Wards (Best Segregation)",
-          "bottom5Title": "Bottom 5 Wards (Needs Improvement)"
-        }
-      }
+      "map": "Map"
     }
   },
   "bengaluru": {
-    "name": "Bengaluru",
-    "climate": {
-      "index": {
-        "meta": {
-          "title": "Bengaluru Climate Action Dashboard | NOTF",
-          "description": "Track climate action progress across 7 sectors and 369 wards in Bengaluru based on the Bengaluru Climate Action Plan (BCAP)."
-        },
-        "breadcrumb": {
-          "home": "Home",
-          "bengaluru": "Bengaluru",
-          "climate": "Climate Dashboard"
-        },
-        "hero": {
-          "title": "Bengaluru Climate Action Dashboard",
-          "subtitle": "Tracking progress across 7 sectors and 369 wards based on the Bengaluru Climate Action Plan (BCAP)"
-        },
-        "sectorIntro": {
-          "title": "Climate Action by Sector",
-          "description": "Explore targets, baselines, and ward-level progress across 7 key climate sectors in Bengaluru."
-        },
-        "sectors": {
-          "energy": {
-            "name": "Energy & Buildings",
-            "count": "6 Targets",
-            "description": "Clean cooking fuel transition, energy-efficient appliances, green buildings, and renewable energy integration.",
-            "stat1Value": "100%",
-            "stat1Label": "Clean Cooking by 2030",
-            "stat2Value": "40%",
-            "stat2Label": "EE Appliances by 2030",
-            "button": "View Details"
-          },
-          "transport": {
-            "name": "Transportation",
-            "count": "7 Targets",
-            "description": "Transit-oriented development, public transport, non-motorized transport, and electric vehicle transition.",
-            "stat1Value": "75%",
-            "stat1Label": "PT+NMT Share by 2030",
-            "stat2Value": "92%",
-            "stat2Label": "TOD Households by 2050",
-            "button": "View Details"
-          },
-          "waste": {
-            "name": "Solid Waste",
-            "count": "6 Targets",
-            "description": "Waste segregation, landfill diversion, recycling rates, and waste-to-energy systems.",
-            "stat1Value": "100%",
-            "stat1Label": "Segregation by 2025",
-            "stat2Value": "90%",
-            "stat2Label": "Diversion by 2050",
-            "button": "View Details"
-          },
-          "air": {
-            "name": "Air Quality",
-            "count": "4 Targets",
-            "description": "PM10 and PM2.5 reduction, indoor air quality standards, and continuous air quality monitoring.",
-            "stat1Value": "40%",
-            "stat1Label": "PM10 Reduction by 2026",
-            "stat2Value": "30%",
-            "stat2Label": "PM2.5 Reduction by 2026",
-            "button": "View Details"
-          },
-          "water": {
-            "name": "Water & Wastewater",
-            "count": "8 Targets",
-            "description": "Universal water access, non-revenue water reduction, wastewater reuse, and permeable surfaces.",
-            "stat1Value": "50%",
-            "stat1Label": "WW Reuse by 2030",
-            "stat2Value": "15%",
-            "stat2Label": "NRW by 2050",
-            "button": "View Details"
-          },
-          "greening": {
-            "name": "Greening & Biodiversity",
-            "count": "5 Targets",
-            "description": "Urban planning with climate lens, blue-green network conservation, and affordable housing with transit access.",
-            "stat1Value": "100%",
-            "stat1Label": "Blue-Green Network Conservation",
-            "button": "View Details"
-          },
-          "disaster": {
-            "name": "Disaster Management",
-            "count": "4 Targets",
-            "description": "Hazard database, comprehensive disaster management plans, empowered ward committees, and risk reduction.",
-            "stat1Value": "Ongoing",
-            "stat1Label": "Ward Committee Empowerment",
-            "button": "View Details"
-          }
-        },
-        "dataSources": {
-          "title": "Data Sources & Methodology",
-          "bcapActions": "BCAP Sector Actions (April 2024) - BBMP / WRI India",
-          "wardBoundaries": "Ward Boundaries (December 2025) - Greater Bengaluru Authority",
-          "census": "Census 2011 - Government of India (projected to 2026)",
-          "bescom": "BESCOM Annual Reports - Bangalore Electricity Supply Company",
-          "ires": "India Residential Energy Survey (IRES) 2020 - CEEW",
-          "lastUpdated": "Last Updated:",
-          "lastUpdatedDate": "January 20, 2026"
-        }
-      },
-      "energy": {
-        "meta": {
-          "title": "Energy & Buildings | Bengaluru Climate Action | NOTF",
-          "description": "Track energy and buildings climate targets across 369 wards in Bengaluru - clean cooking, renewable energy, energy efficiency, and green buildings."
-        },
-        "breadcrumb": {
-          "climate": "Climate",
-          "current": "Energy & Buildings"
-        },
-        "hero": {
-          "title": "Energy & Buildings",
-          "subtitle": "Transitioning to clean energy sources and improving energy efficiency in residential and commercial buildings across Bengaluru."
-        },
-        "targets": {
-          "heading": "Climate Targets",
-          "description": "Key goals for reducing carbon emissions and improving energy sustainability in buildings across all 369 wards.",
-          "cleanCooking": {
-            "name": "Clean Cooking",
-            "value": "100%",
-            "year": "By 2030",
-            "progressLabel": "Progress - Baseline being established"
-          },
-          "renewableEnergy": {
-            "name": "Renewable Energy",
-            "value": "50%",
-            "year": "By 2030",
-            "progressLabel": "Progress - Baseline being established"
-          },
-          "energyEfficiency": {
-            "name": "Energy Efficiency",
-            "value": "30%",
-            "year": "Improvement by 2030",
-            "progressLabel": "Progress - Baseline being established"
-          },
-          "zeroCarbonBuildings": {
-            "name": "Zero Carbon Buildings",
-            "value": "100%",
-            "year": "New Buildings by 2030",
-            "progressLabel": "Progress - Baseline being established"
-          }
-        },
-        "wardTracking": {
-          "heading": "Ward-Level Tracking",
-          "description": "Energy and building targets are tracked at the ward level across all 369 wards in Bengaluru to ensure equitable climate action.",
-          "loadingMessage": "Loading ward performance data...",
-          "leaderboardButton": "View Full Ward Leaderboard",
-          "performance": {
-            "title": "Clean Cooking Performance Distribution",
-            "description": "Tracking adoption of clean cooking methods (LPG, induction, etc.) across all wards. Lower percentages are better (less solid fuel use).",
-            "highPerformers": "High Performers",
-            "highRange": "(0-30% solid fuel)",
-            "mediumPerformers": "Medium Performers",
-            "mediumRange": "(31-70% solid fuel)",
-            "needImprovement": "Need Improvement",
-            "needImprovementRange": "(>70% solid fuel)",
-            "top5Title": "Top 5 Wards (Cleanest Cooking)",
-            "bottom5Title": "Bottom 5 Wards (Most Solid Fuel)"
-          }
-        },
-        "actions": {
-          "heading": "Key Actions Being Taken",
-          "description": "Initiatives and programs driving progress toward energy and building sector targets.",
-          "cleanCooking": {
-            "title": "Clean Cooking Transition",
-            "description": "Subsidized LPG connections and induction cookstoves for low-income households across all wards."
-          },
-          "rooftopSolar": {
-            "title": "Rooftop Solar Program",
-            "description": "Net metering policies and financing options for residential and commercial solar installations."
-          },
-          "eeAppliances": {
-            "title": "Energy-Efficient Appliances",
-            "description": "Awareness campaigns and rebate programs for 5-star rated appliances and LED lighting."
-          },
-          "greenBuildings": {
-            "title": "Green Building Standards",
-            "description": "Mandatory GRIHA/IGBC certification for new commercial buildings and incentives for retrofits."
-          },
-          "energyAudits": {
-            "title": "Energy Audits",
-            "description": "Free energy audits for residential complexes and commercial buildings to identify efficiency improvements."
-          }
-        },
-        "cta": {
-          "heading": "Explore Other Climate Sectors",
-          "viewAllButton": "View All Climate Sectors",
-          "viewMapButton": "View Ward Map"
-        },
-        "leaderboard": {
-          "meta": {
-            "title": "Energy & Buildings Ward Leaderboard | Bengaluru Climate | NOTF",
-            "description": "Ward-level leaderboard for energy and buildings climate metrics in Bengaluru - see how all 369 wards rank on clean cooking, renewable energy, and more."
-          },
-          "breadcrumb": {
-            "energy": "Energy & Buildings",
-            "current": "Leaderboard"
-          },
-          "hero": {
-            "title": "Ward Leaderboard",
-            "description": "Compare performance across all 369 wards on energy and buildings climate metrics"
-          },
-          "controls": {
-            "metricLabel": "Metric:",
-            "filterLabel": "Filter:",
-            "wardCount": "wards"
-          },
-          "metrics": {
-            "cleanCooking": "Clean Cooking (% using solid fuels)",
-            "renewableEnergy": "Renewable Energy (% share)",
-            "electricityConsumption": "Electricity Use (kWh/capita)",
-            "greenBuildings": "Green Buildings (certified)"
-          },
-          "corporations": {
-            "all": "All Corporations (369 wards)",
-            "central": "Central (63 wards)",
-            "east": "East (50 wards)",
-            "west": "West (112 wards)",
-            "north": "North (72 wards)",
-            "south": "South (72 wards)"
-          },
-          "backButton": "Back to Energy & Buildings"
-        }
-      },
-      "waste": {
-        "meta": {
-          "title": "Solid Waste Management | Bengaluru Climate Action | NOTF",
-          "description": "Track solid waste management climate targets across 369 wards in Bengaluru - segregation, composting, recycling, and zero waste to landfill."
-        },
-        "breadcrumb": {
-          "climate": "Climate",
-          "current": "Solid Waste Management"
-        },
-        "hero": {
-          "title": "Solid Waste Management",
-          "subtitle": "Implementing comprehensive waste management systems focused on reduction, reuse, and recycling at the ward level."
-        },
-        "targets": {
-          "heading": "Climate Targets",
-          "description": "Key goals for reducing waste generation and diverting waste from landfills across all 369 wards.",
-          "doorToDoor": {
-            "name": "Door-to-Door Collection",
-            "value": "100%",
-            "year": "By 2025",
-            "progressLabel": "Progress - Baseline being established"
-          },
-          "segregation": {
-            "name": "Waste Segregation",
-            "value": "80%",
-            "year": "At Source by 2030",
-            "progressLabel": "Progress - Baseline being established"
-          },
-          "wastePerCapita": {
-            "name": "Waste Per Capita",
-            "value": "0.3 kg/day",
-            "year": "By 2030",
-            "progressLabel": "Progress - Baseline being established"
-          },
-          "recyclingRate": {
-            "name": "Recycling Rate",
-            "value": "60%",
-            "year": "By 2030",
-            "progressLabel": "Progress - Baseline being established"
-          }
-        },
-        "wardTracking": {
-          "heading": "Ward-Level Tracking",
-          "description": "Waste management targets are tracked at the ward level across all 369 wards to ensure comprehensive coverage.",
-          "loadingMessage": "Loading ward performance data...",
-          "leaderboardButton": "View Full Ward Leaderboard",
-          "performance": {
-            "title": "Waste Segregation Performance Distribution",
-            "description": "Tracking waste segregation practices across all wards. Higher percentages indicate better source segregation.",
-            "highPerformers": "High Performers",
-            "highRange": "(71-100% segregation)",
-            "mediumPerformers": "Medium Performers",
-            "mediumRange": "(31-70% segregation)",
-            "needImprovement": "Need Improvement",
-            "needImprovementRange": "(0-30% segregation)",
-            "top5Title": "Top 5 Wards (Best Segregation)",
-            "bottom5Title": "Bottom 5 Wards (Need Support)"
-          }
-        },
-        "actions": {
-          "heading": "Key Actions Being Taken",
-          "description": "Initiatives and programs driving progress toward waste management sector targets.",
-          "segregation": {
-            "title": "Waste Segregation at Source",
-            "description": "Color-coded bins (wet, dry, hazardous) distributed to all households with community training programs."
-          },
-          "composting": {
-            "title": "Community Composting",
-            "description": "Setting up ward-level composting units and promoting home composting with subsidized equipment."
-          },
-          "dryWaste": {
-            "title": "Dry Waste Collection Centers",
-            "description": "Establishing collection points in every ward for recyclables with payment incentives for residents."
-          },
-          "plasticBan": {
-            "title": "Single-Use Plastic Ban",
-            "description": "Enforcing ban on single-use plastics with alternatives support for vendors and businesses."
-          },
-          "wasteAudits": {
-            "title": "Ward Waste Audits",
-            "description": "Regular waste characterization studies to track segregation quality and identify improvement areas."
-          }
-        },
-        "cta": {
-          "heading": "Explore Other Climate Sectors",
-          "viewAllButton": "View All Climate Sectors",
-          "viewMapButton": "View Ward Map"
-        },
-        "leaderboard": {
-          "meta": {
-            "title": "Solid Waste Ward Leaderboard | Bengaluru Climate | NOTF",
-            "description": "Ward-level leaderboard for solid waste management metrics in Bengaluru - see how all 369 wards rank on segregation, recycling, and more."
-          },
-          "breadcrumb": {
-            "waste": "Solid Waste Management",
-            "current": "Leaderboard"
-          },
-          "hero": {
-            "title": "Ward Leaderboard",
-            "description": "Compare performance across all 369 wards on solid waste management metrics"
-          },
-          "controls": {
-            "metricLabel": "Metric:",
-            "filterLabel": "Filter:",
-            "wardCount": "wards"
-          },
-          "metrics": {
-            "doorToDoor": "Door-to-Door Collection (%)",
-            "segregation": "Waste Segregation (%)",
-            "wastePerCapita": "Waste Per Capita (kg/day)",
-            "recyclingRate": "Recycling Rate (%)"
-          },
-          "corporations": {
-            "all": "All Corporations (369 wards)",
-            "central": "Central (63 wards)",
-            "east": "East (50 wards)",
-            "west": "West (112 wards)",
-            "north": "North (72 wards)",
-            "south": "South (72 wards)"
-          },
-          "backButton": "Back to Solid Waste Management"
-        }
-      },
-      "title": "Bengaluru Climate Action Dashboard",
-      "subtitle": "Tracking progress across 7 sectors and 369 wards based on the Bengaluru Climate Action Plan (BCAP)",
-      "breadcrumb": {
-        "home": "Home",
-        "bengaluru": "Bengaluru",
-        "climate": "Climate Dashboard",
-        "current": "Climate Dashboard"
-      },
-      "intro": {
-        "title": "Climate Action by Sector",
-        "description": "Explore targets, baselines, and ward-level progress across 7 key climate sectors in Bengaluru."
-      },
-      "sectors": {
-        "energy": {
-          "name": "Energy & Buildings",
-          "count": "6 Targets",
-          "description": "Clean cooking fuel transition, energy-efficient appliances, green buildings, and renewable energy integration.",
-          "stat1Value": "100%",
-          "stat1Label": "Clean Cooking by 2030",
-          "stat2Value": "40%",
-          "stat2Label": "EE Appliances by 2030",
-          "button": "View Details"
-        },
-        "transport": {
-          "name": "Transportation",
-          "count": "7 Targets",
-          "description": "Transit-oriented development, public transport, non-motorized transport, and electric vehicle transition.",
-          "stat1Value": "75%",
-          "stat1Label": "PT+NMT Share by 2030",
-          "stat2Value": "92%",
-          "stat2Label": "TOD Households by 2050",
-          "button": "View Details"
-        },
-        "waste": {
-          "name": "Solid Waste",
-          "count": "6 Targets",
-          "description": "Waste segregation, landfill diversion, recycling rates, and waste-to-energy systems.",
-          "stat1Value": "100%",
-          "stat1Label": "Segregation by 2025",
-          "stat2Value": "90%",
-          "stat2Label": "Diversion by 2050",
-          "button": "View Details"
-        },
-        "air": {
-          "name": "Air Quality",
-          "count": "4 Targets",
-          "description": "PM10 and PM2.5 reduction, indoor air quality standards, and continuous air quality monitoring.",
-          "stat1Value": "40%",
-          "stat1Label": "PM10 Reduction by 2026",
-          "stat2Value": "30%",
-          "stat2Label": "PM2.5 Reduction by 2026",
-          "button": "View Details"
-        },
-        "water": {
-          "name": "Water & Wastewater",
-          "count": "8 Targets",
-          "description": "Universal water access, non-revenue water reduction, wastewater reuse, and permeable surfaces.",
-          "stat1Value": "50%",
-          "stat1Label": "WW Reuse by 2030",
-          "stat2Value": "15%",
-          "stat2Label": "NRW by 2050",
-          "button": "View Details"
-        },
-        "greening": {
-          "name": "Greening & Biodiversity",
-          "count": "5 Targets",
-          "description": "Urban planning with climate lens, blue-green network conservation, and affordable housing with transit access.",
-          "stat1Value": "100%",
-          "stat1Label": "Blue-Green Network Conservation",
-          "button": "View Details"
-        },
-        "disaster": {
-          "name": "Disaster Management",
-          "count": "4 Targets",
-          "description": "Hazard database, comprehensive disaster management plans, empowered ward committees, and risk reduction.",
-          "stat1Value": "Ongoing",
-          "stat1Label": "Ward Committee Empowerment",
-          "button": "View Details"
-        }
-      },
-      "dataSources": {
-        "title": "Data Sources & Methodology",
-        "bcapActions": "BCAP Sector Actions (April 2024) - BBMP / WRI India",
-        "wardBoundaries": "Ward Boundaries (December 2025) - Greater Bengaluru Authority",
-        "census": "Census 2011 - Government of India (projected to 2026)",
-        "bescom": "BESCOM Annual Reports - Bangalore Electricity Supply Company",
-        "ires": "India Residential Energy Survey (IRES) 2020 - CEEW",
-        "lastUpdated": "Last Updated:",
-        "lastUpdatedDate": "January 20, 2026"
-      },
-      "findWard": {
-        "title": "Find Your Ward",
-        "subtitle": "See how your neighbourhood is performing across all climate sectors",
-        "placeholder": "Type your ward name...",
-        "button": "View Report Card"
-      }
-    }
+    "name": "Bengaluru"
   },
   "citiesPage": {
     "title": "Our Cities",

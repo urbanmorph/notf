@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neighbourhoods of the Future | NOTF</title>
-    <meta name="description" content="Building connected, resilient neighbourhoods across India. Explore 13 cities with ward-level data, community networks, and climate action tracking.">
+    <meta name="description" content="Building connected, resilient neighbourhoods across India: community networks, solution providers, ready-to-use projects and live, open air quality data.">
     <link rel="canonical" href="https://notf.in/">
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Neighbourhoods of the Future">
     <meta property="og:title" content="Neighbourhoods of the Future | NOTF">
-    <meta property="og:description" content="Building connected, resilient neighbourhoods across India. Explore 13 cities with ward-level data, community networks, and climate action tracking.">
+    <meta property="og:description" content="Building connected, resilient neighbourhoods across India: community networks, solution providers, ready-to-use projects and live, open air quality data.">
     <meta property="og:url" content="https://notf.in/">
     <meta property="og:image" content="https://notf.in/assets/images/notf-terracotta.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Neighbourhoods of the Future | NOTF">
-    <meta name="twitter:description" content="Building connected, resilient neighbourhoods across India. Explore 13 cities with ward-level data, community networks, and climate action tracking.">
+    <meta name="twitter:description" content="Building connected, resilient neighbourhoods across India: community networks, solution providers, ready-to-use projects and live, open air quality data.">
     <meta name="twitter:image" content="https://notf.in/assets/images/notf-terracotta.png">
 
     <!-- Structured data -->
@@ -73,42 +73,6 @@
             </div>
         </section>
 
-        <!-- Climate Impact Stats Bar -->
-        <section class="stats-bar climate-stats-bar" aria-labelledby="climateImpactHeading">
-            <h2 id="climateImpactHeading" class="climate-stats-title" data-i18n="homepage.climateStats.title">Climate Action on the Ground</h2>
-            <div class="climate-stats-grid">
-                <div class="stat-item climate-stat">
-                    <img src="/assets/images/icons/waste-management.svg" alt="" aria-hidden="true" class="climate-stat-icon">
-                    <span class="stat-number">65+ <small>t</small></span>
-                    <span class="stat-label" data-i18n="homepage.climateStats.waste">Waste diverted from landfill</span>
-                </div>
-                <div class="stat-item climate-stat">
-                    <img src="/assets/images/icons/environment.svg" alt="" aria-hidden="true" class="climate-stat-icon">
-                    <span class="stat-number">60K+ <small>kg</small></span>
-                    <span class="stat-label" data-i18n="homepage.climateStats.co2">CO₂ emissions prevented</span>
-                </div>
-                <div class="stat-item climate-stat">
-                    <img src="/assets/images/icons/recycle.svg" alt="" aria-hidden="true" class="climate-stat-icon">
-                    <span class="stat-number">20K+</span>
-                    <span class="stat-label" data-i18n="homepage.climateStats.bottles">Plastic bottles avoided</span>
-                </div>
-                <div class="stat-item climate-stat">
-                    <img src="/assets/images/icons/trees.svg" alt="" aria-hidden="true" class="climate-stat-icon">
-                    <span class="stat-number">12K+</span>
-                    <span class="stat-label" data-i18n="homepage.climateStats.trees">Trees & saplings planted</span>
-                </div>
-                <div class="stat-item climate-stat">
-                    <img src="/assets/images/icons/policy.svg" alt="" aria-hidden="true" class="climate-stat-icon">
-                    <span class="stat-number">10+</span>
-                    <span class="stat-label" data-i18n="homepage.climateStats.plans">City climate action plans</span>
-                </div>
-            </div>
-            <p class="climate-stats-footer">
-                <span data-i18n="homepage.climateStats.attribution">Delivered by 15 climate projects in our catalogue.</span>
-                <a href="/catalog/" class="climate-stats-cta" data-i18n="homepage.climateStats.cta">Browse climate projects <i class="fa-solid fa-arrow-right"></i></a>
-            </p>
-        </section>
-
         <!-- What is NOTF -->
         <section class="notf-explainer">
             <div class="notf-explainer-content">
@@ -130,10 +94,10 @@
                         </div>
                     </div>
                     <div class="explainer-point">
-                        <img src="/assets/images/icons/conservation.svg" alt="" aria-hidden="true" class="explainer-icon">
+                        <img src="/assets/images/icons/transparency.svg" alt="" aria-hidden="true" class="explainer-icon">
                         <div>
-                            <strong data-i18n="homepage.explainer.point3.title">Climate Resilient</strong>
-                            <span data-i18n="homepage.explainer.point3.desc">Track climate action across wards and sectors, from waste management to green cover to clean energy</span>
+                            <strong data-i18n="homepage.explainer.point3.title">Open Data</strong>
+                            <span data-i18n="homepage.explainer.point3.desc">Neighbourhoods measure what matters to them, like the air they breathe, and share it openly</span>
                         </div>
                     </div>
                 </div>
@@ -156,6 +120,41 @@
                     </div>
                 </div>
                 <a href="/about/" class="notf-explainer-cta" data-i18n="homepage.explainer.cta">Learn more about NOTF <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </section>
+
+        <!-- Open Air Quality (OAQ): live numbers filled by /assets/js/oaq-live.js.
+             data-oaq-cities is the city list for "Air right now" (to be matched to chapters). -->
+        <section class="oaq-section" id="oaq" aria-labelledby="oaqHeading"
+                 data-oaq-cities="Bengaluru,Mumbai,Delhi,Chennai,Hyderabad,Pune">
+            <div class="oaq-card">
+                <div class="oaq-text">
+                    <p class="oaq-eyebrow"><img src="/assets/images/icons/air-quality.svg" alt="" aria-hidden="true"> <span data-i18n="homepage.oaq.eyebrow">OAQ · Open Air Quality</span></p>
+                    <h2 id="oaqHeading" data-i18n="homepage.oaq.title">India&rsquo;s air, measured by its people</h2>
+                    <p class="oaq-lead" data-i18n="homepage.oaq.lead">OAQ is NOTF&rsquo;s open platform for hyperlocal air quality. Researchers, community groups and residents run sensors in their own neighbourhoods, and everyone can see the readings live, for free.</p>
+                    <div class="oaq-live" id="oaqLive" aria-live="polite">
+                        <div class="oaq-live-stats">
+                            <div><span class="oaq-num" id="oaqStations">&ndash;</span><span class="oaq-label" data-i18n="homepage.oaq.stats.stations">stations live</span></div>
+                            <div><span class="oaq-num" id="oaqCities">&ndash;</span><span class="oaq-label" data-i18n="homepage.oaq.stats.cities">cities covered</span></div>
+                            <div><span class="oaq-num" id="oaqNetworks">&ndash;</span><span class="oaq-label" data-i18n="homepage.oaq.stats.networks">sensor networks</span></div>
+                        </div>
+                        <h3 class="oaq-now-title"><span data-i18n="homepage.oaq.nowTitle">Air right now</span> <span class="oaq-updated">&middot; <span data-i18n="homepage.oaq.updated">updated</span> <span id="oaqUpdated" dir="ltr"></span></span></h3>
+                        <ul class="oaq-now" id="oaqNow"></ul>
+                        <p class="oaq-source" data-i18n="homepage.oaq.source">Typical (median) CPCB AQI across each city&rsquo;s stations. Data: OAQ, via the mugilu open mirror.</p>
+                    </div>
+                    <div class="oaq-buttons">
+                        <a href="https://oaq.notf.in" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><span data-i18n="homepage.oaq.mapButton">See the live map</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                        <a href="https://oaq.notf.in/deployments" target="_blank" rel="noopener noreferrer" class="btn btn-tertiary" data-i18n="homepage.oaq.hostButton">Host a sensor</a>
+                    </div>
+                </div>
+                <a class="oaq-visual" href="https://oaq.notf.in" target="_blank" rel="noopener noreferrer" data-i18n-aria="homepage.oaq.mapLink" aria-label="Open the OAQ live map">
+                    <svg class="oaq-map" id="oaqMap" viewBox="0 0 600 590" data-bbox="77.4401,12.8136,77.8044,13.1627" role="img" aria-labelledby="oaqMapTitle">
+                    <title id="oaqMapTitle" data-i18n="homepage.oaq.mapTitle">Live air quality sensors across Bengaluru</title>
+                    <path class="oaq-map-land" d="M181.1 230.9L169.5 208.5L165.8 220.0L135.3 197.3L129.1 207.5L86.3 187.8L83.9 178.6L87.4 153.1L97.8 153.4L110.9 143.2L128.3 149.4L130.0 140.3L137.0 138.1L137.9 117.6L165.8 122.9L171.6 103.7L193.2 105.2L206.6 62.0L213.3 63.6L220.7 36.3L230.5 33.8L239.0 50.4L283.2 49.7L313.6 61.9L327.2 83.5L324.3 95.3L346.5 97.8L333.8 128.3L340.2 131.0L326.5 147.9L324.6 201.4L331.5 203.1L337.4 214.2L331.0 217.0L325.4 227.6L317.3 228.0L365.1 247.2L366.1 254.0L350.5 265.1L340.3 261.4L325.3 266.2L323.3 268.4L333.8 282.0L325.9 283.2L324.9 287.3L306.6 283.1L296.7 275.0L291.1 282.1L295.2 296.6L277.9 286.0L272.3 291.6L269.8 287.2L257.8 284.3L272.7 284.7L277.9 276.7L271.8 278.7L265.9 272.5L272.1 263.7L256.5 256.0L252.4 265.5L243.9 252.1L237.0 250.4L238.2 236.2L230.6 230.1L216.1 226.8L201.0 204.0L193.1 209.7L197.5 222.6L190.1 241.4L187.3 242.3L181.1 230.9ZM117.4 459.7L91.7 477.7L69.5 504.0L60.4 502.7L62.1 481.2L57.3 477.0L63.8 467.4L70.5 467.7L69.1 462.0L64.7 461.2L58.4 453.4L61.4 449.9L54.9 446.6L46.6 463.4L33.2 443.3L33.4 432.8L43.8 432.3L54.6 398.9L65.1 400.1L72.6 383.4L54.7 375.8L59.7 361.4L51.1 360.1L58.0 341.9L53.1 336.3L57.3 316.0L54.7 302.5L46.7 297.4L58.0 270.6L58.2 264.0L54.0 262.6L63.1 242.7L65.1 225.4L60.8 221.6L70.0 206.3L65.1 200.0L65.9 192.9L83.9 198.7L87.5 187.8L129.1 207.5L135.3 197.3L165.8 220.0L169.5 208.5L187.5 242.4L197.5 222.6L193.1 209.7L201.0 204.0L216.1 226.8L230.6 230.1L238.2 236.2L237.0 250.4L246.6 255.9L257.0 283.9L246.4 282.8L237.4 275.8L231.9 279.6L220.6 276.8L216.2 269.3L216.4 280.2L207.6 280.7L210.6 294.5L199.9 294.7L200.4 305.5L188.4 316.2L195.4 315.9L192.8 326.7L171.0 335.8L179.6 355.5L189.0 359.8L194.4 359.2L190.4 356.6L191.8 353.9L200.3 353.7L200.0 360.7L204.5 361.9L204.1 377.5L210.5 370.3L220.2 370.1L220.4 375.3L226.8 375.3L230.5 381.8L238.6 382.0L238.5 388.3L229.9 388.1L230.0 404.3L219.9 404.1L219.8 415.2L213.3 417.7L211.9 413.3L205.5 415.6L200.2 407.4L191.4 405.1L182.1 417.3L175.9 413.0L151.1 413.9L141.3 436.7L117.4 459.7ZM384.6 416.7L370.1 409.1L376.7 404.5L375.5 391.1L369.8 396.5L360.8 394.2L354.0 384.8L363.0 379.3L344.4 371.4L328.9 356.8L336.3 353.8L344.2 366.2L349.9 355.2L363.9 354.6L368.2 344.4L361.7 344.1L365.5 331.9L357.8 328.6L358.5 324.4L372.4 323.2L374.3 316.2L392.1 321.1L395.9 304.1L386.8 298.0L374.6 298.7L376.0 291.5L366.8 280.4L365.2 247.3L317.3 228.0L325.4 227.6L331.0 217.0L337.4 214.3L331.6 203.2L324.8 202.6L324.5 199.4L326.5 147.9L340.2 131.0L345.2 137.6L353.8 136.5L362.5 160.5L373.8 163.5L374.0 166.8L378.8 163.4L390.5 165.1L390.0 168.6L394.4 170.2L393.1 182.9L403.3 198.4L401.0 218.9L413.1 219.9L418.9 229.8L443.3 232.2L453.0 220.9L467.8 218.6L469.6 231.3L477.4 241.7L474.3 257.2L486.9 256.4L487.6 262.3L505.8 263.6L507.1 253.6L517.8 259.8L520.4 257.9L532.7 270.1L541.3 270.4L545.9 249.4L548.5 250.2L549.0 264.1L553.1 265.6L547.5 270.7L551.6 273.5L550.3 288.4L553.5 289.2L555.2 300.0L551.2 307.8L557.3 311.2L553.6 317.2L557.7 324.8L565.3 324.1L567.1 328.1L566.6 331.4L555.7 328.6L546.7 332.5L543.1 339.5L534.5 343.4L537.4 384.8L534.6 395.3L514.1 401.2L512.7 406.6L503.4 410.3L501.8 420.8L473.5 419.6L471.4 432.8L462.3 428.9L441.9 430.2L439.4 440.5L384.6 416.7ZM225.3 547.9L201.2 547.0L193.1 542.8L188.5 531.8L172.6 532.4L169.2 539.7L161.9 536.4L160.6 542.4L153.8 545.9L137.5 545.4L129.1 509.6L136.6 493.7L132.1 491.0L125.7 496.7L126.0 515.2L105.1 515.2L113.2 502.8L95.4 489.9L93.2 496.8L82.0 497.2L82.4 502.5L77.4 503.5L75.0 511.2L62.1 507.9L67.5 506.9L91.7 477.7L114.3 463.5L141.3 436.7L151.1 413.9L175.9 413.0L182.1 417.3L191.4 405.1L200.2 407.4L205.6 415.8L207.5 412.2L213.3 417.7L218.8 415.8L219.9 404.1L230.0 404.3L229.9 388.1L238.5 388.3L238.6 382.0L251.4 382.8L251.1 395.8L264.2 396.1L266.2 381.3L260.9 379.0L258.9 370.9L267.8 372.7L269.1 358.6L295.2 363.7L298.1 358.5L308.4 361.0L318.0 380.4L332.4 394.5L328.1 403.3L348.6 403.0L348.2 408.1L362.8 416.3L367.7 396.2L375.5 391.1L376.7 404.5L370.1 409.1L432.9 437.0L414.2 437.2L406.5 433.0L407.4 439.8L399.2 441.5L390.6 453.6L385.0 455.4L382.5 469.9L385.9 471.3L385.3 478.0L380.4 477.2L387.4 490.2L383.5 497.6L373.0 501.0L368.1 510.4L346.3 521.0L346.2 524.8L334.0 526.4L332.3 505.4L327.4 503.3L311.3 516.8L291.1 515.7L284.3 525.7L278.5 526.3L278.8 535.1L256.2 529.9L249.5 554.6L242.1 556.1L225.3 547.9ZM207.3 376.7L204.1 377.5L204.5 361.9L200.0 360.7L200.3 353.7L191.8 353.9L190.4 356.6L194.4 359.2L189.0 359.8L179.6 355.5L171.0 335.8L192.8 326.7L195.4 315.9L188.5 316.2L200.4 305.5L199.9 294.7L210.6 294.5L207.6 280.7L216.4 280.2L216.2 269.3L220.6 276.8L231.9 279.6L237.4 275.8L246.4 282.8L257.0 283.9L252.3 265.4L256.5 256.0L272.1 263.7L266.5 275.1L271.8 278.7L277.9 276.7L272.7 284.7L257.8 284.3L269.8 287.2L272.3 291.6L277.9 286.0L295.2 296.6L291.1 282.1L296.7 275.0L306.6 283.1L324.9 287.3L325.9 283.2L333.8 282.0L323.3 268.4L325.3 266.2L340.3 261.4L350.5 265.1L361.4 256.0L366.0 254.0L366.8 280.4L376.0 291.5L374.6 298.7L386.8 298.0L395.9 304.1L392.1 321.1L374.3 316.2L372.4 323.2L358.5 324.4L357.8 328.6L365.5 331.9L361.7 344.1L368.1 344.4L363.9 354.6L349.9 355.2L344.2 366.2L336.3 353.8L328.9 356.8L344.4 371.4L363.0 379.3L354.0 384.8L360.8 394.2L367.7 396.2L362.8 416.3L348.2 408.1L348.6 403.0L328.1 403.3L332.4 394.5L318.0 380.4L308.4 361.0L298.8 356.6L295.2 363.7L269.1 358.6L267.8 372.7L258.9 370.9L260.9 379.0L266.2 381.3L264.2 396.1L251.1 395.8L251.4 382.8L230.5 381.8L226.8 375.3L220.4 375.3L220.2 370.1L210.5 370.2L207.3 376.7Z"/>
+                    <g class="oaq-map-dots"></g>
+                    </svg>
+                    <span class="oaq-visual-tag"><span class="oaq-visual-place" data-i18n="homepage.oaq.mapPlace">Bengaluru</span> &middot; oaq.notf.in</span>
+                </a>
             </div>
         </section>
 
@@ -741,6 +740,7 @@
         loadPreviewCards();
     </script>
 
+    <script src="/assets/js/oaq-live.js"></script>
     <script src="/assets/js/components/common-scripts.js"></script>
 </body>
 </html>

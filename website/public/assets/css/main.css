@@ -188,6 +188,10 @@ nav {
     color: var(--forest-green);
 }
 
+/* External link in the main menu (opens another NOTF site) */
+.nav-menu a.nav-external { gap: 6px; }
+.nav-menu a.nav-external i { font-size: 0.7em; opacity: 0.7; }
+
 /* Active page highlight */
 .nav-menu a.nav-active,
 .nav-menu a.active {
@@ -2128,75 +2132,115 @@ body.menu-open {
     border-bottom: 1px solid rgba(0,0,0,0.08);
 }
 
-/* === CLIMATE IMPACT STATS BAR === */
-.climate-stats-bar {
-    flex-direction: column;
-    gap: 20px;
-    background: var(--warm-cream, #FAF6E8);
-    padding: 36px 24px 28px;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
+/* === OPEN AIR QUALITY (OAQ) CARD === */
+.oaq-section {
+    padding: 64px 24px;
+    background: var(--warm-cream);
 }
-.climate-stats-title {
-    font-size: 1.25rem;
-    color: var(--forest-green);
-    margin: 0;
-    text-align: center;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-}
-.climate-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 24px;
-    width: 100%;
-    max-width: 1100px;
+.oaq-card {
+    max-width: var(--container-default);
     margin: 0 auto;
-}
-.climate-stat {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
     align-items: center;
-    gap: 4px;
+    background: var(--color-bg-white);
+    border-radius: 12px;
+    padding: 48px;
+    box-shadow: var(--shadow-md);
 }
-.climate-stat-icon {
-    width: 44px;
-    height: 44px;
-    margin-bottom: 6px;
-    object-fit: contain;
-}
-.climate-stat .stat-number {
-    color: var(--terracotta, #C45A2A);
-    font-size: 1.85rem;
-    font-weight: 800;
-    line-height: 1.05;
-}
-.climate-stat .stat-number small {
-    font-size: 0.7em;
-    font-weight: 700;
-    color: var(--forest-green, #2F4A2C);
-}
-.climate-stat .stat-label {
-    font-size: 0.78rem;
-    line-height: 1.3;
-    text-align: center;
-    max-width: 160px;
-}
-.climate-stats-footer {
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--charcoal);
-    opacity: 0.8;
-    margin: 4px 0 0;
-}
-.climate-stats-cta {
-    margin-left: 8px;
-    color: var(--forest-green);
+.oaq-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-size: 13px;
     font-weight: 600;
-    text-decoration: none;
-    white-space: nowrap;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--slate-blue);
 }
-.climate-stats-cta:hover { text-decoration: underline; }
-.climate-stats-cta i { font-size: 0.75em; margin-left: 2px; }
+.oaq-eyebrow img { width: 32px; height: 32px; }
+.oaq-text h2 {
+    font-size: 36px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--forest-green);
+    margin: 16px 0;
+}
+.oaq-lead {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--charcoal);
+    margin: 0 0 24px;
+}
+.oaq-live { margin: 0 0 32px; }
+.oaq-live-stats {
+    display: flex;
+    gap: 32px;
+    padding: 16px 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+.oaq-live-stats div { display: flex; flex-direction: column; }
+.oaq-num { font-size: 28px; font-weight: 700; line-height: 1.2; color: var(--forest-green); }
+.oaq-label { font-size: 13px; color: var(--color-text-light); }
+.oaq-now-title { font-size: 14px; font-weight: 600; color: var(--charcoal); margin: 24px 0 8px; }
+.oaq-updated { font-weight: 400; color: var(--color-text-light); }
+.oaq-now {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 24px;
+}
+.oaq-now li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    font-size: 15px;
+    border-bottom: 1px solid var(--color-border);
+}
+.oaq-dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.oaq-city { flex: 1; color: var(--charcoal); }
+.oaq-aqi { min-width: 32px; text-align: right; font-weight: 700; color: var(--charcoal); }
+.oaq-band { min-width: 84px; font-size: 12px; color: var(--color-text-light); }
+.oaq-source { margin: 12px 0 0; font-size: 12px; color: var(--color-text-light); }
+.oaq-buttons { display: flex; flex-wrap: wrap; gap: 16px; }
+.oaq-visual {
+    position: relative;
+    display: block;
+    border-radius: 12px;
+    background: var(--warm-cream);
+    padding: 24px;
+}
+/* overflow: sensors near the edge of the bbox keep their whole dot */
+.oaq-map { display: block; width: 100%; height: auto; overflow: visible; }
+.oaq-map-land { fill: var(--olive-green); stroke: var(--color-bg-white); stroke-width: 2; }
+.oaq-map-dots circle { stroke: var(--color-bg-white); stroke-width: 2; }
+.oaq-visual-tag {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--forest-green);
+    color: var(--warm-cream);
+}
+@media (max-width: 860px) {
+    .oaq-section { padding: 32px 16px; }
+    .oaq-card { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
+    .oaq-text h2 { font-size: 28px; }
+    .oaq-visual { order: -1; }
+}
+@media (max-width: 480px) {
+    .oaq-now { grid-template-columns: 1fr; }
+    .oaq-live-stats { gap: 20px; }
+}
 
 /* === NOTF EXPLAINER === */
 .notf-explainer {
@@ -2413,20 +2457,6 @@ body.menu-open {
     .preview-row-cards {
         grid-template-columns: 1fr;
     }
-    .climate-stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 18px;
-    }
-    .climate-stat .stat-number { font-size: 1.5rem; }
-    .climate-stat-icon { width: 36px; height: 36px; }
-    .climate-stats-footer .climate-stats-cta {
-        display: block;
-        margin: 6px 0 0;
-    }
-}
-@media (max-width: 420px) {
-    .climate-stats-grid { grid-template-columns: repeat(2, 1fr); }
-    .climate-stats-title { font-size: 1.1rem; }
 }
 
 /* === SECTOR TAB NAVIGATION === */

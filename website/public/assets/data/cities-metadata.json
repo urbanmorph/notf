@@ -26,10 +26,6 @@
         "providers": {
           "available": false,
           "count": 0
-        },
-        "climate": {
-          "available": false,
-          "expectedLaunch": "TBD"
         }
       }
     },
@@ -59,10 +55,6 @@
         "providers": {
           "available": true,
           "count": 34
-        },
-        "climate": {
-          "available": true,
-          "sectorCount": 7
         }
       }
     },
@@ -92,10 +84,6 @@
         "providers": {
           "available": false,
           "count": 0
-        },
-        "climate": {
-          "available": false,
-          "expectedLaunch": "TBD"
         }
       }
     },
@@ -125,10 +113,6 @@
         "providers": {
           "available": false,
           "count": 0
-        },
-        "climate": {
-          "available": false,
-          "expectedLaunch": "TBD"
         }
       }
     },
@@ -158,10 +142,6 @@
         "providers": {
           "available": false,
           "count": 0
-        },
-        "climate": {
-          "available": false,
-          "expectedLaunch": "TBD"
         }
       }
     },
@@ -191,10 +171,6 @@
         "providers": {
           "available": false,
           "count": 0
-        },
-        "climate": {
-          "available": false,
-          "expectedLaunch": "TBD"
         }
       }
     },
@@ -224,10 +200,6 @@
         "providers": {
           "available": false,
           "count": 0
-        },
-        "climate": {
-          "available": false,
-          "expectedLaunch": "TBD"
         }
       }
     },
@@ -257,10 +229,6 @@
         "providers": {
           "available": false,
           "count": 0
-        },
-        "climate": {
-          "available": false,
-          "expectedLaunch": "TBD"
         }
       }
     },
@@ -290,10 +258,6 @@
         "providers": {
           "available": false,
           "count": 0
-        },
-        "climate": {
-          "available": false,
-          "expectedLaunch": "TBD"
         }
       }
     },
@@ -323,10 +287,6 @@
         "providers": {
           "available": false,
           "count": 0
-        },
-        "climate": {
-          "available": true,
-          "sectorCount": 2
         }
       }
     },
@@ -356,10 +316,6 @@
         "providers": {
           "available": false,
           "count": 0
-        },
-        "climate": {
-          "available": false,
-          "expectedLaunch": "TBD"
         }
       }
     },
@@ -389,10 +345,6 @@
         "providers": {
           "available": false,
           "count": 0
-        },
-        "climate": {
-          "available": false,
-          "expectedLaunch": "TBD"
         }
       }
     },
@@ -422,10 +374,6 @@
         "providers": {
           "available": false,
           "count": 0
-        },
-        "climate": {
-          "available": false,
-          "expectedLaunch": "TBD"
         }
       }
     }

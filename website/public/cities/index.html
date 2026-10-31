@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cities | Neighbourhoods of the Future</title>
-    <meta name="description" content="13 Indian cities with community networks, solution providers, and ward-level climate data — Bengaluru, Mumbai, Delhi, Chennai, Hyderabad, Pune, Kolkata, Kochi, Ahmedabad, Jaipur, Gurugram, Bhubaneswar, Visakhapatnam.">
+    <meta name="description" content="13 Indian cities with community networks, solution providers, and ward maps — Bengaluru, Mumbai, Delhi, Chennai, Hyderabad, Pune, Kolkata, Kochi, Ahmedabad, Jaipur, Gurugram, Bhubaneswar, Visakhapatnam.">
 
         <link rel="canonical" href="https://notf.in/cities/">
 
@@ -12,12 +12,12 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Neighbourhoods of the Future">
     <meta property="og:title" content="Cities | Neighbourhoods of the Future">
-    <meta property="og:description" content="13 Indian cities with community networks, solution providers, and ward-level climate data — Bengaluru, Mumbai, Delhi, Chennai, Hyderabad, Pune, Kolkata, Kochi, Ahmedabad, Jaipur, Gurugram, Bhubaneswar, Visakhapatnam.">
+    <meta property="og:description" content="13 Indian cities with community networks, solution providers, and ward maps — Bengaluru, Mumbai, Delhi, Chennai, Hyderabad, Pune, Kolkata, Kochi, Ahmedabad, Jaipur, Gurugram, Bhubaneswar, Visakhapatnam.">
     <meta property="og:url" content="https://notf.in/cities/">
     <meta property="og:image" content="https://notf.in/assets/images/notf-terracotta.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Cities | Neighbourhoods of the Future">
-    <meta name="twitter:description" content="13 Indian cities with community networks, solution providers, and ward-level climate data — Bengaluru, Mumbai, Delhi, Chennai, Hyderabad, Pune, Kolkata, Kochi, Ahmedabad, Jaipur, Gurugram, Bhubaneswar, Visakhapatnam.">
+    <meta name="twitter:description" content="13 Indian cities with community networks, solution providers, and ward maps — Bengaluru, Mumbai, Delhi, Chennai, Hyderabad, Pune, Kolkata, Kochi, Ahmedabad, Jaipur, Gurugram, Bhubaneswar, Visakhapatnam.">
     <meta name="twitter:image" content="https://notf.in/assets/images/notf-terracotta.png">
 
         <script type="application/ld+json" data-notf-breadcrumb="1">
@@ -439,10 +439,6 @@
                         <div class="feature-item ${city.features.communities.available ? 'available' : 'coming-soon'}">
                             <img src="/assets/images/icons/community.svg" alt="" style="width:20px;height:20px;">
                             <span>${city.features.communities.available ? `${city.features.communities.count} ` : ''}<span data-i18n="${city.features.communities.available ? 'stats.communities' : 'citySelector.communitiesComingSoon'}">${city.features.communities.available ? 'Communities' : 'Communities (Coming Soon)'}</span></span>
-                        </div>
-                        <div class="feature-item ${city.features.climate.available ? 'available' : 'coming-soon'}">
-                            <img src="/assets/images/icons/conservation.svg" alt="" style="width:20px;height:20px;">
-                            <span data-i18n="${city.features.climate.available ? 'citySelector.climateDashboard' : 'citySelector.climateComingSoon'}">${city.features.climate.available ? 'Climate Dashboard' : 'Climate (Coming Soon)'}</span>
                         </div>
                         <div class="feature-item ${city.storyCount > 0 ? 'available' : 'coming-soon'}">
                             ${city.storyCount > 0

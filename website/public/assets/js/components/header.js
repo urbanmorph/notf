@@ -23,6 +23,7 @@
                 <a href="/communities/" data-i18n="nav.communities">Communities</a>
                 <a href="/catalog/" data-i18n="nav.catalogue">Catalogue</a>
                 <a href="/cities/" data-i18n="nav.cities">Cities</a>
+                <a href="https://oaq.notf.in" class="nav-external" target="_blank" rel="noopener noreferrer"><span data-i18n="nav.airQuality">Air Quality</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                 <a href="/join/" class="join-link" data-i18n="nav.join">Join</a>
                 <a href="/admin/login.html" class="admin-link" data-i18n-title="nav.admin" title="Admin Login">
                     <img src="/assets/images/icons/login.svg" alt="Admin" style="width:36px;height:36px;">
@@ -38,28 +39,24 @@
 
         // Determine which sub-pages exist for this city
         const subPages = {
-            bengaluru: ['communities', 'climate', 'map', 'stories'],
-            mumbai: ['climate', 'map']
+            bengaluru: ['communities', 'map', 'stories']
         };
         const links = subPages[citySlug] || ['map'];
 
         const icons = {
             communities: 'fa-house-user',
-            climate: 'fa-leaf',
             map: 'fa-map',
             stories: 'fa-book-open'
         };
 
         const labels = {
             communities: 'Communities',
-            climate: 'Climate',
             map: 'Map',
             stories: 'Stories'
         };
 
         const i18nKeys = {
             communities: 'cityHub.nav.communities',
-            climate: 'cityHub.nav.climate',
             map: 'cityHub.nav.map',
             stories: 'cityHub.nav.stories'
         };

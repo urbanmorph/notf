@@ -140,3 +140,35 @@ export async function stubSupabase(page: Page): Promise<void> {
     });
   });
 }
+
+/**
+ * Fixed OAQ snapshot standing in for the key-free mugilu mirror
+ * (https://mugilu.live/index.json) that the home page's OAQ card reads, so the
+ * card's live numbers are identical on every run.
+ */
+export const OAQ_SNAPSHOT = {
+  generated_at: '2026-10-31T03:05:10.724Z',
+  station_count: 8,
+  providers: 3,
+  stations: [
+    { id: 'cpcb-1', provider: 'cpcb', city: 'Bengaluru', aqi: 120, lat: 12.97, lon: 77.59 },
+    { id: 'airview-1', provider: 'airview', city: 'Bengaluru', aqi: 140, lat: 13.03, lon: 77.62 },
+    { id: 'cpcb-2', provider: 'cpcb', city: 'Mumbai', aqi: 60, lat: 19.07, lon: 72.87 },
+    { id: 'cpcb-3', provider: 'cpcb', city: 'Delhi', aqi: 310 },
+    { id: 'airnet-1', provider: 'airnet', city: 'Chennai', aqi: 45 },
+    { id: 'cpcb-4', provider: 'cpcb', city: 'Hyderabad', aqi: 75 },
+    { id: 'cpcb-5', provider: 'cpcb', city: 'Pune', aqi: 210 },
+    { id: 'cpcb-6', provider: 'cpcb', city: 'Nagpur', aqi: 95 },
+  ],
+};
+
+export async function stubOaq(page: Page): Promise<void> {
+  await page.route('https://mugilu.live/**', (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      headers: { 'Access-Control-Allow-Origin': '*' },
+      body: JSON.stringify(OAQ_SNAPSHOT),
+    }),
+  );
+}

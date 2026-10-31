@@ -9,9 +9,9 @@
     "admin": "അഡ്മിൻ ലോഗിൻ",
     "adminLogin": "അഡ്മിൻ ലോഗിൻ",
     "bengaluru": "ബെംഗളൂരു",
-    "climate": "കാലാവസ്ഥ",
     "catalogue": "പദ്ധതി പട്ടിക",
-    "cities": "നഗരങ്ങള്‍"
+    "cities": "നഗരങ്ങള്‍",
+    "airQuality": "വായു ഗുണനിലവാരം"
   },
   "hero": {
     "title": "നമ്മുടെ അയൽപക്കങ്ങളെ ജീവിതത്തിലേക്ക് കൊണ്ടുവരുന്നു",
@@ -229,20 +229,36 @@
         "desc": "പരിഹാര ദാതാക്കൾ തയ്യാറായ പ്രോജക്ടുകളും പരിശീലനവും നൽകുന്നു"
       },
       "point3": {
-        "title": "കാലാവസ്ഥ പ്രതിരോധം",
-        "desc": "വാർഡുകളിലും മേഖലകളിലും കാലാവസ്ഥാ നടപടി ട്രാക്ക് ചെയ്യുക"
+        "title": "ഓപ്പൺ ഡാറ്റ",
+        "desc": "അയൽപക്കങ്ങൾ തങ്ങൾക്ക് പ്രധാനമായത് അളക്കുന്നു, അവർ ശ്വസിക്കുന്ന വായു പോലെ, അത് തുറന്ന് പങ്കിടുന്നു"
       },
       "cta": "NOTF-നെ കുറിച്ച് കൂടുതലറിയുക"
     },
-    "climateStats": {
-      "title": "നിലത്തുള്ള കാലാവസ്ഥാ പ്രവർത്തനം",
-      "waste": "ലാൻഡ്ഫില്ലിൽ നിന്ന് വഴിതിരിച്ച മാലിന്യം",
-      "co2": "തടഞ്ഞ CO₂ പുറന്തള്ളൽ",
-      "bottles": "ഒഴിവാക്കിയ പ്ലാസ്റ്റിക് കുപ്പികൾ",
-      "trees": "നട്ട മരങ്ങളും തൈകളും",
-      "plans": "നഗര കാലാവസ്ഥാ കർമ്മ പദ്ധതികൾ",
-      "attribution": "ഞങ്ങളുടെ കാറ്റലോഗിലെ 15 കാലാവസ്ഥാ പദ്ധതികളിലൂടെ വിതരണം ചെയ്തു.",
-      "cta": "കാലാവസ്ഥാ പദ്ധതികൾ ബ്രൗസ് ചെയ്യുക"
+    "oaq": {
+      "eyebrow": "OAQ · ഓപ്പൺ എയർ ക്വാളിറ്റി",
+      "title": "ഇന്ത്യയുടെ വായു, അതിലെ ജനങ്ങൾ അളന്നത്",
+      "lead": "പ്രാദേശിക വായു ഗുണനിലവാരത്തിനായുള്ള NOTF-ന്റെ തുറന്ന പ്ലാറ്റ്‌ഫോമാണ് OAQ. ഗവേഷകരും സമൂഹ കൂട്ടായ്മകളും താമസക്കാരും സ്വന്തം അയൽപക്കങ്ങളിൽ സെൻസറുകൾ പ്രവർത്തിപ്പിക്കുന്നു, എല്ലാവർക്കും റീഡിംഗുകൾ തത്സമയം സൗജന്യമായി കാണാം.",
+      "stats": {
+        "stations": "സജീവ സ്റ്റേഷനുകൾ",
+        "cities": "നഗരങ്ങൾ",
+        "networks": "സെൻസർ ശൃംഖലകൾ"
+      },
+      "nowTitle": "ഇപ്പോഴത്തെ വായു",
+      "updated": "പുതുക്കിയത്",
+      "source": "ഓരോ നഗരത്തിലെയും സ്റ്റേഷനുകളുടെ സാധാരണ (മീഡിയൻ) CPCB AQI. ഡാറ്റ: OAQ, mugilu ഓപ്പൺ മിറർ വഴി.",
+      "mapButton": "തത്സമയ മാപ്പ് കാണുക",
+      "hostButton": "സെൻസർ സ്ഥാപിക്കുക",
+      "mapLink": "OAQ തത്സമയ മാപ്പ് തുറക്കുക",
+      "mapTitle": "ബെംഗളൂരുവിലുടനീളം തത്സമയ വായു ഗുണനിലവാര സെൻസറുകൾ",
+      "mapPlace": "ബെംഗളൂരു",
+      "bands": {
+        "good": "നല്ലത്",
+        "satisfactory": "തൃപ്തികരം",
+        "moderate": "മിതമായത്",
+        "poor": "മോശം",
+        "very-poor": "വളരെ മോശം",
+        "severe": "ഗുരുതരം"
+      }
     }
   },
   "stats": {
@@ -264,8 +280,6 @@
     "mapComingSoon": "മാപ്പ് (ഉടൻ വരുന്നു)",
     "communitiesComingSoon": "കമ്മ്യൂണിറ്റികൾ (ഉടൻ വരുന്നു)",
     "providersComingSoon": "ദാതാക്കൾ (ഉടൻ വരുന്നു)",
-    "climateDashboard": "കാലാവസ്ഥ ഡാഷ്ബോർഡ്",
-    "climateComingSoon": "കാലാവസ്ഥ (ഉടൻ വരുന്നു)",
     "storiesComingSoon": "കഥകൾ (ഉടൻ വരുന്നു)"
   },
   "features": {
@@ -508,7 +522,7 @@
       "wards": "വാർഡുകൾ",
       "population": "ജനസംഖ്യ",
       "exploreTitle": "മുംബൈ പര്യവേക്ഷണം ചെയ്യുക",
-      "exploreSubtitle": "വാർഡ് തല ഭൂപടവും കാലാവസ്ഥാ ഡാറ്റയും ഇപ്പോൾ ലഭ്യമാണ്. കമ്മ്യൂണിറ്റി, പ്രൊവൈഡർ ഡയറക്ടറി ഉടൻ വരുന്നു."
+      "exploreSubtitle": "വാർഡുതല മാപ്പ് ഇപ്പോൾ ലഭ്യമാണ്.കമ്മ്യൂണിറ്റി, പ്രൊവൈഡർ ഡയറക്‌ടറികൾ ഉടൻ വരുന്നു."
     },
     "pune": {
       "subtitle": "മഹാരാഷ്ട്ര, ഇന്ത്യ",
@@ -534,8 +548,7 @@
     "stats": {
       "communities": "കമ്മ്യൂണിറ്റികൾ",
       "providers": "പരിഹാര ദാതാക്കൾ",
-      "wardsTracked": "വാർഡുകൾ ട്രാക്ക് ചെയ്തു",
-      "climateSectors": "കാലാവസ്ഥാ മേഖലകൾ"
+      "wardsTracked": "വാർഡുകൾ ട്രാക്ക് ചെയ്തു"
     },
     "features": {
       "map": {
@@ -554,21 +567,6 @@
         "description": "Find {{count}} organizations supporting community work. CBOs, solution providers, and more.",
         "button": "ദാതാക്കളെ കാണുക"
       },
-      "climate": {
-        "title": "കാലാവസ്ഥാ ഡാറ്റ",
-        "description": "{{wardCount}} വാർഡുകളിൽ വാർഡ്-ലെവൽ കാലാവസ്ഥാ ബേസ്‌ലൈൻ ഡാറ്റ. ഇന്ററാക്ടീവ് ഡാഷ്ബോർഡുകൾ ഉപയോഗിച്ച് ഊർജം, കെട്ടിടങ്ങൾ, മാലിന്യ മാനേജ്‌മെന്റ് മേഖലകൾ പര്യവേക്ഷണം ചെയ്യുക.",
-        "button": "ഡാഷ്ബോർഡ് കാണുക",
-        "sectors": {
-          "energy": "ഊർജ്ജവും കെട്ടിടങ്ങളും",
-          "transportation": "ഗതാഗതം",
-          "waste": "ഖരമാലിന്യങ്ങൾ",
-          "air": "എയർ ക്വാളിറ്റി",
-          "water": "വെള്ളം",
-          "greening": "ഹരിതവൽക്കരണം",
-          "disaster": "ഡിസാസ്റ്റർ മാനേജ്മെൻ്റ്"
-        },
-        "statusLive": "തത്സമയം"
-      },
       "statusComingSoon": "ഉടൻ വരുന്നു",
       "stories": {
         "title": "സമൂഹ കഥകള്‍",
@@ -582,7 +580,6 @@
       "communities": "സമൂഹങ്ങൾ",
       "providers": "ദാതാക്കൾ",
       "map": "ഭൂപടം",
-      "climate": "കാലാവസ്ഥ",
       "stories": "കഥകൾ",
       "backTo": "ബെംഗളൂരുവിലേക്ക് മടങ്ങുക",
       "allCities": "എല്ലാ നഗരങ്ങളും"
@@ -592,58 +589,9 @@
       "description": "ഞങ്ങൾ നിലവിൽ സിറ്റി ഡയറക്ടറി നിർമ്മിക്കുകയാണ്.നിങ്ങളുടെ കമ്മ്യൂണിറ്റിയോ ഓർഗനൈസേഷനോ രജിസ്റ്റർ ചെയ്തുകൊണ്ട് നെറ്റ്‌വർക്ക് വളർത്താൻ ഞങ്ങളെ സഹായിക്കുക.",
       "communityDirectory": "കമ്മ്യൂണിറ്റി ഡയറക്ടറി",
       "providerNetwork": "സൊല്യൂഷൻ പ്രൊവൈഡർ നെറ്റ്‌വർക്ക്",
-      "climateAction": "കാലാവസ്ഥാ പ്രവർത്തന ഡാഷ്‌ബോർഡ്",
       "joinCommunity": "കമ്മ്യൂണിറ്റിയായി ചേരുക",
       "joinProvider": "ദാതാവായി ചേരുക",
-      "comingSoonButton": "ഉടൻ വരുന്നു",
-      "additionalSectors": "അധിക കാലാവസ്ഥാ മേഖലകൾ (5 കൂടി)"
-    }
-  },
-  "mumbai_climate": {
-    "title": "Mumbai Climate Action Dashboard [ml]",
-    "subtitle": "Tracking climate data across 227 wards [ml]",
-    "intro_title": "Climate Action by Sector [ml]",
-    "intro_description": "Explore ward-level metrics across 2 climate sectors [ml]",
-    "sectors": {
-      "energy_title": "Energy & Buildings [ml]",
-      "energy_count": "227 Wards",
-      "energy_description": "Energy and buildings metrics [ml]",
-      "waste_title": "Waste Management [ml]",
-      "waste_count": "227 Wards",
-      "waste_description": "Waste management metrics [ml]"
-    },
-    "stats": {
-      "clean_cooking": "Clean Cooking [ml]",
-      "segregation": "Segregation [ml]",
-      "wards_tracked": "Wards Tracked [ml]"
-    },
-    "data_sources_title": "Data Sources [ml]",
-    "sources": {
-      "census": "Census 2011",
-      "census_desc": "Government of India",
-      "opencity": "OpenCity.in",
-      "opencity_desc": "Ward-level data",
-      "boundaries": "Ward Boundaries",
-      "boundaries_desc": "BMC (227 Prabhags)",
-      "ires": "IRES 2020",
-      "ires_desc": "CEEW estimates",
-      "confidence": "Data Confidence:",
-      "confidence_desc": "~60%",
-      "updated": "Last Updated:"
-    },
-    "zones": {
-      "all": "All Zones [ml]",
-      "northern": "Northern Suburbs [ml]",
-      "eastern": "Eastern Suburbs [ml]",
-      "western": "Western Suburbs [ml]",
-      "central": "Central [ml]",
-      "south": "South Mumbai [ml]"
-    }
-  },
-  "climate": {
-    "sectors": {
-      "energy": "Energy & Buildings [ml]",
-      "waste": "Waste Management [ml]"
+      "comingSoonButton": "ഉടൻ വരുന്നു"
     }
   },
   "citiesPage": {
@@ -733,18 +681,7 @@
     },
     "detailsButton": "വിശദാംശങ്ങൾ"
   },
-  "mumbai": {
-    "climate": {
-      "waste": {
-        "leaderboard": {
-          "metrics": {
-            "generation": "മാലിന്യ ഉൽപ്പാദനം (കിലോ/വ്യക്തി/ദിനം)",
-            "diversion": "ലാൻഡ്‌ഫിൽ ഡൈവേഷൻ (% ഡൈവേർട്ട് ചെയ്തത്)"
-          }
-        }
-      }
-    }
-  },
+  "mumbai": {},
   "joinPage": {
     "step1": {
       "title": "നിങ്ങള്‍ ആരാണ്?",
@@ -787,14 +724,5 @@
       "readStoriesDesc": "ഇതിനകം തുടങ്ങിയ സമൂഹങ്ങളില്‍ നിന്ന് പഠിക്കുക"
     }
   },
-  "bengaluru": {
-    "climate": {
-      "findWard": {
-        "title": "നിങ്ങളുടെ വാർഡ് കണ്ടെത്തുക",
-        "subtitle": "എല്ലാ കാലാവസ്ഥാ മേഖലകളിലും നിങ്ങളുടെ അയൽപക്കം എങ്ങനെ പ്രവർത്തിക്കുന്നുവെന്ന് കാണുക",
-        "placeholder": "നിങ്ങളുടെ വാർഡിന്റെ പേര് ടൈപ്പ് ചെയ്യുക...",
-        "button": "റിപ്പോർട്ട് കാർഡ് കാണുക"
-      }
-    }
-  }
+  "bengaluru": {}
 }

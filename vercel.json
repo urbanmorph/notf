@@ -7,6 +7,17 @@
       "source": "/api/supabase/:path*",
       "destination": "https://abblyaukkoxmgzwretvm.supabase.co/:path*"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/cities/:city/climate/air-quality/:path*",
+      "destination": "https://oaq.notf.in",
+      "permanent": true
+    },
+    {
+      "source": "/cities/:city/climate/:path*",
+      "destination": "/cities/:city/",
+      "permanent": true
+    }
   ]
 }
-

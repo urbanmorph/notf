@@ -9,9 +9,9 @@
     "admin": "ଆଡମିନି ଲଗଇନ୍ |",
     "adminLogin": "ଆଡମିନ ଲଗଇନ",
     "bengaluru": "ବେଙ୍ଗାଲୁରୁ",
-    "climate": "ଜଳବାୟୁ",
     "catalogue": "ପ୍ରକଳ୍ପ ତାଲିକା",
-    "cities": "ସହରଗୁଡ଼ିକ"
+    "cities": "ସହରଗୁଡ଼ିକ",
+    "airQuality": "ବାୟୁ ଗୁଣବତ୍ତା"
   },
   "hero": {
     "title": "ଆମ ପଡ଼ୋଶୀମାନଙ୍କୁ ଜୀବନରେ ଆଣିବା |",
@@ -229,20 +229,36 @@
         "desc": "ସମାଧାନ ପ୍ରଦାନକାରୀମାନେ ପ୍ରସ୍ତୁତ ପ୍ରକଳ୍ପ ଏବଂ ତାଲିମ ପ୍ରଦାନ କରନ୍ତି"
       },
       "point3": {
-        "title": "ଜଳବାୟୁ ସ୍ଥିତିସ୍ଥାପକ",
-        "desc": "ୱାର୍ଡ ଏବଂ କ୍ଷେତ୍ରରେ ଜଳବାୟୁ କାର୍ଯ୍ୟକୁ ଟ୍ରାକ କରନ୍ତୁ"
+        "title": "ଖୋଲା ତଥ୍ୟ",
+        "desc": "ପଡ଼ୋଶୀ ଅଞ୍ଚଳଗୁଡ଼ିକ ସେମାନଙ୍କ ପାଇଁ ଯାହା ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ତାହା ମାପନ୍ତି, ଯେପରିକି ସେମାନେ ନିଶ୍ୱାସ ନେଉଥିବା ବାୟୁ, ଏବଂ ତାହା ଖୋଲାଖୋଲି ବାଣ୍ଟନ୍ତି"
       },
       "cta": "NOTF ବିଷୟରେ ଅଧିକ ଜାଣନ୍ତୁ"
     },
-    "climateStats": {
-      "title": "ଭୂମିରେ ଜଳବାୟୁ କାର୍ଯ୍ୟ",
-      "waste": "ଲ୍ୟାଣ୍ଡଫିଲରୁ ବୁଲାଯାଇଥିବା ଅଳିଆ",
-      "co2": "ରୋକାଯାଇଥିବା CO₂ ନିର୍ଗମନ",
-      "bottles": "ଏଡ଼ାଯାଇଥିବା ପ୍ଲାଷ୍ଟିକ ବୋତଲ",
-      "trees": "ଲଗାଯାଇଥିବା ଗଛ ଓ ଚାରା",
-      "plans": "ସହର ଜଳବାୟୁ କାର୍ଯ୍ୟ ଯୋଜନା",
-      "attribution": "ଆମ କ୍ୟାଟାଲଗର 15ଟି ଜଳବାୟୁ ପ୍ରକଳ୍ପ ଦ୍ୱାରା ବିତରଣ କରାଯାଇଛି।",
-      "cta": "ଜଳବାୟୁ ପ୍ରକଳ୍ପ ବ୍ରାଉଜ କରନ୍ତୁ"
+    "oaq": {
+      "eyebrow": "OAQ · ଓପନ୍ ଏୟାର କ୍ୱାଲିଟି",
+      "title": "ଭାରତର ବାୟୁ, ଏହାର ଲୋକଙ୍କ ଦ୍ୱାରା ମପାଯାଇଥିବା",
+      "lead": "OAQ ହେଉଛି ସ୍ଥାନୀୟ ବାୟୁ ଗୁଣବତ୍ତା ପାଇଁ NOTF ର ଖୋଲା ପ୍ଲାଟଫର୍ମ। ଗବେଷକ, ସମୁଦାୟ ଗୋଷ୍ଠୀ ଏବଂ ବାସିନ୍ଦାମାନେ ନିଜ ଅଞ୍ଚଳରେ ସେନ୍ସର ଚଳାନ୍ତି, ଏବଂ ସମସ୍ତେ ରିଡିଂ ସିଧାସଳଖ ଓ ମାଗଣାରେ ଦେଖିପାରିବେ।",
+      "stats": {
+        "stations": "ସକ୍ରିୟ ଷ୍ଟେସନ",
+        "cities": "ସହର",
+        "networks": "ସେନ୍ସର ନେଟୱାର୍କ"
+      },
+      "nowTitle": "ବର୍ତ୍ତମାନର ବାୟୁ",
+      "updated": "ଅପଡେଟ୍",
+      "source": "ପ୍ରତ୍ୟେକ ସହରର ଷ୍ଟେସନଗୁଡ଼ିକର ସାଧାରଣ (ମଧ୍ୟମା) CPCB AQI। ତଥ୍ୟ: OAQ, mugilu ଓପନ୍ ମିରର ମାଧ୍ୟମରେ।",
+      "mapButton": "ଲାଇଭ୍ ମାନଚିତ୍ର ଦେଖନ୍ତୁ",
+      "hostButton": "ସେନ୍ସର ଲଗାନ୍ତୁ",
+      "mapLink": "OAQ ଲାଇଭ୍ ମାନଚିତ୍ର ଖୋଲନ୍ତୁ",
+      "mapTitle": "ବେଙ୍ଗାଲୁରୁ ସାରା ଲାଇଭ୍ ବାୟୁ ଗୁଣବତ୍ତା ସେନ୍ସର",
+      "mapPlace": "ବେଙ୍ଗାଲୁରୁ",
+      "bands": {
+        "good": "ଭଲ",
+        "satisfactory": "ସନ୍ତୋଷଜନକ",
+        "moderate": "ମଧ୍ୟମ",
+        "poor": "ଖରାପ",
+        "very-poor": "ବହୁତ ଖରାପ",
+        "severe": "ଗମ୍ଭୀର"
+      }
     }
   },
   "stats": {
@@ -264,8 +280,6 @@
     "mapComingSoon": "ମାନଚିତ୍ର (ଶୀଘ୍ର ଆସୁଛି)",
     "communitiesComingSoon": "ସମ୍ପ୍ରଦାୟଗୁଡିକ (ଶୀଘ୍ର ଆସୁଛି)",
     "providersComingSoon": "ପ୍ରଦାନକାରୀ (ଶୀଘ୍ର ଆସୁଛନ୍ତି)",
-    "climateDashboard": "ଜଳବାୟୁ ଡ୍ୟାସବୋର୍ଡ |",
-    "climateComingSoon": "ଜଳବାୟୁ (ଶୀଘ୍ର ଆସୁଛି)",
     "storiesComingSoon": "କାହାଣୀ (ଶୀଘ୍ର ଆସୁଛି)"
   },
   "features": {
@@ -508,7 +522,7 @@
       "wards": "ୱାର୍ଡଗୁଡିକ",
       "population": "ଜନସଂଖ୍ୟା",
       "exploreTitle": "ମୁମ୍ବାଇ ଏକ୍ସପ୍ଲୋର୍ କରନ୍ତୁ |",
-      "exploreSubtitle": "ୱାର୍ଡ-ସ୍ତରୀୟ ମାନଚିତ୍ର ଏବଂ ଜଳବାୟୁ ଡାଟା ବର୍ତ୍ତମାନ ଉପଲବ୍ଧ | ସମ୍ପ୍ରଦାୟ ଏବଂ ପ୍ରଦାନକାରୀ ଡିରେକ୍ଟୋରୀ ଶୀଘ୍ର ଆସୁଛି |"
+      "exploreSubtitle": "ୱାର୍ଡ ସ୍ତରୀୟ ମାନଚିତ୍ର ବର୍ତ୍ତମାନ ଉପଲବ୍ଧ |ସମ୍ପ୍ରଦାୟ ଏବଂ ପ୍ରଦାନକାରୀ ଡିରେକ୍ଟୋରୀଗୁଡିକ ଶୀଘ୍ର ଆସିବ |"
     },
     "pune": {
       "subtitle": "ମହାରାଷ୍ଟ୍ର, ଭାରତ",
@@ -534,8 +548,7 @@
     "stats": {
       "communities": "ସମ୍ପ୍ରଦାୟଗୁଡିକ",
       "providers": "ସମାଧାନ ପ୍ରଦାନକାରୀ |",
-      "wardsTracked": "ୱାର୍ଡଗୁଡିକ ଟ୍ରାକ୍ ହୋଇଛି |",
-      "climateSectors": "ଜଳବାୟୁ କ୍ଷେତ୍ର"
+      "wardsTracked": "ୱାର୍ଡଗୁଡିକ ଟ୍ରାକ୍ ହୋଇଛି |"
     },
     "features": {
       "map": {
@@ -554,21 +567,6 @@
         "description": "Find {{count}} organizations supporting community work. CBOs, solution providers, and more.",
         "button": "ପ୍ରଦାନକାରୀଙ୍କୁ ଦର୍ଶନ କରନ୍ତୁ |"
       },
-      "climate": {
-        "title": "ଜଳବାୟୁ ଡାଟା",
-        "description": "{{wardCount}} ୱାର୍ଡରେ ୱାର୍ଡ-ସ୍ତରୀୟ ଜଳବାୟୁ ବେସଲାଇନ ଡାଟା। ଇଣ୍ଟରାକ୍ଟିଭ୍ ଡ୍ୟାସବୋର୍ଡ ସହିତ ଶକ୍ତି ଏବଂ କୋଠା ଏବଂ ବର୍ଜ୍ୟବସ୍ତୁ ପରିଚାଳନା କ୍ଷେତ୍ର ଅନୁସନ୍ଧାନ କରନ୍ତୁ।",
-        "button": "ଡ୍ୟାସବୋର୍ଡ ଦେଖନ୍ତୁ",
-        "sectors": {
-          "energy": "ଶକ୍ତି ଏବଂ ବିଲ୍ଡିଂ",
-          "transportation": "ପରିବହନ",
-          "waste": "କଠିନ ବର୍ଜ୍ୟବସ୍ତୁ |",
-          "air": "ବାୟୁ ଗୁଣବତ୍ତା",
-          "water": "ଜଳ",
-          "greening": "ସବୁଜ କରିବା",
-          "disaster": "ବିପର୍ଯ୍ୟୟ ପରିଚାଳନା"
-        },
-        "statusLive": "ଲାଇଭ୍"
-      },
       "statusComingSoon": "ଶୀଘ୍ର ଆସୁଛି |",
       "stories": {
         "title": "ସମ୍ପ୍ରଦାୟ କାହାଣୀ",
@@ -582,7 +580,6 @@
       "communities": "ସମୁଦାୟ",
       "providers": "ପ୍ରଦାନକାରୀ |",
       "map": "ମାନଚିତ୍ର",
-      "climate": "ଜଳବାୟୁ",
       "stories": "କାହାଣୀ",
       "backTo": "ବେଙ୍ଗାଲୁରୁକୁ ଫେରନ୍ତୁ",
       "allCities": "ସବୁ ସହର"
@@ -592,58 +589,9 @@
       "description": "ଆମେ ବର୍ତ୍ତମାନ ସିଟି ଡିରେକ୍ଟୋରୀ ନିର୍ମାଣ କରୁଛୁ |ଆପଣଙ୍କ ସମ୍ପ୍ରଦାୟ କିମ୍ବା ସଂଗଠନକୁ ପଞ୍ଜୀକୃତ କରି ଆମକୁ ନେଟୱାର୍କ ବ grow ାଇବାକୁ ସାହାଯ୍ୟ କରନ୍ତୁ |",
       "communityDirectory": "ସମ୍ପ୍ରଦାୟ ଡିରେକ୍ଟୋରୀ |",
       "providerNetwork": "ସମାଧାନ ପ୍ରଦାନକାରୀ ନେଟୱାର୍କ |",
-      "climateAction": "ଜଳବାୟୁ କାର୍ଯ୍ୟ ଡ୍ୟାସବୋର୍ଡ |",
       "joinCommunity": "ସମ୍ପ୍ରଦାୟ ଭାବରେ ଯୋଗ ଦିଅନ୍ତୁ |",
       "joinProvider": "ପ୍ରଦାନକାରୀ ଭାବରେ ଯୋଗ ଦିଅନ୍ତୁ |",
-      "comingSoonButton": "ଶୀଘ୍ର ଆସୁଛି |",
-      "additionalSectors": "ଅତିରିକ୍ତ ଜଳବାୟୁ କ୍ଷେତ୍ର (5 ଅଧିକ)"
-    }
-  },
-  "mumbai_climate": {
-    "title": "Mumbai Climate Action Dashboard [or]",
-    "subtitle": "Tracking climate data across 227 wards [or]",
-    "intro_title": "Climate Action by Sector [or]",
-    "intro_description": "Explore ward-level metrics across 2 climate sectors [or]",
-    "sectors": {
-      "energy_title": "Energy & Buildings [or]",
-      "energy_count": "227 Wards",
-      "energy_description": "Energy and buildings metrics [or]",
-      "waste_title": "Waste Management [or]",
-      "waste_count": "227 Wards",
-      "waste_description": "Waste management metrics [or]"
-    },
-    "stats": {
-      "clean_cooking": "Clean Cooking [or]",
-      "segregation": "Segregation [or]",
-      "wards_tracked": "Wards Tracked [or]"
-    },
-    "data_sources_title": "Data Sources [or]",
-    "sources": {
-      "census": "Census 2011",
-      "census_desc": "Government of India",
-      "opencity": "OpenCity.in",
-      "opencity_desc": "Ward-level data",
-      "boundaries": "Ward Boundaries",
-      "boundaries_desc": "BMC (227 Prabhags)",
-      "ires": "IRES 2020",
-      "ires_desc": "CEEW estimates",
-      "confidence": "Data Confidence:",
-      "confidence_desc": "~60%",
-      "updated": "Last Updated:"
-    },
-    "zones": {
-      "all": "All Zones [or]",
-      "northern": "Northern Suburbs [or]",
-      "eastern": "Eastern Suburbs [or]",
-      "western": "Western Suburbs [or]",
-      "central": "Central [or]",
-      "south": "South Mumbai [or]"
-    }
-  },
-  "climate": {
-    "sectors": {
-      "energy": "Energy & Buildings [or]",
-      "waste": "Waste Management [or]"
+      "comingSoonButton": "ଶୀଘ୍ର ଆସୁଛି |"
     }
   },
   "citiesPage": {
@@ -733,18 +681,7 @@
     },
     "detailsButton": "ବିବରଣୀ"
   },
-  "mumbai": {
-    "climate": {
-      "waste": {
-        "leaderboard": {
-          "metrics": {
-            "generation": "ବର୍ଜ୍ୟ ଉତ୍ପାଦନ (କିଗ୍ରା/ବ୍ୟକ୍ତି/ଦିନ)",
-            "diversion": "ଲ୍ୟାଣ୍ଡଫିଲ ଡାଇଭର୍ସନ (% ଡାଇଭର୍ଟ ହୋଇଛି)"
-          }
-        }
-      }
-    }
-  },
+  "mumbai": {},
   "joinPage": {
     "step1": {
       "title": "ଆପଣ କିଏ?",
@@ -787,14 +724,5 @@
       "readStoriesDesc": "ଯେଉଁ ସମ୍ପ୍ରଦାୟ ପୂର୍ବରୁ ଆରମ୍ଭ କରିଛନ୍ତି ସେମାନଙ୍କଠାରୁ ଶିଖନ୍ତୁ"
     }
   },
-  "bengaluru": {
-    "climate": {
-      "findWard": {
-        "title": "ଆପଣଙ୍କ ୱାର୍ଡ ଖୋଜନ୍ତୁ",
-        "subtitle": "ସମସ୍ତ ଜଳବାୟୁ କ୍ଷେତ୍ରଗୁଡ଼ିକରେ ଆପଣଙ୍କ ପଡ଼ୋଶୀ କିପରି କାର୍ଯ୍ୟ କରୁଛି ଦେଖନ୍ତୁ",
-        "placeholder": "ଆପଣଙ୍କ ୱାର୍ଡର ନାମ ଟାଇପ୍ କରନ୍ତୁ...",
-        "button": "ରିପୋର୍ଟ କାର୍ଡ ଦେଖନ୍ତୁ"
-      }
-    }
-  }
+  "bengaluru": {}
 }

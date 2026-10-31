@@ -9,9 +9,9 @@
     "admin": "એડમિન લૉગિન",
     "adminLogin": "એડમિન લૉગિન",
     "bengaluru": "બેંગલુરુ",
-    "climate": "આબોહવા",
     "catalogue": "પ્રોજેક્ટ સૂચિ",
-    "cities": "શહેરો"
+    "cities": "શહેરો",
+    "airQuality": "હવાની ગુણવત્તા"
   },
   "hero": {
     "title": "અમારા પડોશને જીવંત બનાવવું",
@@ -229,20 +229,36 @@
         "desc": "ઉકેલ પ્રદાતાઓ તૈયાર પ્રોજેક્ટ્સ અને તાલીમ આપે છે"
       },
       "point3": {
-        "title": "આબોહવા સ્થિતિસ્થાપક",
-        "desc": "વોર્ડ અને ક્ષેત્રોમાં આબોહવા કાર્યવાહીને ટ્રેક કરો"
+        "title": "ખુલ્લો ડેટા",
+        "desc": "પડોશીઓ તેમના માટે જે મહત્ત્વનું છે તે માપે છે, જેમ કે તેઓ શ્વાસમાં લે છે તે હવા, અને તેને ખુલ્લેઆમ વહેંચે છે"
       },
       "cta": "NOTF વિશે વધુ જાણો"
     },
-    "climateStats": {
-      "title": "જમીન પર આબોહવા ક્રિયા",
-      "waste": "લેન્ડફિલમાંથી ફેરવાયેલ કચરો",
-      "co2": "અટકાવવામાં આવેલ CO₂ ઉત્સર્જન",
-      "bottles": "ટાળવામાં આવેલ પ્લાસ્ટિક બોટલો",
-      "trees": "વાવેલ વૃક્ષો અને છોડ",
-      "plans": "શહેર આબોહવા કાર્ય યોજનાઓ",
-      "attribution": "અમારા કેટલોગના 15 આબોહવા પ્રોજેક્ટ્સ દ્વારા પૂરા પાડવામાં આવેલ.",
-      "cta": "આબોહવા પ્રોજેક્ટ્સ બ્રાઉઝ કરો"
+    "oaq": {
+      "eyebrow": "OAQ · ઓપન એર ક્વોલિટી",
+      "title": "ભારતની હવા, તેના લોકો દ્વારા માપેલી",
+      "lead": "OAQ સ્થાનિક હવાની ગુણવત્તા માટે NOTFનું ખુલ્લું પ્લેટફોર્મ છે. સંશોધકો, સમુદાય જૂથો અને રહેવાસીઓ પોતાના જ વિસ્તારોમાં સેન્સર ચલાવે છે, અને દરેક વ્યક્તિ રીડિંગ્સ લાઇવ અને મફત જોઈ શકે છે.",
+      "stats": {
+        "stations": "લાઇવ સ્ટેશન",
+        "cities": "શહેરો",
+        "networks": "સેન્સર નેટવર્ક"
+      },
+      "nowTitle": "અત્યારની હવા",
+      "updated": "અપડેટ",
+      "source": "દરેક શહેરનાં સ્ટેશનોનો સામાન્ય (મધ્યક) CPCB AQI. ડેટા: OAQ, mugilu ઓપન મિરર દ્વારા.",
+      "mapButton": "લાઇવ નકશો જુઓ",
+      "hostButton": "સેન્સર લગાવો",
+      "mapLink": "OAQ નો લાઇવ નકશો ખોલો",
+      "mapTitle": "સમગ્ર બેંગલુરુમાં લાઇવ હવા ગુણવત્તા સેન્સર",
+      "mapPlace": "બેંગલુરુ",
+      "bands": {
+        "good": "સારી",
+        "satisfactory": "સંતોષકારક",
+        "moderate": "મધ્યમ",
+        "poor": "ખરાબ",
+        "very-poor": "ખૂબ ખરાબ",
+        "severe": "ગંભીર"
+      }
     }
   },
   "stats": {
@@ -264,8 +280,6 @@
     "mapComingSoon": "નકશો (ટૂંક સમયમાં આવી રહ્યો છે)",
     "communitiesComingSoon": "સમુદાયો (ટૂંક સમયમાં આવી રહ્યા છે)",
     "providersComingSoon": "પ્રદાતાઓ (ટૂંક સમયમાં આવી રહ્યા છે)",
-    "climateDashboard": "આબોહવા ડેશબોર્ડ",
-    "climateComingSoon": "આબોહવા (ટૂંક સમયમાં આવી રહ્યું છે)",
     "storiesComingSoon": "વાર્તાઓ (ટૂંક સમયમાં આવશે)"
   },
   "features": {
@@ -508,7 +522,7 @@
       "wards": "વોર્ડ",
       "population": "વસ્તી",
       "exploreTitle": "મુંબઈની શોધખોળ કરો",
-      "exploreSubtitle": "વોર્ડ-સ્તરનો નકશો અને આબોહવા ડેટા હવે ઉપલબ્ધ છે. સમુદાય અને પ્રદાતા ડિરેક્ટરી ટૂંક સમયમાં આવી રહી છે."
+      "exploreSubtitle": "વોર્ડ-સ્તરનો નકશો હવે ઉપલબ્ધ છે.સમુદાય અને પ્રદાતા નિર્દેશિકાઓ ટૂંક સમયમાં આવી રહી છે."
     },
     "pune": {
       "subtitle": "મહારાષ્ટ્ર, ભારત",
@@ -534,8 +548,7 @@
     "stats": {
       "communities": "સમુદાયો",
       "providers": "ઉકેલ પ્રદાતાઓ",
-      "wardsTracked": "વોર્ડ ટ્રેક કર્યા",
-      "climateSectors": "આબોહવા ક્ષેત્રો"
+      "wardsTracked": "વોર્ડ ટ્રેક કર્યા"
     },
     "features": {
       "map": {
@@ -554,21 +567,6 @@
         "description": "Find {{count}} organizations supporting community work. CBOs, solution providers, and more.",
         "button": "પ્રદાતાઓ જુઓ"
       },
-      "climate": {
-        "title": "આબોહવા ડેટા",
-        "description": "{{wardCount}} વોર્ડમાં વોર્ડ-સ્તરીય આબોહવા આધારરેખા ડેટા. ઇન્ટરેક્ટિવ ડેશબોર્ડ સાથે ઊર્જા અને ઇમારતો અને કચરો વ્યવસ્થાપન ક્ષેત્રોની શોધ કરો.",
-        "button": "ડેશબોર્ડ જુઓ",
-        "sectors": {
-          "energy": "ઊર્જા અને ઇમારતો",
-          "transportation": "પરિવહન",
-          "waste": "ઘન કચરો",
-          "air": "હવાની ગુણવત્તા",
-          "water": "પાણી",
-          "greening": "હરિયાળી",
-          "disaster": "ડિઝાસ્ટર મેનેજમેન્ટ"
-        },
-        "statusLive": "લાઇવ"
-      },
       "statusComingSoon": "ટૂંક સમયમાં આવી રહ્યું છે",
       "stories": {
         "title": "સામુદાયિક વાર્તાઓ",
@@ -582,7 +580,6 @@
       "communities": "સમુદાયો",
       "providers": "પ્રદાતાઓ",
       "map": "નકશો",
-      "climate": "આબોહવા",
       "stories": "વાર્તાઓ",
       "backTo": "બેંગલુરુ પર પાછા જાઓ",
       "allCities": "બધા શહેરો"
@@ -592,58 +589,9 @@
       "description": "અમે હાલમાં સિટી ડિરેક્ટરી બનાવી રહ્યા છીએ.તમારા સમુદાય અથવા સંસ્થાની નોંધણી કરીને નેટવર્ક વધારવામાં અમારી સહાય કરો.",
       "communityDirectory": "સમુદાય નિર્દેશિકા",
       "providerNetwork": "ઉકેલ પ્રદાતા નેટવર્ક",
-      "climateAction": "ક્લાઇમેટ એક્શન ડેશબોર્ડ",
       "joinCommunity": "સમુદાય તરીકે જોડાઓ",
       "joinProvider": "પ્રદાતા તરીકે જોડાઓ",
-      "comingSoonButton": "ટૂંક સમયમાં આવી રહ્યું છે",
-      "additionalSectors": "વધારાના આબોહવા ક્ષેત્રો (વધુ 5)"
-    }
-  },
-  "mumbai_climate": {
-    "title": "Mumbai Climate Action Dashboard [gu]",
-    "subtitle": "Tracking climate data across 227 wards [gu]",
-    "intro_title": "Climate Action by Sector [gu]",
-    "intro_description": "Explore ward-level metrics across 2 climate sectors [gu]",
-    "sectors": {
-      "energy_title": "Energy & Buildings [gu]",
-      "energy_count": "227 Wards",
-      "energy_description": "Energy and buildings metrics [gu]",
-      "waste_title": "Waste Management [gu]",
-      "waste_count": "227 Wards",
-      "waste_description": "Waste management metrics [gu]"
-    },
-    "stats": {
-      "clean_cooking": "Clean Cooking [gu]",
-      "segregation": "Segregation [gu]",
-      "wards_tracked": "Wards Tracked [gu]"
-    },
-    "data_sources_title": "Data Sources [gu]",
-    "sources": {
-      "census": "Census 2011",
-      "census_desc": "Government of India",
-      "opencity": "OpenCity.in",
-      "opencity_desc": "Ward-level data",
-      "boundaries": "Ward Boundaries",
-      "boundaries_desc": "BMC (227 Prabhags)",
-      "ires": "IRES 2020",
-      "ires_desc": "CEEW estimates",
-      "confidence": "Data Confidence:",
-      "confidence_desc": "~60%",
-      "updated": "Last Updated:"
-    },
-    "zones": {
-      "all": "All Zones [gu]",
-      "northern": "Northern Suburbs [gu]",
-      "eastern": "Eastern Suburbs [gu]",
-      "western": "Western Suburbs [gu]",
-      "central": "Central [gu]",
-      "south": "South Mumbai [gu]"
-    }
-  },
-  "climate": {
-    "sectors": {
-      "energy": "Energy & Buildings [gu]",
-      "waste": "Waste Management [gu]"
+      "comingSoonButton": "ટૂંક સમયમાં આવી રહ્યું છે"
     }
   },
   "citiesPage": {
@@ -733,18 +681,7 @@
     },
     "detailsButton": "વિગતો"
   },
-  "mumbai": {
-    "climate": {
-      "waste": {
-        "leaderboard": {
-          "metrics": {
-            "generation": "કચરો ઉત્પાદન (કિલો/વ્યક્તિ/દિવસ)",
-            "diversion": "લેન્ડફિલ ડાયવર્ઝન (% ડાયવર્ટ થયેલ)"
-          }
-        }
-      }
-    }
-  },
+  "mumbai": {},
   "joinPage": {
     "step1": {
       "title": "તમે કોણ છો?",
@@ -787,14 +724,5 @@
       "readStoriesDesc": "જે સમુદાયોએ પહેલેથી શરૂ કર્યું છે તેમની પાસેથી શીખો"
     }
   },
-  "bengaluru": {
-    "climate": {
-      "findWard": {
-        "title": "તમારો વોર્ડ શોધો",
-        "subtitle": "તમામ આબોહવા ક્ષેત્રોમાં તમારો પડોશ કેવું પ્રદર્શન કરી રહ્યો છે તે જુઓ",
-        "placeholder": "તમારા વોર્ડનું નામ ટાઈપ કરો...",
-        "button": "રિપોર્ટ કાર્ડ જુઓ"
-      }
-    }
-  }
+  "bengaluru": {}
 }
