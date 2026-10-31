@@ -42,7 +42,7 @@
     var scripts = [
         'https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js',
         'https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js',
-        '/assets/chat/smart-matcher.js',
+        '/assets/chat/search-index.js',
         '/assets/chat/discovery-engine.js',
         '/assets/chat/complaint-engine.js',
         '/assets/chat/boundary-loader.js',
