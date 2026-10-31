@@ -1,4 +1,4 @@
-import { test, expect, type Page } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 // Behaviour tests (no screenshot): admin auth must go through the same-origin
 // /api/supabase proxy, never the third-party *.supabase.co host (ISP DNS blocks
@@ -6,42 +6,7 @@ import { test, expect, type Page } from '@playwright/test';
 // key supabase-js derived before the switch, so existing sessions survive.
 // Desktop-only; the admin login screenshot is covered by admin.spec.ts.
 
-const LEGACY_AUTH_KEY = 'sb-abblyaukkoxmgzwretvm-auth-token';
-
-function b64url(obj: object): string {
-  return Buffer.from(JSON.stringify(obj)).toString('base64url');
-}
-
-function fakeSession() {
-  const now = Math.floor(Date.now() / 1000);
-  const user = { id: '00000000-0000-0000-0000-000000000001', aud: 'authenticated', role: 'authenticated', email: 'admin@example.org' };
-  return {
-    access_token: `${b64url({ alg: 'HS256', typ: 'JWT' })}.${b64url({ sub: user.id, exp: now + 3600, role: 'authenticated' })}.sig`,
-    token_type: 'bearer',
-    expires_in: 3600,
-    expires_at: now + 3600,
-    refresh_token: 'fake-refresh-token',
-    user,
-  };
-}
-
-// Record direct *.supabase.co traffic and console errors; stub the dashboard so
-// the post-login redirect lands on a static page instead of running admin code.
-async function instrument(page: Page) {
-  const direct: string[] = [];
-  const consoleErrors: string[] = [];
-  page.on('request', (req) => {
-    if (new URL(req.url()).hostname.endsWith('.supabase.co')) direct.push(req.url());
-  });
-  page.on('pageerror', (err) => consoleErrors.push(`pageerror: ${err.message}`));
-  page.on('console', (msg) => {
-    if (msg.type() === 'error') consoleErrors.push(`console.error: ${msg.text()}`);
-  });
-  await page.route('**/admin/index.html', (route) =>
-    route.fulfill({ status: 200, contentType: 'text/html', body: '<!doctype html><title>dashboard stub</title>' }),
-  );
-  return { direct, consoleErrors };
-}
+import { LEGACY_AUTH_KEY, fakeSession, instrument } from './admin-fixtures';
 
 test.describe('admin supabase proxy', () => {
   test.beforeEach(async ({}, testInfo) => {

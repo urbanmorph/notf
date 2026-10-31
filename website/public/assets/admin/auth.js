@@ -89,6 +89,50 @@ async function login(email, password) {
     return data;
 }
 
+// Where the emailed "reset your password" link lands.
+const RESET_PAGE = '/admin/reset-password.html';
+
+// Email a reset link. Supabase answers the same for unknown emails, and the
+// login page shows one neutral message either way; only rate limits surface.
+async function requestPasswordReset(email) {
+    const client = getSupabaseAuthClient();
+    const { error } = await client.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}${RESET_PAGE}`
+    });
+    if (error && error.status === 429) throw error;
+}
+
+// Open the recovery session from the emailed link, which comes in one of two
+// forms: ?token_hash=…&type=recovery (a custom email template; verified here,
+// through the proxy) or Supabase's default #access_token=…&type=recovery, which
+// supabase-js reads itself. Returns the session, or throws why the link failed.
+async function startPasswordRecovery() {
+    const client = getSupabaseAuthClient();
+    const query = new URLSearchParams(window.location.search);
+    const hash = new URLSearchParams(window.location.hash.slice(1));
+    if (hash.get('error_description')) throw new Error(hash.get('error_description'));
+    const tokenHash = query.get('token_hash');
+    if (tokenHash && query.get('type') === 'recovery') {
+        const { data, error } = await client.auth.verifyOtp({ token_hash: tokenHash, type: 'recovery' });
+        // The token works once; keep it out of the address bar and history.
+        history.replaceState(null, '', window.location.pathname);
+        if (error) throw error;
+        return data.session;
+    }
+    const { data: { session } } = await client.auth.getSession();
+    if (!session) throw new Error('This reset link is invalid or has expired.');
+    return session;
+}
+
+// Save a new password for the signed-in (recovering) user, then sign out so the
+// next sign-in uses it.
+async function updatePassword(password) {
+    const client = getSupabaseAuthClient();
+    const { error } = await client.auth.updateUser({ password });
+    if (error) throw error;
+    await client.auth.signOut();
+}
+
 // Logout
 async function logout() {
     const client = getSupabaseAuthClient();
@@ -114,6 +158,9 @@ window.authUtils = {
     isActiveAdmin,
     login,
     logout,
+    requestPasswordReset,
+    startPasswordRecovery,
+    updatePassword,
     getCurrentUser,
     get supabase() { return getSupabaseAuthClient(); }  // Export as lazy getter
 };
