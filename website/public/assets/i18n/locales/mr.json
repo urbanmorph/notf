@@ -8,9 +8,7 @@
     "join": "सामील व्हा",
     "admin": "प्रशासक लॉगिन",
     "adminLogin": "प्रशासक लॉगिन",
-    "bengaluru": "बेंगळुरू",
     "catalogue": "प्रकल्प सूची",
-    "cities": "शहरे",
     "airQuality": "हवेची गुणवत्ता"
   },
   "hero": {
@@ -272,16 +270,6 @@
     "catalogItems": "कॅटलॉग",
     "stories": "कथा"
   },
-  "citySelector": {
-    "title": "तुमचे शहर निवडा",
-    "subtitle": "समुदाय नेटवर्क, प्रभाग-स्तरीय नकाशे आणि स्थानिक उपक्रम एक्सप्लोर करण्यासाठी शहर निवडा.",
-    "explore": "एक्सप्लोर करा",
-    "wardMap": "प्रभाग नकाशा",
-    "mapComingSoon": "नकाशा (लवकरच येत आहे)",
-    "communitiesComingSoon": "समुदाय (लवकरच येत आहे)",
-    "providersComingSoon": "प्रदाता (लवकरच येत आहे)",
-    "storiesComingSoon": "कथा (लवकरच येत आहे)"
-  },
   "features": {
     "title": "NOTF कसे कार्य करते",
     "subtitle": "आमच्या नाविन्यपूर्ण विचारणा/ऑफर जुळणाऱ्या अल्गोरिदमद्वारे समर्थित तीन शक्तिशाली निर्देशिकांद्वारे आमचे नेटवर्क एक्सप्लोर करा जे उपलब्ध संसाधनांसह समुदायाच्या गरजा जोडतात",
@@ -335,8 +323,6 @@
   },
   "common": {
     "loading": "लोड करत आहे...",
-    "loadingCitiesQuote": "महान शहरे एकट्या सरकारद्वारे बांधली जात नाहीत, तर समुदायांनी एकत्रितपणे काम केले आहे.",
-    "loadingCitiesAuthor": "- जेन जेकब्स",
     "error": "एक त्रुटी आली",
     "close": "बंद करा",
     "cancel": "रद्द करा",
@@ -451,162 +437,6 @@
       "error": "तुमचा अर्ज सबमिट करताना एक त्रुटी आली.कृपया पुन्हा प्रयत्न करा."
     }
   },
-  "cityHub": {
-    "ahmedabad": {
-      "subtitle": "गुजरात, भारत",
-      "wards": "प्रभाग",
-      "population": "लोकसंख्या",
-      "exploreTitle": "अहमदाबाद एक्सप्लोर करा",
-      "exploreSubtitle": "वॉर्ड-स्तरीय नकाशा आता उपलब्ध आहे.समुदाय आणि प्रदाता निर्देशिका लवकरच येत आहेत."
-    },
-    "bengaluru": {
-      "subtitle": "कर्नाटक, भारत",
-      "wards": "प्रभाग",
-      "population": "लोकसंख्या",
-      "exploreTitle": "बेंगळुरू एक्सप्लोर करा",
-      "exploreSubtitle": "भारताच्या सिलिकॉन व्हॅलीसाठी समुदाय, संस्था आणि वॉर्ड-स्तरीय डेटाद्वारे नेव्हिगेट करा."
-    },
-    "bhubaneswar": {
-      "subtitle": "ओडिशा, भारत",
-      "wards": "प्रभाग",
-      "population": "लोकसंख्या",
-      "exploreTitle": "भुवनेश्वर एक्सप्लोर करा",
-      "exploreSubtitle": "वॉर्ड-स्तरीय नकाशा आता उपलब्ध आहे.समुदाय आणि प्रदाता निर्देशिका लवकरच येत आहेत."
-    },
-    "chennai": {
-      "subtitle": "तामिळनाडू, भारत",
-      "wards": "प्रभाग",
-      "population": "लोकसंख्या",
-      "exploreTitle": "चेन्नई एक्सप्लोर करा",
-      "exploreSubtitle": "वॉर्ड-स्तरीय नकाशा आता उपलब्ध आहे.समुदाय आणि प्रदाता निर्देशिका लवकरच येत आहेत."
-    },
-    "gurugram": {
-      "subtitle": "हरियाणा, भारत",
-      "wards": "प्रभाग",
-      "population": "लोकसंख्या",
-      "exploreTitle": "गुरुग्राम एक्सप्लोर करा",
-      "exploreSubtitle": "वॉर्ड-स्तरीय नकाशा आता उपलब्ध आहे.समुदाय आणि प्रदाता निर्देशिका लवकरच येत आहेत."
-    },
-    "hyderabad": {
-      "subtitle": "तेलंगणा, भारत",
-      "wards": "प्रभाग",
-      "population": "लोकसंख्या",
-      "exploreTitle": "हैदराबाद एक्सप्लोर करा",
-      "exploreSubtitle": "वॉर्ड-स्तरीय नकाशा आता उपलब्ध आहे.समुदाय आणि प्रदाता निर्देशिका लवकरच येत आहेत."
-    },
-    "jaipur": {
-      "subtitle": "राजस्थान, भारत",
-      "wards": "प्रभाग",
-      "population": "लोकसंख्या",
-      "exploreTitle": "जयपूर एक्सप्लोर करा",
-      "exploreSubtitle": "वॉर्ड-स्तरीय नकाशा आता उपलब्ध आहे.समुदाय आणि प्रदाता निर्देशिका लवकरच येत आहेत."
-    },
-    "kochi": {
-      "subtitle": "केरळ, भारत",
-      "wards": "प्रभाग",
-      "population": "लोकसंख्या",
-      "exploreTitle": "कोची एक्सप्लोर करा",
-      "exploreSubtitle": "वॉर्ड-स्तरीय नकाशा आता उपलब्ध आहे.समुदाय आणि प्रदाता निर्देशिका लवकरच येत आहेत."
-    },
-    "kolkata": {
-      "subtitle": "पश्चिम बंगाल, भारत",
-      "wards": "प्रभाग",
-      "population": "लोकसंख्या",
-      "exploreTitle": "कोलकाता एक्सप्लोर करा",
-      "exploreSubtitle": "वॉर्ड-स्तरीय नकाशा आता उपलब्ध आहे.समुदाय आणि प्रदाता निर्देशिका लवकरच येत आहेत."
-    },
-    "mumbai": {
-      "subtitle": "महाराष्ट्र, भारत",
-      "wards": "प्रभाग",
-      "population": "लोकसंख्या",
-      "exploreTitle": "मुंबई एक्सप्लोर करा",
-      "exploreSubtitle": "वॉर्ड-स्तरीय नकाशा आता उपलब्ध आहे.समुदाय आणि प्रदाता निर्देशिका लवकरच येत आहेत."
-    },
-    "pune": {
-      "subtitle": "महाराष्ट्र, भारत",
-      "wards": "प्रभाग",
-      "population": "लोकसंख्या",
-      "exploreTitle": "पुणे एक्सप्लोर करा",
-      "exploreSubtitle": "वॉर्ड-स्तरीय नकाशा आता उपलब्ध आहे.समुदाय आणि प्रदाता निर्देशिका लवकरच येत आहेत."
-    },
-    "thane": {
-      "subtitle": "महाराष्ट्र, भारत",
-      "wards": "प्रभाग",
-      "population": "लोकसंख्या",
-      "exploreTitle": "ठाणे एक्सप्लोर करा",
-      "exploreSubtitle": "वॉर्ड-स्तरीय नकाशा आता उपलब्ध आहे.समुदाय आणि प्रदाता निर्देशिका लवकरच येत आहेत."
-    },
-    "visakhapatnam": {
-      "subtitle": "आंध्र प्रदेश, भारत",
-      "wards": "प्रभाग",
-      "population": "लोकसंख्या",
-      "exploreTitle": "विशाखापट्टणम एक्सप्लोर करा",
-      "exploreSubtitle": "वॉर्ड-स्तरीय नकाशा आता उपलब्ध आहे.समुदाय आणि प्रदाता निर्देशिका लवकरच येत आहेत."
-    },
-    "stats": {
-      "communities": "समुदाय",
-      "providers": "समाधान प्रदाते",
-      "wardsTracked": "प्रभागांचा मागोवा घेतला"
-    },
-    "features": {
-      "map": {
-        "title": "प्रभाग-स्तर नकाशा",
-        "description": "Explore all {{wardCount}} electoral wards with interactive boundaries. View ward demographics, boundaries, and geographical data.",
-        "button": "नकाशा पहा",
-        "statusLive": "लाइव्ह"
-      },
-      "communities": {
-        "title": "समुदाय",
-        "description": "Connect with {{count}} active community-led initiatives. Discover collaboration opportunities and local impact projects.",
-        "button": "समुदाय ब्राउझ करा"
-      },
-      "providers": {
-        "title": "समाधान प्रदाते",
-        "description": "Find {{count}} organizations supporting community work. CBOs, solution providers, and more.",
-        "button": "प्रदाते पहा"
-      },
-      "statusComingSoon": "लवकरच येत आहे",
-      "stories": {
-        "title": "सामुदायिक कथा",
-        "description": "शेजारच्या परिवर्तनाच्या खऱ्या कथा शोधा, ज्या लोकांनी ते घडवून आणले त्यांच्याकडून सांगितलेल्या.",
-        "button": "कथा वाचा",
-        "comingSoonDescription": "या शहराच्या सामुदायिक कथा विकासाधीन आहेत. शेजारच्या परिवर्तनाच्या खऱ्या कथा लवकरच येत आहेत."
-      }
-    },
-    "nav": {
-      "cities": "शहरे",
-      "communities": "समुदाय",
-      "providers": "प्रदाते",
-      "map": "नकाशा",
-      "stories": "कथा",
-      "backTo": "बेंगळुरूला परत जा",
-      "allCities": "सर्व शहरे"
-    },
-    "comingSoonCallout": {
-      "title": "शहर डेटा लवकरच येत आहे",
-      "description": "आम्ही सध्या शहर निर्देशिका तयार करत आहोत.तुमचा समुदाय किंवा संस्था नोंदणी करून नेटवर्क वाढवण्यास आम्हाला मदत करा.",
-      "communityDirectory": "समुदाय निर्देशिका",
-      "providerNetwork": "समाधान प्रदाता नेटवर्क",
-      "joinCommunity": "समुदाय म्हणून सामील व्हा",
-      "joinProvider": "प्रदाता म्हणून सामील व्हा",
-      "comingSoonButton": "लवकरच येत आहे"
-    }
-  },
-  "mumbai": {
-    "name": "मुंबई",
-    "nav": {
-      "hub": "मुंबई केंद्र",
-      "communities": "समुदाय",
-      "providers": "प्रदाते",
-      "map": "नकाशा"
-    }
-  },
-  "citiesPage": {
-    "title": "आमची शहरे",
-    "subtitle": "वॉर्ड-स्तरीय डेटा, सामुदायिक नेटवर्क आणि स्थानिक उपक्रमांसह भारतभरातील 13 शहरे शोधा.",
-    "breadcrumb": "शहरे",
-    "errorLoading": "शहरे लोड करताना त्रुटी. कृपया पेज रिफ्रेश करा."
-  },
   "storiesPage": {
     "title": "सामुदायिक कथा",
     "subtitle": "शेजारी परिवर्तनाच्या खऱ्या कथा, ज्यांनी ते घडवले त्यांनी सांगितलेल्या.",
@@ -626,7 +456,6 @@
     "noStories": "तुमच्या फिल्टरशी जुळणाऱ्या कथा सापडल्या नाहीत."
   },
   "statsNav": {
-    "citiesHint": "बेंगळुरू सर्वाधिक सक्रिय समुदायांसह अग्रेसर आहे",
     "exploreAll": "सर्व शहरे पहा",
     "browseAll": "समुदाय पहा",
     "browseCatalog": "कॅटलॉग पहा",
@@ -635,7 +464,6 @@
     "storiesLoading": "कथा लोड होत आहेत...",
     "catalogTitle": "प्रकल्प",
     "storiesTitle": "कथा",
-    "citiesTitle": "शहरे",
     "communitiesTitle": "समुदाय",
     "storiesHint": "शेजारच्या परिवर्तनाच्या खऱ्या कथा",
     "communitiesHint": "भारतभरातील सक्रिय शेजार गट"
@@ -730,7 +558,6 @@
       "readStoriesDesc": "ज्या समुदायांनी आधीच सुरुवात केली आहे त्यांच्याकडून शिका"
     }
   },
-  "bengaluru": {},
   "cityMap": {
     "allCities": "सर्व शहरे",
     "communities": {

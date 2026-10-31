@@ -223,49 +223,6 @@ nav {
     color: var(--slate-blue);
 }
 
-/* City Sub-Navigation */
-.city-sub-nav {
-    background: var(--color-bg-white);
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    padding: 0 var(--space-md);
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    max-width: var(--container-wide);
-    margin: 0 auto;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-
-.city-sub-nav::-webkit-scrollbar {
-    display: none;
-}
-
-.city-sub-nav-link {
-    padding: 8px 16px;
-    border-radius: var(--radius-md);
-    text-decoration: none;
-    color: var(--charcoal);
-    font-weight: 500;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    transition: background 0.2s ease, color 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.city-sub-nav-link:hover {
-    background: var(--olive-green-alpha-15);
-    color: var(--forest-green);
-}
-
-.city-sub-nav-link.active {
-    background: var(--forest-green-alpha-12);
-    color: var(--forest-green);
-    font-weight: 600;
-}
-
 /* Hamburger Menu */
 .hamburger {
     display: none;
@@ -1200,15 +1157,6 @@ body.menu-open {
         height: 120px;
         right: -30px;
     }
-
-    /* City Sub-Navigation */
-    .city-sub-nav {
-        padding: 0 8px;
-    }
-    .city-sub-nav-link {
-        padding: 6px 12px;
-        font-size: 0.875rem;
-    }
 }
 
 /* === UTILITY CLASSES === */
@@ -1865,7 +1813,7 @@ body.menu-open {
 
 .preview-row-cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
 }
 
@@ -2050,13 +1998,6 @@ body.menu-open {
 
 .preview-card-cta i {
     font-size: 10px;
-}
-
-.city-map-svg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
 }
 
 .sr-only {

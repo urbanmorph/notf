@@ -31,7 +31,7 @@
           "alternateName": "NOTF",
           "url": "https://notf.in/",
           "logo": "https://notf.in/assets/images/notf-logo.png",
-          "description": "An alliance for local action bringing together communities, solution providers, and civic data across 13 Indian cities."
+          "description": "An alliance for local action bringing together communities, solution providers, and civic data across India."
         },
         {
           "@type": "WebSite",
@@ -159,9 +159,9 @@
         </section>
 
         <!-- Preview Content Cards -->
-        <section class="preview-section" id="explore" aria-label="Explore catalogue, stories, and cities">
+        <section class="preview-section" id="explore" aria-label="Explore catalogue and stories">
             <div class="preview-wrapper">
-                <!-- Row 1: Catalogue + Stories as carousel cards -->
+                <!-- Catalogue + Stories as carousel cards -->
                 <div class="preview-row-cards">
                     <!-- Catalogue Card -->
                     <div class="preview-card" style="border-color: rgba(196, 90, 42, 0.15);">
@@ -190,20 +190,6 @@
                         </div>
                         <div class="preview-card-footer">
                             <div class="carousel-nav" id="storyNav"></div>
-                        </div>
-                    </div>
-                    <!-- Cities Card -->
-                    <div class="preview-card" style="border-color: rgba(63, 95, 122, 0.15);">
-                        <div class="preview-card-header">
-                            <span class="preview-card-label" style="color: var(--slate-blue);" data-i18n="stats.cities">Cities</span>
-                            <span class="preview-card-count"><span id="cityCount">13</span> <span data-i18n="statsNav.citiesTitle">Cities</span></span>
-                            <a href="/cities/" class="preview-card-cta" style="color: var(--slate-blue);">Explore all <i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                        <div class="preview-card-carousel-wrapper">
-                            <div class="preview-card-carousel" id="cityItems"></div>
-                        </div>
-                        <div class="preview-card-footer">
-                            <div class="carousel-nav" id="cityNav"></div>
                         </div>
                     </div>
                 </div>
@@ -408,86 +394,6 @@
             return storyFallbackImages[index % storyFallbackImages.length];
         }
 
-        // Convert GeoJSON FeatureCollection to an inline SVG string
-        function geojsonToSvg(geojson, color) {
-            const features = geojson.features || [];
-            if (!features.length) return '';
-
-            // Collect all coordinates to compute bounding box
-            let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-            const allPolygons = [];
-
-            features.forEach(f => {
-                const geom = f.geometry;
-                if (!geom) return;
-                let rings = [];
-                if (geom.type === 'Polygon') {
-                    rings = geom.coordinates;
-                } else if (geom.type === 'MultiPolygon') {
-                    geom.coordinates.forEach(poly => rings.push(...poly));
-                }
-                rings.forEach(ring => {
-                    const points = ring.map(([lng, lat]) => {
-                        if (lng < minX) minX = lng;
-                        if (lng > maxX) maxX = lng;
-                        if (lat < minY) minY = lat;
-                        if (lat > maxY) maxY = lat;
-                        return [lng, lat];
-                    });
-                    allPolygons.push(points);
-                });
-            });
-
-            if (!allPolygons.length) return '';
-
-            // Add padding
-            const dx = maxX - minX;
-            const dy = maxY - minY;
-            const pad = Math.max(dx, dy) * 0.08;
-            minX -= pad; minY -= pad; maxX += pad; maxY += pad;
-
-            const width = 400;
-            const height = 380;
-            const spanX = Math.max(maxX - minX, 1e-6);
-            const spanY = Math.max(maxY - minY, 1e-6);
-            const scaleX = width / spanX;
-            const scaleY = height / spanY;
-            const scale = Math.min(scaleX, scaleY);
-            const offsetX = (width - (maxX - minX) * scale) / 2;
-            const offsetY = (height - (maxY - minY) * scale) / 2;
-
-            function project(lng, lat) {
-                const x = (lng - minX) * scale + offsetX;
-                const y = (maxY - lat) * scale + offsetY; // flip Y
-                return `${x.toFixed(1)},${y.toFixed(1)}`;
-            }
-
-            // Simplify: skip points if too close (< 1px apart)
-            function simplify(ring) {
-                if (ring.length < 4) return ring;
-                const result = [ring[0]];
-                for (let i = 1; i < ring.length; i++) {
-                    const [x0, y0] = ring[i - 1];
-                    const [x1, y1] = ring[i];
-                    const dx = (x1 - x0) * scale;
-                    const dy = (y1 - y0) * scale;
-                    if (dx * dx + dy * dy > 1) result.push(ring[i]);
-                }
-                return result;
-            }
-
-            const paths = allPolygons.map(ring => {
-                const simplified = simplify(ring);
-                if (simplified.length < 3) return '';
-                return `<path d="M${simplified.map(([lng, lat]) => project(lng, lat)).join('L')}Z" fill="${color}" fill-opacity="0.2" stroke="${color}" stroke-width="0.5" stroke-opacity="0.4"/>`;
-            }).join('');
-
-            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" class="city-map-svg" preserveAspectRatio="xMidYMid meet">
-                <rect width="${width}" height="${height}" fill="#FAF6E8"/>
-                ${paths}
-            </svg>`;
-        }
-
         // Escape HTML special characters to prevent XSS
         function esc(str) {
             if (typeof str !== 'string') return '';
@@ -637,7 +543,6 @@
         async function loadPreviewCards() {
             // Show skeletons while loading
             showCarouselSkeletons('storyItems');
-            showCarouselSkeletons('cityItems');
 
             // Catalogue count comes straight from the source-of-truth list, so it
             // never drifts from /catalog/. Set it up front (no network dependency).
@@ -657,11 +562,6 @@
             );
 
             try {
-                const response = await fetch('/assets/data/cities-metadata.json');
-                if (!response.ok) throw new Error(`cities-metadata.json: HTTP ${response.status}`);
-                const citiesData = await response.json();
-                const cities = citiesData.cities || [];
-
                 if (window.dataLoader) {
                     await dataLoader.waitForSupabase();
 
@@ -681,7 +581,13 @@
                     // Provider count now from Supabase (synced with catalogue)
                     if (el('statProviders')) el('statProviders').textContent = providers.length;
                     if (el('statProjects')) el('statProjects').textContent = catalogProjects.length;
-                    if (el('statCities')) el('statCities').textContent = cities.length;
+                    // Cities reached: every city a community or a catalogue project names.
+                    if (el('statCities')) {
+                        el('statCities').textContent = countByCity(
+                            [...communities, ...(window.CATALOG_PROJECTS || [])],
+                            (item) => item.cities || [item.city]
+                        ).length;
+                    }
 
                     // Render stories as full-face carousel slides (YouTube thumbnails when available)
                     renderCarouselSlides('storyItems', 'storyNav',
@@ -693,47 +599,12 @@
                         }))
                     );
 
-                    // Render cities as autoscroll carousel with GeoJSON maps
-                    const cityCounts = {};
-                    communities.forEach(c => { if (c.city) cityCounts[c.city] = (cityCounts[c.city] || 0) + 1; });
-
-                    const cityItems = cities
-                        .map(c => ({
-                            name: c.name,
-                            meta: cityCounts[c.name] ? `${cityCounts[c.name]} ${window.translator?.t('common.communities') || 'communities'}` : c.state,
-                            href: `/cities/${c.slug}/`,
-                            image: `/assets/images/cities/${c.slug}.svg`,
-                            boundaryFile: c.features?.map?.boundaryFile,
-                            color: c.color || '#3F5F7A',
-                            count: cityCounts[c.name] || 0
-                        }))
-                        .sort((a, b) => b.count - a.count);
-
-                    renderCarouselSlides('cityItems', 'cityNav', cityItems);
-
-                    // Load GeoJSON maps and render as SVG backgrounds
-                    cityItems.forEach(city => {
-                        if (!city.boundaryFile) return;
-                        fetch(city.boundaryFile)
-                            .then(r => r.json())
-                            .then(geojson => {
-                                const slide = document.querySelector(`#cityItems .carousel-slide[data-slide-name="${CSS.escape(city.name)}"]`);
-                                if (!slide) return;
-                                const bg = slide.querySelector('.carousel-slide-bg');
-                                if (!bg) return;
-                                const svg = geojsonToSvg(geojson, city.color);
-                                bg.style.backgroundImage = 'none';
-                                bg.innerHTML = svg;
-                            })
-                            .catch(() => {});
-                    });
-
-                    window.notfData = { communities, members: providers, cities };
+                    window.notfData = { communities, members: providers };
                     console.log('[Home] Preview cards loaded');
                 }
             } catch (error) {
                 console.error('Error loading preview cards:', error);
-                window.notfData = { communities: [], members: [], cities: [] };
+                window.notfData = { communities: [], members: [] };
             }
         }
 
@@ -741,6 +612,7 @@
     </script>
 
     <script src="/assets/js/map-projection.js"></script>
+    <script src="/assets/js/city-map.js"></script>
     <script src="/assets/js/oaq-live.js"></script>
     <script src="/assets/js/components/common-scripts.js"></script>
 </body>
