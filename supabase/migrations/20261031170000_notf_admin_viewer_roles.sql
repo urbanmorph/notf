@@ -13,6 +13,25 @@
 -- the audit trail records which admin made a change, and the dormant notf-cms
 -- complaint/discussion tables stop accepting anonymous inserts.
 
+-- 0. Every UPDATE on admin_users failed: its timestamp trigger used the shared
+-- update_updated_at(), which also bumps NEW.version, a column only
+-- file_metadata has ("record new has no field version"). Give admin_users its
+-- own trigger that only stamps updated_at; file_metadata keeps the shared one.
+CREATE OR REPLACE FUNCTION public.touch_updated_at()
+RETURNS trigger
+LANGUAGE plpgsql
+SET search_path = ''
+AS $$
+BEGIN
+  NEW.updated_at = now();
+  RETURN NEW;
+END;
+$$;
+DROP TRIGGER IF EXISTS update_admin_users_timestamp ON public.admin_users;
+CREATE TRIGGER update_admin_users_timestamp
+  BEFORE UPDATE ON public.admin_users
+  FOR EACH ROW EXECUTE FUNCTION public.touch_updated_at();
+
 -- 1. The NOTF role, with today's NOTF super admins as NOTF admins.
 ALTER TABLE public.admin_users ADD COLUMN IF NOT EXISTS notf_role text
   CHECK (notf_role IN ('admin', 'viewer'));
