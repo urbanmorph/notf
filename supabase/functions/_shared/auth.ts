@@ -8,9 +8,10 @@
 // active row in `admin_users` is authoritative; the legacy metadata flag is
 // still honoured so nothing that previously worked breaks.
 //
-// NOTE: this is a *membership* gate (is the caller an active admin at all),
-// not role-tier or corporation/zone scoping. Granular RBAC is a planned
-// follow-up (see RBAC-PLAN.md); when added, extend this module.
+// NOTF access is decided by admin_users.notf_role (admin_users is shared with
+// the notf-cms city app, whose `role` column is a city hierarchy): 'admin' may
+// read and write, 'viewer' may only read, NULL means no NOTF access. See
+// RBAC-PLAN.md and supabase/migrations/20261031170000_notf_admin_viewer_roles.sql.
 
 export interface MinimalUser {
   id: string;
@@ -26,36 +27,44 @@ export interface AdminQueryClient {
   from(table: string): any;
 }
 
+export type NotfRole = "admin" | "viewer";
+
 /**
- * Returns true if `user` is an authorized admin.
- *
- * Authorization is granted when EITHER:
- *  1. the user carries the legacy `user_metadata.role === 'admin'` flag, OR
- *  2. there is an active row in `admin_users` for the user's id.
- *
- * Any query error is treated as "not authorized" (fail closed).
+ * The caller's NOTF role from an active admin_users row: "admin", "viewer", or
+ * null (no row, inactive, no NOTF role, or any query error: fail closed).
+ */
+export async function getNotfRole(
+  adminClient: AdminQueryClient,
+  user: MinimalUser | null | undefined,
+): Promise<NotfRole | null> {
+  if (!user || !user.id) return null;
+  try {
+    const { data, error } = await adminClient
+      .from("admin_users")
+      .select("notf_role")
+      .eq("user_id", user.id)
+      .eq("is_active", true)
+      .maybeSingle();
+    if (error || !data) return null;
+    return data.notf_role === "admin" || data.notf_role === "viewer"
+      ? data.notf_role
+      : null;
+  } catch (_e) {
+    return null;
+  }
+}
+
+/**
+ * Returns true if `user` may change NOTF data: the legacy
+ * `user_metadata.role === 'admin'` flag, or an active admin_users row with
+ * notf_role 'admin'. Viewers and city-app-only accounts are refused.
  */
 export async function isAuthorizedAdmin(
   adminClient: AdminQueryClient,
   user: MinimalUser | null | undefined,
 ): Promise<boolean> {
   if (!user || !user.id) return false;
-
   // Legacy fast-path: explicit admin role in the JWT metadata.
   if (user.user_metadata?.role === "admin") return true;
-
-  // Primary path: active membership in the admin_users registry.
-  try {
-    const { data, error } = await adminClient
-      .from("admin_users")
-      .select("id")
-      .eq("user_id", user.id)
-      .eq("is_active", true)
-      .maybeSingle();
-
-    if (error) return false;
-    return data != null;
-  } catch (_e) {
-    return false;
-  }
+  return (await getNotfRole(adminClient, user)) === "admin";
 }

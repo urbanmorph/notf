@@ -1,5 +1,9 @@
 import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
-import { type AdminQueryClient, isAuthorizedAdmin } from "./auth.ts";
+import {
+  type AdminQueryClient,
+  getNotfRole,
+  isAuthorizedAdmin,
+} from "./auth.ts";
 
 // Build a mock admin client whose admin_users lookup resolves to the given
 // result, and that records the filters it was called with.
@@ -36,8 +40,11 @@ function mockClient(
   return { client, calls };
 }
 
-Deno.test("isAuthorizedAdmin: active admin_users member is authorized", async () => {
-  const { client, calls } = mockClient({ data: { id: "row-1" }, error: null });
+Deno.test("isAuthorizedAdmin: an active NOTF admin is authorized", async () => {
+  const { client, calls } = mockClient({
+    data: { notf_role: "admin" },
+    error: null,
+  });
   const ok = await isAuthorizedAdmin(client, {
     id: "user-123",
     user_metadata: {},
@@ -45,6 +52,7 @@ Deno.test("isAuthorizedAdmin: active admin_users member is authorized", async ()
   assertEquals(ok, true);
   // verify it queried admin_users by user_id + is_active
   assertEquals(calls.table, "admin_users");
+  assertEquals(calls.columns, "notf_role");
   assertEquals(calls.eq1, ["user_id", "user-123"]);
   assertEquals(calls.eq2, ["is_active", true]);
 });
@@ -83,7 +91,31 @@ Deno.test("isAuthorizedAdmin: a query error fails closed (denied)", async () => 
 });
 
 Deno.test("isAuthorizedAdmin: null/undefined user is denied", async () => {
-  const { client } = mockClient({ data: { id: "x" }, error: null });
+  const { client } = mockClient({ data: { notf_role: "admin" }, error: null });
   assertEquals(await isAuthorizedAdmin(client, null), false);
   assertEquals(await isAuthorizedAdmin(client, undefined), false);
+});
+
+Deno.test("isAuthorizedAdmin: a NOTF viewer may not write", async () => {
+  const { client } = mockClient({ data: { notf_role: "viewer" }, error: null });
+  assertEquals(await isAuthorizedAdmin(client, { id: "user-viewer" }), false);
+});
+
+Deno.test("isAuthorizedAdmin: an active city-app admin without a NOTF role is denied", async () => {
+  const { client } = mockClient({ data: { notf_role: null }, error: null });
+  assertEquals(await isAuthorizedAdmin(client, { id: "user-city" }), false);
+});
+
+Deno.test("getNotfRole: returns admin, viewer or null, failing closed", async () => {
+  for (const role of ["admin", "viewer"]) {
+    const { client } = mockClient({ data: { notf_role: role }, error: null });
+    assertEquals(await getNotfRole(client, { id: "u" }), role);
+  }
+  const unknown = mockClient({ data: { notf_role: "owner" }, error: null });
+  assertEquals(await getNotfRole(unknown.client, { id: "u" }), null);
+  const none = mockClient({ data: null, error: null });
+  assertEquals(await getNotfRole(none.client, { id: "u" }), null);
+  const failed = mockClient({ data: null, error: { message: "boom" } });
+  assertEquals(await getNotfRole(failed.client, { id: "u" }), null);
+  assertEquals(await getNotfRole(none.client, null), null);
 });

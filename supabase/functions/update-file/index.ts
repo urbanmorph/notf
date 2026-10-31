@@ -26,7 +26,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({
         status: 'ok',
-        version: '4.4-admin-users-auth',
+        version: '4.5-notf-roles',
         timestamp: new Date().toISOString()
       }),
       {

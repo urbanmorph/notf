@@ -22,7 +22,7 @@ Legend: **[Owner]** = an action only the current owner/admin (Sathya) can do ·
 | Edit static pages / catalogue, run frontend locally, run tests | ❌ None — clone is enough (anon key is public + in-repo) |
 | Open PRs | ⚠️ GitHub write **or** a fork |
 | Merge PRs, manage branches | ✅ GitHub write |
-| Approve/edit/delete content via the admin panel (prod) | ✅ An `admin_users` row (see §2) |
+| Approve/edit/delete content via the admin panel (prod) | ✅ NOTF admin access (see §2b); viewers can only look |
 | Deploy edge functions, run migrations, read/repair the DB | ✅ Supabase project membership |
 | View deploys/logs, manage env vars, roll back | ✅ Vercel project membership |
 | Run the backfill/sync scripts in `scripts/` | ✅ The service-role key (a shared secret — see §4) |
@@ -62,11 +62,25 @@ Two distinct kinds of access — don't confuse them:
 **(b) Admin-panel authorization** (to use the in-app admin at `/admin/`)
 - Being a Supabase *project* member does **not** make you an app admin. The app checks
   the **`admin_users`** table.
-- **[Owner]** Add the person: insert an active row into `admin_users` (their auth
-  `user_id`, a role, `is_active = true`). This is the single gate used by the edge
-  functions (`isAuthorizedAdmin`), the RLS policies, and the admin UI's `requireAuth`.
-- Roles today are a *membership* gate; fine-grained role scoping is the
-  [`RBAC-PLAN.md`](RBAC-PLAN.md) work.
+- NOTF access is `admin_users.notf_role` on an active row (the table is shared with the
+  notf-cms city app, whose `role` column is a city hierarchy and does not grant NOTF
+  access):
+
+  | Access | How they're added | Can |
+  |---|---|---|
+  | **Super admin** (`role = 'super_admin'`, `notf_role = 'admin'`) | **[Owner]** only: `bash scripts/add-super-admin.sh <email> "<Name>"` | Everything; can't be changed from the panel |
+  | **Admin** (`notf_role = 'admin'`) | Any NOTF admin: admin panel → **Admins** → Invite | View, approve, edit, archive, delete; invite and manage admins and viewers |
+  | **Viewer** (`notf_role = 'viewer'`) | Any NOTF admin: admin panel → **Admins** → Invite | View everything, change nothing |
+
+- Invites email a link to `/admin/reset-password.html` to set a password. Supabase Auth →
+  URL Configuration must have Site URL `https://www.notf.in` and that page in Redirect URLs.
+  Anyone can reset a forgotten password from **Forgot password?** on the login page.
+- Enforced in three places that agree: the edge functions (`_shared/auth.ts`
+  `isAuthorizedAdmin` = NOTF admin; `manage-admins`), the RLS policies
+  (`public.notf_role()`), and the admin UI (`auth.js requireAuth`; viewers get a
+  read-only panel). Nobody can change their own role or active flag.
+- `scripts/add-super-admin.sh` reads the service-role key from `scripts/.env`; it prints
+  no keys and is safe to re-run. See [`RBAC-PLAN.md`](RBAC-PLAN.md) for later roles.
 
 ## 3. Vercel — the NOTF project
 
@@ -110,10 +124,10 @@ handover:
 
 - [ ] **[Owner]** GitHub collaborator (Write/Admin) added.
 - [ ] **[Owner]** Supabase org member invited.
-- [ ] **[Owner]** `admin_users` row created (only if they need the admin panel).
+- [ ] Invited from the admin panel's **Admins** page as admin or viewer (only if they need the admin panel).
 - [ ] **[Owner]** Vercel team member added.
 - [ ] **[Dev]** `supabase login && supabase link` works; can list functions.
 - [ ] **[Dev]** `vercel login` works (if CLI access needed).
 - [ ] **[Owner]** Shared secrets rotated and delivered via password manager (to lead only).
-- [ ] **[Owner]** When someone leaves: revoke GitHub, Supabase, Vercel; deactivate their
-      `admin_users` row (`is_active = false`); rotate shared secrets if they held them.
+- [ ] **[Owner]** When someone leaves: revoke GitHub, Supabase, Vercel; **Deactivate** them
+      on the admin panel's Admins page; rotate shared secrets if they held them.

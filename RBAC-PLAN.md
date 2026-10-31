@@ -42,6 +42,36 @@ Unify the admin check on the real registry, without role granularity yet:
 Result: only active admins can reach the console or write — but every active
 admin can still do everything. Scoping/role-tiers are Phases 1–3.
 
+## Phase 0.5 — NOTF admin / viewer (DONE, 2026-10-31)
+
+`admin_users` is shared with the notf-cms city app, whose `role` enum describes a
+city corporation, not NOTF's work. NOTF access is now a separate column,
+`admin_users.notf_role` (migration `20261031170000_notf_admin_viewer_roles.sql`):
+
+| `notf_role` | NOTF admin panel | Added by |
+|---|---|---|
+| `admin` | read, approve/edit/archive/delete, invite and manage admins and viewers | another admin (panel → Admins) |
+| `viewer` | read everything, change nothing | an admin (panel → Admins) |
+| `NULL` | no access (city-app-only accounts, e.g. the commissioner) | — |
+
+Super admins (`role = 'super_admin'`, `notf_role = 'admin'`) are added only with
+`scripts/add-super-admin.sh` and can't be changed from the panel. Nobody can change
+their own role or active flag (the old `admin_users_update_own` policy allowed it).
+
+Enforcement:
+- RLS: `public.notf_role()` (SECURITY DEFINER). NOTF admins write `file_metadata`
+  and read the audit trail; admins and viewers read all records and chat searches.
+  The old `Authenticated users read all files (USING true)` is gone.
+- Edge Functions: `isAuthorizedAdmin` = NOTF admin (viewers 403);
+  `manage-admins` (list / invite / update) with the rules in `_shared/admin-rules.ts`.
+- UI: `auth.js requireAuth` marks `<html data-notf-role>`; viewers don't see write
+  controls, the Admins page or the geocoding tool.
+- Audit: `file_metadata_audit.actor` falls back to `updated_by`, which the Edge
+  Functions set to the signed-in admin (delete-file stamps it before deleting).
+
+Phases 1–2 below were written for the city roles; for NOTF, later roles (e.g. a
+`chapter_lead` scoped to a city) extend `notf_role` the same way.
+
 ## Phase 1 — Role-tier capability matrix (no data scoping)
 
 Define what each role may do and enforce it in both the UI and the Edge Functions.

@@ -37,35 +37,42 @@ async function checkAuth() {
     return session;
 }
 
-// Check whether a signed-in user is an active admin (the admin_users registry).
-// This is the same membership gate the Edge Functions enforce server-side, so
-// the UI and the write path agree on who is an admin.
-async function isActiveAdmin(userId) {
-    if (!userId) return false;
+// The signed-in user's NOTF role from their active admin_users row: 'admin'
+// (read and change), 'viewer' (read only), or null (no NOTF access). The Edge
+// Functions and RLS enforce the same roles server-side; the UI only follows.
+async function getNotfRole(userId) {
+    if (!userId) return null;
     const client = getSupabaseAuthClient();
     const { data, error } = await client
         .from('admin_users')
-        .select('id')
+        .select('notf_role')
         .eq('user_id', userId)
         .eq('is_active', true)
         .maybeSingle();
     if (error) {
-        console.error('admin_users membership check failed:', error.message);
-        return false;
+        console.error('admin_users role check failed:', error.message);
+        return null;
     }
-    return !!data;
+    return data?.notf_role === 'admin' || data?.notf_role === 'viewer' ? data.notf_role : null;
 }
 
-// Redirect to login if not authenticated OR not an active admin.
+async function isActiveAdmin(userId) {
+    return (await getNotfRole(userId)) !== null;
+}
+
+// Redirect to login if not signed in, or not a NOTF admin or viewer. Marks the
+// page with the role (<html data-notf-role="viewer">) so CSS hides what viewers
+// may not do.
 async function requireAuth() {
     const session = await checkAuth();
     if (!session) {
         window.location.href = '/admin/login.html';
         return null;
     }
-    // A valid session is not enough — require active admin_users membership.
-    const admin = await isActiveAdmin(session.user?.id);
-    if (!admin) {
+    const role = await getNotfRole(session.user?.id);
+    document.documentElement.dataset.notfRole = role || '';
+    window.authUtils.role = role;
+    if (!role) {
         const client = getSupabaseAuthClient();
         await client.auth.signOut();
         window.location.href = '/admin/login.html?denied=1';
@@ -156,6 +163,8 @@ window.authUtils = {
     checkAuth,
     requireAuth,
     isActiveAdmin,
+    getNotfRole,
+    role: null,
     login,
     logout,
     requestPasswordReset,

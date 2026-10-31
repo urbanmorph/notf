@@ -1,0 +1,2 @@
+# Disable JWT verification to allow the function to handle auth internally
+verify_jwt = false
