@@ -19,6 +19,12 @@ Runs on Deno:
 deno run --allow-net --allow-read scripts/check-catalogue-consistency.mjs
 ```
 
+### `build-india-outline.py` / `build-oaq-outline.py`
+Build the inline map outlines: India (LGD state boundaries) for the city maps on
+`/communities/` and `/catalog/`, and Bengaluru for the home page's OAQ card. Shared
+simplification and projection live in `outline_lib.py`. Download and usage are in each
+script's docstring. Re-run only when the boundaries change.
+
 ### `generate-sitemap.py`
 Generates `sitemap.xml` for the public site.
 ```bash

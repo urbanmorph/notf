@@ -7,6 +7,7 @@
     const currentSort = { column: 'name', direction: 'asc' };
     let fuse = null;
     let searchTimeout;
+    let selectedCity = '';
 
     (async function init() {
         await dataLoader.waitForSupabase();
@@ -21,18 +22,15 @@
             });
         }
 
-        const cities = [...new Set(allCommunities.map(c => c.city).filter(c => c))].sort();
-        const cityFilter = document.getElementById('cityFilter');
-        cities.forEach(city => {
-            const option = document.createElement('option');
-            option.value = city;
-            option.textContent = city;
-            cityFilter.appendChild(option);
+        selectedCity = window.mountCityMap(document.getElementById('cityMap'), {
+            items: allCommunities,
+            citiesOf: (c) => [c.city],
+            onChange: (city) => {
+                selectedCity = city;
+                applyFilters();
+            },
         });
-
-        renderCards();
         setupSorting();
-        setupFilters();
         setupSearch();
         injectSchema();
     })();
@@ -160,22 +158,17 @@
     }
 
     function applyFilters() {
-        const selectedCity = document.getElementById('cityFilter').value;
         const query = document.getElementById('searchInput').value.trim();
 
         let results = (query && fuse) ? fuse.search(query).map(r => r.item) : [...allCommunities];
 
-        if (selectedCity !== 'all') {
-            results = results.filter(c => c.city === selectedCity);
+        if (selectedCity) {
+            results = results.filter(c => normaliseCity(c.city) === selectedCity);
         }
 
         filteredCommunities = results;
         sortCommunities();
         renderCards();
-    }
-
-    function setupFilters() {
-        document.getElementById('cityFilter').addEventListener('change', applyFilters);
     }
 
     function setupSearch() {

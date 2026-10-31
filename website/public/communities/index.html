@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/i18n/language-selector.css">
     <link rel="stylesheet" href="/assets/css/pages/communities.css">
+    <link rel="stylesheet" href="/assets/css/city-map.css">
     <link rel="stylesheet" href="/assets/chat/chat.css">
 </head>
 <body>
@@ -43,15 +44,29 @@
                 <h1><span data-i18n="communities.title">Active Communities</span> <span id="communityCount" style="font-size: 0.6em; color: var(--forest-green); font-weight: 600;">(0)</span></h1>
             <p class="lead" data-i18n="communities.lead">NOTF supports neighborhood-level initiatives across India, working on community-driven transformation.</p>
 
+            <!-- City map: filled by /assets/js/city-map.js from the loaded communities. -->
+            <section class="city-map" id="cityMap" aria-labelledby="cityMapHeading">
+                <div class="city-map-text">
+                    <h2 id="cityMapHeading" data-i18n="cityMap.communities.title">Where communities are</h2>
+                    <p data-i18n="cityMap.communities.lead">Pick a city to see the communities registered there.</p>
+                    <div class="city-chips" role="group" aria-labelledby="cityMapHeading">
+                        <button type="button" class="city-chip" data-city="" aria-pressed="true"><span data-i18n="cityMap.allCities">All cities</span> <span class="city-chip-count"></span></button>
+                    </div>
+                    <button type="button" class="city-chips-more" aria-expanded="false" hidden><span class="city-chips-more-label"><span data-i18n="cityMap.moreCities">More cities</span> (<span class="city-chips-more-count"></span>)</span><span class="city-chips-fewer" data-i18n="cityMap.fewerCities">Fewer cities</span></button>
+                </div>
+                <svg class="city-map-figure" role="img" aria-labelledby="cityMapSvgTitle">
+                    <title id="cityMapSvgTitle" data-i18n="cityMap.communities.mapTitle">Map of India with a circle for each city that has registered communities</title>
+                    <path class="city-map-land"/>
+                    <g class="city-map-bubbles"></g>
+                    <g class="city-map-labels"></g>
+                </svg>
+            </section>
+
             <div class="filters">
                 <div class="search-input-wrapper">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" id="searchInput" data-i18n-placeholder="communities.searchPlaceholder" placeholder="Search communities..." aria-label="Search communities">
                 </div>
-                <label class="filter-label" for="cityFilter" data-i18n="communities.filterLabel">Filter by City:</label>
-                <select id="cityFilter" class="filter-select">
-                    <option value="all" data-i18n="communities.allCities">All Cities</option>
-                </select>
                 <div class="sort-controls">
                     <label class="filter-label" for="sortSelect" data-i18n="communities.sortLabel">Sort by:</label>
                     <select id="sortSelect" class="sort-select">
@@ -137,6 +152,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="/assets/js/data-loader.js"></script>
     <script src="/assets/js/seo-schema.js"></script>
+    <script src="/assets/js/map-projection.js"></script>
+    <script src="/assets/js/india-outline.js"></script>
+    <script src="/assets/js/city-map.js"></script>
     <script src="/assets/js/pages/communities.js"></script>
 
     <script src="/assets/js/components/common-scripts.js"></script>

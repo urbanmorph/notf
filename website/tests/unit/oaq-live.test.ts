@@ -1,12 +1,13 @@
 // deno-lint-ignore-file no-import-prefix
 import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
 
-// oaq-live.js is a classic browser script (no ESM exports). Load it as a module by
-// appending exports, so its pure helpers can be unit-tested in Deno. Its DOM wiring
-// only runs when `document` exists, so it evaluates cleanly here.
-const src = await Deno.readTextFile(
-  new URL("../../public/assets/js/oaq-live.js", import.meta.url),
-);
+// oaq-live.js is a classic browser script (no ESM exports) that uses projectPoint
+// from map-projection.js. Load both as one module, with exports appended, so the
+// pure helpers can be unit-tested in Deno. DOM wiring only runs when `document` exists.
+const read = (p: string) =>
+  Deno.readTextFile(new URL(`../../public/assets/js/${p}`, import.meta.url));
+const src = (await read("map-projection.js")) + "\n" +
+  (await read("oaq-live.js"));
 const mod = await import(
   "data:text/javascript," +
     encodeURIComponent(

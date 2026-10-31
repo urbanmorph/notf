@@ -111,7 +111,7 @@ function resolveRedirect(
   return null;
 }
 
-Deno.test("old climate URLs redirect permanently, with or without a trailing slash", async () => {
+Deno.test("retired URLs redirect permanently, with or without a trailing slash", async () => {
   const cfg = JSON.parse(await Deno.readTextFile(new URL("vercel.json", ROOT)));
   const redirects: Array<
     { source: string; destination: string; permanent: boolean }
@@ -128,6 +128,9 @@ Deno.test("old climate URLs redirect permanently, with or without a trailing sla
     ["/cities/bengaluru/climate/energy/", "/cities/bengaluru/"],
     ["/cities/bengaluru/climate/energy/wards/a-adugodi/", "/cities/bengaluru/"],
     ["/cities/mumbai/climate/waste/leaderboard/", "/cities/mumbai/"],
+    // City communities now live on /communities/ as a city filter.
+    ["/cities/bengaluru/communities/", "/communities/?city=bengaluru"],
+    ["/cities/bengaluru/communities", "/communities/?city=bengaluru"],
   ];
   for (const [from, to] of cases) {
     assertEquals(resolveRedirect(redirects, from), to, from);
@@ -144,11 +147,15 @@ Deno.test("old climate URLs redirect permanently, with or without a trailing sla
   }
 });
 
-Deno.test("every i18n key used on the home page and header exists in all 11 locales", async () => {
-  const sources = [
-    await Deno.readTextFile(new URL("index.html", PUBLIC)),
-    await Deno.readTextFile(new URL("assets/js/components/header.js", PUBLIC)),
-  ].join("\n");
+Deno.test("every i18n key used on the home, communities and catalogue pages and header exists in all 11 locales", async () => {
+  const sources = (await Promise.all(
+    [
+      "index.html",
+      "communities/index.html",
+      "catalog/index.html",
+      "assets/js/components/header.js",
+    ].map((p) => Deno.readTextFile(new URL(p, PUBLIC))),
+  )).join("\n");
   const keys = new Set(
     [...sources.matchAll(
       /data-i18n(?:-aria|-title|-placeholder)?="([a-zA-Z0-9_.]+)"/g,

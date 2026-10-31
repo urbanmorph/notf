@@ -69,6 +69,7 @@ the next unused `id`:
     whyExists: "Full paragraph.",
     involves: ["Activity one", "Activity two"],
     whereDone: "Where it ran, with scale/reach.",
+    cities: ["Bengaluru", "Mumbai"],        // cities named in whereDone; [] if none
     impact: "Concrete outcomes and numbers.",
     whatsNeeded: "What a community needs to host it.",
     links: ["https://example.org/project"], // [] if none
@@ -83,6 +84,12 @@ the next unused `id`:
 `Governance & Policy`, `Livelihoods & Inclusion`, `Mobility`, `Place-Based Centres`,
 `Placemaking & Urban Ecology`, `Waste & Circular Economy`, `Water & Ecology`. A new
 theme string creates a new section — flag it in the PR rather than inventing one.
+
+**`cities`** puts the project on the catalogue's city map and city filter. Use the
+city names in `CITY_POINTS` (`website/public/assets/js/city-map.js`); for a city not
+listed yet, add it there with its `[lat, lon]`. Leave out states, regions and places
+outside India. The unit tests (`website/tests/unit/city-map.test.ts`) fail on a city
+the map can't place.
 
 **2. `catalog/index.html` `projectTags`** (optional) — extra filter chips, keyed by id.
 Existing values: `Awareness`, `Biodiversity`, `Community`, `Education`, `Gender`,

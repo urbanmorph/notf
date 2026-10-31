@@ -110,7 +110,8 @@ async function loadCommunities(cityFilter = null) {
         slug: item.slug,
         name: item.metadata?.name || item.slug,
         type: 'community',
-        city: item.city || item.metadata?.city || '',
+        // Some older records keep the city only in metadata.location (a string).
+        city: item.city || item.metadata?.city || (typeof item.metadata?.location === 'string' ? item.metadata.location : ''),
         state: item.metadata?.state || '',
         neighborhood: item.neighborhood || item.metadata?.neighborhood || '',
         themes: item.metadata?.themes || [],

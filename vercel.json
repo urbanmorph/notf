@@ -18,6 +18,11 @@
       "source": "/cities/:city/climate(/.*)?",
       "destination": "/cities/:city/",
       "permanent": true
+    },
+    {
+      "source": "/cities/:city/communities(/.*)?",
+      "destination": "/communities/?city=:city",
+      "permanent": true
     }
   ]
 }

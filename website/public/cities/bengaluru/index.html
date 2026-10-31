@@ -323,7 +323,7 @@
                     <div class="hub-section-header">
                         <h3><img src="/assets/images/icons/community.svg" alt="" style="width:24px;height:24px;vertical-align:middle;"> <span data-i18n="cityHub.features.communities.title">Communities</span></h3>
                         <span class="hub-count" id="hubCommCount">-</span>
-                        <a href="/cities/bengaluru/communities/" class="hub-see-all">See all <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="/communities/?city=Bengaluru" class="hub-see-all">See all <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                     <div class="hub-preview-list" id="hubCommunities">
                         <div class="hub-loading">Loading...</div>
@@ -395,7 +395,7 @@
                 const hubCommEl = document.getElementById('hubCommunities');
                 if (bengaluruCommunities.length > 0) {
                     hubCommEl.innerHTML = bengaluruCommunities.slice(0, 4).map(c => `
-                        <a href="/cities/bengaluru/communities/" class="hub-preview-item">
+                        <a href="/communities/?city=Bengaluru" class="hub-preview-item">
                             <strong>${c.name}</strong>
                             <span class="hub-preview-meta">${(c.themes || []).slice(0, 2).join(', ') || ''}</span>
                         </a>

@@ -1,0 +1,184 @@
+/* City map on the listing pages (/communities/, /catalog/). Markup in each page,
+   filled by /assets/js/city-map.js. */
+
+.city-map {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+    gap: 32px;
+    align-items: start;
+    background: var(--color-bg-white);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: var(--shadow-md);
+    margin: 0 0 32px;
+}
+
+.city-map-text h2 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--charcoal);
+}
+
+.city-map-text p {
+    margin: 0 0 24px;
+    color: var(--color-text-light);
+}
+
+.city-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.city-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 16px;
+    border: 2px solid var(--color-border);
+    border-radius: 2rem;
+    background: var(--color-bg-white);
+    color: var(--charcoal);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.city-chip:hover {
+    border-color: var(--forest-green);
+}
+
+.city-chip:focus-visible {
+    outline: 3px solid var(--mustard-yellow);
+    outline-offset: 2px;
+}
+
+.city-chip-count {
+    font-weight: 400;
+    color: var(--color-text-light);
+}
+
+.city-chip.is-selected {
+    background: var(--forest-green);
+    border-color: var(--forest-green);
+    color: var(--warm-cream);
+}
+
+.city-chip.is-selected .city-chip-count {
+    color: var(--warm-cream);
+}
+
+.city-map-figure {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.city-map-land {
+    fill: var(--olive-green);
+    stroke: var(--warm-cream);
+    stroke-width: 0.8;
+    stroke-linejoin: round;
+}
+
+.city-bubble {
+    fill: var(--terracotta);
+    fill-opacity: 0.85;
+    stroke: var(--color-bg-white);
+    stroke-width: 1.5;
+    cursor: pointer;
+    transition: fill-opacity 0.15s ease;
+}
+
+.city-bubble:hover {
+    fill-opacity: 1;
+}
+
+.city-map.has-selection .city-bubble:not(.is-selected) {
+    fill-opacity: 0.35;
+}
+
+.city-bubble.is-selected {
+    fill: var(--forest-green);
+    fill-opacity: 1;
+}
+
+.city-label {
+    font-size: 19px;
+    font-weight: 600;
+    fill: var(--charcoal);
+    stroke: var(--warm-cream);
+    stroke-width: 4px;
+    stroke-linejoin: round;
+    paint-order: stroke;
+    cursor: pointer;
+}
+
+/* Only the busiest cities show until "More cities" is pressed; a picked city always shows. */
+.city-map:not(.show-all) .city-chip.is-extra:not(.is-selected) {
+    display: none;
+}
+
+.city-chips-more {
+    margin-top: 8px;
+    min-height: 44px;
+    padding: 8px 4px;
+    border: 0;
+    background: none;
+    color: var(--forest-green);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.city-chips-more:focus-visible {
+    outline: 3px solid var(--mustard-yellow);
+    outline-offset: 2px;
+}
+
+.city-map .city-chips-fewer,
+.city-map.show-all .city-chips-more-label {
+    display: none;
+}
+
+.city-map.show-all .city-chips-fewer {
+    display: inline;
+}
+
+/* Text runs right-to-left in Urdu; keep the map's own labels and counts as drawn. */
+[dir="rtl"] .city-map-figure {
+    direction: ltr;
+}
+
+@media (max-width: 860px) {
+    .city-map {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 24px;
+    }
+
+    .city-map-figure {
+        max-width: 420px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .city-map-text h2 {
+        font-size: 24px;
+    }
+
+    .city-chip {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
