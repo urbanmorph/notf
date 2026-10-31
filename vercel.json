@@ -25,7 +25,12 @@
       "permanent": true
     },
     {
-      "source": "/cities/:city(/.*)?",
+      "source": "/cities/:city/(.*)",
+      "destination": "/communities/?city=:city",
+      "permanent": true
+    },
+    {
+      "source": "/cities/:city",
       "destination": "/communities/?city=:city",
       "permanent": true
     },
