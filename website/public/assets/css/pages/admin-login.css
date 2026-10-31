@@ -109,3 +109,73 @@
 .login-footer a:hover {
     text-decoration: underline;
 }
+
+/* Notices: a finished password reset (green) or a non-admin account (amber). */
+.login-notice {
+    background: #eef3e6;
+    color: #2F4A2C;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.login-notice.is-warning {
+    background: #fdf3dc;
+    color: #6b4a00;
+}
+
+/* "Forgot password?" and the reset form it opens. */
+.forgot-row {
+    margin: 1rem 0 0;
+    text-align: center;
+}
+
+.link-button {
+    min-height: 44px;
+    padding: 0.5rem;
+    border: 0;
+    background: none;
+    color: #4f5db8;
+    font: inherit;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.link-button:hover {
+    text-decoration: underline;
+}
+
+.link-button:focus-visible,
+.btn-reset:focus-visible {
+    outline: 3px solid #F5B82E;
+    outline-offset: 2px;
+}
+
+.reset-panel {
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.reset-panel > p {
+    color: #555;
+    font-size: 0.95rem;
+    margin: 0 0 1rem;
+}
+
+.btn-reset {
+    width: 100%;
+    padding: 0.85rem;
+    font-weight: 600;
+}
+
+.reset-status {
+    margin: 1rem 0 0;
+    color: #2F4A2C;
+    font-size: 0.9rem;
+}
+
+.reset-status:empty {
+    display: none;
+}

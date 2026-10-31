@@ -31,6 +31,8 @@
             </h1>
             <p class="subtitle">Secure administrator access</p>
 
+            <div id="notice" class="login-notice" role="status" hidden></div>
+
             <form id="loginForm" class="login-form">
                 <div class="form-group">
                     <label for="email">Email Address</label>
@@ -66,6 +68,22 @@
                 </button>
             </form>
 
+            <p class="forgot-row">
+                <button type="button" class="link-button" id="forgotLink" aria-expanded="false" aria-controls="resetPanel">Forgot password?</button>
+            </p>
+
+            <form id="resetPanel" class="reset-panel" hidden>
+                <p>Enter your admin email and we will send you a link to set a new password.</p>
+                <div class="form-group">
+                    <label for="resetEmail">Email Address</label>
+                    <input type="email" id="resetEmail" name="resetEmail" required autocomplete="email" />
+                </div>
+                <button type="submit" class="btn-secondary btn-reset" id="resetBtn">
+                    <i class="fa-solid fa-envelope"></i> Send reset link
+                </button>
+                <p id="resetStatus" class="reset-status" role="status"></p>
+            </form>
+
             <div class="login-footer">
                 <p><a href="/">← Back to NOTF Home</a></p>
             </div>
@@ -83,6 +101,50 @@
         window.location.href = '/admin/index.html';
     }
 })();
+
+// Notices from other pages: a finished reset, or a signed-in non-admin.
+(function() {
+    const params = new URLSearchParams(window.location.search);
+    const notice = document.getElementById('notice');
+    const text = params.get('reset') === 'done'
+        ? 'Password updated. Sign in with your new password.'
+        : params.get('denied') === '1'
+            ? 'That account is not an active NOTF admin. Ask a super admin to add you.'
+            : '';
+    if (text) {
+        notice.textContent = text;
+        notice.classList.toggle('is-warning', params.get('denied') === '1');
+        notice.hidden = false;
+    }
+    if (params.get('forgot') === '1') openResetPanel();
+})();
+
+// "Forgot password?": email a reset link. The answer is the same whether or not
+// the email is an admin, so the form cannot be used to find admin accounts.
+function openResetPanel() {
+    const panel = document.getElementById('resetPanel');
+    panel.hidden = false;
+    document.getElementById('forgotLink').setAttribute('aria-expanded', 'true');
+    const resetEmail = document.getElementById('resetEmail');
+    resetEmail.value = resetEmail.value || document.getElementById('email').value;
+    resetEmail.focus();
+}
+document.getElementById('forgotLink').addEventListener('click', openResetPanel);
+
+document.getElementById('resetPanel').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const status = document.getElementById('resetStatus');
+    const button = document.getElementById('resetBtn');
+    button.disabled = true;
+    try {
+        await authUtils.requestPasswordReset(document.getElementById('resetEmail').value.trim());
+        status.textContent = 'If that email belongs to a NOTF admin, we have sent a link to reset the password.';
+    } catch (error) {
+        status.textContent = 'Too many requests. Please wait a few minutes and try again.';
+    } finally {
+        button.disabled = false;
+    }
+});
 
 // Handle login form submission
 document.getElementById('loginForm').addEventListener('submit', async function(e) {
