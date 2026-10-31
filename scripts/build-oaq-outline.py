@@ -11,55 +11,20 @@ equirectangular projection.
 """
 
 import json
-import math
 from pathlib import Path
+
+from outline_lib import projector, ring_path, simplify_ring
 
 SRC = Path(__file__).resolve().parent.parent / "website/public/assets/data/bengaluru-corporations.geojson"
 WIDTH = 600
 TOLERANCE = 0.0015  # degrees (~150 m): keeps the shape, drops most points
 
 
-def simplify(points, tol):
-    """Douglas-Peucker line simplification."""
-    if len(points) < 3:
-        return points
-    (x1, y1), (x2, y2) = points[0], points[-1]
-    dx, dy = x2 - x1, y2 - y1
-    norm = math.hypot(dx, dy) or 1e-12
-    idx, dmax = 0, 0.0
-    for i in range(1, len(points) - 1):
-        px, py = points[i]
-        d = abs(dy * px - dx * py + x2 * y1 - y2 * x1) / norm
-        if d > dmax:
-            idx, dmax = i, d
-    if dmax <= tol:
-        return [points[0], points[-1]]
-    return simplify(points[: idx + 1], tol)[:-1] + simplify(points[idx:], tol)
-
-
 def main():
     features = json.loads(SRC.read_text())["features"]
     rings = [f["geometry"]["coordinates"][0] for f in features]
-    lons = [p[0] for r in rings for p in r]
-    lats = [p[1] for r in rings for p in r]
-    pad = 0.02
-    min_lon, max_lon = min(lons) - pad, max(lons) + pad
-    min_lat, max_lat = min(lats) - pad, max(lats) + pad
-    kx = math.cos(math.radians((min_lat + max_lat) / 2))
-    scale = WIDTH / ((max_lon - min_lon) * kx)
-    height = round((max_lat - min_lat) * scale)
-
-    def project(lon, lat):
-        return round((lon - min_lon) * kx * scale, 1), round((max_lat - lat) * scale, 1)
-
-    paths = []
-    for ring in rings:
-        # A closed ring starts and ends on the same point, which Douglas-Peucker
-        # can't measure against, so simplify its two halves separately.
-        mid = len(ring) // 2
-        pts = simplify(ring[: mid + 1], TOLERANCE)[:-1] + simplify(ring[mid:], TOLERANCE)
-        xy = [project(lon, lat) for lon, lat in pts]
-        paths.append("M" + "L".join(f"{x} {y}" for x, y in xy) + "Z")
+    project, (min_lon, min_lat, max_lon, max_lat), height = projector(rings, WIDTH, pad=0.02)
+    paths = [ring_path([project(lon, lat) for lon, lat in simplify_ring(r, TOLERANCE)]) for r in rings]
 
     bbox = f"{min_lon:.4f},{min_lat:.4f},{max_lon:.4f},{max_lat:.4f}"
     print(

@@ -8,6 +8,7 @@
  * links stay.
  *
  * Cities shown come from the card's `data-oaq-cities` attribute (comma-separated).
+ * Needs map-projection.js (projectPoint) loaded first.
  */
 
 const OAQ_FEED_URL = 'https://mugilu.live/index.json';
@@ -30,19 +31,6 @@ function median(values) {
     const sorted = [...values].sort((a, b) => a - b);
     const mid = sorted.length >> 1;
     return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
-}
-
-/**
- * Project a sensor onto the inline city outline: the same equirectangular
- * projection as scripts/build-oaq-outline.py. bbox is [minLon, minLat, maxLon, maxLat];
- * returns SVG {x, y}, or null when the point is missing or outside the bbox.
- */
-function projectPoint(lon, lat, bbox, width) {
-    const [minLon, minLat, maxLon, maxLat] = bbox;
-    if (lon == null || lat == null || lon < minLon || lon > maxLon || lat < minLat || lat > maxLat) return null;
-    const kx = Math.cos(((minLat + maxLat) / 2) * Math.PI / 180);
-    const scale = width / ((maxLon - minLon) * kx);
-    return { x: (lon - minLon) * kx * scale, y: (maxLat - lat) * scale };
 }
 
 /** Coverage counts plus each requested city's median AQI (cities with no reading are left out). */

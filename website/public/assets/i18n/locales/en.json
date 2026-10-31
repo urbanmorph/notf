@@ -367,8 +367,6 @@
   "communities": {
     "title": "Active Communities",
     "lead": "NOTF supports neighborhood-level initiatives across India, working on community-driven transformation.",
-    "filterLabel": "Filter by City:",
-    "allCities": "All Cities",
     "tableHeaders": {
       "name": "Name",
       "city": "City",
@@ -734,5 +732,20 @@
       "readStories": "Read community stories",
       "readStoriesDesc": "Learn from communities who've already started"
     }
+  },
+  "cityMap": {
+    "allCities": "All cities",
+    "communities": {
+      "title": "Where communities are",
+      "lead": "Pick a city to see the communities registered there.",
+      "mapTitle": "Map of India with a circle for each city that has registered communities"
+    },
+    "catalogue": {
+      "title": "Where these projects have run",
+      "lead": "Pick a city to see the projects already done there.",
+      "mapTitle": "Map of India with a circle for each city where catalogue projects have run"
+    },
+    "moreCities": "More cities",
+    "fewerCities": "Fewer cities"
   }
 }

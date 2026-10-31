@@ -74,7 +74,9 @@
 
         links.forEach(function(page) {
             const isActive = citySubPage === page ? ' active' : '';
-            html += '<a href="/cities/' + citySlug + '/' + page + '/" class="city-sub-nav-link' + isActive + '" data-i18n="' + i18nKeys[page] + '"><i class="fa-solid ' + icons[page] + '"></i> ' + labels[page] + '</a>';
+            // A city's communities are the city filter on /communities/.
+            const href = page === 'communities' ? '/communities/?city=' + cityName : '/cities/' + citySlug + '/' + page + '/';
+            html += '<a href="' + href + '" class="city-sub-nav-link' + isActive + '" data-i18n="' + i18nKeys[page] + '"><i class="fa-solid ' + icons[page] + '"></i> ' + labels[page] + '</a>';
         });
 
         html += '</div>';
