@@ -27,7 +27,7 @@
                     <li>Where is it located?</li>
                     <li>When did it start?</li>
                 </ul>
-                <p class="tip">💡 <strong>Tip:</strong> Detailed descriptions help the authorities address your complaint faster.</p>
+                <p class="tip"><i class="fa-solid fa-lightbulb"></i> <strong>Tip:</strong> Detailed descriptions help the authorities address your complaint faster.</p>
             </div>
         `);
 

@@ -51,6 +51,17 @@ function normaliseCity(raw) {
     return parts.at(-1) ?? '';
 }
 
+// Every spelling we know, longest first, so "navi mumbai" wins over "mumbai".
+const CITY_NAMES = [...Object.keys(CANONICAL), ...Object.keys(CITY_ALIASES)]
+    .sort((a, b) => b.length - a.length);
+
+/** The city a question names, as {city, phrase}: "waste in bangalore?" → {city: "Bengaluru", phrase: "bangalore"}. */
+function findCityIn(text) {
+    const words = ` ${String(text ?? '').toLowerCase().replace(/[^\p{L}\p{N}-]+/gu, ' ')} `;
+    const phrase = CITY_NAMES.find((name) => words.includes(` ${name} `));
+    return phrase ? { city: normaliseCity(phrase), phrase } : null;
+}
+
 /** [{city, count, point}] for the cities `citiesOf(item)` names, busiest first. */
 function countByCity(items, citiesOf) {
     const counts = new Map();

@@ -15,11 +15,17 @@ const mod = await import(
   "data:text/javascript," +
     encodeURIComponent(
       src +
-        "\nexport { CITY_POINTS, normaliseCity, countByCity, bubbleRadius, placeLabels, projectPoint };",
+        "\nexport { CITY_POINTS, normaliseCity, findCityIn, countByCity, bubbleRadius, placeLabels, projectPoint };",
     )
 );
-const { CITY_POINTS, normaliseCity, countByCity, bubbleRadius, placeLabels } =
-  mod;
+const {
+  CITY_POINTS,
+  normaliseCity,
+  findCityIn,
+  countByCity,
+  bubbleRadius,
+  placeLabels,
+} = mod;
 
 Deno.test("normaliseCity tidies the city names communities type in", () => {
   assertEquals(normaliseCity("Bengaluru"), "Bengaluru");
@@ -31,6 +37,21 @@ Deno.test("normaliseCity tidies the city names communities type in", () => {
   assertEquals(normaliseCity("Some New Town"), "Some New Town");
   assertEquals(normaliseCity(""), "");
   assertEquals(normaliseCity(null), "");
+});
+
+Deno.test("findCityIn finds the city a question names, in any spelling", () => {
+  assertEquals(findCityIn("waste groups in Bengaluru?"), {
+    city: "Bengaluru",
+    phrase: "bengaluru",
+  });
+  assertEquals(findCityIn("communities in bangalore")?.city, "Bengaluru");
+  assertEquals(findCityIn("Pune")?.city, "Pune");
+  // The longest name wins, so Navi Mumbai is not read as Mumbai.
+  assertEquals(findCityIn("lakes in navi mumbai")?.city, "Navi Mumbai");
+  assertEquals(findCityIn("Pimpri-Chinchwad parks")?.city, "Pimpri-Chinchwad");
+  // Whole words only: "una" must not match inside "community".
+  assertEquals(findCityIn("community gardens"), null);
+  assertEquals(findCityIn(""), null);
 });
 
 Deno.test("countByCity counts each item once per city, busiest first, then by name", () => {

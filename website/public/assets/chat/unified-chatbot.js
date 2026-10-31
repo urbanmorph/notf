@@ -353,7 +353,7 @@ class NotfChatbot {
                     <li><i class="fa-solid fa-house-user"></i> Community name or neighborhood</li>
                     <li><i class="fa-solid fa-tags"></i> Theme (waste, education, water, health, etc.)</li>
                     <li><i class="fa-solid fa-location-dot"></i> Location (city, area)</li>
-                    <li>🤝 Resources (funding, volunteers, space)</li>
+                    <li><i class="fa-solid fa-handshake"></i> Resources (funding, volunteers, space)</li>
                 </ul>
                 <p>Try asking: <em>"Find communities working on waste management in Bengaluru"</em></p>
             </div>
@@ -416,6 +416,8 @@ class NotfChatbot {
     }
 
     async processDiscoveryMessage(message) {
+        await this.loadCityHelpers();
+
         // Re-initialize discovery engine if it's null (data loaded after initialization)
         if (!this.discoveryEngine) {
             console.log('[Chatbot] Re-initializing discovery engine with loaded data');
@@ -427,8 +429,11 @@ class NotfChatbot {
 
         // Use discovery engine to process query
         const results = await this.discoveryEngine.search(message);
+        const city = typeof findCityIn === 'function' ? findCityIn(message)?.city || '' : '';
 
-        if (results.length === 0) {
+        if (results.length === 0 && city) {
+            this.addBotMessage(this.renderNothingInCity(city) + this.airQualityNote(message));
+        } else if (results.length === 0) {
             this.addBotMessage(`
                 <p>I couldn't find any communities matching your search.</p>
                 <p>Try:</p>
@@ -437,13 +442,67 @@ class NotfChatbot {
                     <li>Searching by neighborhood or city</li>
                     <li>Browsing by theme (waste, education, water, etc.)</li>
                 </ul>
-            `);
+            ` + this.airQualityNote(message));
         } else {
-            this.displayDiscoveryResults(results);
+            this.displayDiscoveryResults(results, city, message);
         }
     }
 
-    displayDiscoveryResults(results) {
+    // city-map.js (findCityIn, normaliseCity) is already on the home and communities
+    // pages. Elsewhere it loads on the first search; by then the page's own scripts
+    // have run, so it is never loaded twice. Search still works if it fails to load.
+    loadCityHelpers() {
+        if (typeof findCityIn === 'function') return Promise.resolve();
+        this.cityHelpers ||= new Promise((resolve) => {
+            const script = document.createElement('script');
+            script.src = '/assets/js/city-map.js';
+            script.onload = script.onerror = resolve;
+            document.body.appendChild(script);
+        });
+        return this.cityHelpers;
+    }
+
+    chatLinks(links) {
+        return `<div class="chat-option-buttons">${links.map(({ href, label }) =>
+            `<a href="${href}" class="chat-link-btn"><i class="fa-solid fa-arrow-right"></i> ${this.escapeHtml(label)}</a>`
+        ).join('')}</div>`;
+    }
+
+    // A link to the city's view on /communities/, when anyone is registered there.
+    cityLink(city) {
+        const count = this.discoveryEngine.resourcesIn(city).filter(r => r.resourceType === 'community').length;
+        if (!count) return '';
+        return this.chatLinks([{
+            href: `/communities/?city=${encodeURIComponent(city)}`,
+            label: `See ${count === 1 ? 'the 1 community' : `all ${count} communities`} in ${city}`
+        }]);
+    }
+
+    // Say so plainly rather than show other cities; point to the catalogue and to joining.
+    renderNothingInCity(city) {
+        const name = this.escapeHtml(city);
+        if (this.discoveryEngine.resourcesIn(city).length) {
+            return `<p>Nothing in ${name} matched that.</p>` + this.cityLink(city);
+        }
+        const projects = (window.CATALOG_PROJECTS || [])
+            .filter(p => (p.cities || []).some(c => normaliseCity(c) === city)).length;
+        return `<p>There are no registered communities or solution providers in ${name} yet.</p>` +
+            this.chatLinks([
+                projects
+                    ? { href: `/catalog/?city=${encodeURIComponent(city)}`, label: `See ${projects} ${projects === 1 ? 'project' : 'projects'} in ${city} in the catalogue` }
+                    : { href: '/catalog/', label: 'Browse the project catalogue' },
+                { href: '/join/', label: `Know a group in ${city}? Invite them to join` }
+            ]);
+    }
+
+    // Communities can work on air quality, but live readings live on oaq.notf.in.
+    airQualityNote(message) {
+        if (!/\b(air[ -]?quality|air pollution|aqi|smog|pollution)\b/i.test(message)) return '';
+        return '<p><i class="fa-solid fa-wind"></i> For live air quality readings, see ' +
+            '<a href="https://oaq.notf.in" target="_blank" rel="noopener">oaq.notf.in</a>.</p>';
+    }
+
+    displayDiscoveryResults(results, city = '', message = '') {
         this.currentSearchResults = results; // Store for modal access
 
         // Determine what types of results we have
@@ -461,8 +520,10 @@ class NotfChatbot {
 
         const resultsHtml = `
             <div class="discovery-results">
-                <p>I found <strong>${results.length}</strong> result${results.length === 1 ? '' : 's'}${resultTypeText} for you:</p>
+                <p>I found <strong>${results.length}</strong> result${results.length === 1 ? '' : 's'}${resultTypeText}${city ? ` in ${this.escapeHtml(city)}` : ''} for you:</p>
                 ${results.map((result, index) => this.renderResourceCard(result, index)).join('')}
+                ${city ? this.cityLink(city) : ''}
+                ${this.airQualityNote(message)}
             </div>
         `;
 
@@ -516,7 +577,7 @@ class NotfChatbot {
                 <div class="chat-modal-content" onclick="event.stopPropagation()">
                     <div class="chat-modal-header">
                         <h3>${resource.name}</h3>
-                        <button class="chat-modal-close" onclick="window.notfChatbot.closeResourceModal()">✕</button>
+                        <button class="chat-modal-close" onclick="window.notfChatbot.closeResourceModal()" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
                     </div>
                     <div class="chat-modal-body">
                         <div class="chat-modal-section">
@@ -759,7 +820,7 @@ class NotfChatbot {
         messageEl.className = 'chat-message user-message';
         messageEl.innerHTML = `
             <div class="message-content">${this.escapeHtml(text)}</div>
-            <div class="message-avatar">👤</div>
+            <div class="message-avatar"><i class="fa-solid fa-user"></i></div>
         `;
         this.elements.messagesContainer.appendChild(messageEl);
         this.scrollToBottom();

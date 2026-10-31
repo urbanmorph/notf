@@ -184,24 +184,28 @@ class DiscoveryEngine {
         const requestedType = this.detectResourceType(queryLower);
         console.log('[Discovery] Requested type:', requestedType);
 
-        // Remove resource type keywords from query for better matching
-        const cleanQuery = this.cleanQuery(queryLower);
-        console.log('[Discovery] Clean query:', cleanQuery);
+        // A named city narrows every result to that city; the rest of the
+        // question is matched within it ("waste in Pune" → "waste").
+        const found = typeof findCityIn === 'function' ? findCityIn(queryLower) : null;
+        const city = found?.city || '';
+        const keep = (r) => (!requestedType || r.resourceType === requestedType) &&
+            (!city || this.cityOf(r) === city);
+
+        // Remove resource type keywords (and the city) from query for better matching
+        const cleanQuery = this.cleanQuery(found ? queryLower.replace(found.phrase, ' ') : queryLower);
+        console.log('[Discovery] Clean query:', cleanQuery, 'City:', city || '(any)');
+
+        // Just a city ("communities in Pune"): everyone there.
+        if (city && !cleanQuery) {
+            return this.allResources.filter(keep).slice(0, 10);
+        }
 
         // Try SmartMatcher first (multi-component scoring)
         if (this.smartMatcher) {
             console.log('[Discovery] Using SmartMatcher (multi-component scoring)...');
             try {
-                // Filter by resource type if requested
-                let resourcesToSearch = this.allResources;
-                if (requestedType === 'community') {
-                    resourcesToSearch = resourcesToSearch.filter(r => r.resourceType === 'community');
-                } else if (requestedType === 'provider') {
-                    resourcesToSearch = resourcesToSearch.filter(r => r.resourceType === 'provider');
-                }
-
                 // Use SmartMatcher's search method
-                const smartResults = await this.smartMatcher.search(cleanQuery, resourcesToSearch, {
+                const smartResults = await this.smartMatcher.search(cleanQuery, this.allResources.filter(keep), {
                     limit: 10,
                     minScore: 0.25  // Lower threshold for discovery (more results)
                 });
@@ -221,7 +225,7 @@ class DiscoveryEngine {
         if (this.resourceEmbeddings && this.resourceEmbeddings.length > 0) {
             console.log('[Discovery] Using semantic matching (fallback)...');
             try {
-                const semanticResults = await this.semanticSearch(cleanQuery, requestedType);
+                const semanticResults = await this.semanticSearch(cleanQuery, keep);
                 if (semanticResults.length > 0) {
                     console.log('[Discovery] Found', semanticResults.length, 'semantic matches');
                     return semanticResults;
@@ -234,24 +238,15 @@ class DiscoveryEngine {
         // Fall back to Fuse.js (final fallback)
         if (!this.fuse) {
             console.warn('[Discovery] Fuse.js not available, using basic search');
-            return this.basicSearch(cleanQuery, requestedType);
+            return this.basicSearch(cleanQuery, keep);
         }
 
         console.log('[Discovery] Using Fuse.js fuzzy matching (final fallback)...');
         // Use Fuse.js for fuzzy search
-        let results = this.fuse.search(cleanQuery).map(result => ({
+        const results = this.fuse.search(cleanQuery).filter(result => keep(result.item)).map(result => ({
             ...result.item,
             matchScore: 1 - result.score  // Invert score (lower Fuse score = better match)
         }));
-
-        console.log('[Discovery] Fuse.js found', results.length, 'results before filtering');
-
-        // Filter by requested resource type if specified
-        if (requestedType === 'community') {
-            results = results.filter(r => r.resourceType === 'community');
-        } else if (requestedType === 'provider') {
-            results = results.filter(r => r.resourceType === 'provider');
-        }
 
         console.log('[Discovery] Final results after filtering:', results.length);
         if (results.length > 0) {
@@ -265,10 +260,10 @@ class DiscoveryEngine {
     /**
      * Semantic search using Transformers.js embeddings
      * @param {string} query - The search query
-     * @param {string} requestedType - Optional resource type filter ('community' or 'provider')
+     * @param {Function} keep - Which resources may be returned (type and city)
      * @returns {Array} - Matching resources with semantic scores
      */
-    async semanticSearch(query, requestedType) {
+    async semanticSearch(query, keep) {
         if (!window.semanticMatcher || !window.semanticMatcher.isReady) {
             console.warn('[Discovery] SemanticMatcher not ready');
             return [];
@@ -285,7 +280,7 @@ class DiscoveryEngine {
             for (const resEmb of this.resourceEmbeddings) {
                 const similarity = window.semanticMatcher.cosineSimilarity(queryEmbedding, resEmb.embedding);
 
-                if (similarity >= SEMANTIC_THRESHOLD) {
+                if (similarity >= SEMANTIC_THRESHOLD && keep(resEmb.resource)) {
                     matches.push({
                         ...resEmb.resource,
                         matchScore: similarity,
@@ -295,16 +290,8 @@ class DiscoveryEngine {
                 }
             }
 
-            // Filter by requested resource type if specified
-            let filteredMatches = matches;
-            if (requestedType === 'community') {
-                filteredMatches = matches.filter(m => m.resourceType === 'community');
-            } else if (requestedType === 'provider') {
-                filteredMatches = matches.filter(m => m.resourceType === 'provider');
-            }
-
             // Sort by similarity score (highest first) and return top 10
-            const sortedMatches = filteredMatches.sort((a, b) => b.matchScore - a.matchScore).slice(0, 10);
+            const sortedMatches = matches.sort((a, b) => b.matchScore - a.matchScore).slice(0, 10);
 
             console.log('[Discovery] Semantic search found', sortedMatches.length, 'matches');
             if (sortedMatches.length > 0) {
@@ -319,7 +306,7 @@ class DiscoveryEngine {
     }
 
     // Fallback basic search if Fuse.js fails to load
-    basicSearch(cleanQuery, requestedType) {
+    basicSearch(cleanQuery, keep) {
         const queryWords = cleanQuery.split(/\s+/).filter(w => w.length > 0);
         const matchScores = new Map();
 
@@ -347,20 +334,24 @@ class DiscoveryEngine {
             });
         });
 
-        let results = Array.from(matchScores.entries())
+        return Array.from(matchScores.entries())
             .sort((a, b) => b[1] - a[1])
             .map(([idx, score]) => ({
                 ...this.allResources[idx],
                 matchScore: score
-            }));
+            }))
+            .filter(keep)
+            .slice(0, 10);
+    }
 
-        if (requestedType === 'community') {
-            results = results.filter(r => r.resourceType === 'community');
-        } else if (requestedType === 'provider') {
-            results = results.filter(r => r.resourceType === 'provider');
-        }
+    /** One spelling of the city a community or provider is in ("bangalore" → "Bengaluru"). */
+    cityOf(resource) {
+        return typeof normaliseCity === 'function' ? normaliseCity(resource.city || resource.location) : '';
+    }
 
-        return results.slice(0, 10);
+    /** Everyone registered in `city`, communities and providers. */
+    resourcesIn(city) {
+        return this.allResources.filter(r => this.cityOf(r) === city);
     }
 
     detectResourceType(query) {
