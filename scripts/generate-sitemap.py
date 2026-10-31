@@ -32,8 +32,6 @@ def get_priority(rel_path: str) -> tuple[float, str]:
         return (1.0, "weekly")
     if rel_path in ("about", "communities", "solution-providers", "catalog", "stories", "join"):
         return (0.9, "weekly")
-    if rel_path == "cities" or rel_path.startswith("cities/") and rel_path.count("/") == 1:
-        return (0.8, "weekly")
     return (0.7, "monthly")
 
 

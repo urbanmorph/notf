@@ -15,13 +15,23 @@
       "permanent": true
     },
     {
-      "source": "/cities/:city/climate(/.*)?",
-      "destination": "/cities/:city/",
+      "source": "/cities/:city/stories(/.*)?",
+      "destination": "/stories/",
       "permanent": true
     },
     {
-      "source": "/cities/:city/communities(/.*)?",
+      "source": "/cities/:city/solution-providers(/.*)?",
+      "destination": "/solution-providers/",
+      "permanent": true
+    },
+    {
+      "source": "/cities/:city(/.*)?",
       "destination": "/communities/?city=:city",
+      "permanent": true
+    },
+    {
+      "source": "/cities(/)?",
+      "destination": "/communities/",
       "permanent": true
     }
   ]

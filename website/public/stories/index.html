@@ -473,11 +473,6 @@
         let allStories = [];
 
         // City slug mapping
-        function getCitySlug(cityName) {
-            if (!cityName) return '';
-            return cityName.toLowerCase().replace(/\s+/g, '-');
-        }
-
         // Theme tag color mapping
         function getThemeClass(theme) {
             const t = (theme || '').toLowerCase();
@@ -620,13 +615,12 @@
                         const themes = story.themes || [];
                         const youtubeId = getYoutubeId(story.youtube_url);
                         const hasContent = story.content && story.content.trim();
-                        const citySlug = getCitySlug(story.city);
 
                         return `
                             <div class="story-card" id="story-${index}">
                                 <div class="story-card-header">
                                     <div class="story-tags-row">
-                                        ${story.city ? `<a href="/cities/${escapeHtml(citySlug)}/" class="city-badge">${escapeHtml(story.city)}</a>` : ''}
+                                        ${story.city ? `<a href="/communities/?city=${encodeURIComponent(story.city)}" class="city-badge">${escapeHtml(story.city)}</a>` : ''}
                                         ${themes.length > 0 ? `
                                             <div class="story-themes">
                                                 ${themes.map(t => `<span class="theme-tag ${getThemeClass(t)}">${escapeHtml(t)}</span>`).join('')}

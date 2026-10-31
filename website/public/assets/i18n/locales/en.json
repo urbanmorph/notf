@@ -8,9 +8,7 @@
     "join": "Join",
     "admin": "Admin Login",
     "adminLogin": "Admin Login",
-    "bengaluru": "Bengaluru",
     "catalogue": "Catalogue",
-    "cities": "Cities",
     "airQuality": "Air Quality"
   },
   "hero": {
@@ -272,16 +270,6 @@
     "catalogItems": "Catalogue",
     "stories": "Stories"
   },
-  "citySelector": {
-    "title": "Select Your City",
-    "subtitle": "Choose a city to explore community networks, ward-level maps, and local initiatives.",
-    "explore": "Explore",
-    "wardMap": "Ward Map",
-    "mapComingSoon": "Map (Coming Soon)",
-    "communitiesComingSoon": "Communities (Coming Soon)",
-    "providersComingSoon": "Providers (Coming Soon)",
-    "storiesComingSoon": "Stories (Coming Soon)"
-  },
   "features": {
     "title": "How NOTF Works",
     "subtitle": "Explore our network through three powerful directories, powered by our innovative ask/offer matching algorithm that connects community needs with available resources",
@@ -335,8 +323,6 @@
   },
   "common": {
     "loading": "Loading...",
-    "loadingCitiesQuote": "Great cities are not built by governments alone, but by communities working together.",
-    "loadingCitiesAuthor": "— Jane Jacobs",
     "error": "An error occurred",
     "close": "Close",
     "cancel": "Cancel",
@@ -451,165 +437,6 @@
       "error": "An error occurred while submitting your application. Please try again."
     }
   },
-  "cityHub": {
-    "ahmedabad": {
-      "subtitle": "Gujarat, India",
-      "wards": "Wards",
-      "population": "Population",
-      "exploreTitle": "Explore Ahmedabad",
-      "exploreSubtitle": "Ward-level map available now. Community and provider directories coming soon."
-    },
-    "bengaluru": {
-      "subtitle": "Karnataka, India",
-      "wards": "Wards",
-      "population": "Population",
-      "exploreTitle": "Explore Bengaluru",
-      "exploreSubtitle": "Navigate through communities, organizations, and ward-level data for India's Silicon Valley."
-    },
-    "bhubaneswar": {
-      "subtitle": "Odisha, India",
-      "wards": "Wards",
-      "population": "Population",
-      "exploreTitle": "Explore Bhubaneswar",
-      "exploreSubtitle": "Ward-level map available now. Community and provider directories coming soon."
-    },
-    "chennai": {
-      "subtitle": "Tamil Nadu, India",
-      "wards": "Wards",
-      "population": "Population",
-      "exploreTitle": "Explore Chennai",
-      "exploreSubtitle": "Ward-level map available now. Community and provider directories coming soon."
-    },
-    "gurugram": {
-      "subtitle": "Haryana, India",
-      "wards": "Wards",
-      "population": "Population",
-      "exploreTitle": "Explore Gurugram",
-      "exploreSubtitle": "Ward-level map available now. Community and provider directories coming soon."
-    },
-    "hyderabad": {
-      "subtitle": "Telangana, India",
-      "wards": "Wards",
-      "population": "Population",
-      "exploreTitle": "Explore Hyderabad",
-      "exploreSubtitle": "Ward-level map available now. Community and provider directories coming soon."
-    },
-    "jaipur": {
-      "subtitle": "Rajasthan, India",
-      "wards": "Wards",
-      "population": "Population",
-      "exploreTitle": "Explore Jaipur",
-      "exploreSubtitle": "Ward-level map available now. Community and provider directories coming soon."
-    },
-    "kochi": {
-      "subtitle": "Kerala, India",
-      "wards": "Wards",
-      "population": "Population",
-      "exploreTitle": "Explore Kochi",
-      "exploreSubtitle": "Ward-level map available now. Community and provider directories coming soon."
-    },
-    "kolkata": {
-      "subtitle": "West Bengal, India",
-      "wards": "Wards",
-      "population": "Population",
-      "exploreTitle": "Explore Kolkata",
-      "exploreSubtitle": "Ward-level map available now. Community and provider directories coming soon."
-    },
-    "mumbai": {
-      "subtitle": "Maharashtra, India",
-      "wards": "Wards",
-      "population": "Population",
-      "exploreTitle": "Explore Mumbai",
-      "exploreSubtitle": "Ward-level map available now. Community and provider directories coming soon."
-    },
-    "pune": {
-      "subtitle": "Maharashtra, India",
-      "wards": "Wards",
-      "population": "Population",
-      "exploreTitle": "Explore Pune",
-      "exploreSubtitle": "Ward-level map available now. Community and provider directories coming soon."
-    },
-    "thane": {
-      "subtitle": "Maharashtra, India",
-      "wards": "Wards",
-      "population": "Population",
-      "exploreTitle": "Explore Thane",
-      "exploreSubtitle": "Ward-level map available now. Community and provider directories coming soon."
-    },
-    "visakhapatnam": {
-      "subtitle": "Andhra Pradesh, India",
-      "wards": "Wards",
-      "population": "Population",
-      "exploreTitle": "Explore Visakhapatnam",
-      "exploreSubtitle": "Ward-level map available now. Community and provider directories coming soon."
-    },
-    "stats": {
-      "communities": "Communities",
-      "providers": "Solution Providers",
-      "wardsTracked": "Wards Tracked"
-    },
-    "features": {
-      "map": {
-        "title": "Ward-Level Map",
-        "description": "Explore all {{wardCount}} electoral wards with interactive boundaries. View ward demographics, boundaries, and geographical data.",
-        "button": "View Map",
-        "statusLive": "Live"
-      },
-      "communities": {
-        "title": "Communities",
-        "description": "Connect with {{count}} active community-led initiatives. Discover collaboration opportunities and local impact projects.",
-        "button": "Browse Communities"
-      },
-      "providers": {
-        "title": "Solution Providers",
-        "description": "Find {{count}} organizations supporting community work. CBOs, solution providers, and more.",
-        "button": "View Providers"
-      },
-      "statusComingSoon": "Coming Soon",
-      "stories": {
-        "title": "Community Stories",
-        "description": "Discover real stories of neighbourhood transformation, told by the people who made it happen.",
-        "button": "Read Stories",
-        "comingSoonDescription": "Community stories for this city are under development. Real stories of neighbourhood transformation coming soon."
-      }
-    },
-    "nav": {
-      "cities": "Cities",
-      "communities": "Communities",
-      "providers": "Providers",
-      "map": "Map",
-      "stories": "Stories",
-      "backTo": "Back to Bengaluru",
-      "allCities": "All Cities"
-    },
-    "comingSoonCallout": {
-      "title": "City Data Coming Soon",
-      "description": "We're currently building the city directory. Help us grow the network by registering your community or organization.",
-      "communityDirectory": "Community Directory",
-      "providerNetwork": "Solution Provider Network",
-      "joinCommunity": "Join as Community",
-      "joinProvider": "Join as Provider",
-      "comingSoonButton": "Coming Soon"
-    }
-  },
-  "mumbai": {
-    "name": "Mumbai",
-    "nav": {
-      "hub": "Mumbai Hub",
-      "communities": "Communities",
-      "providers": "Providers",
-      "map": "Map"
-    }
-  },
-  "bengaluru": {
-    "name": "Bengaluru"
-  },
-  "citiesPage": {
-    "title": "Our Cities",
-    "subtitle": "Explore 13 cities across India with ward-level data, community networks, and local initiatives.",
-    "breadcrumb": "Cities",
-    "errorLoading": "Error loading cities. Please refresh the page."
-  },
   "storiesPage": {
     "title": "Community Stories",
     "subtitle": "Real stories of neighbourhood transformation, told by the people who made it happen.",
@@ -629,7 +456,6 @@
     "noStories": "No stories found matching your filters."
   },
   "statsNav": {
-    "citiesHint": "Bengaluru leads with the most active communities",
     "exploreAll": "Explore all cities",
     "browseAll": "Browse communities",
     "browseCatalog": "Browse catalogue",
@@ -638,7 +464,6 @@
     "storiesLoading": "Loading stories...",
     "catalogTitle": "Projects",
     "storiesTitle": "Stories",
-    "citiesTitle": "Cities",
     "communitiesTitle": "Communities",
     "storiesHint": "Real stories of neighbourhood transformation",
     "communitiesHint": "Active neighbourhood groups across India"

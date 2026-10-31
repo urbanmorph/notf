@@ -8,9 +8,7 @@
     "join": "شامل ہوں",
     "admin": "ایڈمن لاگ ان",
     "adminLogin": "ایڈمن لاگ ان",
-    "bengaluru": "بنگلور",
     "catalogue": "پروجیکٹ فہرست",
-    "cities": "شہر",
     "airQuality": "ہوا کا معیار"
   },
   "hero": {
@@ -272,16 +270,6 @@
     "catalogItems": "کیٹلاگ",
     "stories": "کہانیاں"
   },
-  "citySelector": {
-    "title": "اپنے شہر کو منتخب کریں",
-    "subtitle": "کمیونٹی نیٹ ورکس ، وارڈ سطح کے نقشے ، اور مقامی اقدامات کی تلاش کے ل a ایک شہر کا انتخاب کریں۔",
-    "explore": "دریافت کریں",
-    "wardMap": "وارڈ کا نقشہ",
-    "mapComingSoon": "نقشہ (جلد ہی آرہا ہے)",
-    "communitiesComingSoon": "کمیونٹیز (جلد ہی آرہی ہیں)",
-    "providersComingSoon": "فراہم کرنے والے (جلد ہی آرہے ہیں)",
-    "storiesComingSoon": "کہانیاں (جلد آ رہا ہے)"
-  },
   "features": {
     "title": "کیسے کام کرتا ہے",
     "subtitle": "ہمارے نیٹ ورک کو تین طاقتور ڈائریکٹریوں کے ذریعے دریافت کریں ، جو ہمارے جدید پوچھ/پیش کش کے مماثل الگورتھم کے ذریعہ تقویت یافتہ ہیں جو معاشرے کی ضروریات کو دستیاب وسائل سے جوڑتا ہے۔",
@@ -335,8 +323,6 @@
   },
   "common": {
     "loading": "لوڈنگ ...",
-    "loadingCitiesQuote": "عظیم شہر صرف حکومتوں کے ذریعہ نہیں بنائے جاتے ہیں ، بلکہ ایک ساتھ مل کر کام کرنے والی جماعتوں کے ذریعہ۔",
-    "loadingCitiesAuthor": "- جین جیکبز",
     "error": "ایک غلطی ہوئی",
     "close": "بند کریں",
     "cancel": "منسوخ کریں",
@@ -451,153 +437,6 @@
       "error": "آپ کی درخواست جمع کرواتے وقت ایک خرابی پیش آگئی۔براہ کرم دوبارہ کوشش کریں۔"
     }
   },
-  "cityHub": {
-    "ahmedabad": {
-      "subtitle": "گجرات ، ہندوستان",
-      "wards": "وارڈز",
-      "population": "آبادی",
-      "exploreTitle": "احمد آباد کو دریافت کریں",
-      "exploreSubtitle": "وارڈ لیول کا نقشہ اب دستیاب ہے۔کمیونٹی اور فراہم کنندہ ڈائریکٹری جلد ہی آرہی ہیں۔"
-    },
-    "bengaluru": {
-      "subtitle": "کرناٹک ، ہندوستان",
-      "wards": "وارڈز",
-      "population": "آبادی",
-      "exploreTitle": "بنگلورو کو دریافت کریں",
-      "exploreSubtitle": "ہندوستان کی سلیکن ویلی کے لئے برادریوں ، تنظیموں اور وارڈ لیول کے اعداد و شمار کے ذریعے تشریف لے جائیں۔"
-    },
-    "bhubaneswar": {
-      "subtitle": "اوڈیشہ ، ہندوستان",
-      "wards": "وارڈز",
-      "population": "آبادی",
-      "exploreTitle": "بھوبنیشور کو دریافت کریں",
-      "exploreSubtitle": "وارڈ لیول کا نقشہ اب دستیاب ہے۔کمیونٹی اور فراہم کنندہ ڈائریکٹری جلد ہی آرہی ہیں۔"
-    },
-    "chennai": {
-      "subtitle": "تمل ناڈو ، ہندوستان",
-      "wards": "وارڈز",
-      "population": "آبادی",
-      "exploreTitle": "چنئی کو دریافت کریں",
-      "exploreSubtitle": "وارڈ لیول کا نقشہ اب دستیاب ہے۔کمیونٹی اور فراہم کنندہ ڈائریکٹری جلد ہی آرہی ہیں۔"
-    },
-    "gurugram": {
-      "subtitle": "ہریانہ ، ہندوستان",
-      "wards": "وارڈز",
-      "population": "آبادی",
-      "exploreTitle": "گروگرام کو دریافت کریں",
-      "exploreSubtitle": "وارڈ لیول کا نقشہ اب دستیاب ہے۔کمیونٹی اور فراہم کنندہ ڈائریکٹری جلد ہی آرہی ہیں۔"
-    },
-    "hyderabad": {
-      "subtitle": "تلنگانہ ، ہندوستان",
-      "wards": "وارڈز",
-      "population": "آبادی",
-      "exploreTitle": "حیدرآباد کو دریافت کریں",
-      "exploreSubtitle": "وارڈ لیول کا نقشہ اب دستیاب ہے۔کمیونٹی اور فراہم کنندہ ڈائریکٹری جلد ہی آرہی ہیں۔"
-    },
-    "jaipur": {
-      "subtitle": "راجستھان ، ہندوستان",
-      "wards": "وارڈز",
-      "population": "آبادی",
-      "exploreTitle": "جے پور کو دریافت کریں",
-      "exploreSubtitle": "وارڈ لیول کا نقشہ اب دستیاب ہے۔کمیونٹی اور فراہم کنندہ ڈائریکٹری جلد ہی آرہی ہیں۔"
-    },
-    "kochi": {
-      "subtitle": "کیرالہ ، ہندوستان",
-      "wards": "وارڈز",
-      "population": "آبادی",
-      "exploreTitle": "کوچی کو دریافت کریں",
-      "exploreSubtitle": "وارڈ لیول کا نقشہ اب دستیاب ہے۔کمیونٹی اور فراہم کنندہ ڈائریکٹری جلد ہی آرہی ہیں۔"
-    },
-    "kolkata": {
-      "subtitle": "مغربی بنگال ، ہندوستان",
-      "wards": "وارڈز",
-      "population": "آبادی",
-      "exploreTitle": "کولکتہ دریافت کریں",
-      "exploreSubtitle": "وارڈ لیول کا نقشہ اب دستیاب ہے۔کمیونٹی اور فراہم کنندہ ڈائریکٹری جلد ہی آرہی ہیں۔"
-    },
-    "mumbai": {
-      "subtitle": "مہاراشٹر ، ہندوستان",
-      "wards": "وارڈز",
-      "population": "آبادی",
-      "exploreTitle": "ممبئی دریافت کریں",
-      "exploreSubtitle": "وارڈ لیول کا نقشہ اب دستیاب ہے۔کمیونٹی اور فراہم کنندہ ڈائریکٹری جلد ہی آرہی ہیں۔"
-    },
-    "pune": {
-      "subtitle": "مہاراشٹر ، ہندوستان",
-      "wards": "وارڈز",
-      "population": "آبادی",
-      "exploreTitle": "پونے کو دریافت کریں",
-      "exploreSubtitle": "وارڈ لیول کا نقشہ اب دستیاب ہے۔کمیونٹی اور فراہم کنندہ ڈائریکٹری جلد ہی آرہی ہیں۔"
-    },
-    "thane": {
-      "subtitle": "مہاراشٹر ، ہندوستان",
-      "wards": "وارڈز",
-      "population": "آبادی",
-      "exploreTitle": "تھانہ کو دریافت کریں",
-      "exploreSubtitle": "وارڈ لیول کا نقشہ اب دستیاب ہے۔کمیونٹی اور فراہم کنندہ ڈائریکٹری جلد ہی آرہی ہیں۔"
-    },
-    "visakhapatnam": {
-      "subtitle": "آندھرا پردیش ، ہندوستان",
-      "wards": "وارڈز",
-      "population": "آبادی",
-      "exploreTitle": "وشاکھاپٹن کو دریافت کریں",
-      "exploreSubtitle": "وارڈ لیول کا نقشہ اب دستیاب ہے۔کمیونٹی اور فراہم کنندہ ڈائریکٹری جلد ہی آرہی ہیں۔"
-    },
-    "stats": {
-      "communities": "برادریوں",
-      "providers": "حل فراہم کرنے والے",
-      "wardsTracked": "وارڈوں نے ٹریک کیا"
-    },
-    "features": {
-      "map": {
-        "title": "وارڈ سطح کا نقشہ",
-        "description": "Explore all {{wardCount}} electoral wards with interactive boundaries. View ward demographics, boundaries, and geographical data.",
-        "button": "نقشہ دیکھیں",
-        "statusLive": "زندہ"
-      },
-      "communities": {
-        "title": "برادریوں",
-        "description": "Connect with {{count}} active community-led initiatives. Discover collaboration opportunities and local impact projects.",
-        "button": "برادریوں کو براؤز کریں"
-      },
-      "providers": {
-        "title": "حل فراہم کرنے والے",
-        "description": "Find {{count}} organizations supporting community work. CBOs, solution providers, and more.",
-        "button": "فراہم کنندگان دیکھیں"
-      },
-      "statusComingSoon": "جلد آرہا ہے",
-      "stories": {
-        "title": "کمیونٹی کہانیاں",
-        "description": "محلے کی تبدیلی کی حقیقی کہانیاں دریافت کریں، ان لوگوں نے بتائی ہیں جنہوں نے اسے ممکن بنایا۔",
-        "button": "کہانیاں پڑھیں",
-        "comingSoonDescription": "اس شہر کی کمیونٹی کہانیاں زیر ترقی ہیں۔ محلے کی تبدیلی کی حقیقی کہانیاں جلد آ رہی ہیں۔"
-      }
-    },
-    "nav": {
-      "cities": "شہر",
-      "communities": "کمیونٹیز",
-      "providers": "فراہم کرنے والے",
-      "map": "نقشہ",
-      "stories": "کہانیاں",
-      "backTo": "بنگلور واپس جائیں",
-      "allCities": "تمام شہر"
-    },
-    "comingSoonCallout": {
-      "title": "شہر کا ڈیٹا جلد ہی آرہا ہے",
-      "description": "ہم فی الحال سٹی ڈائرکٹری بنا رہے ہیں۔اپنی برادری یا تنظیم کو رجسٹر کرکے نیٹ ورک کو بڑھانے میں ہماری مدد کریں۔",
-      "communityDirectory": "کمیونٹی ڈائرکٹری",
-      "providerNetwork": "حل فراہم کرنے والا نیٹ ورک",
-      "joinCommunity": "برادری کے طور پر شامل ہوں",
-      "joinProvider": "فراہم کنندہ کے طور پر شامل ہوں",
-      "comingSoonButton": "جلد آرہا ہے"
-    }
-  },
-  "citiesPage": {
-    "title": "ہمارے شہر",
-    "subtitle": "وارڈ سطح کے ڈیٹا، کمیونٹی نیٹ ورکس اور مقامی اقدامات کے ساتھ پورے بھارت میں 13 شہروں کو دریافت کریں۔",
-    "breadcrumb": "شہر",
-    "errorLoading": "شہروں کو لوڈ کرنے میں خرابی۔ براہ کرم صفحہ ریفریش کریں۔"
-  },
   "storiesPage": {
     "title": "کمیونٹی کہانیاں",
     "subtitle": "محلے کی تبدیلی کی حقیقی کہانیاں، ان لوگوں کی زبانی جنہوں نے اسے ممکن بنایا۔",
@@ -617,7 +456,6 @@
     "noStories": "آپ کے فلٹرز سے مماثل کوئی کہانی نہیں ملی۔"
   },
   "statsNav": {
-    "citiesHint": "بنگلورو سب سے زیادہ فعال کمیونٹیز کے ساتھ آگے ہے",
     "exploreAll": "تمام شہر دیکھیں",
     "browseAll": "کمیونٹیز دیکھیں",
     "browseCatalog": "کیٹلاگ دیکھیں",
@@ -626,7 +464,6 @@
     "storiesLoading": "کہانیاں لوڈ ہو رہی ہیں...",
     "catalogTitle": "منصوبے",
     "storiesTitle": "کہانیاں",
-    "citiesTitle": "شہر",
     "communitiesTitle": "برادریاں",
     "storiesHint": "محلے کی تبدیلی کی حقیقی کہانیاں",
     "communitiesHint": "پورے بھارت میں فعال محلہ گروپس"
@@ -679,7 +516,6 @@
     },
     "detailsButton": "تفصیلات"
   },
-  "mumbai": {},
   "joinPage": {
     "step1": {
       "title": "آپ کون ہیں؟",
@@ -722,7 +558,6 @@
       "readStoriesDesc": "ان کمیونٹیز سے سیکھیں جو پہلے ہی شروع کر چکی ہیں"
     }
   },
-  "bengaluru": {},
   "cityMap": {
     "allCities": "تمام شہر",
     "communities": {

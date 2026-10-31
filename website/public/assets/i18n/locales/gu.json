@@ -8,9 +8,7 @@
     "join": "જોડાઓ",
     "admin": "એડમિન લૉગિન",
     "adminLogin": "એડમિન લૉગિન",
-    "bengaluru": "બેંગલુરુ",
     "catalogue": "પ્રોજેક્ટ સૂચિ",
-    "cities": "શહેરો",
     "airQuality": "હવાની ગુણવત્તા"
   },
   "hero": {
@@ -272,16 +270,6 @@
     "catalogItems": "કેટલોગ",
     "stories": "વાર્તાઓ"
   },
-  "citySelector": {
-    "title": "તમારું શહેર પસંદ કરો",
-    "subtitle": "સમુદાય નેટવર્ક્સ, વોર્ડ-સ્તરના નકશા અને સ્થાનિક પહેલનું અન્વેષણ કરવા માટે એક શહેર પસંદ કરો.",
-    "explore": "અન્વેષણ કરો",
-    "wardMap": "વોર્ડ નકશો",
-    "mapComingSoon": "નકશો (ટૂંક સમયમાં આવી રહ્યો છે)",
-    "communitiesComingSoon": "સમુદાયો (ટૂંક સમયમાં આવી રહ્યા છે)",
-    "providersComingSoon": "પ્રદાતાઓ (ટૂંક સમયમાં આવી રહ્યા છે)",
-    "storiesComingSoon": "વાર્તાઓ (ટૂંક સમયમાં આવશે)"
-  },
   "features": {
     "title": "NOTF કેવી રીતે કામ કરે છે",
     "subtitle": "ત્રણ શક્તિશાળી ડિરેક્ટરીઓ દ્વારા અમારા નેટવર્કનું અન્વેષણ કરો, અમારા નવીન પૂછો/ઓફર મેચિંગ અલ્ગોરિધમ દ્વારા સંચાલિત જે સમુદાયની જરૂરિયાતોને ઉપલબ્ધ સંસાધનો સાથે જોડે છે.",
@@ -335,8 +323,6 @@
   },
   "common": {
     "loading": "લોડ કરી રહ્યું છે...",
-    "loadingCitiesQuote": "મહાન શહેરો એકલા સરકારો દ્વારા બનાવવામાં આવતા નથી, પરંતુ સમુદાયો સાથે મળીને કામ કરે છે.",
-    "loadingCitiesAuthor": "- જેન જેકોબ્સ",
     "error": "એક ભૂલ આવી",
     "close": "બંધ કરો",
     "cancel": "રદ કરો",
@@ -451,153 +437,6 @@
       "error": "તમારી અરજી સબમિટ કરતી વખતે એક ભૂલ આવી.કૃપા કરીને ફરી પ્રયાસ કરો."
     }
   },
-  "cityHub": {
-    "ahmedabad": {
-      "subtitle": "ગુજરાત, ભારત",
-      "wards": "વોર્ડ",
-      "population": "વસ્તી",
-      "exploreTitle": "અમદાવાદની શોધખોળ કરો",
-      "exploreSubtitle": "વોર્ડ-સ્તરનો નકશો હવે ઉપલબ્ધ છે.સમુદાય અને પ્રદાતા નિર્દેશિકાઓ ટૂંક સમયમાં આવી રહી છે."
-    },
-    "bengaluru": {
-      "subtitle": "કર્ણાટક, ભારત",
-      "wards": "વોર્ડ",
-      "population": "વસ્તી",
-      "exploreTitle": "બેંગલુરુનું અન્વેષણ કરો",
-      "exploreSubtitle": "ભારતની સિલિકોન વેલી માટે સમુદાયો, સંસ્થાઓ અને વોર્ડ-સ્તરના ડેટા દ્વારા નેવિગેટ કરો."
-    },
-    "bhubaneswar": {
-      "subtitle": "ઓડિશા, ભારત",
-      "wards": "વોર્ડ",
-      "population": "વસ્તી",
-      "exploreTitle": "ભુવનેશ્વરનું અન્વેષણ કરો",
-      "exploreSubtitle": "વોર્ડ-સ્તરનો નકશો હવે ઉપલબ્ધ છે.સમુદાય અને પ્રદાતા નિર્દેશિકાઓ ટૂંક સમયમાં આવી રહી છે."
-    },
-    "chennai": {
-      "subtitle": "તમિલનાડુ, ભારત",
-      "wards": "વોર્ડ",
-      "population": "વસ્તી",
-      "exploreTitle": "ચેન્નાઈનું અન્વેષણ કરો",
-      "exploreSubtitle": "વોર્ડ-સ્તરનો નકશો હવે ઉપલબ્ધ છે.સમુદાય અને પ્રદાતા નિર્દેશિકાઓ ટૂંક સમયમાં આવી રહી છે."
-    },
-    "gurugram": {
-      "subtitle": "હરિયાણા, ભારત",
-      "wards": "વોર્ડ",
-      "population": "વસ્તી",
-      "exploreTitle": "ગુરુગ્રામનું અન્વેષણ કરો",
-      "exploreSubtitle": "વોર્ડ-સ્તરનો નકશો હવે ઉપલબ્ધ છે.સમુદાય અને પ્રદાતા નિર્દેશિકાઓ ટૂંક સમયમાં આવી રહી છે."
-    },
-    "hyderabad": {
-      "subtitle": "તેલંગાણા, ભારત",
-      "wards": "વોર્ડ",
-      "population": "વસ્તી",
-      "exploreTitle": "હૈદરાબાદનું અન્વેષણ કરો",
-      "exploreSubtitle": "વોર્ડ-સ્તરનો નકશો હવે ઉપલબ્ધ છે.સમુદાય અને પ્રદાતા નિર્દેશિકાઓ ટૂંક સમયમાં આવી રહી છે."
-    },
-    "jaipur": {
-      "subtitle": "રાજસ્થાન, ભારત",
-      "wards": "વોર્ડ",
-      "population": "વસ્તી",
-      "exploreTitle": "જયપુરનું અન્વેષણ કરો",
-      "exploreSubtitle": "વોર્ડ-સ્તરનો નકશો હવે ઉપલબ્ધ છે.સમુદાય અને પ્રદાતા નિર્દેશિકાઓ ટૂંક સમયમાં આવી રહી છે."
-    },
-    "kochi": {
-      "subtitle": "કેરળ, ભારત",
-      "wards": "વોર્ડ",
-      "population": "વસ્તી",
-      "exploreTitle": "કોચીનું અન્વેષણ કરો",
-      "exploreSubtitle": "વોર્ડ-સ્તરનો નકશો હવે ઉપલબ્ધ છે.સમુદાય અને પ્રદાતા નિર્દેશિકાઓ ટૂંક સમયમાં આવી રહી છે."
-    },
-    "kolkata": {
-      "subtitle": "પશ્ચિમ બંગાળ, ભારત",
-      "wards": "વોર્ડ",
-      "population": "વસ્તી",
-      "exploreTitle": "કોલકાતાનું અન્વેષણ કરો",
-      "exploreSubtitle": "વોર્ડ-સ્તરનો નકશો હવે ઉપલબ્ધ છે.સમુદાય અને પ્રદાતા નિર્દેશિકાઓ ટૂંક સમયમાં આવી રહી છે."
-    },
-    "mumbai": {
-      "subtitle": "મહારાષ્ટ્ર, ભારત",
-      "wards": "વોર્ડ",
-      "population": "વસ્તી",
-      "exploreTitle": "મુંબઈની શોધખોળ કરો",
-      "exploreSubtitle": "વોર્ડ-સ્તરનો નકશો હવે ઉપલબ્ધ છે.સમુદાય અને પ્રદાતા નિર્દેશિકાઓ ટૂંક સમયમાં આવી રહી છે."
-    },
-    "pune": {
-      "subtitle": "મહારાષ્ટ્ર, ભારત",
-      "wards": "વોર્ડ",
-      "population": "વસ્તી",
-      "exploreTitle": "પુણેનું અન્વેષણ કરો",
-      "exploreSubtitle": "વોર્ડ-સ્તરનો નકશો હવે ઉપલબ્ધ છે.સમુદાય અને પ્રદાતા નિર્દેશિકાઓ ટૂંક સમયમાં આવી રહી છે."
-    },
-    "thane": {
-      "subtitle": "મહારાષ્ટ્ર, ભારત",
-      "wards": "વોર્ડ",
-      "population": "વસ્તી",
-      "exploreTitle": "થાણેનું અન્વેષણ કરો",
-      "exploreSubtitle": "વોર્ડ-સ્તરનો નકશો હવે ઉપલબ્ધ છે.સમુદાય અને પ્રદાતા નિર્દેશિકાઓ ટૂંક સમયમાં આવી રહી છે."
-    },
-    "visakhapatnam": {
-      "subtitle": "આંધ્ર પ્રદેશ, ભારત",
-      "wards": "વોર્ડ",
-      "population": "વસ્તી",
-      "exploreTitle": "વિશાખાપટ્ટનમનું અન્વેષણ કરો",
-      "exploreSubtitle": "વોર્ડ-સ્તરનો નકશો હવે ઉપલબ્ધ છે.સમુદાય અને પ્રદાતા નિર્દેશિકાઓ ટૂંક સમયમાં આવી રહી છે."
-    },
-    "stats": {
-      "communities": "સમુદાયો",
-      "providers": "ઉકેલ પ્રદાતાઓ",
-      "wardsTracked": "વોર્ડ ટ્રેક કર્યા"
-    },
-    "features": {
-      "map": {
-        "title": "વોર્ડ-કક્ષાનો નકશો",
-        "description": "Explore all {{wardCount}} electoral wards with interactive boundaries. View ward demographics, boundaries, and geographical data.",
-        "button": "નકશો જુઓ",
-        "statusLive": "જીવંત"
-      },
-      "communities": {
-        "title": "સમુદાયો",
-        "description": "Connect with {{count}} active community-led initiatives. Discover collaboration opportunities and local impact projects.",
-        "button": "સમુદાયો બ્રાઉઝ કરો"
-      },
-      "providers": {
-        "title": "ઉકેલ પ્રદાતાઓ",
-        "description": "Find {{count}} organizations supporting community work. CBOs, solution providers, and more.",
-        "button": "પ્રદાતાઓ જુઓ"
-      },
-      "statusComingSoon": "ટૂંક સમયમાં આવી રહ્યું છે",
-      "stories": {
-        "title": "સામુદાયિક વાર્તાઓ",
-        "description": "પડોશના પરિવર્તનની સાચી વાર્તાઓ શોધો, તે શક્ય બનાવનારા લોકો દ્વારા કહેવામાં આવી છે.",
-        "button": "વાર્તાઓ વાંચો",
-        "comingSoonDescription": "આ શહેરની સામુદાયિક વાર્તાઓ વિકાસ હેઠળ છે. પડોશના પરિવર્તનની સાચી વાર્તાઓ ટૂંક સમયમાં આવી રહી છે."
-      }
-    },
-    "nav": {
-      "cities": "શહેરો",
-      "communities": "સમુદાયો",
-      "providers": "પ્રદાતાઓ",
-      "map": "નકશો",
-      "stories": "વાર્તાઓ",
-      "backTo": "બેંગલુરુ પર પાછા જાઓ",
-      "allCities": "બધા શહેરો"
-    },
-    "comingSoonCallout": {
-      "title": "શહેરનો ડેટા ટૂંક સમયમાં આવી રહ્યો છે",
-      "description": "અમે હાલમાં સિટી ડિરેક્ટરી બનાવી રહ્યા છીએ.તમારા સમુદાય અથવા સંસ્થાની નોંધણી કરીને નેટવર્ક વધારવામાં અમારી સહાય કરો.",
-      "communityDirectory": "સમુદાય નિર્દેશિકા",
-      "providerNetwork": "ઉકેલ પ્રદાતા નેટવર્ક",
-      "joinCommunity": "સમુદાય તરીકે જોડાઓ",
-      "joinProvider": "પ્રદાતા તરીકે જોડાઓ",
-      "comingSoonButton": "ટૂંક સમયમાં આવી રહ્યું છે"
-    }
-  },
-  "citiesPage": {
-    "title": "અમારા શહેરો",
-    "subtitle": "વોર્ડ-સ્તરના ડેટા, સમુદાય નેટવર્ક્સ અને સ્થાનિક પહેલ સાથે ભારતભરના 13 શહેરો શોધો.",
-    "breadcrumb": "શહેરો",
-    "errorLoading": "શહેરો લોડ કરવામાં ભૂલ. કૃપા કરીને પેજ રિફ્રેશ કરો."
-  },
   "storiesPage": {
     "title": "સમુદાય વાર્તાઓ",
     "subtitle": "પડોશ પરિવર્તનની વાસ્તવિક વાર્તાઓ, જેમણે તે શક્ય બનાવ્યું તેમના દ્વારા કહેવામાં આવેલી.",
@@ -617,7 +456,6 @@
     "noStories": "તમારા ફિલ્ટર્સ સાથે મેળ ખાતી કોઈ વાર્તાઓ મળી નથી."
   },
   "statsNav": {
-    "citiesHint": "બેંગલુરુ સૌથી વધુ સક્રિય સમુદાયો સાથે આગળ છે",
     "exploreAll": "બધા શહેરો જુઓ",
     "browseAll": "સમુદાયો જુઓ",
     "browseCatalog": "કેટલોગ જુઓ",
@@ -626,7 +464,6 @@
     "storiesLoading": "વાર્તાઓ લોડ થઈ રહી છે...",
     "catalogTitle": "પ્રોજેક્ટ્સ",
     "storiesTitle": "વાર્તાઓ",
-    "citiesTitle": "શહેરો",
     "communitiesTitle": "સમુદાયો",
     "storiesHint": "પડોશના પરિવર્તનની સાચી વાર્તાઓ",
     "communitiesHint": "ભારતભરમાં સક્રિય પડોશ જૂથો"
@@ -679,7 +516,6 @@
     },
     "detailsButton": "વિગતો"
   },
-  "mumbai": {},
   "joinPage": {
     "step1": {
       "title": "તમે કોણ છો?",
@@ -722,7 +558,6 @@
       "readStoriesDesc": "જે સમુદાયોએ પહેલેથી શરૂ કર્યું છે તેમની પાસેથી શીખો"
     }
   },
-  "bengaluru": {},
   "cityMap": {
     "allCities": "બધાં શહેરો",
     "communities": {
