@@ -93,6 +93,11 @@ test.describe('chatbot', () => {
     const air = await ask('air quality');
     await expect(air.locator('a[href="https://oaq.notf.in"]')).toBeVisible();
 
+    // Everyday words in other languages find the same records: Hindi for "garbage".
+    const waste = await ask('कचरा');
+    await expect(waste.locator('.community-card h4').first()).toBeVisible();
+    await expect(waste).toContainText('Green Glen Collective');
+
     expect(errors).toEqual([]);
   });
 });

@@ -1,13 +1,16 @@
 // deno-lint-ignore-file no-import-prefix
 import { assertEquals } from "https://deno.land/std@0.224.0/assert/mod.ts";
 
-// discovery-engine.js is a classic browser script that uses findCityIn and
-// normaliseCity from city-map.js. Load both as one module, with exports appended.
-// Without Fuse.js or SmartMatcher loaded, search uses its basic keyword fallback.
+// discovery-engine.js is a classic browser script that uses city-map.js (city
+// helpers) and search-index.js (ranking). Load all three as one module, with
+// exports appended.
 const read = (p: string) =>
   Deno.readTextFile(new URL(`../../public/assets/${p}`, import.meta.url));
-const src = "const window = globalThis;\n" + (await read("js/city-map.js")) +
-  "\n" + (await read("chat/discovery-engine.js"));
+const src = (await Promise.all(
+  ["js/city-map.js", "chat/search-index.js", "chat/discovery-engine.js"].map(
+    read,
+  ),
+)).join("\n");
 const { DiscoveryEngine } = await import(
   "data:text/javascript," +
     encodeURIComponent(src + "\nexport { DiscoveryEngine };")
