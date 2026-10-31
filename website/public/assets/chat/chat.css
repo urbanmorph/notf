@@ -307,6 +307,12 @@
     font-style: italic;
 }
 
+.mode-message .chat-privacy-note {
+    margin: 0;
+    font-size: 13px;
+    color: #6b7280;
+}
+
 .tip {
     background: #fef3c7;
     border-left: 3px solid #f59e0b;

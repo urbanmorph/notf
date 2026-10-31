@@ -319,7 +319,8 @@
     "intentDiscovery": "Find Communities & Resources",
     "intentComplaint": "File a Complaint",
     "tips": "Tips: You can switch modes anytime using the repeat button in the header. Resize this window by dragging the top-left corner.",
-    "inputPlaceholder": "Type your message..."
+    "inputPlaceholder": "Type your message...",
+    "searchLogNote": "We keep the words you search for and what we showed you, not who you are, to improve search."
   },
   "common": {
     "loading": "Loading...",

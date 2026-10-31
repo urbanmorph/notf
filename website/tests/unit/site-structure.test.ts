@@ -135,6 +135,38 @@ Deno.test("every page with the chatbot loads the community data it searches", as
   assertEquals(missing, []);
 });
 
+Deno.test("the search log only lets visitors add rows, admins read, and expires", async () => {
+  const sql = await Deno.readTextFile(
+    new URL(
+      "supabase/migrations/20261031120000_add_chat_searches.sql",
+      ROOT,
+    ),
+  );
+  assert(/ENABLE ROW LEVEL SECURITY/.test(sql));
+  assert(
+    /REVOKE ALL ON public\.chat_searches FROM anon, authenticated/.test(sql),
+  );
+  // anon may only INSERT; nobody may UPDATE or DELETE through the API.
+  const grants = [...sql.matchAll(/GRANT (\w+)[^;]* TO ([^;]+);/g)].map((
+    m,
+  ) => `${m[1]} ${m[2]}`);
+  assertEquals(grants, ["INSERT anon, authenticated", "SELECT authenticated"]);
+  assert(
+    /FOR SELECT TO authenticated\s+USING \(EXISTS \(SELECT 1 FROM public\.admin_users/
+      .test(sql),
+  );
+  assert(/interval '90 days'/.test(sql));
+  // No visitor identifiers among the table's columns.
+  const columns = sql.slice(
+    sql.indexOf("CREATE TABLE"),
+    sql.indexOf("CREATE INDEX"),
+  )
+    .replace(/--.*$/gm, "");
+  assert(
+    !/\b(ip|ip_address|user_agent|visitor_id|session_id)\b/i.test(columns),
+  );
+});
+
 // Vercel matches redirect sources with path-to-regexp 6, so test with it rather
 // than an approximation (two hand-rolled matchers each let a broken rule ship).
 function resolveRedirect(
@@ -199,13 +231,15 @@ Deno.test("retired URLs redirect permanently, with or without a trailing slash",
   }
 });
 
-Deno.test("every i18n key used on the home, communities and catalogue pages and header exists in all 11 locales", async () => {
+Deno.test("every i18n key used on the home, communities and catalogue pages, header and chatbot exists in all 11 locales", async () => {
   const sources = (await Promise.all(
     [
       "index.html",
       "communities/index.html",
       "catalog/index.html",
       "assets/js/components/header.js",
+      "assets/js/components/chatbot-loader.js",
+      "assets/chat/unified-chatbot.js",
     ].map((p) => Deno.readTextFile(new URL(p, PUBLIC))),
   )).join("\n");
   const keys = new Set(
