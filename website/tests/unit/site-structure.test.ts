@@ -167,6 +167,38 @@ Deno.test("the search log only lets visitors add rows, admins read, and expires"
   );
 });
 
+Deno.test("admin_users is no longer readable by everyone: own row, or all for super admins", async () => {
+  const sql = await Deno.readTextFile(
+    new URL(
+      "supabase/migrations/20261031150000_lock_down_admin_users_read.sql",
+      ROOT,
+    ),
+  );
+  assert(
+    /DROP POLICY IF EXISTS admin_users_read ON public\.admin_users/.test(sql),
+  );
+  assert(/REVOKE ALL ON public\.admin_users FROM anon/.test(sql));
+  // Every SELECT policy is for signed-in users only, and none is open (USING true).
+  const selects = [...sql.matchAll(/CREATE POLICY [^;]*?FOR SELECT[^;]*;/g)]
+    .map((m) => m[0]);
+  assertEquals(selects.length, 2);
+  for (const p of selects) {
+    assert(/TO authenticated/.test(p), p);
+    assert(!/USING \(true\)/i.test(p), p);
+  }
+  assert(selects.some((p) => /USING \(user_id = auth\.uid\(\)\)/.test(p)));
+  // The super-admin check reads admin_users without recursing into its own policy.
+  assert(
+    /FUNCTION public\.is_super_admin\(\)[\s\S]*SECURITY DEFINER[\s\S]*SET search_path = ''/
+      .test(sql),
+  );
+  assert(
+    /REVOKE ALL ON FUNCTION public\.is_super_admin\(\) FROM PUBLIC, anon/.test(
+      sql,
+    ),
+  );
+});
+
 // Vercel matches redirect sources with path-to-regexp 6, so test with it rather
 // than an approximation (two hand-rolled matchers each let a broken rule ship).
 function resolveRedirect(
