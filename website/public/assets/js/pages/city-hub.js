@@ -6,8 +6,8 @@
 // - Communities stat  -> live per-city count from Supabase.
 // - Community Stories card -> flips Live (links to the city stories page)
 //   when the city has at least one story, otherwise left as Coming Soon.
-// Climate Sectors and Wards Tracked are intentionally left untouched (they
-// count built infrastructure, not DB content).
+// Wards Tracked is intentionally left untouched (it counts built
+// infrastructure, not DB content).
 
 (function () {
     (async function init() {

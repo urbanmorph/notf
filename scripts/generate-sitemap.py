@@ -5,8 +5,7 @@ Walks website/public/ looking for every index.html (excluding admin,
 test files, and error pages), emits an ISO-dated sitemap at
 website/public/sitemap.xml.
 
-Re-run after regenerating ward pages:
-    python3 "supporting documents/scripts/processing/generate_ward_pages.py"
+Re-run after adding or removing pages:
     python3 scripts/generate-sitemap.py
 """
 
@@ -24,18 +23,17 @@ SKIP_PREFIXES = (
     "_",
 )
 
+# Pages kept live but hidden from search engines (they carry a noindex meta)
+HIDDEN = {"map", "search"}
+
 # Priority + changefreq by path pattern
 def get_priority(rel_path: str) -> tuple[float, str]:
     if rel_path == "":
         return (1.0, "weekly")
-    if rel_path in ("about", "communities", "solution-providers", "catalog", "stories", "map", "join"):
+    if rel_path in ("about", "communities", "solution-providers", "catalog", "stories", "join"):
         return (0.9, "weekly")
     if rel_path == "cities" or rel_path.startswith("cities/") and rel_path.count("/") == 1:
         return (0.8, "weekly")
-    if "wards" in rel_path:
-        return (0.5, "monthly")
-    if "climate/" in rel_path:
-        return (0.6, "monthly")
     return (0.7, "monthly")
 
 
@@ -52,6 +50,8 @@ def main() -> None:
         if any(rel == p.rstrip("/") or rel.startswith(p + "/") or rel.startswith(p) for p in SKIP_PREFIXES):
             if rel.startswith(("admin", "test-", "_")):
                 continue
+        if rel in HIDDEN:
+            continue
         priority, changefreq = get_priority(rel)
         path = "/" if rel == "" else f"/{rel}/"
         urls.append((path, priority, changefreq))

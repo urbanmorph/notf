@@ -12,11 +12,10 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
 
-    <meta name="description" content="Explore all 227 electoral wards in Mumbai with interactive boundaries and climate data visualization.">
+    <meta name="description" content="Explore all 227 electoral wards in Mumbai with interactive boundaries and community locations.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/i18n/language-selector.css">
-    <link rel="stylesheet" href="/assets/css/climate/ward-modal.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         /* Breadcrumb */
@@ -141,15 +140,34 @@
             color: #333;
         }
 
-        .popup-subtitle {
-            color: #666;
-            font-size: 0.85rem;
+        .popup-type {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
             margin-bottom: 0.5rem;
+            background-color: #2F4A2C;
+            color: white;
         }
 
         .popup-info {
             margin: 0.5rem 0;
             font-size: 0.9rem;
+        }
+
+        .popup-contact {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .popup-contact a {
+            color: #2F4A2C;
+            text-decoration: none;
+        }
+
+        .popup-contact a:hover {
+            text-decoration: underline;
         }
 
         /* Ward tooltip styling */
@@ -166,129 +184,6 @@
 
         .ward-tooltip::before {
             border-top-color: #2F4A2CF2;
-        }
-
-        /* Layer Control Panel */
-        .layer-control-panel {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            z-index: 1000;
-            min-width: 250px;
-        }
-
-        .layer-control-panel h4 {
-            margin: 0 0 0.75rem 0;
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--charcoal);
-        }
-
-        .layer-toggle {
-            display: flex;
-            gap: 0;
-            margin-bottom: 1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .layer-toggle-btn {
-            flex: 1;
-            padding: 0.5rem;
-            border: none;
-            background: white;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--color-text);
-            transition: all 0.2s ease;
-        }
-
-        .layer-toggle-btn:hover {
-            background: #f5f5f5;
-        }
-
-        .layer-toggle-btn.active {
-            background: var(--forest-green);
-            color: white;
-        }
-
-        .climate-controls {
-            display: none;
-        }
-
-        .climate-controls.active {
-            display: block;
-        }
-
-        .climate-control-group {
-            margin-bottom: 0.75rem;
-        }
-
-        .climate-control-group label {
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--charcoal);
-            margin-bottom: 0.25rem;
-        }
-
-        .climate-control-group select {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            background: white;
-        }
-
-        .climate-legend {
-            margin-top: 0.75rem;
-            padding-top: 0.75rem;
-            border-top: 1px solid #e0e0e0;
-        }
-
-        .climate-legend-title {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--charcoal);
-            margin-bottom: 0.5rem;
-        }
-
-        .climate-legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin: 0.25rem 0;
-            font-size: 0.75rem;
-        }
-
-        .climate-legend-color {
-            width: 20px;
-            height: 12px;
-            border-radius: 2px;
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .layer-control-panel {
-                position: static;
-                margin-bottom: 1rem;
-                width: 100%;
-            }
-
-            #map {
-                height: 400px;
-            }
-
-            .page-header h1 {
-                font-size: 28px;
-            }
         }
     </style>
     <link rel="stylesheet" href="/assets/chat/chat.css">
@@ -309,7 +204,7 @@
         <!-- Page Header -->
         <section class="page-header">
             <h1><i class="fa-solid fa-map-location-dot"></i> Mumbai Ward Map</h1>
-            <p class="lead">Explore all 227 electoral wards with climate data visualization</p>
+            <p class="lead">Explore all 227 electoral wards with interactive boundaries</p>
         </section>
 
         <!-- Map Section -->
@@ -320,80 +215,25 @@
                     <div class="map-stat-label">Electoral Wards</div>
                 </div>
                 <div class="map-stat-card">
-                    <div class="map-stat-number" id="populationCount">12.4M</div>
-                    <div class="map-stat-label">Population</div>
-                </div>
-                <div class="map-stat-card">
-                    <div class="map-stat-number" id="householdCount">4.3M</div>
-                    <div class="map-stat-label">Households</div>
+                    <div class="map-stat-number" id="commCount">-</div>
+                    <div class="map-stat-label">Communities Mapped</div>
                 </div>
             </div>
 
-            <div style="position: relative;">
-                <div id="map"></div>
-
-                <!-- Layer Control Panel -->
-                <div class="layer-control-panel">
-                    <h4><i class="fa-solid fa-layer-group"></i> Climate Data View</h4>
-
-                    <!-- Climate Data Controls -->
-                    <div class="climate-controls active">
-                        <div class="climate-control-group">
-                            <label for="climate-sector">Sector:</label>
-                            <select id="climate-sector">
-                                <option value="energy_buildings">Energy & Buildings</option>
-                                <option value="waste_management">Waste Management</option>
-                            </select>
-                        </div>
-
-                        <div class="climate-control-group">
-                            <label for="climate-metric">Metric:</label>
-                            <select id="climate-metric">
-                                <option value="clean_cooking">Clean Cooking</option>
-                                <option value="renewable_energy">Renewable Energy</option>
-                                <option value="electricity_consumption">Electricity Use</option>
-                                <option value="green_buildings">Green Buildings</option>
-                            </select>
-                        </div>
-
-                        <div class="climate-legend">
-                            <div class="climate-legend-title">Performance:</div>
-                            <div class="climate-legend-item">
-                                <div class="climate-legend-color" style="background: #2F4A2C;"></div>
-                                <span>Good (70-100%)</span>
-                            </div>
-                            <div class="climate-legend-item">
-                                <div class="climate-legend-color" style="background: #F5B82E;"></div>
-                                <span>Medium (30-70%)</span>
-                            </div>
-                            <div class="climate-legend-item">
-                                <div class="climate-legend-color" style="background: #C45A2A;"></div>
-                                <span>Needs Improvement (0-30%)</span>
-                            </div>
-                            <div class="climate-legend-item">
-                                <div class="climate-legend-color" style="background: #CCCCCC;"></div>
-                                <span>No Data</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div id="map"></div>
 
             <div class="map-legend">
-                <h3 style="margin-bottom: 0.75rem; font-size: 1rem;">Map Legend</h3>
+                <h3 style="margin-bottom: 0.75rem; font-size: 1rem;">Legend</h3>
                 <div class="legend-item">
-                    <div style="width: 20px; height: 2px; background: #333; opacity: 0.8; margin-right: 0.75rem;"></div>
-                    <span>Ward Boundaries (click to view details)</span>
+                    <div class="legend-marker community"></div>
+                    <span>Community Initiative</span>
                 </div>
-                <div class="legend-item" style="margin-top: 0.5rem; font-size: 0.85rem; color: #666;">
-                    <i class="fa-solid fa-info-circle" style="margin-right: 0.5rem;"></i>
-                    <span>Ward colors show climate performance for selected metric</span>
+                <div class="legend-item" style="margin-top: 0.75rem;">
+                    <div style="width: 20px; height: 2px; background: #2F4A2C; opacity: 0.6; margin-right: 0.75rem;"></div>
+                    <span>Ward Boundaries (hover to see ward name)</span>
                 </div>
             </div>
         </div>
-
-        <!-- Ward Modal Container -->
-        <div id="wardModalContainer"></div>
 
 </main>
 
@@ -405,14 +245,11 @@
     <script src="/assets/js/components/footer.js"></script>
 
     <!-- Leaflet JS -->
+
+    <!-- Load Supabase and data -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-    <!-- Load Climate Data Loader -->
-    <script src="/assets/js/climate/data-loader.js"></script>
-
-    <!-- Ward Modal -->
-    <script src="/assets/js/climate/ward-modal.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/assets/js/data-loader.js"></script>
     <script>
         // Initialize the map centered on Mumbai
         const map = L.map('map').setView([19.0760, 72.8777], 11);
@@ -423,91 +260,75 @@
             maxZoom: 18
         }).addTo(map);
 
-        // Initialize Mumbai climate data loader
-        const mumbaiDataLoader = new ClimateDataLoader('mumbai');
+        // Custom community marker icon
+        const communityIcon = L.divIcon({
+            className: 'custom-marker',
+            html: '<div style="background-color: #2F4A2C; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 3px 8px rgba(0,0,0,0.4);"></div>',
+            iconSize: [20, 20],
+            iconAnchor: [10, 10]
+        });
 
-        // Initialize Ward Modal for Mumbai
-        let wardModal;
-        try {
-            wardModal = new WardModal('wardModalContainer', {
-                city: 'mumbai',
-                dataLoader: mumbaiDataLoader
-            });
-            console.log('✅ Ward modal initialized');
-        } catch (error) {
-            console.error('❌ Failed to initialize ward modal:', error);
-        }
-
-        // Layer management
-        let wardBoundariesLayer = null;
-        let currentSector = 'energy_buildings';
-        let currentMetric = 'clean_cooking';
-        let climateData = null;
-        let wardIndex = null;
-
-        /**
-         * Get color for climate metric value
-         */
-        function getColorForValue(value, inverted = false) {
-            if (value === null || value === undefined || isNaN(value)) {
-                return '#CCCCCC'; // Gray for no data
+        // Get coordinates for a community
+        function getCoordinates(item) {
+            // Use database coordinates if available
+            if (item.latitude && item.longitude) {
+                return {
+                    lat: parseFloat(item.latitude),
+                    lng: parseFloat(item.longitude)
+                };
             }
 
-            if (inverted) {
-                // Lower is better (e.g., pollution, waste)
-                if (value < 30) return '#2F4A2C'; // Dark green (good)
-                if (value < 70) return '#F5B82E'; // Yellow (medium)
-                return '#C45A2A'; // Terracotta (poor)
-            } else {
-                // Higher is better (e.g., renewable energy, recycling)
-                if (value >= 70) return '#2F4A2C'; // Dark green (good)
-                if (value >= 30) return '#F5B82E'; // Yellow (medium)
-                return '#C45A2A'; // Terracotta (poor)
-            }
+            // Fallback to city center with random offset
+            const offset = Math.random() * 0.02 - 0.01;
+            return {
+                lat: 19.0760 + offset,
+                lng: 72.8777 + offset
+            };
         }
 
-        /**
-         * Find ward data by name
-         */
-        function findWardData(wardName) {
-            if (!wardIndex || !wardIndex.wards) return null;
+        // Create popup content
+        function createPopupContent(comm) {
+            let html = `
+                <div class="popup-title">${comm.name}</div>
+                <span class="popup-type">Community</span>
+            `;
 
-            // Normalize ward name for comparison
-            const normalizedName = wardName.toLowerCase().trim();
+            html += `<div class="popup-info"><i class="fa-solid fa-location-dot"></i> ${comm.city || 'Mumbai'}${comm.state ? ', ' + comm.state : ''}</div>`;
 
-            return wardIndex.wards.find(w => {
-                const wName = w.name.toLowerCase().trim();
-                return wName === normalizedName || wName.includes(normalizedName) || normalizedName.includes(wName);
-            });
+            if (comm.themes && comm.themes.length > 0) {
+                html += `<div class="popup-info"><strong>Focus:</strong> ${comm.themes.slice(0, 3).join(', ')}</div>`;
+            }
+
+            if (comm.description) {
+                const shortDesc = comm.description.length > 100
+                    ? comm.description.substring(0, 100) + '...'
+                    : comm.description;
+                html += `<div class="popup-info">${shortDesc}</div>`;
+            }
+
+            if (comm.contact && comm.contact.email) {
+                html += `<div class="popup-contact"><i class="fa-solid fa-envelope"></i> <a href="mailto:${comm.contact.email}">${comm.contact.email}</a></div>`;
+            }
+
+            return html;
         }
 
-        /**
-         * Get metric value from ward data
-         */
-        async function getWardMetricValue(wardSlug, sector, metric) {
-            try {
-                const wardData = await mumbaiDataLoader.getWardBySlug(wardSlug);
-                const sectorData = wardData[sector];
+        // Create tooltip content (shows on hover)
+        function createTooltipContent(comm) {
+            let tooltip = `<strong>${comm.name}</strong>`;
 
-                if (!sectorData || !sectorData[metric]) {
-                    return null;
-                }
-
-                const metricData = sectorData[metric];
-                return metricData.percentage !== undefined ? metricData.percentage : metricData.value;
-            } catch (error) {
-                console.warn(`Could not load metric for ward ${wardSlug}:`, error);
-                return null;
+            if (comm.ward) {
+                tooltip += `<br><i class="fa-solid fa-location-dot"></i> ${comm.ward}`;
+            } else if (comm.neighborhood) {
+                tooltip += `<br><i class="fa-solid fa-location-dot"></i> ${comm.neighborhood}`;
             }
+
+            return tooltip;
         }
 
-        /**
-         * Render ward boundaries with climate data coloring
-         */
-        async function renderClimateLayer() {
-            if (wardBoundariesLayer) {
-                map.removeLayer(wardBoundariesLayer);
-            }
+        // Load and display data
+        (async function() {
+            await dataLoader.waitForSupabase();
 
             // Load Mumbai ward boundaries (GeoJSON)
             try {
@@ -515,189 +336,84 @@
                 const response = await fetch('/assets/data/boundaries/mumbai-wards.geojson');
                 const geojson = await response.json();
 
-                // Ensure data is loaded
-                if (!climateData) {
-                    climateData = await mumbaiDataLoader.loadCitySummary();
-                }
-                if (!wardIndex) {
-                    wardIndex = await mumbaiDataLoader.loadWardIndex();
-                }
-
-                wardBoundariesLayer = L.geoJSON(geojson, {
-                    style: (feature) => {
-                        const wardName = feature.properties.name || feature.properties.Name || feature.properties.WARD_NAME || feature.properties.ward_name;
-
-                        // Default color (no data)
-                        let fillColor = '#CCCCCC';
-
-                        // Try to find matching ward in our data
-                        const wardData = findWardData(wardName);
-                        if (wardData) {
-                            // For now, use average from city summary
-                            // In production, would load individual ward data
-                            const sectorData = climateData.sectors[currentSector];
-                            if (sectorData && sectorData[currentMetric]) {
-                                const avgValue = sectorData[currentMetric].average;
-                                // Add some random variation for visualization (±20%)
-                                const variance = (Math.random() - 0.5) * 40;
-                                const wardValue = Math.max(0, Math.min(100, avgValue + variance));
-                                fillColor = getColorForValue(wardValue, false);
-                            }
-                        }
-
-                        return {
-                            color: '#333',
-                            weight: 1,
-                            fillOpacity: 0.6,
-                            fillColor: fillColor,
-                            opacity: 0.8
-                        };
+                L.geoJSON(geojson, {
+                    style: {
+                        color: '#2F4A2C',
+                        weight: 1.5,
+                        fillOpacity: 0.05,
+                        fillColor: '#2F4A2C',
+                        opacity: 0.6
                     },
-                    onEachFeature: (feature, layer) => {
-                        const wardName = feature.properties.name || feature.properties.Name || feature.properties.WARD_NAME || feature.properties.ward_name;
-                        const wardNumber = feature.properties.number || feature.properties.Number || feature.properties.WARD_NO || feature.properties.ward_no || '';
+                    onEachFeature: function(feature, layer) {
+                        if (feature.properties) {
+                            const props = feature.properties;
+                            const wardName = props.name || props.Name || props.WARD_NAME || props.ward_name || 'Ward';
+                            const wardNumber = props.number || props.Number || props.WARD_NO || props.ward_no || '';
 
-                        let tooltipText = '';
-                        if (wardNumber) {
-                            tooltipText = `Ward ${wardNumber}`;
-                            if (wardName && wardName !== 'Ward') {
-                                tooltipText += ` - ${wardName}`;
+                            let tooltipText = '';
+                            if (wardNumber) {
+                                tooltipText = `Ward ${wardNumber}`;
+                                if (wardName && wardName !== 'Ward') {
+                                    tooltipText += ` - ${wardName}`;
+                                }
+                            } else if (wardName) {
+                                tooltipText = wardName;
                             }
-                        } else if (wardName) {
-                            tooltipText = wardName;
-                        }
 
-                        if (tooltipText) {
-                            layer.bindTooltip(tooltipText + '<br><em style="font-size: 0.85em; opacity: 0.9;">Click for details</em>', {
-                                permanent: false,
-                                direction: 'center',
-                                className: 'ward-tooltip'
-                            });
-                        }
-
-                        // Click handler - open ward modal
-                        layer.on('click', () => {
-                            const wardData = findWardData(wardName);
-                            if (wardData && wardModal) {
-                                wardModal.open(wardData.slug);
-                            } else {
-                                console.warn('Ward data not found for:', wardName);
+                            if (tooltipText) {
+                                layer.bindTooltip(tooltipText, {
+                                    permanent: false,
+                                    direction: 'center',
+                                    className: 'ward-tooltip'
+                                });
                             }
-                        });
-
-                        // Hover effect
-                        layer.on('mouseover', function() {
-                            this.setStyle({
-                                weight: 2,
-                                fillOpacity: 0.8
-                            });
-                        });
-
-                        layer.on('mouseout', function() {
-                            wardBoundariesLayer.resetStyle(this);
-                        });
+                        }
                     }
                 }).addTo(map);
 
-                console.log('✅ Ward boundaries loaded and styled with climate data');
+                console.log('✅ Ward boundaries loaded successfully');
             } catch (error) {
                 console.error('❌ Error loading ward boundaries:', error);
             }
-        }
 
-        // Load and display data
-        (async function() {
-            // Load climate data
-            climateData = await mumbaiDataLoader.loadCitySummary();
-            wardIndex = await mumbaiDataLoader.loadWardIndex();
+            // Load and filter communities to Mumbai only
+            const allCommunities = await dataLoader.loadCommunities();
+            const cityCommunities = allCommunities.filter(comm =>
+                comm.city && (
+                    comm.city.toLowerCase().includes('mumbai') ||
+                    comm.city.toLowerCase().includes('mumbai')
+                )
+            );
 
-            console.log(`Loaded Mumbai data: ${climateData.total_wards} wards, ${climateData.total_population.toLocaleString()} population`);
+            console.log(`Found ${cityCommunities.length} communities in Mumbai`);
+            document.getElementById('commCount').textContent = cityCommunities.length;
 
-            // Render initial climate layer
-            await renderClimateLayer();
-
-            // Setup control handlers
-            setupControls();
-
-            // Check for ward in URL hash
-            if (location.hash.startsWith('#ward-')) {
-                const wardSlug = location.hash.replace('#ward-', '');
-                if (wardModal) {
-                    setTimeout(() => wardModal.open(wardSlug), 500);
+            // Add community markers
+            let markerCount = 0;
+            cityCommunities.forEach(comm => {
+                const coords = getCoordinates(comm);
+                if (coords) {
+                    L.marker([coords.lat, coords.lng], { icon: communityIcon })
+                        .addTo(map)
+                        .bindPopup(createPopupContent(comm))
+                        .bindTooltip(createTooltipContent(comm), {
+                            direction: 'top',
+                            offset: [0, -10],
+                            opacity: 0.9
+                        });
+                    markerCount++;
                 }
-            }
-        })();
-
-        /**
-         * Setup control event handlers
-         */
-        function setupControls() {
-            // Climate sector change handler
-            document.getElementById('climate-sector').addEventListener('change', async (e) => {
-                currentSector = e.target.value;
-
-                // Update metric dropdown based on sector
-                updateMetricOptions(currentSector);
-
-                // Re-render with new sector
-                await renderClimateLayer();
             });
 
-            // Climate metric change handler
-            document.getElementById('climate-metric').addEventListener('change', async (e) => {
-                currentMetric = e.target.value;
+            console.log(`Mapped ${markerCount} Mumbai communities`);
 
-                // Re-render with new metric
-                await renderClimateLayer();
-            });
-        }
-
-        /**
-         * Update metric dropdown based on selected sector
-         */
-        function updateMetricOptions(sector) {
-            const metricSelect = document.getElementById('climate-metric');
-
-            // Define metrics for each sector
-            const metrics = {
-                'energy_buildings': [
-                    { value: 'clean_cooking', label: 'Clean Cooking' },
-                    { value: 'renewable_energy', label: 'Renewable Energy' },
-                    { value: 'electricity_consumption', label: 'Electricity Use' },
-                    { value: 'green_buildings', label: 'Green Buildings' }
-                ],
-                'waste_management': [
-                    { value: 'waste_segregation', label: 'Waste Segregation' },
-                    { value: 'recycling_rate', label: 'Recycling Rate' },
-                    { value: 'composting', label: 'Composting' },
-                    { value: 'plastic_reduction', label: 'Plastic Reduction' }
-                ]
+            // Make Mumbai data available to chatbot
+            window.notfData = {
+                communities: cityCommunities,
+                members: [],
+                city: 'mumbai'
             };
-
-            const sectorMetrics = metrics[sector] || metrics['energy_buildings'];
-
-            // Clear existing options
-            metricSelect.innerHTML = '';
-
-            // Add new options
-            sectorMetrics.forEach(metric => {
-                const option = document.createElement('option');
-                option.value = metric.value;
-                option.textContent = metric.label;
-                metricSelect.appendChild(option);
-            });
-
-            // Set current metric to first option
-            currentMetric = sectorMetrics[0].value;
-        }
-
-        // Make Mumbai data available to chatbot
-        window.notfData = {
-            communities: [],
-            members: [],
-            city: 'mumbai',
-            climateData: climateData
-        };
+        })();
     </script>
 
 

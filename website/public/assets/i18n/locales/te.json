@@ -9,9 +9,9 @@
     "admin": "అడ్మిన్ లాగిన్",
     "adminLogin": "నిర్వాహకుడి లాగిన్",
     "bengaluru": "బెంగళూరు",
-    "climate": "వాతావరణం",
     "catalogue": "ప్రాజెక్ట్ జాబితా",
-    "cities": "నగరాలు"
+    "cities": "నగరాలు",
+    "airQuality": "గాలి నాణ్యత"
   },
   "hero": {
     "title": "మా పొరుగు ప్రాంతాలకు జీవం పోయడం",
@@ -229,20 +229,36 @@
         "desc": "పరిష్కార ప్రదాతలు సిద్ధంగా ఉన్న ప్రాజెక్టులు మరియు శిక్షణను అందిస్తారు"
       },
       "point3": {
-        "title": "వాతావరణ స్థితిస్థాపకత",
-        "desc": "వార్డులు మరియు రంగాల వారీగా వాతావరణ చర్యను ట్రాక్ చేయండి"
+        "title": "ఓపెన్ డేటా",
+        "desc": "పరిసరాలు తమకు ముఖ్యమైనవాటిని కొలుస్తాయి, తాము పీల్చే గాలి లాంటివి, వాటిని బహిరంగంగా పంచుకుంటాయి"
       },
       "cta": "NOTF గురించి మరింత తెలుసుకోండి"
     },
-    "climateStats": {
-      "title": "భూమిపై వాతావరణ చర్య",
-      "waste": "ల్యాండ్‌ఫిల్ నుండి దారిమళ్లించిన వ్యర్థాలు",
-      "co2": "నివారించిన CO₂ ఉద్గారాలు",
-      "bottles": "నివారించిన ప్లాస్టిక్ సీసాలు",
-      "trees": "నాటిన చెట్లు మరియు మొక్కలు",
-      "plans": "నగర వాతావరణ కార్యాచరణ ప్రణాళికలు",
-      "attribution": "మా జాబితాలోని 15 వాతావరణ ప్రాజెక్టుల ద్వారా అందించబడింది.",
-      "cta": "వాతావరణ ప్రాజెక్టులను బ్రౌజ్ చేయండి"
+    "oaq": {
+      "eyebrow": "OAQ · ఓపెన్ ఎయిర్ క్వాలిటీ",
+      "title": "భారతదేశపు గాలి, దాని ప్రజలే కొలిచింది",
+      "lead": "OAQ స్థానిక గాలి నాణ్యత కోసం NOTF యొక్క ఓపెన్ వేదిక. పరిశోధకులు, సముదాయ బృందాలు, నివాసితులు తమ సొంత పరిసరాల్లో సెన్సార్లను నడుపుతారు, ప్రతి ఒక్కరూ రీడింగ్‌లను ప్రత్యక్షంగా, ఉచితంగా చూడవచ్చు.",
+      "stats": {
+        "stations": "ప్రత్యక్ష స్టేషన్లు",
+        "cities": "నగరాలు",
+        "networks": "సెన్సార్ నెట్‌వర్క్‌లు"
+      },
+      "nowTitle": "ప్రస్తుత గాలి",
+      "updated": "నవీకరించబడింది",
+      "source": "ప్రతి నగరంలోని స్టేషన్ల సాధారణ (మధ్యస్థ) CPCB AQI. డేటా: OAQ, mugilu ఓపెన్ మిర్రర్ ద్వారా.",
+      "mapButton": "ప్రత్యక్ష మ్యాప్ చూడండి",
+      "hostButton": "సెన్సార్ ఏర్పాటు చేయండి",
+      "mapLink": "OAQ ప్రత్యక్ష మ్యాప్‌ను తెరవండి",
+      "mapTitle": "బెంగళూరు అంతటా ప్రత్యక్ష గాలి నాణ్యత సెన్సార్లు",
+      "mapPlace": "బెంగళూరు",
+      "bands": {
+        "good": "మంచిది",
+        "satisfactory": "సంతృప్తికరం",
+        "moderate": "మధ్యస్థం",
+        "poor": "పేలవం",
+        "very-poor": "చాలా పేలవం",
+        "severe": "తీవ్రం"
+      }
     }
   },
   "stats": {
@@ -264,8 +280,6 @@
     "mapComingSoon": "మ్యాప్ (త్వరలో వస్తుంది)",
     "communitiesComingSoon": "సంఘాలు (త్వరలో)",
     "providersComingSoon": "ప్రొవైడర్లు (త్వరలో)",
-    "climateDashboard": "వాతావరణ డాష్‌బోర్డ్",
-    "climateComingSoon": "వాతావరణం (త్వరలో వస్తుంది)",
     "storiesComingSoon": "కథలు (త్వరలో రాబోతోంది)"
   },
   "features": {
@@ -508,7 +522,7 @@
       "wards": "వార్డులు",
       "population": "జనాభా",
       "exploreTitle": "ముంబైని అన్వేషించండి",
-      "exploreSubtitle": "వార్డు స్థాయి మ్యాప్ మరియు వాతావరణ డేటా ఇప్పుడు అందుబాటులో ఉంది. కమ్యూనిటీ మరియు ప్రొవైడర్ డైరెక్టరీ త్వరలో వస్తుంది."
+      "exploreSubtitle": "వార్డు స్థాయి మ్యాప్ ఇప్పుడు అందుబాటులో ఉంది.కమ్యూనిటీ మరియు ప్రొవైడర్ డైరెక్టరీలు త్వరలో రానున్నాయి."
     },
     "pune": {
       "subtitle": "మహారాష్ట్ర, భారతదేశం",
@@ -534,8 +548,7 @@
     "stats": {
       "communities": "సంఘాలు",
       "providers": "సొల్యూషన్ ప్రొవైడర్స్",
-      "wardsTracked": "వార్డులు ట్రాక్ చేయబడ్డాయి",
-      "climateSectors": "వాతావరణ రంగాలు"
+      "wardsTracked": "వార్డులు ట్రాక్ చేయబడ్డాయి"
     },
     "features": {
       "map": {
@@ -554,21 +567,6 @@
         "description": "Find {{count}} organizations supporting community work. CBOs, solution providers, and more.",
         "button": "ప్రొవైడర్లను వీక్షించండి"
       },
-      "climate": {
-        "title": "వాతావరణ డేటా",
-        "description": "{{wardCount}} వార్డులలో వార్డు-స్థాయి వాతావరణ బేస్‌లైన్ డేటా. ఇంటరాక్టివ్ డాష్‌బోర్డ్‌లతో శక్తి మరియు భవనాలు మరియు వ్యర్థాల నిర్వహణ రంగాలను అన్వేషించండి.",
-        "button": "డాష్‌బోర్డ్ చూడండి",
-        "sectors": {
-          "energy": "శక్తి & భవనాలు",
-          "transportation": "రవాణా",
-          "waste": "ఘన వ్యర్థాలు",
-          "air": "గాలి నాణ్యత",
-          "water": "నీరు",
-          "greening": "పచ్చదనం",
-          "disaster": "విపత్తు నిర్వహణ"
-        },
-        "statusLive": "ప్రత్యక్ష"
-      },
       "statusComingSoon": "త్వరలో వస్తుంది",
       "stories": {
         "title": "సమాజ కథలు",
@@ -582,7 +580,6 @@
       "communities": "సమాజాలు",
       "providers": "ప్రొవైడర్లు",
       "map": "మ్యాప్",
-      "climate": "వాతావరణం",
       "stories": "కథలు",
       "backTo": "బెంగళూరుకు తిరిగి వెళ్ళండి",
       "allCities": "అన్ని నగరాలు"
@@ -592,58 +589,9 @@
       "description": "మేము ప్రస్తుతం సిటీ డైరెక్టరీని రూపొందిస్తున్నాము.మీ సంఘం లేదా సంస్థను నమోదు చేయడం ద్వారా నెట్‌వర్క్‌ను వృద్ధి చేయడంలో మాకు సహాయపడండి.",
       "communityDirectory": "కమ్యూనిటీ డైరెక్టరీ",
       "providerNetwork": "సొల్యూషన్ ప్రొవైడర్ నెట్‌వర్క్",
-      "climateAction": "క్లైమేట్ యాక్షన్ డాష్‌బోర్డ్",
       "joinCommunity": "సంఘంగా చేరండి",
       "joinProvider": "ప్రొవైడర్‌గా చేరండి",
-      "comingSoonButton": "త్వరలో వస్తుంది",
-      "additionalSectors": "అదనపు వాతావరణ రంగాలు (మరో 5)"
-    }
-  },
-  "mumbai_climate": {
-    "title": "Mumbai Climate Action Dashboard [te]",
-    "subtitle": "Tracking climate data across 227 wards [te]",
-    "intro_title": "Climate Action by Sector [te]",
-    "intro_description": "Explore ward-level metrics across 2 climate sectors [te]",
-    "sectors": {
-      "energy_title": "Energy & Buildings [te]",
-      "energy_count": "227 Wards",
-      "energy_description": "Energy and buildings metrics [te]",
-      "waste_title": "Waste Management [te]",
-      "waste_count": "227 Wards",
-      "waste_description": "Waste management metrics [te]"
-    },
-    "stats": {
-      "clean_cooking": "Clean Cooking [te]",
-      "segregation": "Segregation [te]",
-      "wards_tracked": "Wards Tracked [te]"
-    },
-    "data_sources_title": "Data Sources [te]",
-    "sources": {
-      "census": "Census 2011",
-      "census_desc": "Government of India",
-      "opencity": "OpenCity.in",
-      "opencity_desc": "Ward-level data",
-      "boundaries": "Ward Boundaries",
-      "boundaries_desc": "BMC (227 Prabhags)",
-      "ires": "IRES 2020",
-      "ires_desc": "CEEW estimates",
-      "confidence": "Data Confidence:",
-      "confidence_desc": "~60%",
-      "updated": "Last Updated:"
-    },
-    "zones": {
-      "all": "All Zones [te]",
-      "northern": "Northern Suburbs [te]",
-      "eastern": "Eastern Suburbs [te]",
-      "western": "Western Suburbs [te]",
-      "central": "Central [te]",
-      "south": "South Mumbai [te]"
-    }
-  },
-  "climate": {
-    "sectors": {
-      "energy": "Energy & Buildings [te]",
-      "waste": "Waste Management [te]"
+      "comingSoonButton": "త్వరలో వస్తుంది"
     }
   },
   "citiesPage": {
@@ -733,18 +681,7 @@
     },
     "detailsButton": "వివరాలు"
   },
-  "mumbai": {
-    "climate": {
-      "waste": {
-        "leaderboard": {
-          "metrics": {
-            "generation": "వ్యర్థ ఉత్పత్తి (కేజీ/వ్యక్తి/రోజు)",
-            "diversion": "ల్యాండ్‌ఫిల్ డైవర్షన్ (% మళ్లించబడింది)"
-          }
-        }
-      }
-    }
-  },
+  "mumbai": {},
   "joinPage": {
     "step1": {
       "title": "మీరు ఎవరు?",
@@ -787,14 +724,5 @@
       "readStoriesDesc": "ఇప్పటికే ప్రారంభించిన సమాజాల నుండి నేర్చుకోండి"
     }
   },
-  "bengaluru": {
-    "climate": {
-      "findWard": {
-        "title": "మీ వార్డును కనుగొనండి",
-        "subtitle": "అన్ని వాతావరణ రంగాలలో మీ పొరుగు ప్రాంతం ఎలా పనిచేస్తుందో చూడండి",
-        "placeholder": "మీ వార్డు పేరు టైప్ చేయండి...",
-        "button": "రిపోర్ట్ కార్డ్ చూడండి"
-      }
-    }
-  }
+  "bengaluru": {}
 }

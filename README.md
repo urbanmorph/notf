@@ -60,7 +60,13 @@ New to the project? Read these in order:
 
 ---
 
-## 📊 Ward-Level Climate Data
+## 📊 Ward-Level Climate Data (archived)
+
+> **Archived October 2026.** The ward-level climate dashboards were retired from notf.in
+> because the data had gone stale; old dashboard links now redirect to the city page (and
+> air quality to [OAQ](https://oaq.notf.in)). The datasets below are still available from
+> commit [`8e712ee`](https://github.com/urbanmorph/notf/tree/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate),
+> the last version that shipped them. The links below are pinned to it.
 
 ### Overview
 
@@ -97,9 +103,10 @@ NOTF provides open ward-level climate baseline data for Indian cities, starting 
 
 **Option 1: Full Dataset (3.8 MB)**
 ```bash
-# Clone repository
-git clone https://github.com/urbanmorph/notf.git
-cd notf/website/public/assets/data/climate/bengaluru/
+# Clone repository and restore the archived data
+git clone https://github.com/urbanmorph/notf.git && cd notf
+git checkout 8e712ee -- website/public/assets/data/climate/bengaluru
+cd website/public/assets/data/climate/bengaluru/
 
 # All files:
 # - city_climate.json (10 KB) - City-level aggregates
@@ -114,17 +121,17 @@ cd notf/website/public/assets/data/climate/bengaluru/
 **Option 2: Direct Download Links**
 ```bash
 # City summary (10 KB)
-wget https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/bengaluru/city_climate.json
+wget https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/bengaluru/city_climate.json
 
 # Ward index (96 KB)
-wget https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/bengaluru/ward_index.json
+wget https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/bengaluru/ward_index.json
 
 # Corporation data (download specific corporation or all 5)
-wget https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/bengaluru/climate_central.json
-wget https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/bengaluru/climate_east.json
-wget https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/bengaluru/climate_west.json
-wget https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/bengaluru/climate_north.json
-wget https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/bengaluru/climate_south.json
+wget https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/bengaluru/climate_central.json
+wget https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/bengaluru/climate_east.json
+wget https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/bengaluru/climate_west.json
+wget https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/bengaluru/climate_north.json
+wget https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/bengaluru/climate_south.json
 ```
 
 **Option 3: Python Script**
@@ -134,7 +141,7 @@ import requests
 
 # Load city summary
 city_data = requests.get(
-    'https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/bengaluru/city_climate.json'
+    'https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/bengaluru/city_climate.json'
 ).json()
 
 print(f"Total wards: {city_data['total_wards']}")
@@ -142,7 +149,7 @@ print(f"Total population: {city_data['total_population']:,}")
 
 # Load specific corporation
 central_wards = requests.get(
-    'https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/bengaluru/climate_central.json'
+    'https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/bengaluru/climate_central.json'
 ).json()
 
 for ward in central_wards['wards']:
@@ -153,9 +160,10 @@ for ward in central_wards['wards']:
 
 **Option 1: Full Dataset (2.4 MB)**
 ```bash
-# Clone repository
-git clone https://github.com/urbanmorph/notf.git
-cd notf/website/public/assets/data/climate/mumbai/
+# Clone repository and restore the archived data
+git clone https://github.com/urbanmorph/notf.git && cd notf
+git checkout 8e712ee -- website/public/assets/data/climate/mumbai
+cd website/public/assets/data/climate/mumbai/
 
 # All files:
 # - city_climate.json (10 KB) - City-level aggregates
@@ -170,17 +178,17 @@ cd notf/website/public/assets/data/climate/mumbai/
 **Option 2: Direct Download Links**
 ```bash
 # City summary (10 KB)
-wget https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/mumbai/city_climate.json
+wget https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/mumbai/city_climate.json
 
 # Ward index (60 KB)
-wget https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/mumbai/ward_index.json
+wget https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/mumbai/ward_index.json
 
 # Zone data (download specific zone or all 5)
-wget https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/mumbai/climate_south.json
-wget https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/mumbai/climate_central.json
-wget https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/mumbai/climate_western.json
-wget https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/mumbai/climate_eastern.json
-wget https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/mumbai/climate_northern.json
+wget https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/mumbai/climate_south.json
+wget https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/mumbai/climate_central.json
+wget https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/mumbai/climate_western.json
+wget https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/mumbai/climate_eastern.json
+wget https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/mumbai/climate_northern.json
 ```
 
 **Option 3: Python Script**
@@ -190,7 +198,7 @@ import requests
 
 # Load city summary
 city_data = requests.get(
-    'https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/mumbai/city_climate.json'
+    'https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/mumbai/city_climate.json'
 ).json()
 
 print(f"Total wards: {city_data['total_wards']}")
@@ -198,7 +206,7 @@ print(f"Total population: {city_data['total_population']:,}")
 
 # Load specific zone
 south_wards = requests.get(
-    'https://raw.githubusercontent.com/urbanmorph/notf/main/website/public/assets/data/climate/mumbai/climate_south.json'
+    'https://raw.githubusercontent.com/urbanmorph/notf/8e712eee22163916ea4ed127484572d8af193858/website/public/assets/data/climate/mumbai/climate_south.json'
 ).json()
 
 for ward in south_wards['wards']:
@@ -311,7 +319,7 @@ Python scripts for generating ward-level climate data are available in [`data-do
 1. **`split_corporation_data.py`** - Split 3.5 MB baseline JSON into 5 corporation files
 2. **`generate_ward_index.py`** - Extract ward metadata for routing
 3. **`generate_city_summary.py`** - Calculate city-level aggregates and rankings
-4. **`generate_ward_pages.py`** - Generate 738 static HTML ward pages
+4. **`generate_ward_pages.py`** - Generate the 738 static HTML ward pages (retired from the site in October 2026)
 5. **`add_source_metadata.py`** - Add OpenCity.in source attributions
 
 ```bash
