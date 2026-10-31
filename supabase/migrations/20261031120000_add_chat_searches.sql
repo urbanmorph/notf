@@ -42,12 +42,23 @@ CREATE POLICY "Admins can read searches" ON public.chat_searches
   USING (EXISTS (SELECT 1 FROM public.admin_users
                  WHERE admin_users.user_id = auth.uid() AND admin_users.is_active = true));
 
--- Keep 90 days.
-CREATE EXTENSION IF NOT EXISTS pg_cron;
-SELECT cron.unschedule('chat-searches-retention')
-  WHERE EXISTS (SELECT 1 FROM cron.job WHERE jobname = 'chat-searches-retention');
-SELECT cron.schedule(
-  'chat-searches-retention',
-  '15 3 * * *',
-  $$DELETE FROM public.chat_searches WHERE created_at < now() - interval '90 days'$$
-);
+-- Keep 90 days: each insert clears rows past that age (cheap with the index
+-- above). Done here rather than with pg_cron, which this shared project does
+-- not enable.
+CREATE OR REPLACE FUNCTION public.chat_searches_expire()
+RETURNS trigger
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = ''
+AS $$
+BEGIN
+  DELETE FROM public.chat_searches WHERE created_at < now() - interval '90 days';
+  RETURN NULL;
+END;
+$$;
+REVOKE ALL ON FUNCTION public.chat_searches_expire() FROM PUBLIC, anon, authenticated;
+
+DROP TRIGGER IF EXISTS chat_searches_expire_trg ON public.chat_searches;
+CREATE TRIGGER chat_searches_expire_trg
+  AFTER INSERT ON public.chat_searches
+  FOR EACH STATEMENT EXECUTE FUNCTION public.chat_searches_expire();
