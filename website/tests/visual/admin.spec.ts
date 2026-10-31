@@ -10,5 +10,5 @@ test('admin login', async ({ page }, info) => {
 // Opened without an emailed link, the reset page shows its "invalid or expired
 // link" state, which needs no auth stub and renders the same on every run.
 test('admin reset password', async ({ page }, info) => {
-  await auditPage(page, info, '/admin/reset-password.html');
+  await auditPage(page, info, '/admin/reset-password.html', { name: 'reset-password' });
 });
