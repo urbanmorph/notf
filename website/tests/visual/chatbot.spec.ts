@@ -53,4 +53,46 @@ test.describe('chatbot', () => {
     // No JS errors during load.
     expect(consoleErrors, `console errors:\n${consoleErrors.join('\n')}`).toEqual([]);
   });
+
+  // Find communities on a page that does not load city-map.js itself (About): the
+  // chatbot loads the community data and the city helpers on its own.
+  test('a city in the question keeps answers to that city', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'desktop-1440', 'desktop-only behavior test');
+    const errors: string[] = [];
+    page.on('pageerror', (err) => errors.push(err.message));
+    await stubSupabase(page);
+    await page.goto('/about/', { waitUntil: 'networkidle' });
+    await page.waitForFunction(() => !!window.notfChatbot, null, { timeout: 10000 });
+    await page.locator('.intent-button[data-intent="discovery"]').click();
+    await expect(page.locator('.chat-messages')).toContainText('What are you looking for?');
+
+    const replies = page.locator('.chat-messages .bot-message');
+    const ask = async (question: string) => {
+      const before = await replies.count();
+      await page.fill('.chat-input-field', question);
+      await page.click('.chat-send-button');
+      await expect(replies).toHaveCount(before + 1);
+      return replies.nth(before);
+    };
+
+    // Only Mumbai's communities, and a link to Mumbai's view of /communities/.
+    const mumbai = await ask('communities in Mumbai');
+    await expect(mumbai).toContainText('in Mumbai for you');
+    const places = await mumbai.locator('.community-card .location').allInnerTexts();
+    expect(places.length).toBeGreaterThan(0);
+    for (const place of places) expect(place).toContain('Mumbai');
+    await expect(mumbai.locator('a[href="/communities/?city=Mumbai"]')).toContainText('See the 1 community in Mumbai');
+
+    // Nobody registered: say so, rather than list other cities.
+    const kolkata = await ask('waste groups in Calcutta');
+    await expect(kolkata).toContainText('no registered communities or solution providers in Kolkata yet');
+    await expect(kolkata.locator('.community-card')).toHaveCount(0);
+    await expect(kolkata.locator('a[href="/join/"]')).toBeVisible();
+
+    // Live readings live on oaq.notf.in.
+    const air = await ask('air quality');
+    await expect(air.locator('a[href="https://oaq.notf.in"]')).toBeVisible();
+
+    expect(errors).toEqual([]);
+  });
 });

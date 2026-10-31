@@ -124,6 +124,17 @@ Deno.test("the hidden /map/ and /search/ pages ask search engines not to index t
   }
 });
 
+Deno.test("every page with the chatbot loads the community data it searches", async () => {
+  const missing = (await publicSources())
+    .filter(({ path }) => path.endsWith(".html"))
+    .filter(({ text }) =>
+      text.includes("/assets/js/components/chatbot-loader.js")
+    )
+    .filter(({ text }) => !text.includes('src="/assets/js/data-loader.js"'))
+    .map(({ path }) => path);
+  assertEquals(missing, []);
+});
+
 // Vercel matches redirect sources with path-to-regexp 6, so test with it rather
 // than an approximation (two hand-rolled matchers each let a broken rule ship).
 function resolveRedirect(
