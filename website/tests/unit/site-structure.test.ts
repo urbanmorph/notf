@@ -4,6 +4,7 @@ import {
   assertEquals,
 } from "https://deno.land/std@0.224.0/assert/mod.ts";
 import { walk } from "https://deno.land/std@0.224.0/fs/walk.ts";
+import { type Key, pathToRegexp } from "https://esm.sh/path-to-regexp@6.2.1";
 
 // Site-shape contract after the climate pages (2026-10) and then the /cities/
 // section were retired, and the site-wide /map/ and /search/ pages were hidden
@@ -61,12 +62,17 @@ Deno.test("the climate pages and their assets are gone", async () => {
 });
 
 Deno.test("the /cities/ section is gone, but the ward boundary files stay", async () => {
-  assert(!(await exists(new URL("cities/", PUBLIC))), "cities/ should be deleted");
+  assert(
+    !(await exists(new URL("cities/", PUBLIC))),
+    "cities/ should be deleted",
+  );
   assert(!(await exists(new URL("assets/js/pages/city-hub.js", PUBLIC))));
   assert(!(await exists(new URL("assets/css/pages/city-hub.css", PUBLIC))));
   // Kept for a later ward map, and used today by the chatbot's ward lookup.
   const index = JSON.parse(
-    await Deno.readTextFile(new URL("assets/data/boundaries/index.json", PUBLIC)),
+    await Deno.readTextFile(
+      new URL("assets/data/boundaries/index.json", PUBLIC),
+    ),
   );
   assert(Object.keys(index).length > 0);
   for await (
@@ -118,22 +124,20 @@ Deno.test("the hidden /map/ and /search/ pages ask search engines not to index t
   }
 });
 
-// Approximates Vercel's matcher: `:name` is one path segment, `(...)` is a raw
-// regex group, and the whole path must match. Enough to pin the behaviour we rely on.
+// Vercel matches redirect sources with path-to-regexp 6, so test with it rather
+// than an approximation (two hand-rolled matchers each let a broken rule ship).
 function resolveRedirect(
   redirects: Array<{ source: string; destination: string }>,
   path: string,
 ): string | null {
   for (const r of redirects) {
-    const pattern = r.source
-      .replace(/:(\w+)/g, "(?<$1>[^/]+)");
-    const m = path.match(new RegExp(`^${pattern}$`));
-    if (m) {
-      return r.destination.replace(
-        /:(\w+)/g,
-        (_, k) => m.groups?.[k] ?? `:${k}`,
-      );
-    }
+    const keys: Key[] = [];
+    const m = pathToRegexp(r.source, keys).exec(path);
+    if (!m) continue;
+    const params = Object.fromEntries(
+      keys.map((k, i) => [k.name, m[i + 1] ?? ""]),
+    );
+    return r.destination.replace(/:(\w+)/g, (_, k) => params[k] ?? "");
   }
   return null;
 }
@@ -152,7 +156,10 @@ Deno.test("retired URLs redirect permanently, with or without a trailing slash",
     ["/cities/bengaluru/climate/air-quality", "https://oaq.notf.in"],
     // City views now live on /communities/ as a city filter, in one hop.
     ["/cities/bengaluru/climate/", "/communities/?city=bengaluru"],
-    ["/cities/bengaluru/climate/energy/wards/a-adugodi/", "/communities/?city=bengaluru"],
+    [
+      "/cities/bengaluru/climate/energy/wards/a-adugodi/",
+      "/communities/?city=bengaluru",
+    ],
     ["/cities/mumbai/climate/waste/leaderboard/", "/communities/?city=mumbai"],
     ["/cities/bengaluru/communities/", "/communities/?city=bengaluru"],
     ["/cities/bengaluru/communities", "/communities/?city=bengaluru"],
