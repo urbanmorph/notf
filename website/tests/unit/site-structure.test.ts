@@ -199,6 +199,42 @@ Deno.test("admin_users is no longer readable by everyone: own row, or all for su
   );
 });
 
+Deno.test("NOTF roles: admins write, admins and viewers read, nobody promotes themselves", async () => {
+  const sql = await Deno.readTextFile(
+    new URL(
+      "supabase/migrations/20261031170000_notf_admin_viewer_roles.sql",
+      ROOT,
+    ),
+  );
+  assert(
+    /notf_role text\s+CHECK \(notf_role IN \('admin', 'viewer'\)\)/.test(sql),
+  );
+  // Today's NOTF super admins keep full access.
+  assert(/SET notf_role = 'admin'\s+WHERE role = 'super_admin'/.test(sql));
+  // Writes to NOTF records need notf_role 'admin'; the open read is gone.
+  assert(
+    /"NOTF admins can manage files"[\s\S]*?USING \(public\.notf_role\(\) = 'admin'\)[\s\S]*?WITH CHECK \(public\.notf_role\(\) = 'admin'\)/
+      .test(sql),
+  );
+  assert(
+    /DROP POLICY IF EXISTS "Authenticated users read all files"/.test(sql),
+  );
+  assert(/USING \(public\.notf_role\(\) IN \('admin', 'viewer'\)\)/.test(sql));
+  // Own row: name and phone only, never role or is_active.
+  assert(/DROP POLICY IF EXISTS admin_users_update_own/.test(sql));
+  assert(/REVOKE UPDATE ON public\.admin_users FROM authenticated/.test(sql));
+  assert(
+    /GRANT UPDATE \(name, phone\) ON public\.admin_users TO authenticated/.test(
+      sql,
+    ),
+  );
+  // The audit trigger and the delete lockdown stay (Data Safety invariants 5, 6).
+  assert(/file_metadata_audit/.test(sql));
+  assert(!/GRANT[^;]*DELETE[^;]*file_metadata/i.test(sql));
+  assert(!/DROP TRIGGER[^;]*file_metadata_audit_trg/i.test(sql));
+  assert(/COALESCE\(auth\.uid\(\)/.test(sql));
+});
+
 // Vercel matches redirect sources with path-to-regexp 6, so test with it rather
 // than an approximation (two hand-rolled matchers each let a broken rule ship).
 function resolveRedirect(

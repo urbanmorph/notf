@@ -21,7 +21,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({
         status: 'ok',
-        version: '2.1-admin-users-auth',
+        version: '2.2-notf-roles',
         timestamp: new Date().toISOString()
       }),
       {
@@ -68,8 +68,8 @@ serve(async (req) => {
       )
     }
 
-    // Authorize via the admin_users registry (active membership), honouring the
-    // legacy user_metadata.role === 'admin' flag too. Uses the service-role
+    // Authorize: an active NOTF admin (admin_users.notf_role = 'admin'), or the
+    // legacy user_metadata.role === 'admin' flag. Viewers are refused. Uses the service-role
     // client so the lookup is not subject to RLS.
     if (!(await isAuthorizedAdmin(supabaseAdmin, user))) {
       console.log(`Delete denied for ${user.email}: not an active admin`)
@@ -124,6 +124,10 @@ serve(async (req) => {
     // Capture a before-image in the response so the caller retains the deleted
     // content (until a dedicated audit table exists).
     const deletedSnapshot = existingRow.metadata
+
+    // Stamp who is deleting, so the audit trigger records them as the actor
+    // (this service-role client has no auth.uid()).
+    await supabaseAdmin.from('file_metadata').update({ updated_by: user.id }).eq('id', existingRow.id)
 
     // Delete the DB row by its immutable id (not the client-supplied path).
     const { error: dbError } = await supabaseAdmin

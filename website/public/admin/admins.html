@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Manage Admins - NOTF Admin | NOTF</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/assets/admin/admin.css">
+</head>
+<body style="margin: 0; padding: 0; background: transparent;">
+    <main>
+
+<section class="admin-page">
+    <div class="admin-container">
+        <div class="page-header minimal">
+            <h1><i class="fa-solid fa-user-shield" style="color: #C45A2A;"></i> Admins <span id="adminCount" style="font-size: 0.7em; color: #B9C98A; font-weight: 500;">(0)</span></h1>
+            <div class="icon-actions">
+                <button class="icon-btn" type="button" id="refreshBtn">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                    <span>Refresh</span>
+                </button>
+            </div>
+        </div>
+
+        <form id="inviteForm" class="invite-form">
+            <h2>Invite someone</h2>
+            <p class="invite-help">
+                <strong>Admins</strong> can approve, edit and delete, and invite others.
+                <strong>Viewers</strong> can see everything but change nothing.
+                They get an email with a link to set their password.
+            </p>
+            <div class="invite-fields">
+                <label>Name <input type="text" id="inviteName" required autocomplete="off"></label>
+                <label>Email <input type="email" id="inviteEmail" required autocomplete="off"></label>
+                <label>Access
+                    <select id="inviteRole">
+                        <option value="viewer">Viewer</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </label>
+                <button type="submit" class="btn-primary" id="inviteBtn">
+                    <i class="fa-solid fa-paper-plane"></i> Send invite
+                </button>
+            </div>
+            <p id="inviteStatus" class="invite-status" role="status"></p>
+        </form>
+
+        <div id="adminList" class="admin-list" aria-live="polite">
+            <p class="loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading admins…</p>
+        </div>
+
+        <p class="invite-help">
+            Super admins are added by the maintainer with <code>scripts/add-super-admin.sh</code>
+            and can't be changed here. You can't change your own access.
+        </p>
+    </div>
+</section>
+
+    </main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/assets/admin/auth.js"></script>
+<script src="/assets/admin/admins.js"></script>
+</body>
+</html>

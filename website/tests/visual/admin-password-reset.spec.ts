@@ -62,7 +62,7 @@ test.describe('admin password reset', () => {
     await page.goto('/admin/login.html?reset=done', { waitUntil: 'networkidle' });
     await expect(page.locator('#notice')).toContainText('Password updated');
     await page.goto('/admin/login.html?denied=1', { waitUntil: 'networkidle' });
-    await expect(page.locator('#notice')).toContainText('not an active NOTF admin');
+    await expect(page.locator('#notice')).toContainText('does not have NOTF admin access');
   });
 
   test('a token_hash link opens the reset form; a new password is saved and the admin signed out', async ({ page }) => {

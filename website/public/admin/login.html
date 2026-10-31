@@ -109,7 +109,7 @@
     const text = params.get('reset') === 'done'
         ? 'Password updated. Sign in with your new password.'
         : params.get('denied') === '1'
-            ? 'That account is not an active NOTF admin. Ask a super admin to add you.'
+            ? 'That account does not have NOTF admin access. Ask a NOTF admin to invite you.'
             : '';
     if (text) {
         notice.textContent = text;

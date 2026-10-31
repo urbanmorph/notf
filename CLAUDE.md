@@ -990,13 +990,16 @@ appears to require weakening one, STOP and confirm with the maintainer first.
   project URL.
 
 **Admin authorization (shared by the write/delete functions):**
-- `_shared/auth.ts` `isAuthorizedAdmin()` is the single gate: a caller is an admin
-  if they have an **active row in `admin_users`** (the real registry, also used by
-  the file_metadata RLS policy + audit policy + the admin UI's `requireAuth`) **OR**
-  the legacy `user_metadata.role === 'admin'` flag. This unified the two mismatched
-  checks that previously 403'd every admin write (no account had the metadata flag).
-  This is a *membership* gate; per-role / corp-zone scoping is the planned next step
-  (see `RBAC-PLAN.md`). **Do not** narrow it back to `user_metadata.role` only.
+- `_shared/auth.ts` `isAuthorizedAdmin()` is the single write gate: a caller may
+  change NOTF data if they have an **active `admin_users` row with
+  `notf_role = 'admin'`** (the same rule as the file_metadata RLS policy via
+  `public.notf_role()` and the admin UI's `requireAuth`) **OR** the legacy
+  `user_metadata.role === 'admin'` flag. `notf_role = 'viewer'` is read-only; NULL
+  (city-app-only accounts) has no NOTF access. Super admins are added only with
+  `scripts/add-super-admin.sh`; admins and viewers are managed in the panel through
+  the `manage-admins` function (see `ACCESS.md`, `RBAC-PLAN.md`). **Do not** narrow
+  it back to `user_metadata.role` only, and do not let people change their own
+  `role`, `notf_role` or `is_active`.
 - CORS lives in `_shared/cors.ts` (`getCorsHeaders`); `ALLOWED_ORIGINS` MUST include
   `https://www.notf.in` (production, post-redirect) or the admin site's calls are
   silently blocked by the browser. Don't drift per-function copies.

@@ -65,7 +65,13 @@
                     </span>
                     <span class="label">Matcher</span>
                 </a>
-                <a href="#" class="nav-item" data-page="geocode" data-label="Geocoding Tool">
+                <a href="#" class="nav-item admin-only" data-page="admins" data-label="Admins">
+                    <span class="icon">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </span>
+                    <span class="label">Admins</span>
+                </a>
+                <a href="#" class="nav-item admin-only" data-page="geocode" data-label="Geocoding Tool">
                     <span class="icon">
                         <i class="fa-solid fa-location-dot"></i>
                     </span>
@@ -255,7 +261,8 @@
                 // Find the nav item for this page
                 const navItem = document.querySelector(`.nav-item[data-page="${lastPage}"]`);
 
-                if (navItem) {
+                // Skip pages this role cannot open (hidden nav items).
+                if (navItem && navItem.offsetParent !== null) {
                     // Update active state
                     document.querySelectorAll('.nav-item:not(.nav-item-toggle)').forEach(i => i.classList.remove('active'));
                     navItem.classList.add('active');
@@ -286,6 +293,9 @@
                     break;
                 case 'geocode':
                     iframe.src = '/admin/geocode-tool.html';
+                    break;
+                case 'admins':
+                    iframe.src = '/admin/admins.html';
                     break;
             }
         }

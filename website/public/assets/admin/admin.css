@@ -1525,3 +1525,109 @@ header {
     justify-content: flex-end;
     gap: 0.75rem;
 }
+
+/* ========================================
+   NOTF viewers: read only. auth.js requireAuth marks <html data-notf-role>.
+   This only hides controls; the Edge Functions and RLS refuse viewer writes.
+   ======================================== */
+[data-notf-role="viewer"] .admin-only,
+[data-notf-role="viewer"] .mini-icon-btn.edit,
+[data-notf-role="viewer"] .mini-icon-btn.delete,
+[data-notf-role="viewer"] .mini-icon-btn.activate,
+[data-notf-role="viewer"] .mini-icon-btn.deactivate,
+[data-notf-role="viewer"] [onclick^="showCreateForm"],
+[data-notf-role="viewer"] [onclick^="showImportModal"] {
+    display: none !important;
+}
+
+/* ========================================
+   Admins page (admins.html)
+   ======================================== */
+.invite-form {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(44, 44, 44, 0.1);
+}
+
+.invite-form h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    color: #2B2B2B;
+}
+
+.invite-help {
+    color: #555;
+    font-size: 0.9rem;
+    margin: 0 0 1rem;
+}
+
+.invite-fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+}
+
+.invite-fields label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #2B2B2B;
+    flex: 1 1 180px;
+}
+
+.invite-fields input,
+.invite-fields select,
+.admin-controls select {
+    min-height: 44px;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 400;
+}
+
+.invite-fields .btn-primary {
+    min-height: 44px;
+}
+
+.invite-status {
+    margin: 1rem 0 0;
+    color: #2F4A2C;
+}
+
+.invite-status:empty {
+    display: none;
+}
+
+.admin-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.admin-controls .btn-secondary {
+    min-height: 44px;
+}
+
+.admin-locked {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.admin-row.is-inactive {
+    opacity: 0.7;
+}
+
+.admin-page .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
