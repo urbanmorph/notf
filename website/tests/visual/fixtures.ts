@@ -139,6 +139,10 @@ export async function stubSupabase(page: Page): Promise<void> {
       body: JSON.stringify(rowsForFileType(fileType)),
     });
   });
+  // The chatbot logs each search; accept those writes without a network call.
+  await page.route('**/rest/v1/chat_searches**', (route) =>
+    route.fulfill({ status: 201, headers: { 'Access-Control-Allow-Origin': '*' }, body: '' }),
+  );
 }
 
 /**

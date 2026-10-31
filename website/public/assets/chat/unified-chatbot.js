@@ -356,6 +356,8 @@ class NotfChatbot {
                     <li><i class="fa-solid fa-handshake"></i> Resources (funding, volunteers, space)</li>
                 </ul>
                 <p>Try asking: <em>"Find communities working on waste management in Bengaluru"</em></p>
+                <p class="chat-privacy-note" data-i18n="chatbot.searchLogNote">${this.escapeHtml(this.t('chatbot.searchLogNote',
+                    'We keep the words you search for and what we showed you, not who you are, to improve search.'))}</p>
             </div>
         `);
 
@@ -430,6 +432,15 @@ class NotfChatbot {
         // Use discovery engine to process query
         const results = await this.discoveryEngine.search(message);
         const city = typeof findCityIn === 'function' ? findCityIn(message)?.city || '' : '';
+        if (typeof logSearch === 'function') {
+            logSearch(searchLogRow({
+                query: message,
+                results,
+                city,
+                lang: window.translator?.currentLanguage || document.documentElement.lang,
+                page: location.pathname
+            }));
+        }
 
         if (results.length === 0 && city) {
             this.addBotMessage(this.renderNothingInCity(city) + this.airQualityNote(message));
@@ -446,6 +457,12 @@ class NotfChatbot {
         } else {
             this.displayDiscoveryResults(results, city, message);
         }
+    }
+
+    // translator.t() returns the key itself when a string is missing.
+    t(key, fallback) {
+        const value = window.translator?.t(key);
+        return value && value !== key ? value : fallback;
     }
 
     // city-map.js (findCityIn, normaliseCity) is already on the home and communities

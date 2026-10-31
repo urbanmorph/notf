@@ -61,10 +61,17 @@ test.describe('chatbot', () => {
     const errors: string[] = [];
     page.on('pageerror', (err) => errors.push(err.message));
     await stubSupabase(page);
+    // Record what the search log sends (registered last, so it wins over the stub).
+    const logged: Array<Record<string, unknown>> = [];
+    await page.route('**/rest/v1/chat_searches**', (route) => {
+      logged.push(route.request().postDataJSON());
+      return route.fulfill({ status: 201, headers: { 'Access-Control-Allow-Origin': '*' }, body: '' });
+    });
     await page.goto('/about/', { waitUntil: 'networkidle' });
     await page.waitForFunction(() => !!window.notfChatbot, null, { timeout: 10000 });
     await page.locator('.intent-button[data-intent="discovery"]').click();
     await expect(page.locator('.chat-messages')).toContainText('What are you looking for?');
+    await expect(page.locator('.chat-privacy-note')).toContainText('not who you are');
 
     const replies = page.locator('.chat-messages .bot-message');
     const ask = async (question: string) => {
@@ -97,6 +104,15 @@ test.describe('chatbot', () => {
     const waste = await ask('कचरा');
     await expect(waste.locator('.community-card h4').first()).toBeVisible();
     await expect(waste).toContainText('Green Glen Collective');
+
+    // Each search is logged with what was shown, and phone numbers are blanked.
+    await ask('call 98450 12345 about lakes');
+    await expect.poll(() => logged.length).toBe(5);
+    expect(logged[0]).toMatchObject({ query: 'communities in Mumbai', city: 'Mumbai', page: '/about/', lang: 'en' });
+    expect(logged[0].result_count).toBe((logged[0].results as unknown[]).length);
+    expect(Object.keys((logged[0].results as object[])[0]).sort()).toEqual(['name', 'slug', 'type']);
+    expect(logged[1]).toMatchObject({ query: 'waste groups in Calcutta', city: 'Kolkata', result_count: 0, results: [] });
+    expect(logged[4].query).toBe('call [number] about lakes');
 
     expect(errors).toEqual([]);
   });
