@@ -124,8 +124,11 @@ repo — they carry the invariants from the 2026-06-02 incident.
 - Add/adjust unit tests under `_shared/*.test.ts` for any logic change (§5).
 - **Deploy is not automatic** — git merge ships the frontend, not functions:
   ```bash
-  supabase functions deploy update-file   # requires Supabase access (see ACCESS.md)
+  supabase functions deploy update-file --no-verify-jwt   # requires Supabase access (see ACCESS.md)
   ```
+  Always pass `--no-verify-jwt`: the functions check the caller themselves, and the
+  gateway's own check rejects the project's ES256 session tokens. (The CLI ignores
+  each function's `config.toml`, so it does not set this for you.)
 - Preserve every invariant in `ARCHITECTURE.md` §"Data Safety Invariants". Fix
   data-integrity issues in the merge layer (one place, protects all callers), not with
   client-side patches.

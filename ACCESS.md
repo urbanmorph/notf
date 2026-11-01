@@ -55,7 +55,7 @@ Two distinct kinds of access — don't confuse them:
   ```bash
   supabase login                                   # your own account
   supabase link --project-ref abblyaukkoxmgzwretvm
-  supabase functions deploy update-file            # example
+  supabase functions deploy update-file --no-verify-jwt   # example; always --no-verify-jwt
   supabase db push                                 # apply migrations
   ```
 
