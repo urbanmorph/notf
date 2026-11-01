@@ -148,7 +148,7 @@ You (almost) never deploy by hand:
 
 - **Frontend** — merge to `main`; Vercel auto-deploys. That's the whole flow.
 - **Edge functions** — changes under `supabase/functions/` are **not** deployed by the
-  git merge. Deploy explicitly: `supabase functions deploy <name>` (requires Supabase
+  git merge. Deploy explicitly: `supabase functions deploy <name> --no-verify-jwt` (requires Supabase
   access — see `ACCESS.md`).
 - **Migrations** — `supabase db push` applies new files in `supabase/migrations/`.
 
