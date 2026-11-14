@@ -47,6 +47,22 @@ The site fetches live data from Supabase via the **public anon key** (hardcoded 
 `.env` or secrets required** for read-only work. See `CONTRIBUTING.md` for the test
 and deploy workflows, and `ACCESS.md` for what write access requires.
 
+## Solution Catalogue
+
+[notf.in/catalog](https://www.notf.in/catalog/) lists neighbourhood solutions that
+communities can host (56 projects as of November 2026). It is **static data, not the
+database**: every project lives in `website/public/catalog/catalog-data.js`, which also
+feeds the home page carousel and counts.
+
+Providers send their project on the **NOTF Catalogue Template** (a two-slide PowerPoint:
+what it is, why it exists, what it involves, impact, where it's been done, what's needed,
+how the process works, photos, links). To add one, map the template's fields onto a new
+`catalog-data.js` entry and follow [`CONTRIBUTING.md`](CONTRIBUTING.md) §B: next unused
+`id`, a valid theme, `cities` the map can place, photos downscaled to about 1400px and
+under 600 KB, an optional filter tag, and a home carousel photo. If the change moves the
+catalogue or solution-provider page layout, regenerate the visual baselines the container
+way (§6).
+
 ## Documentation map — start here
 
 New to the project? Read these in order:

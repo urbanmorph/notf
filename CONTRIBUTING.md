@@ -98,9 +98,11 @@ Existing values: `Awareness`, `Biodiversity`, `Community`, `Education`, `Gender`
 52: ['Biodiversity', 'Water'],
 ```
 
-**3. `index.html` home carousel** (recommended) — a trimmed entry:
+**3. `index.html` home carousel** (recommended) — the carousel reads titles and themes
+from `catalog-data.js` automatically; you only add a photo to the `catalogueImages` map,
+keyed by id. Without one, the card falls back to its theme icon.
 ```js
-{ id: 52, title: 'Project Name', themes: ['Water & Ecology'], image: '/assets/images/catalogue/slug-photo1.jpg' }
+52: '/assets/images/catalogue/slug-photo1.jpg',
 ```
 
 **Images:** put in `assets/images/catalogue/`, name `slug-descriptor.jpg` (lowercase,
