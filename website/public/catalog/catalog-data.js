@@ -903,5 +903,27 @@ window.CATALOG_PROJECTS = [
                 whatsNeeded: "Citizens to engage with the dashboard and vote for the problematic, high-risk locations in their neighbourhoods. CSR funders to use the dashboard to plan funding for road safety improvement projects.",
                 links: ["https://projectintersect.framer.website/"],
                 provider: "Compartment S4"
+            },
+            {
+                id: 56,
+                title: "Sceen",
+                description: "A volunteer mobilisation and coordination platform that lists volunteering opportunities and provides verified volunteers to NGOs, civic agencies, and community events.",
+                themes: ["Livelihoods & Inclusion"],
+                time: 1, workload: 1, budget: 1,
+                whatIsIt: "Sceen is a volunteer mobilisation and coordination platform. It lists opportunities to volunteer and provides verified volunteers to organisations, so that finding and joining a volunteering activity is as simple as booking a movie ticket.",
+                whyExists: "Most organisations struggle to find, mobilise, and retain volunteers, and volunteering itself is often unstructured and hard to access. Sceen reduces the friction at every stage of volunteer engagement, from recruitment to recognition.",
+                involves: ["Self-service listings: NGOs list their volunteering opportunity on Sceen and manage the rest themselves", "Managed service: Sceen handles volunteer sourcing, communications, re-staffing in case of no-shows, feedback collection, and certificates and stipends", "A dedicated communications group, scheduling, and an orientation call for each activity", "Collaborations with NGOs, civic agencies, businesses, event agencies, colleges, and corporates"],
+                whereDone: "Across Bengaluru Urban, from Nandi Hills to Electronic City and from Ullal to Whitefield.",
+                cities: ["Bengaluru"],
+                impact: "2,000+ volunteers mobilised, 20,000+ hours of volunteering, and 50+ partner organisations worked with.",
+                whatsNeeded: "Venues and seating arrangements from the community or partner organisations. Clear volunteer requirements: location, duration, tasks, and perks. To start, message Sceen on WhatsApp (8050317276) or email sceenme1@gmail.com, decide between the free self-service listing and the paid managed service, and decide what to offer volunteers (separate from Sceen's fees).",
+                links: ["https://sceen.me"],
+                images: [
+                    { src: "/assets/images/catalogue/sceen-tree-census.jpg", caption: "Volunteers measuring a tree's girth" },
+                    { src: "/assets/images/catalogue/sceen-zero-waste-volunteers.jpg", caption: "Volunteers at a zero-waste drive with The Zero Waste Collective" },
+                    { src: "/assets/images/catalogue/sceen-festival-waste-sorting.jpg", caption: "Volunteers sorting waste at a festival venue" },
+                    { src: "/assets/images/catalogue/sceen-community-workshop.jpg", caption: "Residents at a hands-on community workshop" }
+                ],
+                provider: "Sceen"
             }
         ];
