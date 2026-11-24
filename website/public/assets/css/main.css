@@ -223,6 +223,13 @@ nav {
     color: var(--slate-blue);
 }
 
+/* Compact desktop nav: seven links don't fit at full spacing on narrow laptops */
+@media (min-width: 769px) and (max-width: 1180px) {
+    .nav-menu { gap: 2px; }
+    .nav-menu a { padding: 8px 8px; font-size: 15px; }
+    .nav-menu .admin-link { padding: 8px 4px; }
+}
+
 /* Hamburger Menu */
 .hamburger {
     display: none;
