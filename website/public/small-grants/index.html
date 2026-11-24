@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NoTF BLR Small Grants | The fix is local</title>
+  <meta name="description" content="Small, short-term grants of ₹50,000 to ₹2,00,000 for people already solving neighbourhood problems in Bengaluru.">
+  <meta property="og:title" content="NoTF BLR Small Grants | The fix is local">
+  <meta property="og:description" content="Neighbourhood fixes, funded in Bengaluru and shared with the world.">
+  <meta property="og:image" content="images/hero-alt.jpg">
+  <!-- Same favicon as notf.in -->
+  <link rel="icon" href="images/favicon.ico?v=32" type="image/x-icon">
+  <link rel="icon" href="images/favicon-16.png?v=32" type="image/png" sizes="16x16">
+  <link rel="icon" href="images/favicon-32.png?v=32" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="images/favicon-180.png?v=32" sizes="180x180">
+  <!-- Instrument Sans for Latin text, Noto Sans Kannada for Kannada -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;700&family=Noto+Sans+Kannada:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="images/hero.jpg?v=32">
+  <link rel="stylesheet" href="styles.css?v=32">
+</head>
+<body>
+  <a class="skip" href="#about">Skip to content</a>
+
+  <!-- Fixed header: logo, nav, language toggle -->
+  <header class="top">
+    <a class="top__logo" href="#home" aria-label="NoTF BLR Small Grants Program, home">
+      <img src="images/logo.svg" alt="NoTF.BLR Small Grants Program" width="165" height="72">
+    </a>
+    <div class="top__right">
+      <nav class="top__nav" aria-label="Main">
+        <span class="tab-lens glass" aria-hidden="true"></span>
+        <a href="#home" data-i18n="nav.home">Home</a>
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#who" data-i18n="nav.who">Who it's for</a>
+        <a href="#how" data-i18n="nav.how">How it works</a>
+        <a href="#faq" data-i18n="nav.faq">FAQs</a>
+      </nav>
+      <div class="lang" role="group" aria-label="Language">
+        <span class="tab-lens glass" aria-hidden="true"></span>
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="kn" lang="kn" aria-pressed="false" aria-label="ಕನ್ನಡ" title="ಕನ್ನಡ">ಕ</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Floating Apply button (asset swaps white/rust by background) -->
+  <a class="apply-fab" href="#apply" aria-label="Apply now">
+    <span class="apply-fab__in">
+      <img class="apply-fab__white" src="images/apply-white.svg?v=32" alt="" width="250" height="130">
+      <img class="apply-fab__rust" src="images/apply-rust.svg?v=32" alt="" width="250" height="130">
+    </span>
+  </a>
+
+  <main>
+    <!-- 1. HERO: full-bleed landing image scrolls into the framed "first scroll" layout -->
+    <section class="hero" id="home" data-scrub="hero">
+      <div class="hero__stage">
+        <div class="hero__probe" aria-hidden="true"></div>
+        <div class="hero__card">
+          <img src="images/hero.jpg?v=32" alt="Illustration of a Bengaluru neighbourhood street with a park, flower stall, bus stop and cycle lane" fetchpriority="high">
+          <img class="hero__wide" src="images/hero-wide.jpg?v=32" alt="">
+          <h1 class="hero__headline" data-i18n="hero.h1">The fix is local</h1>
+        </div>
+        <div class="hero__below">
+          <p class="hero__line"><span data-i18n="hero.pre">Solve it in</span> <span class="ward"><span class="ward__name" data-ward>Malleshwaram</span></span><span class="hero__dot">. </span><span data-i18n="hero.post">Share it with the city.</span></p>
+          <div class="hero__btns">
+            <a class="btn btn--rust btn--sm" href="#fit" data-i18n="hero.fit">Is this you?</a>
+            <a class="btn btn--line btn--sm" href="#how" data-i18n="hero.how">How it works</a>
+          </div>
+        </div>
+        <button class="hero__cue" type="button"><span data-i18n="hero.scroll">Scroll</span><i class="glass" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M5.5 12.5 12 19l6.5-6.5"/></svg></i></button>
+        <button class="sound" type="button" data-state="idle" aria-pressed="false"><svg class="sound__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h3.2L12 18.5v-13L7.2 9.5H4z" fill="currentColor"/><path class="sound__wave" d="M15.5 9.2a4 4 0 0 1 0 5.6"/><path class="sound__wave" d="M18.2 6.6a7.6 7.6 0 0 1 0 10.8"/><path class="sound__x" d="M16 9.5l5 5M21 9.5l-5 5"/></svg><span class="sound__label">Tap for sound</span></button>
+      </div>
+    </section>
+
+    <!-- 2. ABOUT: words light up as you scroll -->
+    <section class="about" id="about" data-scrub="about">
+      <div class="about__stage">
+        <p class="eyebrow eyebrow--light" data-i18n="about.eyebrow">About</p>
+        <h2 class="about__title" data-i18n="about.title">Small Grants Program</h2>
+        <p class="about__text" data-words data-i18n="about.text">Neighbourhood fixes, funded in Bengaluru and shared with the world. Small, short-term grants for people already solving neighbourhood problems, who just need some help to get across the finish line.</p>
+      </div>
+    </section>
+
+    <!-- 3. GRANT: number counts with scroll -->
+    <section class="grant" id="grant" data-scrub="grant">
+      <div class="grant__stage">
+        <div class="grant__main">
+          <p class="eyebrow eyebrow--light" data-i18n="grant.eyebrow">Grant size</p>
+          <p class="grant__number" aria-label="Up to ₹2,00,000"><span class="grant__cur">₹</span><span data-grant-number>2,00,000</span></p>
+          <p class="grant__caption" data-i18n="grant.caption">Grants from ₹50,000. Sized to what your fix needs.</p>
+          <!-- What each grant size can do; icons light up as the amount climbs -->
+          <ol class="grant__stages">
+            <li><img src="images/icons/grant-seed.svg" alt="" width="250" height="250"><span data-i18n="stage.1">Seed a pilot</span></li>
+            <li><img src="images/icons/grant-kits.svg" alt="" width="250" height="250"><span data-i18n="stage.2">Kits and materials</span></li>
+            <li><img src="images/icons/grant-build.svg" alt="" width="250" height="250"><span data-i18n="stage.3">Build it out</span></li>
+            <li><img src="images/icons/grant-finish.svg" alt="" width="250" height="250"><span data-i18n="stage.4">Finish the fix</span></li>
+          </ol>
+          <ul class="grant__stats">
+            <li><b>6 <span data-i18n="grant.months">months</span></b><span data-i18n="grant.s1">Grant duration</span></li>
+            <li><b>~10</b><span data-i18n="grant.s2">Grants in this round</span></li>
+            <li><b>0</b><span data-i18n="grant.s3">Interim reports, just a story at the end</span></li>
+          </ul>
+        </div>
+        <div class="ruler" aria-hidden="true">
+          <div class="ruler__ticks"></div>
+          <div class="ruler__marker"><span data-ruler-label>₹50k</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Parallax breaker 1 -->
+    <section class="breaker" data-scrub="breaker" aria-label="Children painting a neighbourhood mural">
+      <img src="images/mural-painting.jpg" alt="" loading="lazy">
+    </section>
+
+    <!-- 4. WHO IT'S FOR: two marquees, opposite directions -->
+    <section class="who" id="who">
+      <div class="wrap who__head">
+        <p class="eyebrow" data-i18n="who.eyebrow">Who it's for</p>
+        <h2 data-i18n="who.h2">For people already fixing <em>their corner</em> of Bengaluru.</h2>
+        <ul class="who__themes" aria-label="Themes">
+          <li data-i18n="theme.1">Environment</li>
+          <li data-i18n="theme.2">Public spaces</li>
+          <li data-i18n="theme.3">Community wellbeing</li>
+        </ul>
+      </div>
+      <div class="marquee">
+        <div class="marquee__row marquee__row--left">
+          <div class="marquee__track" data-marquee>
+            <span data-i18n="m1.1">Individuals</span><span data-i18n="m1.2">Informal collectives</span><span data-i18n="m1.3">Resident groups</span><span data-i18n="m1.4">Registered organisations</span><span data-i18n="m1.5">Neighbourhood fixers</span><span data-i18n="m1.6">Based in Bengaluru</span>
+          </div>
+        </div>
+        <div class="marquee__row marquee__row--right">
+          <div class="marquee__track" data-marquee>
+            <span data-i18n="t.1">Public spaces</span><span data-i18n="t.2">Waste</span><span data-i18n="t.3">Water</span><span data-i18n="t.4">Trees and greening</span><span data-i18n="t.5">Walking and mobility</span><span data-i18n="t.6">Safety</span><span data-i18n="t.7">Something else</span>
+          </div>
+        </div>
+      </div>
+      <ul class="wrap who__list">
+        <li data-i18n="who.l1">Based in Bengaluru</li>
+        <li data-i18n="who.l2">Tackling a specific neighbourhood problem</li>
+        <li data-i18n="who.l3">With an idea that could travel</li>
+      </ul>
+    </section>
+
+    <!-- 5. HOW IT WORKS -->
+    <section class="how" id="how">
+      <div class="how__intro" data-scrub="float">
+        <img class="how__orb how__orb--a" src="images/repair-cafe.jpg" alt="" loading="lazy">
+        <img class="how__orb how__orb--b" src="images/ev-launch.jpg" alt="" loading="lazy">
+        <p class="eyebrow" data-i18n="how.eyebrow">How it works</p>
+        <h2 data-i18n="how.h2">Rolling call. Six weeks, give or take.</h2>
+        <p data-i18n="how.p">Applications are reviewed as they come in. No deadline to chase.</p>
+        <a class="btn btn--rust" href="#apply" data-i18n="how.apply">Apply now</a>
+      </div>
+
+      <div class="how__panel">
+        <ol class="steps wrap">
+          <li class="step reveal">
+            <span class="step__num">01</span>
+            <div class="step__body">
+              <h3><span data-i18n="s1.t">You apply</span> <span class="pill pill--sage" data-i18n="s1.pill">Any time</span></h3>
+              <p data-i18n="s1.p">Fill in the short application form linked at the end of this page.</p>
+            </div>
+            <span class="step__icon" aria-hidden="true"><img src="images/icons/step-apply.svg" alt="" width="250" height="250" loading="lazy"></span>
+          </li>
+          <li class="step reveal">
+            <span class="step__num">02</span>
+            <div class="step__body">
+              <h3><span data-i18n="s2.t">We get to know you</span> <span class="pill pill--grey" data-i18n="s2.pill">A call or a visit</span></h3>
+              <p data-i18n="s2.p">A short conversation and, if it helps, a visit to see the problem and your work on it.</p>
+            </div>
+            <span class="step__icon" aria-hidden="true"><img src="images/icons/step-get-to-know.svg" alt="" width="250" height="250" loading="lazy"></span>
+          </li>
+          <li class="step reveal">
+            <span class="step__num">03</span>
+            <div class="step__body">
+              <h3><span data-i18n="s3.t">The decision</span> <span class="pill pill--sage" data-i18n="s3.pill">About 6 weeks</span></h3>
+              <p data-i18n="s3.p">You hear back from us, yes or no, within about six weeks of applying.</p>
+            </div>
+            <span class="step__icon" aria-hidden="true"><img src="images/icons/step-decision.svg" alt="" width="250" height="250" loading="lazy"></span>
+          </li>
+          <li class="step reveal">
+            <span class="step__num">04</span>
+            <div class="step__body">
+              <h3><span data-i18n="s4.t">Funds arrive</span> <span class="pill pill--grey" data-i18n="s4.pill">Up to 6 months to deliver</span></h3>
+              <p data-i18n="s4.p">The grant is transferred and you get on with the fix.</p>
+            </div>
+            <span class="step__icon" aria-hidden="true"><img src="images/icons/step-funds.svg" alt="" width="250" height="250" loading="lazy"></span>
+          </li>
+        </ol>
+
+        <div class="wrap asks reveal">
+          <h3 data-i18n="asks.h">What we ask at the end</h3>
+          <ul>
+            <li data-i18n="asks.1">A story or playbook of your fix</li>
+            <li data-i18n="asks.2">A fund utilisation certificate</li>
+            <li data-i18n="asks.3">That's it. No interim reports.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Parallax breaker 2 -->
+    <section class="breaker breaker--short" data-scrub="breaker" aria-label="A community mural along a neighbourhood wall">
+      <img src="images/mural-wall.jpg" alt="" loading="lazy">
+    </section>
+
+    <!-- 6. FIT CHECK: build your sentence, answer three, get a verdict -->
+    <section class="fit" id="fit">
+      <div class="wrap">
+        <div class="fit__head">
+          <div>
+            <p class="eyebrow" data-i18n="fit.eyebrow">Is this you?</p>
+            <h2 data-i18n="fit.h2">Thirty seconds to see if your idea fits.</h2>
+          </div>
+          <p class="fit__note" data-i18n="fit.lede">Three questions. Nothing is saved or sent.</p>
+        </div>
+
+        <div class="fit__card">
+          <p class="sentence">
+            <span data-i18n="fit.im">I'm</span>
+            <label class="sr" for="fitWho">Who you are</label>
+            <select id="fitWho" class="chip">
+              <option data-i18n="fit.who1">an individual</option>
+              <option data-i18n="fit.who2" selected>a collective</option>
+              <option data-i18n="fit.who3">an organisation</option>
+            </select>
+            <span data-i18n="fit.on">working on</span>
+            <label class="sr" for="fitWhat">What you're working on</label>
+            <select id="fitWhat" class="chip chip--fill">
+              <option data-i18n="fit.t1">public spaces</option>
+              <option data-i18n="fit.t2">waste</option>
+              <option data-i18n="fit.t3">water</option>
+              <option data-i18n="fit.t4">trees and greening</option>
+              <option data-i18n="fit.t5">walking and mobility</option>
+              <option data-i18n="fit.t6">safety</option>
+              <option data-i18n="fit.t7">something else</option>
+            </select>
+            <span data-i18n="fit.in">in</span>
+            <label class="sr" for="fitWhere">Your neighbourhood</label>
+            <input id="fitWhere" class="chip chip--input" type="text" placeholder="your neighbourhood" data-i18n-ph="fit.where" maxlength="40" autocomplete="off">
+          </p>
+
+          <div class="fit__grid">
+            <ol class="fit__qs">
+              <li data-q>
+                <span class="fit__n">01</span>
+                <p id="q1" data-i18n="fit.q1">Are you based in Bengaluru?</p>
+                <div class="seg" role="radiogroup" aria-labelledby="q1"><button type="button" role="radio" aria-checked="false" data-a="yes" data-i18n="fit.yes">Yes</button><button type="button" role="radio" aria-checked="false" data-a="no" data-i18n="fit.no">Not quite</button></div>
+              </li>
+              <li data-q>
+                <span class="fit__n">02</span>
+                <p id="q2" data-i18n="fit.q2">Are you tackling a specific neighbourhood problem or opportunity?</p>
+                <div class="seg" role="radiogroup" aria-labelledby="q2"><button type="button" role="radio" aria-checked="false" data-a="yes" data-i18n="fit.yes">Yes</button><button type="button" role="radio" aria-checked="false" data-a="no" data-i18n="fit.no">Not quite</button></div>
+              </li>
+              <li data-q>
+                <span class="fit__n">03</span>
+                <p id="q3" data-i18n="fit.q3">Could your idea or solution work in another neighbourhood too?</p>
+                <div class="seg" role="radiogroup" aria-labelledby="q3"><button type="button" role="radio" aria-checked="false" data-a="yes" data-i18n="fit.yes">Yes</button><button type="button" role="radio" aria-checked="false" data-a="no" data-i18n="fit.no">Not quite</button></div>
+              </li>
+            </ol>
+
+            <div class="verdict" data-verdict data-state="idle" aria-live="polite">
+              <div class="verdict__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+              <p class="verdict__title" data-verdict-title>Answer all three.</p>
+              <p class="verdict__text" data-verdict-text>Your verdict shows up here. Nothing is saved or sent.</p>
+              <a class="btn btn--cream" href="#apply" data-verdict-cta hidden data-i18n="how.apply">Apply now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. FAQ -->
+    <section class="faq" id="faq">
+      <div class="wrap faq__grid">
+        <div>
+          <p class="eyebrow" data-i18n="faq.eyebrow">FAQs</p>
+          <h2 data-i18n="faq.h2">Questions, answered.</h2>
+          <p class="lede" data-i18n="faq.lede">The short version of how the program works. Anything else, just ask.</p>
+        </div>
+        <div class="faq__list">
+          <details open><summary><span>01</span><b data-i18n="faq.q1">What is the NoTF BLR Small Grants Program?</b></summary><p data-i18n="faq.a1">It awards small, short-term grants to individuals, collectives and organisations who are solving neighbourhood problems in Bengaluru.</p></details>
+          <details><summary><span>02</span><b data-i18n="faq.q2">Who can apply?</b></summary><p data-i18n="faq.a2">Individuals, informal collectives (such as resident groups) and registered organisations working on a specific neighbourhood problem in Bengaluru.</p></details>
+          <details><summary><span>03</span><b data-i18n="faq.q3">What will you fund?</b></summary><p data-i18n="faq.a3">Work that helps you finish a neighbourhood fix: materials, small equipment, local labour, events and outreach. We prefer ideas already underway, and ideas that could work in another neighbourhood too.</p></details>
+          <details><summary><span>04</span><b data-i18n="faq.q4">What is the grant value and duration?</b></summary><p data-i18n="faq.a4">Between ₹50,000 and ₹2,00,000, for up to 6 months.</p></details>
+          <details><summary><span>05</span><b data-i18n="faq.q5">How many grants are available?</b></summary><p data-i18n="faq.a5">About 10 in this round.</p></details>
+          <details><summary><span>06</span><b data-i18n="faq.q6">What does the application process look like?</b></summary><p data-i18n="faq.a6">Apply online, have a short conversation with us, and hear our decision within about six weeks. Applications are reviewed as they come in.</p></details>
+          <details><summary><span>07</span><b data-i18n="faq.q7">What are the reporting requirements?</b></summary><p data-i18n="faq.a7">No interim reports. At the end, a story or playbook of your fix and a fund utilisation certificate. Don’t worry, we’ll help.</p></details>
+          <p class="faq__more" data-i18n="faq.more">Still have questions? Write to <a href="mailto:notf.blr@socratusfoundation.in">notf.blr@socratusfoundation.in</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. APPLY -->
+    <section class="cta" id="apply" data-scrub="breaker">
+      <img src="images/dwcc-wall.jpg" alt="" loading="lazy">
+      <div class="cta__inner">
+        <p class="eyebrow eyebrow--light" data-i18n="cta.eyebrow">Applications open · Rolling · Bengaluru only</p>
+        <h2 data-i18n="cta.h2">Ready to finish your fix?</h2>
+        <p data-i18n="cta.p">The fix is local. The idea travels. If you're already working on a neighbourhood fix and just need a push across the finish line, we'd love to hear from you.</p>
+        <div class="cta__btns">
+          <!-- No application form link yet: for now this opens an email to the programme address. Swap the href for the form URL when it exists. -->
+          <a class="btn btn--cream" href="mailto:notf.blr@socratusfoundation.in?subject=Small%20Grants%20application" data-i18n="how.apply">Apply now</a>
+          <a class="btn btn--ghost" href="#faq" data-i18n="cta.faq">Read the FAQs</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot__grid">
+      <a href="#home" class="foot__logo"><img src="images/logo.svg" alt="NoTF.BLR Small Grants Program" width="165" height="72"></a>
+      <nav aria-label="Footer">
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#grant" data-i18n="grant.eyebrow">Grant size</a>
+        <a href="#how" data-i18n="nav.how">How it works</a>
+        <a href="#faq" data-i18n="nav.faq">FAQs</a>
+      </nav>
+      <div class="foot__credits">
+        <p class="foot__support"><span data-i18n="foot.support">Supported by</span> <a href="https://rainmatter.org/" target="_blank" rel="noopener">Rainmatter</a></p>
+        <p class="foot__design"><span data-i18n="foot.design">Designed by</span> <a href="https://www.thestudioikigai.com" target="_blank" rel="noopener">Studio Ikigai</a></p>
+      </div>
+    </div>
+    <div class="wrap foot__bottom">
+      <p class="foot__legal">© 2026 Neighbourhoods of the Future · Part of PDGI (People's Digital Goods &amp; Infrastructure)<br><a href="https://www.notf.in/" target="_blank" rel="noopener">notf.in</a> · <a href="mailto:notf.blr@socratusfoundation.in">notf.blr@socratusfoundation.in</a> · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></p>
+      <div class="foot__social">
+        <a href="https://www.instagram.com/neighbourhoodsofthefuture/" target="_blank" rel="noopener" aria-label="Neighbourhoods of the Future on Instagram" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.1" cy="6.9" r="0.6" fill="currentColor"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/neighbourhoods-of-the-future/" target="_blank" rel="noopener" aria-label="Neighbourhoods of the Future on LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="3.6"/><path d="M8 10.6v6M11.6 16.6v-6M11.6 13.4c0-1.7 1-2.9 2.5-2.9s2.3 1 2.3 2.8v3.3"/><circle cx="8" cy="7.6" r="0.6" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="i18n-kn.js?v=32"></script>
+  <script src="script.js?v=32"></script>
+  <script src="ambience.js?v=32"></script>
+</body>
+</html>
