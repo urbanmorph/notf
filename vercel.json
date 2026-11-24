@@ -10,6 +10,11 @@
   ],
   "redirects": [
     {
+      "source": "/small-grants",
+      "destination": "/small-grants/",
+      "permanent": true
+    },
+    {
       "source": "/cities/:city/climate/air-quality(/.*)?",
       "destination": "https://oaq.notf.in",
       "permanent": true
