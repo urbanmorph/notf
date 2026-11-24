@@ -19,6 +19,7 @@
                 <a href="/about/" data-i18n="nav.about">About</a>
                 <a href="/communities/" data-i18n="nav.communities">Communities</a>
                 <a href="/catalog/" data-i18n="nav.catalogue">Catalogue</a>
+                <a href="/small-grants/" data-i18n="nav.smallGrants">Small Grants</a>
                 <a href="https://oaq.notf.in" class="nav-external" target="_blank" rel="noopener noreferrer"><span data-i18n="nav.airQuality">Air Quality</span> <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                 <a href="/join/" class="join-link" data-i18n="nav.join">Join</a>
                 <a href="/admin/login.html" class="admin-link" data-i18n-title="nav.admin" title="Admin Login">
