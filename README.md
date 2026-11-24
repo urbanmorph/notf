@@ -63,6 +63,35 @@ under 600 KB, an optional filter tag, and a home carousel photo. If the change m
 catalogue or solution-provider page layout, regenerate the visual baselines the container
 way (§6).
 
+## Small Grants page
+
+[notf.in/small-grants](https://www.notf.in/small-grants/) is the NoTF BLR Small Grants
+programme page ("The fix is local"), live since 24 November 2026 and linked from the main
+navigation.
+
+- **Where it lives:** `website/public/small-grants/` (one `index.html`, `styles.css`,
+  three scripts and `images/`). It is a self-contained page with its own header, its own
+  English/Kannada toggle (`i18n-kn.js`) and relative asset paths. It does not use the main
+  site's shared header, footer or 11-language locale files.
+- **Where it comes from:** designed and built upstream in
+  [ray-atomic-ant/notf-small-grants](https://github.com/ray-atomic-ant/notf-small-grants).
+  The files here were copied from upstream commit `651aaa9`. notf.in loads nothing from
+  that repo.
+- **Updating it:** pull the new upstream version, copy it over
+  `website/public/small-grants/` on a branch, and open a PR here. Keep the two local
+  changes below when copying.
+- **Local changes on top of upstream:** all four "Apply now" buttons open the application
+  Google Form in a new tab (upstream scrolls to the closing section and uses a mailto).
+  The contact email in the FAQ and footer is unchanged.
+- **Routing:** `vercel.json` redirects `/small-grants` to `/small-grants/`. The trailing
+  slash is required because the page's asset paths are relative.
+- **Main-site link:** the "Small Grants" item in `assets/js/components/header.js`
+  (`nav.smallGrants` in all 11 locale files). Seven nav items needed compact spacing
+  between 769px and 1180px; see the "Compact desktop nav" rule in `assets/css/main.css`.
+
+`main` is a protected branch: changes land through a pull request with the Visual
+Regression check green, for admins too.
+
 ## Documentation map — start here
 
 New to the project? Read these in order:
