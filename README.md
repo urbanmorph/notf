@@ -75,8 +75,9 @@ navigation.
   site's shared header, footer or 11-language locale files.
 - **Where it comes from:** designed and built upstream in
   [ray-atomic-ant/notf-small-grants](https://github.com/ray-atomic-ant/notf-small-grants).
-  The files here were copied from upstream commit `651aaa9`. notf.in loads nothing from
-  that repo.
+  The files here match upstream commit `6dc3b35` (synced 25 November 2026, which added
+  the Socratus logo to the footer and moved the asset version to v33). notf.in loads
+  nothing from that repo, so a new upstream commit shows up here only after a sync PR.
 - **Updating it:** pull the new upstream version, copy it over
   `website/public/small-grants/` on a branch, and open a PR here. Keep the two local
   changes below when copying.
