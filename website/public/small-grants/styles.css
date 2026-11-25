@@ -383,6 +383,11 @@ body.fab-on-dark .apply-fab__rust { opacity: 0; }
 .foot { background: var(--paper); padding: 56px 0 120px; font-size: 0.86rem; }
 .foot__grid { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 40px; }
 .foot__logo img { width: 132px; height: auto; }
+.foot__logos { display: flex; align-items: center; gap: 18px; }
+.foot__logo { display: block; }
+.foot__logo img { display: block; }
+/* Socratus monogram, set off from the NoTF logo by a thin rule */
+.foot__partner { display: block; width: auto; height: 62px; padding-left: 18px; border-left: 1px solid rgba(44, 43, 50, 0.18); box-sizing: content-box; }
 .foot nav { display: flex; flex-wrap: wrap; gap: 6px 24px; }
 .foot nav a { text-decoration: none; font-weight: 500; }
 .foot nav a:hover { color: var(--rust); }
